@@ -43,7 +43,7 @@ Type.hasMany(Product,{
   foreignKey:{
       type: DataTypes.INTEGER,
       allowNull: false
-  }
+  } 
 })
 
 Product.belongsTo(Type)
