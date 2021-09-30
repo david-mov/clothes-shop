@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const createCategory = require('../controlllers/createCategory');
+const createCategory = require('../controllers/createCategory');
 const getProductsByCategory = require('../controllers/getProductsByCategory');
 const modifyCategory = require('../controllers/modifyCategory');
 const disableCategory = require('../controllers/disableCategory');
