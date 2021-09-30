@@ -38,16 +38,33 @@ const { User, Type, Rol, Product, Image, Category } = sequelize.models;
 User.belongsToMany(Product, {through: "user_product"})
 Product.belongsToMany(User, {through: "user_product"})
 
-Type.hasMany(Product)
+
+Type.hasMany(Product,{
+  foreignKey:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+  } 
+})
+
 Product.belongsTo(Type)
 
 Product.belongsToMany(Category, {through: "category_product"})
 Category.belongsToMany(Product, {through: "user_product"})
 
-Product.hasMany(Image)
+Product.hasMany(Image,{
+  foreignKey:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+  }
+})
 Image.belongsTo(Product)
 
-Rol.hasMany(User)
+Rol.hasMany(User,{
+  foreignKey:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+  }
+})
 User.belongsTo(Rol)
 
 module.exports = {

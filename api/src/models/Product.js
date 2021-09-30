@@ -18,7 +18,12 @@ module.exports = (sequelize) => {
     stock: {
         type: DataTypes.INTEGER,
         allowNull: false
-    }
+    },
+    enabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+  }
+
   },{
     timestamps: false
   });
