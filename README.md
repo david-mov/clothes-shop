@@ -8,6 +8,7 @@
     DB_HOST={nombre del host} <br />
     DB_USER={nombre de usuario de psql} <br />
     DB_PASSWORD={contraseña de usuario de psql} <br/>
+    DB_PORT={puerto en donde esta la bd de postgre} <br />
 Recordatorio: Por defecto el host es 'localhost' y el usuario es 'postgres'.
 4. Crear archivo portConsts.js en la carpeta 'consts', que se encuentra dentro de 'client'. El archivo debe tener la siguiente estructura: <br/>
     const HOST = 'localhost'; <br/>
