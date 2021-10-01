@@ -12,12 +12,7 @@ const createCategory = async (req, res, next) => {
 
     } catch (error) {
         next(error);
-        // next({
-        //     status: 500,
-        //     message: "Algo salio mal :( " + error
-        // });
-        // // console.log(e);
-        // res.status(500).send("Algo salio mal :( ");
+        
     }
     
 
