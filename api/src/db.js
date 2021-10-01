@@ -35,37 +35,39 @@ const { User, Type, Rol, Product, Image, Category } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-User.belongsToMany(Product, {through: "user_product"})
+/* User.belongsToMany(Product, {through: "user_product"})
 Product.belongsToMany(User, {through: "user_product"})
 
-
-Type.hasMany(Product,{
-  foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-  } 
-})
-
-Product.belongsTo(Type)
-
 Product.belongsToMany(Category, {through: "category_product"})
-Category.belongsToMany(Product, {through: "user_product"})
+Category.belongsToMany(Product, {through: "category_product"})
 
-Product.hasMany(Image,{
-  foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-  }
-})
-Image.belongsTo(Product)
+Type.hasMany(Product, {foreignKey: {
+    name: 'type_product',
+    allowNull: false
+  }})
+Product.belongsTo(Type, {foreignKey: {
+    name: 'type_product',
+    allowNull: false
+  }})
 
-Rol.hasMany(User,{
-  foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-  }
-})
-User.belongsTo(Rol)
+Product.hasMany(Image, {foreignKey: {
+    name: 'image_product',
+    allowNull: false
+  }})
+Image.belongsTo(Product, {foreignKey: {
+    name: 'image_product',
+    allowNull: false
+  }})
+
+Rol.hasMany(User, {foreignKey: {
+    name: 'user_rol',
+    allowNull: false
+  }})
+User.belongsTo(Rol, {foreignKey: {
+    name: 'user_rol',
+    allowNull: false
+  }})
+*/
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
