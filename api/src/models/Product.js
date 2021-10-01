@@ -15,10 +15,14 @@ module.exports = (sequelize) => {
     description: {
         type: DataTypes.STRING
     },
-    stock: {
+    color: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+  },
     enabled: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
