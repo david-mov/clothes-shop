@@ -1,10 +1,16 @@
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomeView from './views/HomeView/HomeView';
+import NotFoundView from './views/NotFoundView/NotFoundView';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Final Project</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={HomeView} />
+        <Route path='*' component={NotFoundView}/> 
+      </Switch>
+    </Router>
   );
 }
 
