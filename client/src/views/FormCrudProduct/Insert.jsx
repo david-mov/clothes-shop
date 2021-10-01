@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../../stateManagement/actions/getAllProducts";
 import "./insert.css";
+
 const Insert = () => {
+  const dispatch = useDispatch();
   const [input, setInput] = useState({
     id: "",
     name: "",
     description: "",
-    released: "",
     image: "",
     stock: true,
     types: [],
@@ -15,6 +17,9 @@ const Insert = () => {
   });
   let product = useSelector((state) => state.products);
 
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
   const handleChange = (e) => {
     setInput({
       ...input,
@@ -23,6 +28,12 @@ const Insert = () => {
   };
   const cerrarModalInsertar = () => {
     setInput({ modalInsertar: false });
+  };
+  const handleSelect = (e) => {
+    setInput({
+      ...input,
+      name: [...input.name, e.target.value],
+    });
   };
   const insert = () => {
     var valorNuevo = { ...input.product };
@@ -40,25 +51,16 @@ const Insert = () => {
         <div>
           <h3 className="h3_insert">Insert Product</h3>
         </div>
-
+        <div className="datos">
+          <label>Products:</label>
+          <select onChange={(e) => handleSelect(e)}>
+            {product.map((prod) => (
+              <option value={prod.name}>{prod.name}</option>
+            ))}
+          </select>
+          <h4>{input.name}</h4>
+        </div>
         <div className="insert_label">
-          <label className="label_Insert">Id:</label>
-
-          <input
-            className="form-control"
-            readOnly
-            type="text"
-            value={product.length + 1}
-          />
-
-          <label className="label_Insert">Product:</label>
-          <input
-            className="form-control"
-            name="name"
-            type="text"
-            onChange={handleChange}
-          />
-
           <label className="label_Insert">Name:</label>
           <input
             className="form-control"
@@ -66,6 +68,30 @@ const Insert = () => {
             type="text"
             onChange={handleChange}
           />
+          <label className="label_Insert">Price:</label>
+          <input
+            className="form-control"
+            name="name"
+            type="text"
+            onChange={handleChange}
+          />
+
+          <label className="label_Insert">Description:</label>
+          <input
+            className="form-control"
+            name="name"
+            type="text"
+            onChange={handleChange}
+          />
+          <label className="label_Insert">Stock:</label>
+          <input
+            className="form-control"
+            name="name"
+            type="text"
+            onClick={handleChange}
+          />
+
+          <label className="label_Insert">Image:</label>
         </div>
 
         <div className="crud_Form_Insert_cancelar">

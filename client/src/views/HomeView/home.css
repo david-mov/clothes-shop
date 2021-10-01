@@ -1,3 +1,8 @@
 body {
-  background-color: black;
+  background-color: rgb(241, 223, 223);
+}
+.container {
+  text-align: center;
+  color: rgba(2, 31, 31, 0.459);
+  font-weight: 400;
 }
