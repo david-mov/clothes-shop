@@ -12,7 +12,7 @@ router.post('/', createProduct);
 
 router.get('/:id', getProductDetails);
 router.put('/:id', modifyProduct);
-router.put('/:id', disableProduct);
+router.delete('/:id', disableProduct);
 
 router.post('/:id/category/:categoryId', postProductCategory);
 
