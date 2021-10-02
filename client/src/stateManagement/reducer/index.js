@@ -1,8 +1,8 @@
-import { combineReducer } from 'redux';
+import { combineReducers } from 'redux';
 import categoriesReducer from './categoriesReducer.js'
 import productsReducer from './productsReducer.js'
 
-export default combineReducer(
+export default combineReducers(
 	categoriesReducer,
 	productsReducer
 )
