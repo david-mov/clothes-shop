@@ -35,34 +35,34 @@ const { User, Type, Rol, Product, Image, Category } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-User.belongsToMany(Product, {through: "user_product"})
-Product.belongsToMany(User, {through: "user_product"})
+User.belongsToMany(Product, { through: "user_product" })
+Product.belongsToMany(User, { through: "user_product" })
 
 
-Type.hasMany(Product,{
-  foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-  } 
+Type.hasMany(Product, {
+  foreignKey: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
 })
 
 Product.belongsTo(Type)
 
-Product.belongsToMany(Category, {through: "category_product"})
-Category.belongsToMany(Product, {through: "user_product"})
+Product.belongsToMany(Category, { through: "category_product" })
+Category.belongsToMany(Product, { through: "user_product" })
 
-Product.hasMany(Image,{
-  foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+Product.hasMany(Image, {
+  foreignKey: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 })
 Image.belongsTo(Product)
 
-Rol.hasMany(User,{
-  foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+Rol.hasMany(User, {
+  foreignKey: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   }
 })
 User.belongsTo(Rol)
