@@ -3,6 +3,7 @@ const { Product, Type, Size, Category, Image } = require('../db.js');
 const getAllProducts = async (req, res, next) => {
 	try {
 		const allProducts = await Product.findAll({
+            where: { enabled: true },
 			include: [{
                 model:Type,
                 attributes: ['name']

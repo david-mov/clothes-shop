@@ -6,7 +6,7 @@ const initialState = {
 	categories: [],
 };
 
-export default function rootReducer(state = initialState, action) {
+export default function categoriesReducer(state = initialState, action) {
 	switch(action.type) {
 		case GET_ALL_CATEGORIES:
 			return ({
