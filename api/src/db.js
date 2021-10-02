@@ -41,34 +41,41 @@ Product.belongsToMany(Size, {through: "size_product"})
 User.belongsToMany(Product, {through: "user_product"})
 Product.belongsToMany(User, {through: "user_product"})
 
+Product.belongsToMany(Category, {through: "category_product"})
+Category.belongsToMany(Product, {through: "category_product"})
 
 Type.hasMany(Product,{
   foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+      name: 'type_product'
+  } 
+})
+Product.belongsTo(Type,{
+  foreignKey:{
+      name: 'type_product'
   } 
 })
 
-Product.belongsTo(Type)
-
-Product.belongsToMany(Category, {through: "category_product"})
-Category.belongsToMany(Product, {through: "user_product"})
-
 Product.hasMany(Image,{
   foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+      name: 'image_product'
   }
 })
-Image.belongsTo(Product)
+Image.belongsTo(Product,{
+  foreignKey:{
+      name: 'image_product'
+  }
+})
 
 Rol.hasMany(User,{
   foreignKey:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+      name: 'user_rol'
   }
 })
-User.belongsTo(Rol)
+User.belongsTo(Rol,{
+  foreignKey:{
+      name: 'user_rol'
+  }
+})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
