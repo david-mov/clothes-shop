@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux'
 
 const Product = () => {
     
-    var {products} = useSelector(state => state )
+    var {products} = useSelector(state => state.productsReducer )
     return (
-        <div>
-            <div>
+        <div className="homescreen__products">
                 { products?.map((e) => ( 
                     <ProductCard
                         name= {e.name}
@@ -17,7 +16,6 @@ const Product = () => {
                         />
                     ))}
             </div>
-        </div>
     )
 }
 

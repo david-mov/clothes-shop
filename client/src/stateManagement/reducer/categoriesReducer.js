@@ -17,11 +17,6 @@ export default function categoriesReducer(state = initialState, action) {
 				categories: action.payload,
 				categoriesCopy: action.payload
 			}
-		case GET_CATEGORY:
-			return {
-				...state,
-				categories: state.categoriesCopy.filter(e => e.name === action.payload)
-			}
 		default:
 			return ({ ...state });
 	}

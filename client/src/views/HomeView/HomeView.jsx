@@ -1,12 +1,14 @@
 import NavBar from "../../components/NavBar/NavBar"
 import ProductCards from "../CatalogueView/ProductCards/ProductCards"
+import "./HomeView.css"
 
 export default function HomeView() {
 	return (
-		<div>
+		<div className="homescreen">
 			<NavBar></NavBar>
+			<div className="homescreen__products">
 			<ProductCards/>
-			<h1>Welcome</h1>
+			</div>
 		</div>
 	)
 }
