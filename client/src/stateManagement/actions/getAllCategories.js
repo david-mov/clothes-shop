@@ -10,3 +10,5 @@ const getAllCategories = () => async (dispatch) => {
 			console.error(err);
 		}
 };
+
+export default getAllCategories;
