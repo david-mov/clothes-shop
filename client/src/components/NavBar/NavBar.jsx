@@ -2,21 +2,33 @@ import React, {useEffect, useState} from 'react'
 import {getAllProducts} from "../../stateManagement/actions/getAllProducts"
 import {getAllCategories} from "../../stateManagement/actions/getAllCategories"
 import { getCategory } from '../../stateManagement/actions/getCategory'
+import {getType} from "../../stateManagement/actions/getType"
 import { Link } from 'react-router-dom'
 import {useSelector, useDispatch} from "react-redux"
 import "./NavBar.css"
+import { getAllTypes } from '../../stateManagement/actions/getAllTypes'
 
 function NavBar() {
 
-    const [optionsCategory, setOptionsCategory ] = useState("")
+
     
     const [categoryValue, setCategoryValue] = useState('C');
+    const [typeValue, setTypeValue] = useState("T")
 
     const onSelectCategory = (categoryValue) =>{
         categoryValue.preventDefault()
         setCategoryValue(categoryValue.target.value);
         dispatch(getCategory(categoryValue.target.value))
     }
+
+    const onSelectTypes = (e) => {
+        console.log("mostre on select types")
+        e.preventDefault()
+        setTypeValue(e.target.value);
+        dispatch(getType(e.target.value))
+    }
+
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getAllProducts())
@@ -26,7 +38,11 @@ function NavBar() {
         dispatch(getAllCategories())
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(getAllTypes())
+    }, [dispatch]);
 
+var types = useSelector(state => state.typesReducer.types)
 var categories = useSelector(state => state.categoriesReducer.categories )
 console.log(categories)
 
@@ -36,8 +52,14 @@ const OptionsCategories = categories.map((e,i) => {
     )
 })
 
+const OptionsTypes = types.map((e,i) => {
+    return (
+        <option key={i} value={e.name}>{e.name}</option>
+    )
+})
 
- const onChangePopulation = (e) => {
+
+ const onChangeType = (e) => {
     e.preventDefault()
  }
 
@@ -66,12 +88,9 @@ const OptionsCategories = categories.map((e,i) => {
             </select>
         </div>
         <div className="cart__link">
-            <select className="pintar" onChange={onChangePopulation}>
-                <optgroup className="" label="Type Order">
-                    <option value="none">Type</option>
-                    <option value="">zapatillas</option>
-                    <option value="">pantalon</option>
-                </optgroup>
+            <select className="" value={typeValue} onChange={onSelectTypes}>
+                    <option>Type</option>
+                    {OptionsTypes}
             </select>
         </div>
         <div className="cart__link">
