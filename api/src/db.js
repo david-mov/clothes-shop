@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -30,25 +30,52 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Type, Rol, Product, Image, Category } = sequelize.models;
+const { User, Type, Rol, Product, Image, Category, Size } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+Size.belongsToMany(Product, {through: "size_product"})
+Product.belongsToMany(Size, {through: "size_product"})
+
 User.belongsToMany(Product, {through: "user_product"})
 Product.belongsToMany(User, {through: "user_product"})
 
-Type.hasMany(Product)
-Product.belongsTo(Type)
-
 Product.belongsToMany(Category, {through: "category_product"})
-Category.belongsToMany(Product, {through: "user_product"})
+Category.belongsToMany(Product, {through: "category_product"})
 
-Product.hasMany(Image)
-Image.belongsTo(Product)
+Type.hasMany(Product,{
+  foreignKey:{
+      name: 'type_product'
+  } 
+})
+Product.belongsTo(Type,{
+  foreignKey:{
+      name: 'type_product'
+  } 
+})
 
-Rol.hasMany(User)
-User.belongsTo(Rol)
+Product.hasMany(Image,{
+  foreignKey:{
+      name: 'image_product'
+  }
+})
+Image.belongsTo(Product,{
+  foreignKey:{
+      name: 'image_product'
+  }
+})
+
+Rol.hasMany(User,{
+  foreignKey:{
+      name: 'user_rol'
+  }
+})
+User.belongsTo(Rol,{
+  foreignKey:{
+      name: 'user_rol'
+  }
+})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

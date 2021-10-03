@@ -7,7 +7,11 @@ module.exports = (sequelize) => {
    name: {
        type: DataTypes.ENUM("superAdmin", "admin", "user"),
        allowNull: false
-   }
+   },
+   enabled: {
+     type: DataTypes.BOOLEAN,
+     defaultValue: true
+ }
   },{
     timestamps: false
   });
