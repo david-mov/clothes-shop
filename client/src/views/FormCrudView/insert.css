@@ -1,0 +1,20 @@
+.crud_form {
+  color: white;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(32, 30, 30);
+}
+.crud_Form_Insert_cancelar {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+}
+.insert_label {
+  padding-bottom: 2rem;
+}
+.label_Insert {
+  padding-right: 1rem;
+  padding-left: 0.5rem;
+}
+@media (min-width: 458px) {
+}

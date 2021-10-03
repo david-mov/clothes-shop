@@ -5,7 +5,7 @@ const Delete = () => {
   const [input, setInput] = useState();
   let product = useSelector((state) => state.products);
   console.log("desde el delete", product);
-  // Eliminar usuario
+
   const deleteProduct = (id) => {
     setInput(product.filter((user) => user.id !== id));
     return alert("Estas seguro que desea eliminar ");
@@ -22,7 +22,7 @@ const Delete = () => {
           />
         </div>
 
-        <button>Delete</button>
+        <button>Delete no me renderiza</button>
       </form>
     </div>
   );

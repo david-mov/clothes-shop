@@ -4,6 +4,7 @@ import {
   POST_ALL_PRODUCTS,
   GET_ALL_SIZE,
   GET_ALL_TYPES,
+  POS_PRODUCT,
 } from "../../consts/actionConsts";
 
 const initialState = {
@@ -39,6 +40,10 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         types: action.payload,
+      };
+    case POS_PRODUCT:
+      return {
+        ...state,
       };
     default:
       return state;

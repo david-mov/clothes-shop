@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-//import { postAllProducts } from "../../stateManagement/actions/postAllProducts";
+import { postAllProducts } from "../../stateManagement/actions/postAllProducts";
 import { getAllCategories } from "../../stateManagement/actions/getAllCategories";
 import { getAllsizes } from "../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
+import "./insert.css";
 
 const Insert = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const Insert = () => {
     dispatch(getAllCategories());
     dispatch(getAllsizes());
     dispatch(getAllTypes());
+    dispatch(postAllProducts());
   }, [dispatch]);
   const [input, setInput] = useState({
     name: "",
@@ -19,7 +21,7 @@ const Insert = () => {
     description: "",
     color: "",
     stock: "",
-    type_Product: 0,
+    type_product: 0,
     categories: [],
     sizes: [],
     images: [],
@@ -83,7 +85,7 @@ const Insert = () => {
   const onSelectChangeNewType = (valueType) => {
     setInput({
       ...input,
-      type_Product: valueType.value,
+      type_product: valueType.value,
     });
 
     setvalueType(valueType);
@@ -101,26 +103,26 @@ const Insert = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    dispatch(postAllProducts(input));
     alert("Product has created correctly");
-    setInput({
+
+    return setInput({
       name: "",
+      price: "",
       description: "",
       color: "",
-      image: "",
       stock: "",
       type_product: 0,
       categories: [],
       sizes: [],
+      images: [],
     });
   };
-  console.log(input);
+
   return (
     <div className="crud_form">
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
+      <form>
         <div className="insertar">
           <div>
             <h3 className="h3_insert">Insert Product</h3>
@@ -187,13 +189,15 @@ const Insert = () => {
               className="form-control"
               name="color"
               type="text"
-              onClick={handleChange}
+              onChange={handleChange}
             />
-
-            <label className="label_Insert">Image:</label>
           </div>
           <div className="crud_Form_Insert_cancelar">
-            <button className="crud_Form_Insert_cancelar_button" type="submit">
+            <button
+              type="submit"
+              className="crud_Form_Insert_cancelar_button"
+              onClick={(e) => handleSubmit(e)}
+            >
               Insert
             </button>
             <button
