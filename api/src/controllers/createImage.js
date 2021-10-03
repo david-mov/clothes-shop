@@ -1,14 +1,5 @@
 const multer = require('multer');
 
-const multerConfig = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback (null, 'public/imageProduct/');
-    },
-    filename: (req, file, callback) => {
-        callback (null, 'public/imageProduct/');
-    }
-})
-
 const upload = multer({
     dest: 'public/imageProduct/'
 });
