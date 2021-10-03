@@ -100,3 +100,11 @@
     }
   }
   
+  .elDeHome {
+    width: 30px;
+    background: #171717;
+    color: #f4f4f4;
+    border: 1px solid #171717;
+    cursor: pointer;
+    border-radius: 5px;
+  }

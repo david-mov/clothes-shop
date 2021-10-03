@@ -97,7 +97,7 @@ const OptionsTypes = types.map((e,i) => {
             </select>
         </div>
         <div className="cart__link">
-        <option>Price</option>
+        <div>Price</div>
             <select className="pintar" onChange={onChangePrice}>
                     <option value="none">-</option>
                     <option value="H">Higher</option>
@@ -117,7 +117,7 @@ const OptionsTypes = types.map((e,i) => {
           </Link>
         </li>
         <li>
-          <Link to="/">Shop</Link>
+          <Link to="/list">Lists</Link>
         </li>
       </ul>
         </div>
