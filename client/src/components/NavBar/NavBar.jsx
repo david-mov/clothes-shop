@@ -3,6 +3,8 @@ import {getAllProducts} from "../../stateManagement/actions/getAllProducts"
 import {getAllCategories} from "../../stateManagement/actions/getAllCategories"
 import { getCategory } from '../../stateManagement/actions/getCategory'
 import {getType} from "../../stateManagement/actions/getType"
+import {getPrice} from "../../stateManagement/actions/getPrice"
+import { getSearch } from '../../stateManagement/actions/getSearch'
 import { Link } from 'react-router-dom'
 import {useSelector, useDispatch} from "react-redux"
 import "./NavBar.css"
@@ -10,15 +12,13 @@ import { getAllTypes } from '../../stateManagement/actions/getAllTypes'
 
 function NavBar() {
 
-
-    
     const [categoryValue, setCategoryValue] = useState('C');
     const [typeValue, setTypeValue] = useState("T")
 
-    const onSelectCategory = (categoryValue) =>{
-        categoryValue.preventDefault()
-        setCategoryValue(categoryValue.target.value);
-        dispatch(getCategory(categoryValue.target.value))
+    const onSelectCategory = (e) =>{
+        e.preventDefault()
+        setCategoryValue(e.target.value);
+        dispatch(getCategory(e.target.value))
     }
 
     const onSelectTypes = (e) => {
@@ -59,12 +59,13 @@ const OptionsTypes = types.map((e,i) => {
 })
 
 
- const onChangeType = (e) => {
-    e.preventDefault()
+ const onChangeSearch = (e) => {
+    dispatch(getSearch(e.target.value))
  }
 
  const onChangePrice = (e) => {
      e.preventDefault()
+     dispatch(getPrice(e.target.value))
  }
 
  //const Navbar = ({ click }) => {
@@ -76,37 +77,35 @@ const OptionsTypes = types.map((e,i) => {
  // };
 
     return (
-        <div className>
+        <div className="todo">
              <div className="navbar">
             <div className="navbar__logo" >
             <img className="img" src="https://i.ibb.co/jwF67rm/clothes-Shop.png" alt="clothes-Shop" border="0"></img>
             </div>
             <div className="cart__link">
+                <div>Categories</div>
             <select className="" value={categoryValue} onChange={onSelectCategory} >
-            <option>Categories</option>
+            <option value="none">All</option>
                 {OptionsCategories}
             </select>
         </div>
         <div className="cart__link">
+            <div>Types</div>
             <select className="" value={typeValue} onChange={onSelectTypes}>
-                    <option>Type</option>
+                    <option value="none">All</option>
                     {OptionsTypes}
             </select>
         </div>
         <div className="cart__link">
+        <div>Price</div>
             <select className="pintar" onChange={onChangePrice}>
-                <optgroup className="" label="Order by Price">
-                    <option value="none">Price</option>
-                    <option value="">Higher</option>
-                    <option value="">Lower</option>
-                </optgroup>
+                    <option value="none">-</option>
+                    <option value="H">Higher</option>
+                    <option value="L">Lower</option>
             </select>
         </div>
-        <div className="navbar__links">
-            Search
-        </div>
         <div className="SearchInput">
-                <input type="text" placeholder="Search..." className=""/>
+                <input type="text" onChange={onChangeSearch}  placeholder="Search products..." className=""/>
         </div>
         <ul className="navbar__links">
         <li className="saco">
@@ -118,7 +117,7 @@ const OptionsTypes = types.map((e,i) => {
           </Link>
         </li>
         <li>
-          <Link to="/">Shop</Link>
+          <Link to="/list">Lists</Link>
         </li>
       </ul>
         </div>

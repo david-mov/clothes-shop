@@ -13,6 +13,7 @@ const Product = () => {
                         price= {e.price}
                         description= {e.description}
                         stock= {e.stock}
+                        id= {e.id}
                         />
                     ))}
             </div>

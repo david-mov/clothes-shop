@@ -6,13 +6,12 @@
     align-items: center;
     padding: 1.5rem 1rem;
     z-index: 50;
+    height: 100px;
   }
   
   .navbar__logo {
     color: #f4f4f4;
-    font-size: 1.4rem;
     cursor: pointer;
-    height: 30%;
   }
   
   .navbar__links {
@@ -47,10 +46,11 @@
     padding: 10px;
     border-radius: 8px;
     margin-left: 0px;
+    color: white
   }
   
   .cart__link:hover {
-    background: #dd219e;
+    background: rgb(110, 108, 110);
     color: #f4f4f4;
   }
 

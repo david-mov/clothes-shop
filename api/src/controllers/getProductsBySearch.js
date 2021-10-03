@@ -1,3 +1,4 @@
+
 const { Product, Image, Type, Category } = require('../db.js')
 
 const getProductsBySearch = async (req, res, next) => {
