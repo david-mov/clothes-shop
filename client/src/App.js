@@ -12,6 +12,7 @@ function App() {
         <Route exact path='/profile/:userId' component={ProfileView} />
         <Route exact path='/product/:productId' component={ProductView} />
         <Route path='*' component={NotFoundView} /> 
+        <Route path="/product:id"></Route>
       </Switch>
     </Router>
   );
