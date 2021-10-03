@@ -23,5 +23,5 @@ const postProductCategory = async (req, res, next) => {
 		return next(err);
 	}
 }
-
+ 
 module.exports = postProductCategory;

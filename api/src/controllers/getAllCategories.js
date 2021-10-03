@@ -11,5 +11,4 @@ const getAllCategories = async (req, res, next) => {
     }
 }
 
-
 module.exports = getAllCategories;

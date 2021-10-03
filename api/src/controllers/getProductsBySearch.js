@@ -26,5 +26,5 @@ const getProductsBySearch = async (req, res, next) => {
 		next(err)
 	}
 }
-
+ 
 module.exports = getProductsBySearch;

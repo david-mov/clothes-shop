@@ -29,5 +29,5 @@ const getProductDetails = async (req, res, next) => {
 		next(err);
 	}
 }
-
+ 
 module.exports = getProductDetails;

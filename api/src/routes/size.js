@@ -15,5 +15,5 @@ router.get('/:sizeName', getProductsBySize);
 router.put('/:id', modifySize);
 
 router.delete('/:id', disableSize);
-
+ 
 module.exports = router;

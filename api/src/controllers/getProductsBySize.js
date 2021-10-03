@@ -28,5 +28,5 @@ const getProductsBySize = async (req, res, next) => {
 		return next(err)
 	}
 }
-
+ 
 module.exports = getProductsBySize;

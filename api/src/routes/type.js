@@ -10,7 +10,7 @@ router.post('/', createType);
 
 router.get('/', getAllTypes);
 
-router.get('/:TypeName', getProductsByType);
+router.get('/:typeName', getProductsByType);
 
 router.put('/:id', modifyType);
 

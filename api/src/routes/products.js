@@ -17,5 +17,5 @@ router.put('/:id', disableProduct);
 
 router.post('/:id/category/:categoryId', postProductCategory);
 router.post('/:id/type/:typeId', postProductType);
-
+ 
 module.exports = router;

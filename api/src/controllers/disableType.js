@@ -16,5 +16,5 @@ const disableType = async (req, res, next) => {
 		next(err);
 	}
 }
-
+ 
 module.exports = disableType;

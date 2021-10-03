@@ -16,5 +16,5 @@ const disableCategory = async (req, res, next) => {
 		next(err);
 	}
 }
-
+ 
 module.exports = disableCategory;
