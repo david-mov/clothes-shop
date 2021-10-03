@@ -7,7 +7,9 @@ export function getAllCategories() {
 	return async (dispatch) => {
 		try {
 			const allCategories = await axios.get(`http://${HOST}:${PORT}/category`)
+
 			dispatch({type: GET_ALL_CATEGORIES, payload: allCategories.data})
+
 		} catch (err) {
 			console.error(err);
 		}
