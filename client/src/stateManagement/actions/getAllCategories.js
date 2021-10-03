@@ -12,4 +12,6 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 
-//export default getAllCategories;
+
+
+

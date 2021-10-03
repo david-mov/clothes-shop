@@ -11,4 +11,3 @@ export const getAllProducts = () => async (dispatch) => {
   }
 };
 
-//export default getAllProducts;

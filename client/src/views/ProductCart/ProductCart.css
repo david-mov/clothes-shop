@@ -1,0 +1,62 @@
+.detailTotal {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    background: white
+}
+.detailLink{
+    position: absolute;
+    left: 50px;
+    top: 12px;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: black 1px solid;
+    border-radius: 5%;
+    color: black;
+    border-radius: 5px;
+    background-color: hsl(0, 2%, 63%)
+}
+.detailContainer{
+    width: 400px;
+    justify-content: center;
+    margin-top: 20px;  
+    margin-bottom: 20px;
+    text-decoration: none;
+    border: black 2px solid;
+    border-radius: 5%;
+    color: black;
+    border-radius: 5px;
+    background-color: hsl(0, 2%, 63%)
+
+}
+.imagenn{
+    margin-top: 10px;
+    height: 170px;
+    border: black 2px solid;
+    border-radius: 5px;
+}
+.detailClick{
+    text-decoration: none;
+    color:black
+}
+.tabla{
+    margin-bottom: 20px;
+}
+.detail{
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.detailName{
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.elcountry{
+    text-decoration: underline;
+    font-size: 30px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
