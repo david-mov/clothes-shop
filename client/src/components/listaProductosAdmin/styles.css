@@ -5,10 +5,17 @@ GENERAL
 ----------------------------------------------------------*/
 *{
   margin:0;
-  padding:0;
-  font-family: 'Roboto', sans-serif;
+  padding: 0px;;
+  font-family: "lucida handwriting";
 }
+body{
+  background: #403A3E;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #BE5869, #403A3E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 
+  
 
+}
 html, body{
   display:table;
   height:100%;
@@ -17,7 +24,8 @@ html, body{
   background-color: #f8f8f8;
 }
 .row__title{
-  color: #53646f;
+  color: black;
+  font-family: "lucida handwriting";
   font-weight: 400;
   font-size: 20px;
   margin: 0;
@@ -31,22 +39,30 @@ html, body{
   margin-top: 20px;
 }
 .table__th {
-    color: #9eabb4;
+  font-family: "lucida handwriting";
+    color:white;
     font-weight: 500;
     font-size: 12px;
     text-transform: uppercase;
    cursor: pointer;
     border:0 !important;
   padding: 15px 8px !important;
+  
+  
 }
 
 .table-row {
-    border-bottom: 1px solid #e4e9ea;
-  background-color: #fff;
-}
+  background: #403A3E;  
+background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  
+background: linear-gradient(to right, #BE5869, #403A3E); 
+
+  }
+
 .table__th:hover {
-    color: #01b9d1;
+    color: black;
+   
 }
+
 
 .table--select-all {
     width: 18px;
@@ -58,7 +74,7 @@ html, body{
 .table-row__td {
     padding: 12px 8px !important;
     vertical-align: middle !important;
-    color: #53646f;
+    color: black;
     font-size: 13px;
     font-weight: 400;
   position:relative;
@@ -75,6 +91,7 @@ html, body{
     background-size: cover;
     background-repeat: no-repeat;
    vertical-align: middle;
+  
 }
 
 .table-row--chris .table-row__img {
@@ -308,6 +325,8 @@ html, body{
     display: block;
     text-align: center;
     padding: 8px !important;
+   
+   
   }
   .table-row--red {
     background-color: #fff2f2;
@@ -336,5 +355,33 @@ html, body{
   .table-row {
     width: 100%;
   }
+}
+
+.otro{
+  font-family: "lucida handwriting";
+  border-radius: 2px;
+  border:rgb(13, 1, 22);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+.button2 {
+  background-color: rgb(42, 141, 158); 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2{
+  color:blanchedalmond;
+  padding: 2px 8px;
+  background: #403A3E;  
+  background: -webkit-linear-gradient(to right, #BE5869, #403A3E); 
+  background: linear-gradient(to right, #BE5869, #403A3E);
+  
+}
+.button2:hover {
+  color: white;
+  
 }
 
