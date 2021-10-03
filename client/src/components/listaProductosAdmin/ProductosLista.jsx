@@ -18,20 +18,20 @@ export default function ProductosLista(){
 
     const products = useSelector(state => state.productsReducer.products);
     var id = 789;
-    var name = "jj"
+    var name = ""
 
 
 console.log("pr",products.length)
     return(
       
-        <div className="container">
+        <div  className="container">
           <AddImgProduct
            id={id}
            name={name}
           />
         <div className="row row--top-40">
           <div className="col-md-12">
-            <h2 className="row__title">Total products {products.length}</h2>
+            <h2 className="row__title">TOTAL PRODUCTS{products.length}</h2>
           </div>
         </div>
         <div className="row row--top-20">
