@@ -1,12 +1,14 @@
+const {Op} = require ('sequelize');
 
 const { Product, Image, Type, Category } = require('../db.js')
 
 const getProductsBySearch = async (req, res, next) => {
 	const { query } = req.query;
+	console.log("ACA ESTA QUERY", query)
 	try {
-		const productsFound = Product.findAll({
+		const productsFound = await Product.findAll({
 			where: { 
-				name: `%${query}%`,
+				name: {[Op.iLike]: `%${query}%`},
 				enabled: true,
 			},
 			include: [{
