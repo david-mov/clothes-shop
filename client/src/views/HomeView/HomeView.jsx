@@ -10,7 +10,6 @@ export default function HomeView() {
 			<div className="homescreen__products">
 			<ProductCards/>
 			</div>
-
 		</div>
 	)
 }

@@ -17,6 +17,7 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 require('dotenv').config();
 const server = require('./src/app.js');
 const { conn, Category, Size, Type, Rol } = require('./src/db.js');
@@ -38,9 +39,10 @@ async function preload() {
   await Size.bulkCreate(sizeData);
   await Type.bulkCreate(typesData);
   await Rol.bulkCreate(rolesData);
+
 } // temporal function
 
-// Syncing all the models at once. 
+// Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
   server.listen(DB_PORT, () => {
     preload();

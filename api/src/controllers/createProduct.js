@@ -1,6 +1,7 @@
-const { Product, Category, Type, Size } = require('../db.js');
+const { Product, Category, Type, Size } = require("../db.js");
 
 const createProduct = async (req, res, next) => {
+
 	const { name, price, description, stock, color, type_product, categories, sizes } = req.body;
 	try {
 		const newProduct = await Product.create({
@@ -21,3 +22,4 @@ const createProduct = async (req, res, next) => {
 }
  
 module.exports = createProduct;
+
