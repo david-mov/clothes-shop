@@ -10,7 +10,7 @@ router.post('/', createSize);
 
 router.get('/', getAllSizes);
 
-router.get('/:SizeName', getProductsBySize);
+router.get('/:sizeName', getProductsBySize);
 
 router.put('/:id', modifySize);
 
