@@ -1,6 +1,6 @@
 const { Product, Category, Type } = require('../db.js')
 
-const getProductsByType = (req, res, next) => {
+const getProductsByType = async (req, res, next) => {
 	const { typeName } = req.params;
 	try {
 		const allProducts = await Product.findAll({
