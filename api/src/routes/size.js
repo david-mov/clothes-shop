@@ -10,10 +10,10 @@ router.post('/', createSize);
 
 router.get('/', getAllSizes);
 
-router.get('/:SizeName', getProductsBySize);
+router.get('/:sizeName', getProductsBySize);
 
 router.put('/:id', modifySize);
 
 router.delete('/:id', disableSize);
-
+ 
 module.exports = router;
