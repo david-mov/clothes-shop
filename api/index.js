@@ -45,7 +45,7 @@ async function preload() {
   });
   await Category.bulkCreate(categoriesData);
   await Size.bulkCreate(sizeData);
-  await Type.bulkCreate(typesData);
+  await Type.orCreate(typesData);
 } // temporal function
 
 // Syncing all the models at once.
