@@ -99,6 +99,8 @@ export default function ProductosLista() {
 
   return (
     <div>
+      <Link to='/create'>Insert</Link>
+      <Link to='/'>Insert</Link>
       <TablaList
         title={'Porducts'}
         headers={headers()}
@@ -108,7 +110,7 @@ export default function ProductosLista() {
 
      
         <button className="button2" onClick={prevPage}>
-          VOLVER
+          PREV
         </button>
      
       <h1>
@@ -116,7 +118,7 @@ export default function ProductosLista() {
       </h1>
      
         <button className="button2" onClick={nextPage}>
-          SIGUIENTE
+          NEXT
         </button>
      
     </div>

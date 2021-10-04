@@ -82,7 +82,7 @@ export default function SizeList() {
             bodyTable={bodyTable()}
         />
         <button className="button2" onClick={prevPage}>
-        VOLVER
+        PREV
       </button>
    
     <h1>
@@ -90,7 +90,7 @@ export default function SizeList() {
     </h1>
    
       <button className="button2" onClick={nextPage}>
-        SIGUIENTE
+        NEXT
       </button>
    
   </div>
