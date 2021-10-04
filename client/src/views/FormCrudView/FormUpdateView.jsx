@@ -1,10 +1,10 @@
 import React from "react";
-import InsertType from "./components/Insert/InsertType";
+import UpdateProduct from "./components/Update/UpdateProduct";
 
 const FormTypeView = () => {
   return (
     <div>
-      <InsertType />
+      <UpdateProduct />
     </div>
   );
 };
