@@ -11,40 +11,47 @@ import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 
 function NavBar() {
-  const [categoryValue, setCategoryValue] = useState("C");
-  const [typeValue, setTypeValue] = useState("T");
 
-  const onSelectCategory = (e) => {
-    e.preventDefault();
-    setCategoryValue(e.target.value);
-    dispatch(getCategory(e.target.value));
-  };
+    const [categoryValue, setCategoryValue] = useState('C');
+    const [typeValue, setTypeValue] = useState("T")
 
-  const onSelectTypes = (e) => {
-    console.log("mostre on select types");
-    e.preventDefault();
-    setTypeValue(e.target.value);
-    dispatch(getType(e.target.value));
-  };
+    const onSelectCategory = (e) =>{
+        e.preventDefault()
+        setCategoryValue(e.target.value);
+        dispatch(getCategory(e.target.value))
+    }
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+    const onSelectTypes = (e) => {
+        e.preventDefault()
+        setTypeValue(e.target.value);
+        dispatch(getType(e.target.value))
+    }
 
-  useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getAllTypes());
-  }, [dispatch]);
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllProducts())
+    }, [dispatch]);
 
-  var types = useSelector((state) => state.typesReducer.types);
-  var categories = useSelector((state) => state.categoriesReducer.categories);
-  console.log(categories);
+    useEffect(() => {
+        dispatch(getAllCategories())
+    }, [dispatch]);
 
-  const OptionsCategories = categories.map((e, i) => {
+    useEffect(() => {
+        dispatch(getAllTypes())
+    }, [dispatch]);
+
+var types = useSelector(state => state.typesReducer.types)
+var categories = useSelector(state => state.categoriesReducer.categories )
+console.log(categories)
+
+const OptionsCategories = categories.map((e,i) => {
+    return (
+        <option key={i} value={e.name}>{e.name}</option>
+    )
+})
+
+const OptionsTypes = types.map((e,i) => {
     return (
       <option key={i} value={e.name}>
         {e.name}
@@ -107,12 +114,12 @@ function NavBar() {
           </select>
         </div>
         <div className="cart__link">
-          <div>Price</div>
-          <select className="pintar" onChange={onChangePrice}>
-            <option value="none">-</option>
-            <option value="H">Higher</option>
-            <option value="L">Lower</option>
-          </select>
+        <div>Price</div>
+            <select className="pintar" onChange={onChangePrice}>
+                    <option value="none">None</option>
+                    <option value="H">Higher</option>
+                    <option value="L">Lower</option>
+            </select>
         </div>
         <div className="SearchInput">
           <input

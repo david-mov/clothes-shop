@@ -18,7 +18,7 @@ const getProductsBySize = async (req, res, next) => {
 				model: Size,
 				attributes: ['name'],
 			}],
-			attributes: ['name', 'price', 'stock', 'description']
+			attributes: ['name', 'price', 'stock', 'description', 'id']
 		})
 		productsFiltered = allProducts.filter(p => {
 			return p.sizes.some(c => c.name === sizeName)
