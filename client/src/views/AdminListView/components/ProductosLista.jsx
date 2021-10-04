@@ -96,8 +96,9 @@ console.log("pr",products.length)
                   </tr>
                     )
 
-
+ 
                    })
+                   
                  }
                     
                     

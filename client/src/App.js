@@ -6,14 +6,17 @@ import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
 import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from "./views/CatalogueView/CatalogueView";
-//import FormCrudView from "./views/FormCrudView/components/InsertCategory/InsertCategory";
 import UpdateProduct from "./views/FormCrudView/components/Update/UpdateProduct";
 import Insert from "./views/FormCrudView/components/Insert/Insert";
+import ListAdmin from './views/AdminListView/AdminListView';
+
+
 
 function App() {
   return (
     <Router>
       <Switch>
+
         <Route exact path="/" component={HomeView} />
         <Route exact path="/catalogue" component={CatalogueView} />
         <Route exact path="/profile/:userId" component={ProfileView} />
@@ -21,8 +24,11 @@ function App() {
         <Route path="/update" component={UpdateProduct} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/cart" component={ProductCart} />
+         <Route exact path="/list" component={ListAdmin} />
+
 
         <Route path="*" component={NotFoundView} />
+
       </Switch>
     </Router>
   );
