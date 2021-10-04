@@ -1,10 +1,34 @@
 import React, { useEffect, useState  } from "react";
 import Select from "react-select";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCategories } from "../../stateManagement/actions/getAllCategories";
-import { getAllsizes } from "../../stateManagement/actions/getAllsizes";
-import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
-import {putProduct} from "../../stateManagement/actions/putProduct"
+import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
+import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
+import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
+// import {putProduct} from "../../../../stateManagement/actions/putProduct"
+import { useHistory } from "react-router-dom";
+
+
+const validate = (input) => {
+  let errors = {};
+  if(!input.categories.length) {
+    errors.categories = "Required field"
+  } else if (!input.valueSize) {
+    errors.sizes = "Required field enter a size";
+  } else if (!input.name) {
+    errors.name = "Required field enter a name";
+  } else if ((!input.price)) {
+    errors.price = "Required field. enter a value greater than zero";
+  } else if (!input.description ) {
+    errors.description = "Required field enter a Description";
+  } else if (!input.stock) {
+    errors.stock = "Required field enter a amount";
+  } else if (!input.color) {
+    errors.color = "Required field enter a color";
+  }  if(!input.categories.length) {
+    errors.categories = "Required field"
+  }
+  return errors;
+};
 
 
 // let obj = {
@@ -47,15 +71,17 @@ const Update = ({
     // dispatch(putProduct())   
   }, [dispatch]);
 
+  const history = (useHistory())
+
 
 
   
 
 
   // console.log("*********************************************", mapCategories)
-  let categoriess = useSelector((state) => state.categories);
-  let sizess = useSelector((state) => state.sizes);
-  let types = useSelector((state) => state.types);
+  let categoriess = useSelector((state) => state.categoriesReducer.categories);
+  let sizess = useSelector((state) => state.sizesReducer.sizes);
+  let types = useSelector((state) => state.typesReducer.types);
   const mapCategories = categories.map(e =>({
     value: e.id,
     label: e.name
@@ -102,6 +128,7 @@ const Update = ({
     sizes: valueSize,
     price
   })
+  const [errors, setErrors] = useState({});
 
   // console.log("ESTADOOOOO",valueType)
 
@@ -135,6 +162,10 @@ const Update = ({
       ...input,
       [e.target.name]: e.target.value,
     });
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }))
   };
 
   const onSelectChangeNew = (valueCate) => {
@@ -213,11 +244,15 @@ const Update = ({
         sizes: mapSizes,
         price:input.price
       }
-      
-    
 
-    console.log("OBJ",obj);
-    console.log("INPUT",input)
+      // dispatch(putProduct(obj));
+      
+      console.log("OBJ",obj);
+      console.log("INPUT",input)
+      
+      alert("Successfully edited product")
+      history.push("/list");
+
     
   };
 
@@ -236,7 +271,7 @@ const Update = ({
       >
         <div className="insertar">
           <div>
-            <h3 className="h3_insert">Insert Product</h3>
+            <h3 className="h3_insert">Edit Product</h3>
           </div>
           <div className="insert_label">
             <label>Categories</label>
@@ -249,6 +284,7 @@ const Update = ({
               onChange={(e) => onSelectChangeNew(e)}
             />
           </div>
+            {errors.categories && <p className="error">{errors.categories}</p>}
           <div className="insert_label">
             <label>Zise</label>
             <Select
@@ -275,14 +311,17 @@ const Update = ({
               onChange={handleChange}
               value = {input.name}
             />
+            {errors.name && <p className ="error">{errors.name}</p>}
             <label className="label_Insert">Price:</label>
             <input
               className="form-control"
               name="price"
-              type="text"
+              type="number"
+              min= "0"              
               onChange={handleChange}
               value={input.price}
             />
+            {errors.price && <p className= "error">{errors.price}</p>}
 
             <label className="label_Insert">Description:</label>
             <input
@@ -292,6 +331,8 @@ const Update = ({
               onChange={handleChange}
               value = {input.description}
             />
+            {errors.description && <p className ="error">{errors.description}</p>}
+            
             <label className="label_Insert">Stock:</label>
             <input
               className="form-control"
@@ -301,6 +342,7 @@ const Update = ({
               onChange={handleChange}
               value = {input.stock}
             />
+            {errors.stock && <p className = "error">{errors.stock}</p>}
             <label className="label_Insert">Color:</label>
             <input
               className="form-control"
@@ -309,11 +351,15 @@ const Update = ({
               onChange={handleChange}
               value = {input.color}
             />
+            {errors.color && <p className="error">{errors.color}</p>}
 
             <label className="label_Insert">Image:</label>
           </div>
           <div className="crud_Form_Insert_cancelar">
-            <button className="crud_Form_Insert_cancelar_button" type="submit">
+            <button 
+            className="crud_Form_Insert_cancelar_button" 
+            type="submit"
+            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
               Editar
             </button>
             <button
