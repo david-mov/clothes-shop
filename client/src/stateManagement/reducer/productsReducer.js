@@ -3,12 +3,14 @@ import {
 	GET_CATEGORY,
 	GET_TYPE,
 	GET_FILTER_BY_PRICE,
-	GET_SEARCH
+	GET_SEARCH,
+	GET_PRODUCT_DETAILS
 } from '../../consts/actionConsts';
 
 const initialState = {
 	products: [],
-	productsCopy: []
+	productsCopy: [],
+	productDetails: {}
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -47,12 +49,18 @@ export default function productsReducer(state = initialState, action) {
 						products: state.productsCopy.sort((a, b) => (a.price > b.price) ? 1 : -1)
 					}
 				}
-				case GET_SEARCH: {
-					return {
-						...state,
-						products: action.payload
-					}
+			case GET_SEARCH: {
+				return {
+					...state,
+					products: action.payload
 				}
+			}
+			case GET_PRODUCT_DETAILS: {
+				return {
+					...state,
+					productDetails: action.payload
+				}
+			}
 		default:
 			return ({ ...state });
 	}
