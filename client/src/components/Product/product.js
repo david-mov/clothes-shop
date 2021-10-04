@@ -1,5 +1,23 @@
 import "./product.css";
 import { Link } from "react-router-dom";
+import CardActions from "@material-ui/core/CardActions";
+import IconButton from "@material-ui/core/IconButton";
+import { AddShoppingCart } from "@material-ui/icons";
+
+/*const addToBasket = () => {
+    dispatch({
+      type: actionTypes.ADD_TO_BASKET,
+      item: {
+        id,
+        name,
+        productType,
+        image,
+        price,
+        rating,
+        description,
+      },
+    });
+  };*/
 
 const Product = ({ /*imageUrl*/ description, price, name, productId }) => {
     return (
@@ -17,6 +35,18 @@ const Product = ({ /*imageUrl*/ description, price, name, productId }) => {
                 </p>
 
                 <p className="info__price">$499,9 {/*{price}*/}</p>
+
+                <CardActions disableSpacing>
+                    {/*<IconButton aria-label='Add to Cart' onClick={addToBasket}>
+                        <AddShoppingCart fontSize='large' />
+                    </IconButton>*/}
+                    {Array(4)
+                        .fill()
+                        .map((_, i) => (
+                            <p>&#11088;</p>
+                        ))}
+
+                </CardActions>
 
                 <Link to={`/product/${111}`} className="info__button">
                     {/*${productId}*/}

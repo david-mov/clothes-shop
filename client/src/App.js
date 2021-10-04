@@ -7,7 +7,7 @@ import NotFoundView from './views/NotFoundView/NotFoundView';
 // Screens
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
-//import CartScreen from "./screens/CartScreen";
+import CartScreen from "./views/CartScreen";
 
 
 
@@ -19,7 +19,7 @@ function App() {
           {/*<Route exact path='/' component={HomeView} />*/}
           <Route exact path='/' component={HomeScreen} />
           <Route exact path="/product/:id" component={ProductScreen} />
-          {/*<Route exact path="/cart" component={CartScreen} />*/}
+          <Route exact path="/cart" component={CartScreen} />
           <Route path='*' component={NotFoundView} />
         </Switch>
       </main>
