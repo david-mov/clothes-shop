@@ -59,14 +59,6 @@ const OptionsTypes = types.map((e,i) => {
     );
   });
 
-  const OptionsTypes = types.map((e, i) => {
-    return (
-      <option key={i} value={e.name}>
-        {e.name}
-      </option>
-    );
-  });
-
   const onChangeSearch = (e) => {
     dispatch(getSearch(e.target.value));
   };
