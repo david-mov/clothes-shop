@@ -60,7 +60,7 @@ async function preload() {
 } // temporal function
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(DB_PORT, () => {
     preload();
     console.log(`%Best final project of soyHenry listening at ${DB_PORT}`); // eslint-disable-line no-console

@@ -8,6 +8,7 @@ import ProductView from './views/ProductView/ProductView';
 import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from './views/CatalogueView/CatalogueView';
 import FormCrudView from './views/FormCrudView/FormCrudView';
+import ListAdmin from './views/AdminListView/AdminListView';
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path="/update" component={FormCrudView} />
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
+        <Route exact path="/list" component={ListAdmin} />
         <Route path="*" component={NotFoundView} />
+
       </Switch>
     </Router>
   );
