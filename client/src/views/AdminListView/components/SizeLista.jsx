@@ -81,6 +81,7 @@ export default function SizeList() {
             headers={headers()}
             data={sizes}
             bodyTable={bodyTable()}
+            url = {'/create/size'}
         />
          </div>
         <div className='buttonList'>

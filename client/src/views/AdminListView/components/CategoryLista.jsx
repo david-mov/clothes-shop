@@ -82,6 +82,7 @@ export default function CategoryList() {
             headers={headers()}
             data={categorys}
             bodyTable={bodyTable()}
+            url = {'/create/category'}
         />
         </div>
         <div className='buttonList'>

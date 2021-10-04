@@ -79,6 +79,7 @@ export default function TypeList() {
           headers={headers()}
           data={types}
           bodyTable={bodyTable()}
+          url = {'/create/type'}
         />
       </div>
       <div className='buttonList'>

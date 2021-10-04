@@ -55,7 +55,7 @@ export default function ProductosLista() {
                 <p className="table-row__name">{e.name}</p>
               </div>
             </td>
-            <td data-column="Policy" className="table-row__td">
+            <td data-column="Price" className="table-row__td">
               <div className="">
                 <p className="table-row__policy">${e.price}</p>
               </div>
@@ -104,8 +104,8 @@ export default function ProductosLista() {
   return (
     <div>
       <div className='productList'>
-      <Link className='productListLink' to='/create'>Insert</Link>
       <Link className='productListLink' to='/'>GO TO BACK</Link>
+      <Link className='productListLink' to='/create/product'>Insert</Link>
       </div>
     <div className='body' >
 
@@ -114,6 +114,7 @@ export default function ProductosLista() {
         headers={headers()}
         data={products}
         bodyTable={bodyTable()}
+        url = {'/create/product'}
       />
        </div>
      <div className='buttonList'>
