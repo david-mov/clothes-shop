@@ -1,7 +1,16 @@
+import NavBar from "../../components/NavBar/NavBar.jsx"
+import ProductCards from "./ProductCards/ProductCards.jsx"
+import "../../styles/screen.css";
+
 export default function CatalogueView() {
 	return (
-		<div>
-			<h1>Catalogue</h1>
+		<div className="homescreen">
+			<NavBar></NavBar>
+			<h1>Catalogue</h1>			
+			<div className="homescreen__products">
+			<ProductCards/>
+			</div>
 		</div>
+
 	)
 }

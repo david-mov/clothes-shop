@@ -1,0 +1,69 @@
+.crud_form {
+  color: rgba(255, 255, 255, 0.781);
+  display: flex;
+  justify-content: center;
+  background-color: #171717;
+  width: 98%;
+  border-radius: 1rem;
+  /*** 1200px;**/
+  margin: 0 auto;
+  max-width: 800px;
+  min-height: 600px;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+@media (min-width: 768px) {
+  .crud_form {
+    display: flex;
+    min-height: 400px;
+  }
+}
+.crud_Form_Insert_cancelar {
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.crud_Form_Insert_cancelar_button_danger {
+  margin-left: 1rem;
+}
+button {
+  cursor: pointer;
+}
+button:hover {
+  color: blueviolet;
+}
+.insert_label {
+  padding-top: 0.5rem;
+  text-align: center;
+  padding-bottom: 1rem;
+}
+.label_Insert {
+  display: flex;
+  padding-right: 1rem;
+  padding-left: 0.5rem;
+  justify-content: center;
+}
+@media (min-width: 458px) {
+  .label_Insert {
+    display: block;
+
+    padding-left: 0.5rem;
+  }
+  .label_Insert {
+    display: flex;
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+    justify-content: center;
+  }
+}
+.selected {
+  text-align: center;
+  padding-top: 0.5rem;
+  color: blue;
+}
+.h3_insert {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  padding-top: 1rem;
+  text-transform: uppercase;
+  font-size: 2rem;
+}

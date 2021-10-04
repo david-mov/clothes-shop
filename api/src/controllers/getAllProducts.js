@@ -1,22 +1,20 @@
-const { Product, Type, Size, Category, Image } = require('../db.js');
+const { Product, Type, Category, Image } = require('../db.js');
 
 const getAllProducts = async (req, res, next) => {
 	try {
 		const allProducts = await Product.findAll({
             where: { enabled: true },
 			include: [{
-                model:Type,
-                attributes: ['name']
-            },{
-                model: Size,
-                attributes:['name']
-            },{
-                model: Category,
-                attributes:['name']
-            },{
                 model: Image,
                 attributes:['name']
-            }]    
+            },{
+                model: Type,
+                attributes: ['name'],
+            },{
+                model: Category,
+                attributes: ['name'],
+            }],
+            attributes: ['name', 'price','description','stock', 'id'],
 		});
 		res.json(allProducts);
 	}
@@ -24,5 +22,5 @@ const getAllProducts = async (req, res, next) => {
 		next(e)
 	}
 }
-
+ 
 module.exports = getAllProducts;

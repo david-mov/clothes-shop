@@ -16,5 +16,5 @@ const disableProduct = async (req, res, next) => {
 		next(err);
 	}
 }
-
+ 
 module.exports = disableProduct;

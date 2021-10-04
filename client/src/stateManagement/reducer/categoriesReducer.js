@@ -1,6 +1,8 @@
 import { 
-	GET_ALL_CATEGORIES,
+	GET_ALL_CATEGORIES, GET_CATEGORY,
 } from '../../consts/actionConsts';
+import products from "./productsReducer"
+
 
 const initialState = {
 	categories: [],
@@ -9,10 +11,10 @@ const initialState = {
 export default function categoriesReducer(state = initialState, action) {
 	switch(action.type) {
 		case GET_ALL_CATEGORIES:
-			return ({
+			return {
 				...state,
-				categories: action.payload
-			});
+				categories: action.payload,
+			}
 		default:
 			return ({ ...state });
 	}
