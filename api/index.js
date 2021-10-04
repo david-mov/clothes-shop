@@ -18,49 +18,64 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-require('dotenv').config();
-const server = require('./src/app.js');
-const { conn, Category, Size, Type, Rol } = require('./src/db.js');
+require("dotenv").config();
+const server = require("./src/app.js");
+const { conn, Category, Size, Type, Rol } = require("./src/db.js");
 const { DB_PORT } = process.env;
 
 async function preload() {
-  const categoriesData = ["vintage","futbol","casual","sport","elegant","punk"];
-  const sizesData = ["big","medium","tall","small","num-1","num-2"];
-  const typesData = ["sweater","dress","hoodie","shirt","short","jean","shoes"];
-  const rolesData = ["superAdmin","admin","user"];
+  const categoriesData = [
+    "vintage",
+    "futbol",
+    "casual",
+    "sport",
+    "elegant",
+    "punk",
+  ];
+  const sizesData = ["big", "medium", "tall", "small", "num-1", "num-2"];
+  const typesData = [
+    "sweater",
+    "dress",
+    "hoodie",
+    "shirt",
+    "short",
+    "jean",
+    "shoes",
+  ];
+  const rolesData = ["superAdmin", "admin", "user"];
 
   for (categoryData of categoriesData) {
     await Category.findOrCreate({
       where: {
-        name: categoryData
-      }
-    })
+        name: categoryData,
+      },
+    });
   }
   for (sizeData of sizesData) {
     await Size.findOrCreate({
       where: {
-        name: sizeData
-      }
-    })
+        name: sizeData,
+      },
+    });
   }
   for (typeData of typesData) {
     await Type.findOrCreate({
       where: {
-        name: typeData
-      }
-    })
+        name: typeData,
+      },
+    });
   }
   for (rolData of rolesData) {
     await Rol.findOrCreate({
       where: {
-        name: rolData
-      }
-    })
+        name: rolData,
+      },
+    });
   }
 } // temporal function
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(DB_PORT, () => {
     preload();
     console.log(`%Best final project of soyHenry listening at ${DB_PORT}`); // eslint-disable-line no-console
