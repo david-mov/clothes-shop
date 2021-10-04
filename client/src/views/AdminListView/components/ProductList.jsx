@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getAllProducts } from '../../../stateManagement/actions/getAllProducts'
 import TablaList from './ListTable'
+import './styles.css'
 
 export default function ProductosLista() {
   const dispatch = useDispatch()
@@ -66,21 +67,24 @@ export default function ProductosLista() {
             </td>
 
             <td className="table-row__td">
+            <Link to="/addimage">
               <p>
-                <i className="fas fa-trash-alt fa-2x"></i>
+              <i class="far fa-image fa-2x"></i>
               </p>
+              </Link>
             </td>
             <td className="table-row__td">
-              <Link to="/">
+              <Link to={`/update/${e.name}`}>
+
                 {' '}
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>
                 </p>{' '}
-              </Link>
+             </Link>
             </td>
             <td className="table-row__td">
               <p>
-                <i className="fas fa-trash-alt fa-2x"></i>
+              <i class="far fa-eye fa-2x"></i>
               </p>
             </td>
 
@@ -99,16 +103,20 @@ export default function ProductosLista() {
 
   return (
     <div>
-      <Link to='/create'>Insert</Link>
-      <Link to='/'>Insert</Link>
+      <div className='productList'>
+      <Link className='productListLink' to='/create'>Insert</Link>
+      <Link className='productListLink' to='/'>GO TO BACK</Link>
+      </div>
+    <div className='body' >
+
       <TablaList
         title={'Porducts'}
         headers={headers()}
         data={products}
         bodyTable={bodyTable()}
       />
-
-     
+       </div>
+     <div className='buttonList'>
         <button className="button2" onClick={prevPage}>
           PREV
         </button>
@@ -120,7 +128,8 @@ export default function ProductosLista() {
         <button className="button2" onClick={nextPage}>
           NEXT
         </button>
-     
+        </div>
     </div>
+    
   )
 }

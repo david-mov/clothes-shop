@@ -3,7 +3,7 @@ import { useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
 import {getAllCategories} from '../../../stateManagement/actions/getAllCategories';
 import TablaList from './ListTable';
-
+import './styles.css'
 
 
 
@@ -74,13 +74,16 @@ export default function SizeList() {
     
     console.log("pr",sizes);
     return (
-        <div>
+      <div>
+        <div className='body'>
         <TablaList 
             title={"Sizes"}
             headers={headers()}
             data={sizes}
             bodyTable={bodyTable()}
         />
+         </div>
+        <div className='buttonList'>
         <button className="button2" onClick={prevPage}>
         PREV
       </button>
@@ -92,7 +95,8 @@ export default function SizeList() {
       <button className="button2" onClick={nextPage}>
         NEXT
       </button>
-   
+      </div>
+ 
   </div>
     )
     

@@ -12,6 +12,8 @@ import InsertCategory from "./views/FormCrudView/components/Insert/InsertCategor
 import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
 import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
+import AddImage from './components/agregarImagenProduct/FormAddImg'
+
 
 
 
@@ -33,6 +35,7 @@ function App() {
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
+        <Route exact path="/addimage" component={AddImage} />
         <Route path="*" component={NotFoundView} />
       </Switch>
     </Router>
