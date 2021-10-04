@@ -25,6 +25,9 @@
 .crud_Form_Insert_cancelar_button_danger {
   margin-left: 1rem;
 }
+.error {
+  color: red;
+}
 button {
   cursor: pointer;
 }
