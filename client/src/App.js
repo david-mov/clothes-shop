@@ -8,6 +8,10 @@ import ProductView from './views/ProductView/ProductView';
 import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from './views/CatalogueView/CatalogueView';
 import FormCrudView from './views/FormCrudView/FormCrudView';
+import FormCateView from './views/FormCrudView/FormCateView';
+import FormSizeView from './views/FormCrudView/FormSizeView';
+import FormTypeView from './views/FormCrudView/FormTypeView';
+
 
 function App() {
   return (
@@ -16,7 +20,10 @@ function App() {
         <Route exact path='/' component={HomeView} />
         <Route exact path='/catalogue' component={CatalogueView} />
         <Route exact path='/profile/:userId' component={ProfileView} />
-        <Route path="/create" component={FormCrudView} />
+        <Route path="/create/product" component={FormCrudView} />
+        <Route path="/create/category" component={FormCateView} />
+        <Route path="/create/size" component={FormSizeView} />
+        <Route path="/create/type" component={FormTypeView} />
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route path="*" component={NotFoundView} />

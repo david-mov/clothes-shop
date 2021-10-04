@@ -1,7 +1,7 @@
 import { 
 	GET_ALL_CATEGORIES, GET_CATEGORY,
 } from '../../consts/actionConsts';
-import products from "./productsReducer"
+//import products from "./productsReducer"
 
 
 const initialState = {
