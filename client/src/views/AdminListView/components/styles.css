@@ -6,14 +6,16 @@ GENERAL
 *{
   margin:0;
   padding: 0px;;
-  font-family: "lucida handwriting";
+  font-family: "arial";
 }
-body{
-  background: #403A3E;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #BE5869, #403A3E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.body{
  
-  
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background: #8e9eab;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #eef2f3, #8e9eab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
 
 }
 html, body{
@@ -25,7 +27,7 @@ html, body{
 }
 .row__title{
   color: black;
-  font-family: "lucida handwriting";
+  font-family: "arial";
   font-weight: 400;
   font-size: 20px;
   margin: 0;
@@ -39,8 +41,8 @@ html, body{
   margin-top: 20px;
 }
 .table__th {
-  font-family: "lucida handwriting";
-    color:white;
+  font-family: "arial";
+    color:black;
     font-weight: 500;
     font-size: 12px;
     text-transform: uppercase;
@@ -52,14 +54,15 @@ html, body{
 }
 
 .table-row {
-  background: #403A3E;  
-background: -webkit-linear-gradient(to right, #BE5869, #403A3E);  
-background: linear-gradient(to right, #BE5869, #403A3E); 
-
+  
+  background: #8e9eab;  
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);
+  background: linear-gradient(to right, #eef2f3, #8e9eab); 
+  
   }
 
 .table__th:hover {
-    color: black;
+    color: rgb(80, 98, 255);
    
 }
 
@@ -72,6 +75,7 @@ background: linear-gradient(to right, #BE5869, #403A3E);
     border: 2px solid #becad2;
 }
 .table-row__td {
+  text-align: center;
     padding: 12px 8px !important;
     vertical-align: middle !important;
     color: black;
@@ -94,41 +98,6 @@ background: linear-gradient(to right, #BE5869, #403A3E);
   
 }
 
-.table-row--chris .table-row__img {
-    background-image: url('https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb');
-}
-
-.table-row--angie .table-row__img {
-    background-image: url('https://images.pexels.com/photos/785667/pexels-photo-785667.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-.table-row--ronald .table-row__img {
-    background-image: url('https://images.pexels.com/photos/211050/pexels-photo-211050.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb');
-}
-
-.table-row--june .table-row__img {
-    background-image: url('https://images.pexels.com/photos/709802/pexels-photo-709802.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb');
-}
-
-.table-row--ben .table-row__img {
-    background-image: url('https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-.table-row--natalie .table-row__img {
-    background-image: url('https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-.table-row--thomas .table-row__img {
-    background-image: url('https://images.pexels.com/photos/415326/pexels-photo-415326.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-
-
-
-
-
-
-
 .table-row__info {
     display: inline-block;
     padding-left: 12px;
@@ -137,7 +106,7 @@ background: linear-gradient(to right, #BE5869, #403A3E);
 
 .table-row__name {
     color: #53646f;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 400;
   line-height: 18px;
     margin-bottom: 0px;
@@ -150,15 +119,15 @@ background: linear-gradient(to right, #BE5869, #403A3E);
 }
 
 .table-row__policy {
-    color: #53646f;
-    font-size: 13px;
+    color: rgb(66, 19, 1);
+    font-size: 20px;
     font-weight: 400;
     line-height: 18px;
     margin-bottom: 0px;
 }
 .table-row__p-status {
     margin-bottom: 0;
-    font-size: 13px;
+    font-size: 20px;
     vertical-align: middle;
     display: inline-block;
   color: #9eabb4;
@@ -322,10 +291,9 @@ background: linear-gradient(to right, #BE5869, #403A3E);
   }
   
   .table-row__td {
-    display: block;
-    text-align: center;
+    display: flex;
     padding: 8px !important;
-   
+    justify-content: center;
    
   }
   .table-row--red {
@@ -373,11 +341,12 @@ background: linear-gradient(to right, #BE5869, #403A3E);
 }
 
 .button2{
-  color:blanchedalmond;
+  padding-left: 10px;
+  color:black;
   padding: 2px 8px;
-  background: #403A3E;  
-  background: -webkit-linear-gradient(to right, #BE5869, #403A3E); 
-  background: linear-gradient(to right, #BE5869, #403A3E);
+  background: #ADA996;  
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
   
 }
 .button2:hover {
@@ -385,3 +354,21 @@ background: linear-gradient(to right, #BE5869, #403A3E);
   
 }
 
+.buttonList{
+  display: flex;
+ justify-content: center;
+ padding-top: 15px;
+
+}
+.productList{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.productListLink{
+  text-decoration: none;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 300;
+}

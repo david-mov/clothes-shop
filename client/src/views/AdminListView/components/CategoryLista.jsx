@@ -1,8 +1,9 @@
 import {useDispatch,useSelector} from 'react-redux';
-import { useEffect} from 'react';
+import { useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
-import getAllCategories from '../../stateManagement/actions/getAllCategories';
-import TablaList from './TablaList';
+import {getAllCategories} from '../../../stateManagement/actions/getAllCategories';
+import TablaList from './ListTable';
+import './styles.css'
 
 
 
@@ -10,12 +11,29 @@ import TablaList from './TablaList';
 export default function CategoryList() {
 
     const dispatch = useDispatch();  
+    const [currentPage, setCurrentPage] = useState(0)
+    const [actualCurrent, setactualCurrent] = useState(1)
+    var countP = 5
+    const nextPage = () => {
+      if (totalCurrent !== actualCurrent) {
+        setactualCurrent(actualCurrent + 1)
+        setCurrentPage(currentPage + countP)
+      }
+    }
+  
+    const prevPage = () => {
+      if (actualCurrent > 1) {
+        setactualCurrent(actualCurrent - 1)
+        setCurrentPage(currentPage - countP)
+      }
+    }
     
     useEffect(() => {
       dispatch (getAllCategories());  
     }, [dispatch]);
 
     const categorys = useSelector(state => state.categoriesReducer.categories);
+    var totalCurrent = Math.ceil(categorys.length / countP)
 
     function headers (){
         return (
@@ -57,13 +75,31 @@ export default function CategoryList() {
     
     console.log("pr",categorys);
     return (
+      <div>
+        <div className='body'>
         <TablaList 
             title={"Categorys"}
             headers={headers()}
             data={categorys}
             bodyTable={bodyTable()}
+            url = {'/create/category'}
         />
-
+        </div>
+        <div className='buttonList'>
+        <button className="button2" onClick={prevPage}>
+        PREV
+      </button>
+   
+    <h1>
+      {actualCurrent} De {totalCurrent}
+    </h1>
+   
+      <button className="button2" onClick={nextPage}>
+        NEXT
+      </button>
+   
+      </div>
+  </div>
     )
     
 }

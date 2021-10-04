@@ -1,10 +1,9 @@
 
-
 export default function AddImgProduct({id, name}){
     console.log("soy",id)
    
     return(
-        <div >
+        <div  >
 
             <form>
                 <input value = {id} hidden/>

@@ -18,9 +18,9 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-require('dotenv').config();
-const server = require('./src/app.js');
-const { conn, Category, Size, Type, Rol } = require('./src/db.js');
+require("dotenv").config();
+const server = require("./src/app.js");
+const { conn, Category, Size, Type, Rol } = require("./src/db.js");
 const { DB_PORT } = process.env;
 
 async function preload() {
@@ -32,30 +32,30 @@ async function preload() {
   for (categoryData of categoriesData) {
     await Category.findOrCreate({
       where: {
-        name: categoryData
-      }
-    })
+        name: categoryData,
+      },
+    });
   }
   for (sizeData of sizesData) {
     await Size.findOrCreate({
       where: {
-        name: sizeData
-      }
-    })
+        name: sizeData,
+      },
+    });
   }
   for (typeData of typesData) {
     await Type.findOrCreate({
       where: {
-        name: typeData
-      }
-    })
+        name: typeData,
+      },
+    });
   }
   for (rolData of rolesData) {
     await Rol.findOrCreate({
       where: {
-        name: rolData
-      }
-    })
+        name: rolData,
+      },
+    });
   }
 } // temporal function
 

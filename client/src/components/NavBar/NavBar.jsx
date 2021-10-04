@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react'
-import {getAllProducts} from "../../stateManagement/actions/getAllProducts"
-import {getAllCategories} from "../../stateManagement/actions/getAllCategories"
-import { getCategory } from '../../stateManagement/actions/getCategory'
-import {getType} from "../../stateManagement/actions/getType"
-import {getPrice} from "../../stateManagement/actions/getPrice"
-import { getSearch } from '../../stateManagement/actions/getSearch'
-import { Link } from 'react-router-dom'
-import {useSelector, useDispatch} from "react-redux"
-import "./NavBar.css"
-import { getAllTypes } from '../../stateManagement/actions/getAllTypes'
+import React, { useEffect, useState } from "react";
+import { getAllProducts } from "../../stateManagement/actions/getAllProducts";
+import { getAllCategories } from "../../stateManagement/actions/getAllCategories";
+import { getCategory } from "../../stateManagement/actions/getCategory";
+import { getType } from "../../stateManagement/actions/getType";
+import { getPrice } from "../../stateManagement/actions/getPrice";
+import { getSearch } from "../../stateManagement/actions/getSearch";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import "./NavBar.css";
+import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 
 function NavBar() {
 
@@ -53,47 +53,65 @@ const OptionsCategories = categories.map((e,i) => {
 
 const OptionsTypes = types.map((e,i) => {
     return (
-        <option key={i} value={e.name}>{e.name}</option>
-    )
-})
+      <option key={i} value={e.name}>
+        {e.name}
+      </option>
+    );
+  });
 
-
- const onChangeSearch = (e) => {
-    dispatch(getSearch(e.target.value))
- }
-
- const onChangePrice = (e) => {
-     e.preventDefault()
-     dispatch(getPrice(e.target.value))
- }
-
- //const Navbar = ({ click }) => {
-   // const cart = useSelector((state) => state.cart);
-   // const { cartItems } = cart;
- //}
- //const getCartCount = () => {
-   // return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
- // };
-
+  const OptionsTypes = types.map((e, i) => {
     return (
-        <div className="todo">
-             <div className="navbar">
-            <div className="navbar__logo" >
-            <img className="img" src="https://i.ibb.co/jwF67rm/clothes-Shop.png" alt="clothes-Shop" border="0"></img>
-            </div>
-            <div className="cart__link">
-                <div>Categories</div>
-            <select className="" value={categoryValue} onChange={onSelectCategory} >
-            <option value="none">All</option>
-                {OptionsCategories}
-            </select>
+      <option key={i} value={e.name}>
+        {e.name}
+      </option>
+    );
+  });
+
+  const onChangeSearch = (e) => {
+    dispatch(getSearch(e.target.value));
+  };
+
+  const onChangePrice = (e) => {
+    e.preventDefault();
+    dispatch(getPrice(e.target.value));
+  };
+
+  //const Navbar = ({ click }) => {
+  // const cart = useSelector((state) => state.cart);
+  // const { cartItems } = cart;
+  //}
+  //const getCartCount = () => {
+  // return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+  // };
+
+  return (
+    <div className="todo">
+      <div className="navbar">
+        <div className="navbar__logo">
+          <img
+            className="img"
+            src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+            alt="clothes-Shop"
+            border="0"
+          ></img>
         </div>
         <div className="cart__link">
-            <div>Types</div>
-            <select className="" value={typeValue} onChange={onSelectTypes}>
-                    <option value="none">All</option>
-                    {OptionsTypes}
-            </select>
+          <div>Categories</div>
+          <select
+            className=""
+            value={categoryValue}
+            onChange={onSelectCategory}
+          >
+            <option value="none">All</option>
+            {OptionsCategories}
+          </select>
+        </div>
+        <div className="cart__link">
+          <div>Types</div>
+          <select className="" value={typeValue} onChange={onSelectTypes}>
+            <option value="none">All</option>
+            {OptionsTypes}
+          </select>
         </div>
         <div className="cart__link">
         <div>Price</div>
@@ -104,24 +122,29 @@ const OptionsTypes = types.map((e,i) => {
             </select>
         </div>
         <div className="SearchInput">
-                <input type="text" onChange={onChangeSearch}  placeholder="Search products..." className=""/>
+          <input
+            type="text"
+            onChange={onChangeSearch}
+            placeholder="Search products..."
+            className=""
+          />
         </div>
         <ul className="navbar__links">
-        <li className="saco">
-          <Link to="/cart" className="cart__link">
-            <i className="fas fa-shopping-cart"></i>
-            <span>
-              Cart <span className="cartlogo__badge">{}</span>
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/list">Lists</Link>
-        </li>
-      </ul>
-        </div>
-        </div>
-    )
+          <li className="saco">
+            <Link to="/cart" className="cart__link">
+              <i className="fas fa-shopping-cart"></i>
+              <span>
+                Cart <span className="cartlogo__badge">{}</span>
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/list">Lists</Link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
 }
 
-export default NavBar
+export default NavBar;

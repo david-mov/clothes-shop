@@ -6,14 +6,13 @@ import { getAllCategories } from "../../../../stateManagement/actions/getAllCate
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
 import "./Insert.css";
-import { Link } from "react-router-dom";
 
 const validate = (input) => {
   let errors = {};
   if (!input.name) {
     errors.name = "Required field enter a name";
-  } else if (!input.price) {
-    errors.price = "Required field enter a Price";
+  } else if (!input.price || typeof input.price !== "number") {
+    errors.price = "Required field enter a Number";
   } else if (!input.description) {
     errors.description = "Required field enter a Description";
   } else if (!input.stock) {
@@ -153,22 +152,13 @@ const Insert = () => {
   };
   console.log("data", categories);
   return (
-    <div>
-      <form className="crud_form">
+    <div className="crud_form">
+      <form>
         <div className="insertar">
-          {/* <div className="nav_Insert">
-            <Link className="Link_insert" to="/InsertCategory">
-              <p>Insert size</p>
-            </Link>
-
-            <Link className="Link_insert" to="/Update">
-              <p>Update product</p>
-            </Link>
-          </div> */}
           <div>
-            <h3 className="h3_insert">Insert Product</h3>
+            <h3 className="h3_insert">Insert Category</h3>
           </div>
-          <div className="insert_label">
+          {/* <div className="insert_label">
             <label>Categories</label>
             <Select
               className="selected"
@@ -177,8 +167,8 @@ const Insert = () => {
               isMulti
               onChange={(e) => onSelectChangeNew(e)}
             />
-          </div>
-          <div className="insert_label">
+          </div> */}
+          {/* <div className="insert_label">
             <label>Zise</label>
             <Select
               className="selected"
@@ -187,8 +177,8 @@ const Insert = () => {
               isMulti
               onChange={(e) => onSelectChangeNewSize(e)}
             />
-          </div>
-          {errors.sizes && <p>{errors.sizes}</p>}
+          </div> */}
+          {/* {errors.sizes && <p>{errors.sizes}</p>}
           <div className="insert_label">
             <label>Type</label>
             <Select
@@ -197,7 +187,7 @@ const Insert = () => {
               options={OptionType}
               onChange={(e) => onSelectChangeNewType(e)}
             />
-          </div>
+          </div> */}
           <div className="insert_label">
             <label className="label_Insert">Name</label>
             <input
@@ -208,15 +198,13 @@ const Insert = () => {
               onChange={handleChange}
             />
             {errors.name && <p>{errors.name}</p>}
-            <label className="label_Insert">Price</label>
+            {/* <label className="label_Insert">Price</label>
             <input
               className="form-control"
               name="price"
               type="text"
               value={input.price}
               onChange={handleChange}
-              required
-              pattern="[0-9]+"
             />
             {errors.price && <p>{errors.price}</p>}
             <label className="label_Insert">Description</label>
@@ -246,23 +234,22 @@ const Insert = () => {
               onChange={handleChange}
             />
             {errors.color && <p>{errors.color}</p>}
-          </div>
-          <div className="crud_Form_Insert_cancelar">
-            <button
-              type="submit"
-              className="crud_Form_Insert_cancelar_button"
-              onClick={(e) => handleSubmit(e)}
-            >
-              Insert
-            </button>
-            <Link to="/list">
+          </div> */}
+            <div className="crud_Form_Insert_cancelar">
+              <button
+                type="submit"
+                className="crud_Form_Insert_cancelar_button"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Insert
+              </button>
               <button
                 className="crud_Form_Insert_cancelar_button_danger"
                 onClick={(e) => cerrarModalInsertar(e)}
               >
                 Return
               </button>
-            </Link>
+            </div>
           </div>
         </div>
       </form>
