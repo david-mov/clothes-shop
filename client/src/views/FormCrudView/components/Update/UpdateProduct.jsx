@@ -51,7 +51,7 @@ const Update = ({
     { id: 1, name: "big" },
     { id: 2, name: "medium" },
   ],
-  image = "",
+  
 }) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -99,8 +99,7 @@ const Update = ({
   const [input, setInput] = useState({
     name,
     description,
-    color,
-    image,
+    color,    
     stock,
     type_product,
     categories: valueCate,

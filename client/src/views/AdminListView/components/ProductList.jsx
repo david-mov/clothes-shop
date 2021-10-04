@@ -71,7 +71,7 @@ export default function ProductosLista() {
               </p>
             </td>
             <td className="table-row__td">
-              <Link to="/">
+              <Link to={`/update/${e.name}`}>
                 {' '}
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>

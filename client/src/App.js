@@ -12,6 +12,7 @@ import ListAdmin from './views/AdminListView/AdminListView';
 
 
 
+
 function App() {
   return (
     <Router>
@@ -21,10 +22,10 @@ function App() {
         <Route exact path="/catalogue" component={CatalogueView} />
         <Route exact path="/profile/:userId" component={ProfileView} />
         <Route exact path="/create" component={Insert} />
-        <Route path="/update" component={UpdateProduct} />
+        <Route path="/update/" component={UpdateProduct} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/cart" component={ProductCart} />
-         <Route exact path="/list" component={ListAdmin} />
+        <Route exact path="/list" component={ListAdmin} />
 
 
         <Route path="*" component={NotFoundView} />
