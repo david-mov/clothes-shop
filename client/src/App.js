@@ -8,6 +8,9 @@ import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from "./views/CatalogueView/CatalogueView";
 import UpdateProduct from "./views/FormCrudView/components/Update/UpdateProduct";
 import Insert from "./views/FormCrudView/components/Insert/Insert";
+import InsertCategory from "./views/FormCrudView/components/Insert/InsertCategory";
+import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
+import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
 
 
@@ -19,14 +22,14 @@ function App() {
         <Route exact path='/' component={HomeView} />
         <Route exact path='/catalogue' component={CatalogueView} />
         <Route exact path='/profile/:userId' component={ProfileView} />
-        <Route path="/create/product" component={FormCrudView} />
-        <Route path="/create/category" component={FormCrudView} />
-        <Route path="/create/size" component={FormCrudView} />
-        <Route path="/create/type" component={FormCrudView} />
-        <Route path="/update/product" component={FormCrudView} />
-        <Route path="/update/category" component={FormCrudView} />
-        <Route path="/update/size" component={FormCrudView} />
-        <Route path="/update/type" component={FormCrudView} />
+        <Route path="/create/product" component={Insert} />
+        <Route path="/create/category" component={InsertCategory} />
+        <Route path="/create/size" component={InsertSize} />
+        <Route path="/create/type" component={InsertType} />
+        <Route path="/update/product" component={UpdateProduct} />
+        <Route path="/update/category" component={UpdateProduct} />
+        <Route path="/update/size" component={UpdateProduct} />
+        <Route path="/update/type" component={UpdateProduct} />
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
