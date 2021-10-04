@@ -22,7 +22,6 @@ function NavBar() {
     }
 
     const onSelectTypes = (e) => {
-        console.log("mostre on select types")
         e.preventDefault()
         setTypeValue(e.target.value);
         dispatch(getType(e.target.value))
@@ -99,7 +98,7 @@ const OptionsTypes = types.map((e,i) => {
         <div className="cart__link">
         <div>Price</div>
             <select className="pintar" onChange={onChangePrice}>
-                    <option value="none">-</option>
+                    <option value="none">None</option>
                     <option value="H">Higher</option>
                     <option value="L">Lower</option>
             </select>
