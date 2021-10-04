@@ -17,8 +17,14 @@ function App() {
         <Route exact path='/' component={HomeView} />
         <Route exact path='/catalogue' component={CatalogueView} />
         <Route exact path='/profile/:userId' component={ProfileView} />
-        <Route path="/create" component={FormCrudView} />
-        <Route path="/update" component={FormCrudView} />
+        <Route path="/create/product" component={FormCrudView} />
+        <Route path="/create/category" component={FormCrudView} />
+        <Route path="/create/size" component={FormCrudView} />
+        <Route path="/create/type" component={FormCrudView} />
+        <Route path="/update/product" component={FormCrudView} />
+        <Route path="/update/category" component={FormCrudView} />
+        <Route path="/update/size" component={FormCrudView} />
+        <Route path="/update/type" component={FormCrudView} />
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
