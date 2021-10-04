@@ -24,22 +24,39 @@ const { conn, Category, Size, Type, Rol } = require('./src/db.js');
 const { DB_PORT } = process.env;
 
 async function preload() {
-  const categoriesData = ["vintage","futbol","casual","sport","elegant","punk"].map(e => {
-    return { name: e }
-  });
-  const sizeData = ["big","medium","tall","small","num-1","num-2"].map(e => {
-    return { name: e }
-  });
-  const typesData = ["sweater","dress","hoodie","shirt","short","jean","shoes"].map(e => {
-    return { name: e }
-  });
-  const rolesData = ["superAdmin","admin","user"].map(e => { return { name: e } });
+  const categoriesData = ["vintage","futbol","casual","sport","elegant","punk"];
+  const sizesData = ["big","medium","tall","small","num-1","num-2"];
+  const typesData = ["sweater","dress","hoodie","shirt","short","jean","shoes"];
+  const rolesData = ["superAdmin","admin","user"];
 
-  await Category.bulkCreate(categoriesData);
-  await Size.bulkCreate(sizeData);
-  await Type.bulkCreate(typesData);
-  await Rol.bulkCreate(rolesData);
-
+  for (categoryData of categoriesData) {
+    await Category.findOrCreate({
+      where: {
+        name: categoryData
+      }
+    })
+  }
+  for (sizeData of sizesData) {
+    await Size.findOrCreate({
+      where: {
+        name: sizeData
+      }
+    })
+  }
+  for (typeData of typesData) {
+    await Type.findOrCreate({
+      where: {
+        name: typeData
+      }
+    })
+  }
+  for (rolData of rolesData) {
+    await Rol.findOrCreate({
+      where: {
+        name: rolData
+      }
+    })
+  }
 } // temporal function
 
 // Syncing all the models at once.
