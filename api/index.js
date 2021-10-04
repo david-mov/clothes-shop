@@ -24,9 +24,9 @@ const { conn, Category, Size, Type, Rol } = require('./src/db.js');
 const { DB_PORT } = process.env;
 
 async function preload() {
-  const categoriesData = ["vintage","futbol","casual","sport","elegant","punk"];
-  const sizesData = ["big","medium","tall","small","num-1","num-2"];
-  const typesData = ["sweater","dress","hoodie","shirt","short","jean","shoes"];
+  const categoriesData = ["Elegant","Casual","Vintage","Punk","Sport","Futbol"];
+  const sizesData = ["XXS","XS","S","M","L","XL","XXL"];
+  const typesData = ["Dress","Sweater","Hoodie","Shirt","Short","Jean","Shoes","Hats"];
   const rolesData = ["superAdmin","admin","user"];
 
   for (categoryData of categoriesData) {
@@ -63,6 +63,6 @@ async function preload() {
 conn.sync({ force: false }).then(() => {
   server.listen(DB_PORT, () => {
     preload();
-    console.log(`%Best final project of soyHenry listening at ${DB_PORT}`); // eslint-disable-line no-console
+    console.log(`%the best henry final project listening at ${DB_PORT}`); // eslint-disable-line no-console
   });
 });

@@ -21,7 +21,7 @@ const getProductsBySearch = async (req, res, next) => {
                 model: Category,
                 attributes: ['name'],
             }],
-			attributes: ['name', 'price','description','stock'],
+			attributes: ['name', 'price','description','stock', 'id'],
 		})
 		res.json(productsFound);
 	}
