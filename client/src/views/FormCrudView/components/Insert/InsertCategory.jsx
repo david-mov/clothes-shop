@@ -11,8 +11,8 @@ const validate = (input) => {
   let errors = {};
   if (!input.name) {
     errors.name = "Required field enter a name";
-  } else if (!input.price) {
-    errors.price = "Required field enter a Price";
+  } else if (!input.price || typeof input.price !== "number") {
+    errors.price = "Required field enter a Number";
   } else if (!input.description) {
     errors.description = "Required field enter a Description";
   } else if (!input.stock) {
@@ -44,7 +44,7 @@ const Insert = () => {
     sizes: [],
     images: [],
   });
-  
+
   let categories = useSelector((state) => state.categoriesReducer.categories);
   let sizes = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
@@ -98,7 +98,7 @@ const Insert = () => {
     setErrors(
       validate({
         ...input,
-       // [valueSize.target.name]: valueSize.target.value,
+        // [valueSize.target.name]: valueSize.target.value,
       })
     );
   };
@@ -150,15 +150,15 @@ const Insert = () => {
       images: [],
     });
   };
-console.log("data", categories)
+  console.log("data", categories);
   return (
     <div className="crud_form">
       <form>
         <div className="insertar">
           <div>
-            <h3 className="h3_insert">Insert Product</h3>
+            <h3 className="h3_insert">Insert Category</h3>
           </div>
-          <div className="insert_label">
+          {/* <div className="insert_label">
             <label>Categories</label>
             <Select
               className="selected"
@@ -167,8 +167,8 @@ console.log("data", categories)
               isMulti
               onChange={(e) => onSelectChangeNew(e)}
             />
-          </div>
-          <div className="insert_label">
+          </div> */}
+          {/* <div className="insert_label">
             <label>Zise</label>
             <Select
               className="selected"
@@ -177,8 +177,8 @@ console.log("data", categories)
               isMulti
               onChange={(e) => onSelectChangeNewSize(e)}
             />
-          </div>
-          {errors.sizes && <p>{errors.sizes}</p>}
+          </div> */}
+          {/* {errors.sizes && <p>{errors.sizes}</p>}
           <div className="insert_label">
             <label>Type</label>
             <Select
@@ -187,7 +187,7 @@ console.log("data", categories)
               options={OptionType}
               onChange={(e) => onSelectChangeNewType(e)}
             />
-          </div>
+          </div> */}
           <div className="insert_label">
             <label className="label_Insert">Name</label>
             <input
@@ -198,7 +198,7 @@ console.log("data", categories)
               onChange={handleChange}
             />
             {errors.name && <p>{errors.name}</p>}
-            <label className="label_Insert">Price</label>
+            {/* <label className="label_Insert">Price</label>
             <input
               className="form-control"
               name="price"
@@ -234,21 +234,22 @@ console.log("data", categories)
               onChange={handleChange}
             />
             {errors.color && <p>{errors.color}</p>}
-          </div>
-          <div className="crud_Form_Insert_cancelar">
-            <button
-              type="submit"
-              className="crud_Form_Insert_cancelar_button"
-              onClick={(e) => handleSubmit(e)}
-            >
-              Insert
-            </button>
-            <button
-              className="crud_Form_Insert_cancelar_button_danger"
-              onClick={(e) => cerrarModalInsertar(e)}
-            >
-              Return
-            </button>
+          </div> */}
+            <div className="crud_Form_Insert_cancelar">
+              <button
+                type="submit"
+                className="crud_Form_Insert_cancelar_button"
+                onClick={(e) => handleSubmit(e)}
+              >
+                Insert
+              </button>
+              <button
+                className="crud_Form_Insert_cancelar_button_danger"
+                onClick={(e) => cerrarModalInsertar(e)}
+              >
+                Return
+              </button>
+            </div>
           </div>
         </div>
       </form>

@@ -6,6 +6,7 @@ import { getAllCategories } from "../../../../stateManagement/actions/getAllCate
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
 import "./Insert.css";
+import { Link } from "react-router-dom";
 
 const validate = (input) => {
   let errors = {};
@@ -44,7 +45,7 @@ const Insert = () => {
     sizes: [],
     images: [],
   });
-  
+
   let categories = useSelector((state) => state.categoriesReducer.categories);
   let sizes = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
@@ -98,7 +99,7 @@ const Insert = () => {
     setErrors(
       validate({
         ...input,
-       // [valueSize.target.name]: valueSize.target.value,
+        // [valueSize.target.name]: valueSize.target.value,
       })
     );
   };
@@ -150,11 +151,20 @@ const Insert = () => {
       images: [],
     });
   };
-console.log("data", categories)
+  console.log("data", categories);
   return (
-    <div className="crud_form">
-      <form>
+    <div>
+      <form className="crud_form">
         <div className="insertar">
+          {/* <div className="nav_Insert">
+            <Link className="Link_insert" to="/InsertCategory">
+              <p>Insert size</p>
+            </Link>
+
+            <Link className="Link_insert" to="/Update">
+              <p>Update product</p>
+            </Link>
+          </div> */}
           <div>
             <h3 className="h3_insert">Insert Product</h3>
           </div>
@@ -205,6 +215,8 @@ console.log("data", categories)
               type="text"
               value={input.price}
               onChange={handleChange}
+              required
+              pattern="[0-9]+"
             />
             {errors.price && <p>{errors.price}</p>}
             <label className="label_Insert">Description</label>
@@ -243,12 +255,14 @@ console.log("data", categories)
             >
               Insert
             </button>
-            <button
-              className="crud_Form_Insert_cancelar_button_danger"
-              onClick={(e) => cerrarModalInsertar(e)}
-            >
-              Return
-            </button>
+            <Link to="/list">
+              <button
+                className="crud_Form_Insert_cancelar_button_danger"
+                onClick={(e) => cerrarModalInsertar(e)}
+              >
+                Return
+              </button>
+            </Link>
           </div>
         </div>
       </form>
