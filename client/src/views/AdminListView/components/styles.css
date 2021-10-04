@@ -8,10 +8,14 @@ GENERAL
   padding: 0px;;
   font-family: "lucida handwriting";
 }
-body{
-  background: #ADA996;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.body{
+ 
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background: #ADA996;  
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
 
  
   
@@ -41,7 +45,7 @@ html, body{
 }
 .table__th {
   font-family: "lucida handwriting";
-    color:white;
+    color:black;
     font-weight: 500;
     font-size: 12px;
     text-transform: uppercase;
@@ -53,14 +57,15 @@ html, body{
 }
 
 .table-row {
-  background: #ADA996;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  background: #ADA996;  
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
   
   }
 
 .table__th:hover {
-    color: black;
+    color: rgb(80, 98, 255);
    
 }
 
@@ -73,6 +78,7 @@ html, body{
     border: 2px solid #becad2;
 }
 .table-row__td {
+  text-align: center;
     padding: 12px 8px !important;
     vertical-align: middle !important;
     color: black;
@@ -95,41 +101,6 @@ html, body{
   
 }
 
-.table-row--chris .table-row__img {
-    background-image: url('https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb');
-}
-
-.table-row--angie .table-row__img {
-    background-image: url('https://images.pexels.com/photos/785667/pexels-photo-785667.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-.table-row--ronald .table-row__img {
-    background-image: url('https://images.pexels.com/photos/211050/pexels-photo-211050.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb');
-}
-
-.table-row--june .table-row__img {
-    background-image: url('https://images.pexels.com/photos/709802/pexels-photo-709802.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb');
-}
-
-.table-row--ben .table-row__img {
-    background-image: url('https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-.table-row--natalie .table-row__img {
-    background-image: url('https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-.table-row--thomas .table-row__img {
-    background-image: url('https://images.pexels.com/photos/415326/pexels-photo-415326.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
-}
-
-
-
-
-
-
-
-
 .table-row__info {
     display: inline-block;
     padding-left: 12px;
@@ -151,7 +122,7 @@ html, body{
 }
 
 .table-row__policy {
-    color: #53646f;
+    color: rgb(66, 19, 1);
     font-size: 13px;
     font-weight: 400;
     line-height: 18px;
@@ -323,10 +294,9 @@ html, body{
   }
   
   .table-row__td {
-    display: block;
-    text-align: center;
+    display: flex;
     padding: 8px !important;
-   
+    justify-content: center;
    
   }
   .table-row--red {
@@ -374,11 +344,12 @@ html, body{
 }
 
 .button2{
-  color:blanchedalmond;
+  padding-left: 10px;
+  color:black;
   padding: 2px 8px;
-  background: #403A3E;  
-  background: -webkit-linear-gradient(to right, #BE5869, #403A3E); 
-  background: linear-gradient(to right, #BE5869, #403A3E);
+  background: #ADA996;  
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
   
 }
 .button2:hover {
@@ -386,3 +357,21 @@ html, body{
   
 }
 
+.buttonList{
+  display: flex;
+ justify-content: center;
+ padding-top: 15px;
+
+}
+.productList{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+.productListLink{
+  text-decoration: none;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 300;
+}

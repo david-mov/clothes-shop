@@ -9,6 +9,7 @@ import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from './views/CatalogueView/CatalogueView';
 import FormCrudView from './views/FormCrudView/FormCrudView';
 import ListAdmin from './views/AdminListView/AdminListView';
+import AddImage from './components/agregarImagenProduct/FormAddImg'
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
+        <Route exact path="/addimage" component={AddImage} />
         <Route path="*" component={NotFoundView} />
+
 
       </Switch>
     </Router>
