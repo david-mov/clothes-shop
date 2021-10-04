@@ -1,19 +1,19 @@
 import { 
-	GET_ALL_CATEGORIES, GET_CATEGORY,
+	GET_ALL_SIZES,
 } from '../../consts/actionConsts';
 import products from "./productsReducer"
 
 
 const initialState = {
-	categories: [],
+	sizes: [],
 };
 
-export default function categoriesReducer(state = initialState, action) {
+export default function sizesReducer(state = initialState, action) {
 	switch(action.type) {
-		case GET_ALL_CATEGORIES:
+		case GET_ALL_SIZES:
 			return {
 				...state,
-				categories: action.payload,
+				sizes: action.payload,
 			}
 		default:
 			return ({ ...state });

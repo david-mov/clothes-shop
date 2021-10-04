@@ -1,6 +1,6 @@
 import NavBar from "../../components/NavBar/NavBar"
 import ProductCards from "../CatalogueView/ProductCards/ProductCards"
-import "./HomeView.css"
+import "../../styles/screen.css";
 
 
 export default function HomeView() {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-import { postAllProducts } from "../../stateManagement/actions/postAllProducts";
-import { getAllCategories } from "../../stateManagement/actions/getAllCategories";
-import { getAllsizes } from "../../stateManagement/actions/getAllsizes";
-import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
-import "./insert.css";
+import { postAllProducts } from "../../../../stateManagement/actions/postAllProducts";
+import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
+import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
+import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
+import "./Insert.css";
 
 const validate = (input) => {
   let errors = {};

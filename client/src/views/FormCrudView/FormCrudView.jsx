@@ -1,5 +1,5 @@
 import React from "react";
-import Insert from "./Insert";
+import Insert from "./components/Insert/Insert.jsx";
 
 const FormCrudView = () => {
   return (

@@ -4,7 +4,6 @@ import {
 
 const initialState = {
 	types: [],
-	typesCopy: []
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -13,7 +12,6 @@ export default function productsReducer(state = initialState, action) {
 			return {
 				...state,
 				types: action.payload,
-                typesCopy: action.payload
 			}
 		default:
 			return ({ ...state });

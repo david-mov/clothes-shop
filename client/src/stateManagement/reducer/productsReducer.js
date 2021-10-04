@@ -24,9 +24,7 @@ export default function productsReducer(state = initialState, action) {
 				...state,
 				products: action.payload === "none" ? state.productsCopy : state.productsCopy.filter((e) => e.categories?.some((sne) => sne.name === action.payload))
 			}
-			case GET_TYPE: 
-			console.log("ENTRE EN EL REDUCER DE TYPE")
-			console.log(action.payload)
+			case GET_TYPE:
 			return {
 				...state,
 				products: action.payload === "none" ? state.productsCopy : state.productsCopy.filter((e) => e.type?.name === action.payload)
