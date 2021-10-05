@@ -16,41 +16,41 @@ export default function productsReducer(state = initialState, action) {
 		case GET_ALL_PRODUCTS:
 			return {
 				...state,
-				products: action.payload,
+				products: action.payload.filter(e => e.stock > 0),
 				productsCopy: action.payload
 			}
 			case GET_CATEGORY:
 			return {
 				...state,
-				products: action.payload === "none" ? state.productsCopy : state.productsCopy.filter((e) => e.categories?.some((sne) => sne.name === action.payload))
+				products: action.payload === "none" ? state.productsCopy : state.products.filter((e) => e.categories?.some((sne) => sne.name === action.payload))
 			}
 			case GET_TYPE:
 			return {
 				...state,
-				products: action.payload === "none" ? state.productsCopy : state.productsCopy.filter((e) => e.type?.name === action.payload)
+				products: action.payload === "none" ? state.productsCopy : state.products.filter((e) => e.type?.name === action.payload)
 			}
 			case GET_FILTER_BY_PRICE:
-				if(action.payload == "none"){
+				if(action.payload === "none"){
 					return {
 						...state,
-						products: state.productsCopy
+						products: state.products
 					}
 				}
 				else if(action.payload === "H"){
 					return {
 						...state,
-						products: state.productsCopy.sort((a, b) => (a.price < b.price) ? 1 : -1)
+						products: state.products.sort((a, b) => (a.price < b.price) ? 1 : -1)
 					}
-				}else{
+				}else if(action.payload === "L"){
 					return {
 						...state,
-						products: state.productsCopy.sort((a, b) => (a.price > b.price) ? 1 : -1)
+						products: state.products.sort((a, b) => (a.price > b.price) ? 1 : -1)
 					}
 				}
 				case GET_SEARCH: {
 					return {
 						...state,
-						products: action.payload
+						products: action.payload.filter(e => e.stock > 0)
 					}
 				}
 		default:
