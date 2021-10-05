@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import "./ProductView.css"
 
 export default function ProductView() {
-	return (
+
+    return (
         <div className="productscreen">
-			<Link type="elDeHome" to="/">Home</Link>
+            <Link type="elDeHome" to="/">Home</Link>
             <div className="productscreen__left">
                 <div className="left__image">
                     <img
