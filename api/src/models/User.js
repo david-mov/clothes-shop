@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    mail: {
+    email: {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
@@ -20,13 +20,12 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       unique: true
     },
+    googleId: {
+      type: DataTypes.STRING
+    },
     password: {
       type: DataTypes.STRING
     },
-    enabled: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-  }
   },{
     timestamps: false
   });
