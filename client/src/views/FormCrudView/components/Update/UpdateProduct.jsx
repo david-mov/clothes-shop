@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
+import { getUpdateProductDetails } from '../../../../stateManagement/actions/getUpdatePDetail'
 import "./update.css";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 
 const validate = (input) => {
@@ -58,14 +59,16 @@ const Update = ({
     dispatch(getAllCategories());
     dispatch(getAllsizes());
     dispatch(getAllTypes());
+    dispatch(getUpdateProductDetails(productId));
     // dispatch(putProduct())
   }, [dispatch]);
 
+  const { productId } = useParams();
+
+  const product = useSelector(state => state.productsReducer.productUpdateDetails);
+  console.log("data desde el detalle de update", product)
 
   const history = (useHistory())
-
-
-
   
 
 

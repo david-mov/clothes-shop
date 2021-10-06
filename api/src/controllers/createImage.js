@@ -1,20 +1,44 @@
+const {Image, Product} = require('../db');
 const multer = require('multer');
 
-const upload = multer({
-    dest: 'public/imageProduct/'
+
+const multerConfig = multer.diskStorage({
+    destination: (req, file, callback) => {
+        //const {id} = req.query;        
+        callback(null,'public/imageProduct/');
+    },
+    filename: (req, file, callback) => {
+        const {image_product} = req.query;
+        //const ext = file.mimetype.split('/')[1];
+        const nombre = file.originalname;
+        callback(null,`img-product-${image_product}.${nombre}`);
+    }
+
 });
+
+const upload = multer({    
+    storage: multerConfig,
+    
+});
+
 
 
 
 exports.uploadImage2 = upload.single('img');
 
 exports.createImage = async (req, res, next) => {
-
-        console.log("data file ", req.file);
-       
-        try {            
-            
-            res.json("esta aqui");
+        
+   try {            
+        
+        const {image_product} = req.query;
+        const name = req.file.originalname;
+        console.log(name)
+        const imgInsert = await Image.create({
+            name,
+            image_product
+        }, {include: [Product]});
+      
+            res.json(imgInsert);
     
         } catch (error) {
             next(error);

@@ -13,6 +13,9 @@ const getAllProducts = async (req, res, next) => {
             },{
                 model: Category,
                 attributes: ['name'],
+            },{
+                model: Image,
+                attributes: ['name'],
             }],
             attributes: ['name', 'price','description','stock', 'id'],
 		});
