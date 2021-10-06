@@ -67,14 +67,14 @@ export default function ProductosLista() {
             </td>
 
             <td className="table-row__td">
-            <Link to="/addimage">
+            <Link to={`/addimage/${e.id}`}>
               <p>
               <i class="far fa-image fa-2x"></i>
               </p>
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/update/${e.name}`}>
+              <Link to={`/update/product/${e.id}`}>
 
                 {' '}
                 <p>
