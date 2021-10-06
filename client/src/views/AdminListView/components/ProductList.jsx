@@ -10,6 +10,20 @@ export default function ProductosLista() {
   const [currentPage, setCurrentPage] = useState(0)
   const [actualCurrent, setactualCurrent] = useState(1)
   var countP = 5
+  var dataCompleta = [];
+   const [Input, setInput] = useState('');
+   const product = useSelector((state) => state.productsReducer.products)
+   const filterProducts = () => {
+     if(Input !== ''){
+       return dataCompleta = product.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
+     }
+     return dataCompleta = product;
+   }
+
+  const onInputChange = (Input) =>{  
+    setInput(Input.target.value);
+}
+
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
       setactualCurrent(actualCurrent + 1)
@@ -32,6 +46,19 @@ export default function ProductosLista() {
   var totalCurrent = Math.ceil(products.length / countP)
   function headers() {
     return (
+      <thead className="table__thead">
+        <tr>
+          <th className="table__th">
+          <div >
+              <input 
+            type = "text"
+            value = {Input}
+            placeholder = "search"
+            onChange = {onInputChange}
+            />
+         </div>
+          </th>
+        </tr>
       <tr>
         <th className="table__th">Name</th>
         <th className="table__th">Policy</th>
@@ -41,15 +68,16 @@ export default function ProductosLista() {
         <th className="table__th">Vew detail</th>
         <th className="table__th">Delete Product</th>
       </tr>
+      </thead>
     )
   }
 
   function bodyTable() {
-    return products
+    return  filterProducts()
+
       .map((e, i) => {
         return (
           <tr key={i} className="table-row table-row--chris">
-            <input value={e.id} hidden />
             <td className="table-row__td">
               <div className="table-row__info">
                 <p className="table-row__name">{e.name}</p>
@@ -74,12 +102,10 @@ export default function ProductosLista() {
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/update/product/${e.id}`}>
-
-                {' '}
+              <Link to={`/update/product/${e.id}`}>  
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>
-                </p>{' '}
+                </p>
              </Link>
             </td>
             <td className="table-row__td">
@@ -99,14 +125,9 @@ export default function ProductosLista() {
       .slice(currentPage, currentPage + 5)
   }
 
-  console.log('pr', products.length)
 
   return (
     <div>
-      <div className='productList'>
-      <Link className='productListLink' to='/'>GO TO BACK</Link>
-      <Link className='productListLink' to='/create/product'>Insert</Link>
-      </div>
     <div className='body' >
 
       <TablaList

@@ -16,9 +16,7 @@ export default function TablaList({title, headers, data, bodyTable,url}){
             <div className="table-container">
             <Link to = {url}><button className='button2'>CREAR {title}</button ></Link>
               <table className="table">
-                <thead className="table__thead">
                   {headers}
-                </thead>
 
                 <tbody className="table__tbody">                  
                   {bodyTable}
