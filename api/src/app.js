@@ -6,6 +6,8 @@ const routes = require('./routes/index.js');
 const session = require('express-session');
 const passport = require('passport');
 
+
+
 require('./db.js');
 
 const server = express();
@@ -30,9 +32,11 @@ server.use(
     saveUninitialized: true,
   })
 )
-app.use(passport.initialize());
-app.use(passport.session());
-require("./passportConfig/localPassportConfig.js")(passport);
+server.use(passport.initialize());
+server.use(passport.session());
+console.log(passport)
+require("./passportConfig/localPassportConfig")(passport);
+
 
 server.use('/', routes);
 
