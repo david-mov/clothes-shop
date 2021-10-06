@@ -11,47 +11,47 @@ import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 
 function NavBar() {
+  const [categoryValue, setCategoryValue] = useState("C");
+  const [typeValue, setTypeValue] = useState("T");
 
-    const [categoryValue, setCategoryValue] = useState('C');
-    const [typeValue, setTypeValue] = useState("T")
+  const onSelectCategory = (e) => {
+    e.preventDefault();
+    setCategoryValue(e.target.value);
+    dispatch(getCategory(e.target.value));
+  };
 
-    const onSelectCategory = (e) =>{
-        e.preventDefault()
-        setCategoryValue(e.target.value);
-        dispatch(getCategory(e.target.value))
-    }
+  const onSelectTypes = (e) => {
+    e.preventDefault();
+    setTypeValue(e.target.value);
+    dispatch(getType(e.target.value));
+  };
 
-    const onSelectTypes = (e) => {
-        e.preventDefault()
-        setTypeValue(e.target.value);
-        dispatch(getType(e.target.value))
-    }
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
 
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getAllProducts())
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllTypes());
+  }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(getAllCategories())
-    }, [dispatch]);
+  var types = useSelector((state) => state.typesReducer.types);
+  var categories = useSelector((state) => state.categoriesReducer.categories);
+  //console.log(categories)
 
-    useEffect(() => {
-        dispatch(getAllTypes())
-    }, [dispatch]);
-
-var types = useSelector(state => state.typesReducer.types)
-var categories = useSelector(state => state.categoriesReducer.categories )
-console.log(categories)
-
-const OptionsCategories = categories.map((e,i) => {
+  const OptionsCategories = categories.map((e, i) => {
     return (
-        <option key={i} value={e.name}>{e.name}</option>
-    )
-})
+      <option key={i} value={e.name}>
+        {e.name}
+      </option>
+    );
+  });
 
-const OptionsTypes = types.map((e,i) => {
+  const OptionsTypes = types.map((e, i) => {
     return (
       <option key={i} value={e.name}>
         {e.name}
@@ -106,12 +106,12 @@ const OptionsTypes = types.map((e,i) => {
           </select>
         </div>
         <div className="cart__link">
-        <div>Price</div>
-            <select className="pintar" onChange={onChangePrice}>
-                    <option value="none">None</option>
-                    <option value="H">Higher</option>
-                    <option value="L">Lower</option>
-            </select>
+          <div>Price</div>
+          <select className="pintar" onChange={onChangePrice}>
+            <option value="none">None</option>
+            <option value="H">Higher</option>
+            <option value="L">Lower</option>
+          </select>
         </div>
         <div className="SearchInput">
           <input
