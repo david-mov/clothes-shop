@@ -30,7 +30,7 @@ export default function AddImgProduct({id, name}){
     const InputChange = (e) => {
         setfile(e.target.files[0]);
     }
-    console.log("data ", file.type);
+    //console.log("data ", file.type);
    
     return(
         <div className="container" >

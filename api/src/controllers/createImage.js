@@ -31,8 +31,9 @@ exports.createImage = async (req, res, next) => {
    try {            
         
         const {image_product} = req.query;
-        const name = req.file.originalname;
-        console.log(name)
+        const namefile  = req.file.originalname;
+
+        const  name = `img-product-${image_product}.${namefile}`;
         const imgInsert = await Image.create({
             name,
             image_product
