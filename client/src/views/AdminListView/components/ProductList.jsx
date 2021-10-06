@@ -10,6 +10,18 @@ export default function ProductosLista() {
   const [currentPage, setCurrentPage] = useState(0)
   const [actualCurrent, setactualCurrent] = useState(1)
   var countP = 5
+  var dataCompleta = [];
+   const [Input, setInput] = useState('');
+   const products = useSelector((state) => state.productsReducer.products)
+   const filterProducts = () => {
+     if(Input !== ''){
+       return dataCompleta = products.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
+     }
+     return dataCompleta = products;
+   }
+  const onInputChange = (Input) =>{  
+    setInput(Input.target.value);
+}
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
       setactualCurrent(actualCurrent + 1)
@@ -28,11 +40,25 @@ export default function ProductosLista() {
     dispatch(getAllProducts())
   }, [dispatch])
 
-  const products = useSelector((state) => state.productsReducer.products)
+ 
   var totalCurrent = Math.ceil(products.length / countP)
   function headers() {
     return (
+      <thead className="table__thead">
+        <tr>
+          <th>
+          <div >
+              <input className='button'
+            type = "text"
+            value = {Input}
+            placeholder = "search"
+            onChange = {onInputChange}
+            />
+         </div>
+          </th>
+        </tr>
       <tr>
+        
         <th className="table__th">Name</th>
         <th className="table__th">Policy</th>
         <th className="table__th">Stock</th>
@@ -41,11 +67,13 @@ export default function ProductosLista() {
         <th className="table__th">Vew detail</th>
         <th className="table__th">Delete Product</th>
       </tr>
+      </thead>
     )
   }
 
   function bodyTable() {
-    return products
+    return filterProducts()
+
       .map((e, i) => {
         return (
           <tr key={i} className="table-row table-row--chris">
@@ -102,13 +130,14 @@ export default function ProductosLista() {
   console.log('pr', products.length)
 
   return (
+    
     <div>
       <div className='productList'>
       <Link className='productListLink' to='/'>GO TO BACK</Link>
-      <Link className='productListLink' to='/create/product'>Insert</Link>
       </div>
+     
     <div className='body' >
-
+     
       <TablaList
         title={'Porducts'}
         headers={headers()}

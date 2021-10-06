@@ -10,6 +10,19 @@ export default function TypeList() {
   const [currentPage, setCurrentPage] = useState(0)
   const [actualCurrent, setactualCurrent] = useState(1)
   var countP = 5
+  var dataCompleta = [];
+   const [Input, setInput] = useState('');
+   const type = useSelector(state => state.categoriesReducer.categories);
+   const filterTypes = () => {
+     if(Input !== ''){
+       return dataCompleta = type.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
+     }
+     return dataCompleta = type;
+   }
+   const onInputChange = (Input) =>{  
+    setInput(Input.target.value);
+}
+
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
       setactualCurrent(actualCurrent + 1)
@@ -33,16 +46,30 @@ export default function TypeList() {
 
   function headers() {
     return (
+      <thead className="table__thead">
+      <tr>
+        <th>
+        <div>
+            <input className='button'
+          type = "text"
+          value = {Input}
+          placeholder = "search"
+          onChange = {onInputChange}
+          />
+       </div>
+        </th>
+      </tr>
       <tr>
         <th className="table__th">Name</th>
         <th className="table__th">Update Type</th>
         <th className="table__th">Delete Type</th>
       </tr>
+      </thead>
     )
   }
 
   function bodyTable() {
-    return types.map((e, i) => {
+    return filterTypes().map((e, i) => {
       return (
         <tr key={i} className="table-row table-row--chris">
           <input value={e.id} hidden />

@@ -326,7 +326,7 @@ html, body{
 }
 
 .otro{
-  font-family: "lucida handwriting";
+  font-family: "arial";
   border-radius: 2px;
   border:rgb(13, 1, 22);
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -335,9 +335,9 @@ html, body{
   border: 2px solid #555555;
 }
 .button2 {
-  background-color: rgb(42, 141, 158); 
-  color: black; 
-  border: 2px solid #008CBA;
+  background: #ADA996;  
+  background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+  background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
 }
 
 .button2{
@@ -350,7 +350,7 @@ html, body{
   
 }
 .button2:hover {
-  color: white;
+  color: grey
   
 }
 
@@ -372,3 +372,15 @@ html, body{
   font-size: 20px;
   font-weight: 300;
 }
+.button{
+  border-radius: 10px;
+  border:grey;
+  background: #8e9eab; 
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);  
+ background: linear-gradient(to right, #eef2f3, #8e9eab); 
+  color:black;
+  width: 160%;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+

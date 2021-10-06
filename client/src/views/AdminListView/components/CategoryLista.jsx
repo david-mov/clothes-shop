@@ -10,10 +10,23 @@ import './styles.css'
 
 export default function CategoryList() {
 
-    const dispatch = useDispatch();  
-    const [currentPage, setCurrentPage] = useState(0)
-    const [actualCurrent, setactualCurrent] = useState(1)
-    var countP = 5
+  const dispatch = useDispatch()
+  const [currentPage, setCurrentPage] = useState(0)
+  const [actualCurrent, setactualCurrent] = useState(1)
+  var countP = 5
+  var dataCompleta = [];
+   const [Input, setInput] = useState('');
+   const category = useSelector(state => state.categoriesReducer.categories);
+   const filterCategory = () => {
+     if(Input !== ''){
+       return dataCompleta = category.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
+     }
+     return dataCompleta = category;
+   }
+   const onInputChange = (Input) =>{  
+    setInput(Input.target.value);
+}
+
     const nextPage = () => {
       if (totalCurrent !== actualCurrent) {
         setactualCurrent(actualCurrent + 1)
@@ -37,19 +50,33 @@ export default function CategoryList() {
 
     function headers (){
         return (
+          <thead className="table__thead">
+          <tr>
+            <th>
+            <div>
+                <input className='button'
+              type = "text"
+              value = {Input}
+              placeholder = "search"
+              onChange = {onInputChange}
+              />
+           </div>
+            </th>
+          </tr>
 
             <tr>                 
                 <th className="table__th">Name</th>
                 <th className="table__th">Update Category</th>
                 <th className="table__th">Delete Category</th>
             </tr>
+            </thead>
         )
     };
 
     function bodyTable (){
         return (
 
-            categorys.map((e,i)=>{
+          filterCategory().map((e,i)=>{
                 return(
                     <tr   key={i}  className="table-row table-row--chris">
                     <input value = {e.id} hidden/>
