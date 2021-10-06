@@ -25,7 +25,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={HomeView} />
         <Route exact path='/catalogue' component={CatalogueView} />
-        <Route exact path='/profile/:userId' component={ProfileView} />
+        <Route exact path='/profile' component={ProfileView} />
         <Route path="/create/product" component={Insert} />
         <Route path="/create/category" component={InsertCategory} />
         <Route path="/create/size" component={InsertSize} />
@@ -38,8 +38,8 @@ function App() {
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
         <Route exact path="/addimage" component={AddImage} />
-        <Route path="/login" component={LoginView}></Route>
-        <Route path="/register" component={RegisterView}></Route>
+        <Route path="/login" component={LoginView} />
+        <Route path="/register" component={RegisterView} />
         <Route path="*" component={NotFoundView} />
       </Switch>
     </Router>

@@ -36,6 +36,28 @@ server.use(passport.initialize());
 server.use(passport.session());
 require("./passportConfig/localPassportConfig")(passport);
 
+const loginUser = (req, res) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.status(404).send("No User Exists");
+    else {
+      req.logIn(user, (err) => {
+        // console.log(user)
+        if (err) throw err;
+        res.send("Successfully Authenticated");
+        console.log(req.user)
+      });
+    }
+  })(req, res);
+}
+
+const getUser = (req, res, next) => {
+  console.log(req.user);
+  res.json({ name: 'pablito', email: 'pablito12@mail.com' })
+}
+
+server.post('/user/login', loginUser);
+server.get('/user', getUser);
 
 server.use('/', routes);
 
