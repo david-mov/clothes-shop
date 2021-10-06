@@ -220,7 +220,7 @@ const Insert = () => {
             />
             {errors.price && <p>{errors.price}</p>}
             <label className="label_Insert">Description</label>
-            <input
+            <textarea
               className="form-control"
               name="description"
               type="text"
