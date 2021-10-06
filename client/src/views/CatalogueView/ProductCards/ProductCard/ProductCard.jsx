@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "../ProductCard/ProductCard.css"
 import { AddShoppingCart } from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
+
 
 function ProductCard({ name, price, description, stock, productId }) {
     return (
@@ -18,7 +20,7 @@ function ProductCard({ name, price, description, stock, productId }) {
                 <p className="info__description">{description}</p>
                 <p className="info__description">{stock}</p>
                 <IconButton aria-label='Add to Cart'>
-                    <AddShoppingCart fontSize='large' />
+                    <AddShoppingCart fontSize='medium' />
                 </IconButton>
                 <Link to={`/product/${productId}`}>
                     <h3 className="info__button">Detail</h3>
