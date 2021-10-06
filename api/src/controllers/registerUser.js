@@ -4,7 +4,6 @@ const { User } = require("../db");
 
 const registerUser = async(req, res, next) => {
  const {email, password, name} = req.body
- console.log(email, password, name)
  try{
     const user = await User.findOne({ 
     where: {

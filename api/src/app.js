@@ -34,7 +34,6 @@ server.use(
 )
 server.use(passport.initialize());
 server.use(passport.session());
-console.log(passport)
 require("./passportConfig/localPassportConfig")(passport);
 
 
