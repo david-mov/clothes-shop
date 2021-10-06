@@ -1,4 +1,4 @@
-const passport = require('passport');
+const { passport } = require('../app.js');
 
 const loginUser = () => {
 
