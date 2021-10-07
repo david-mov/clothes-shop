@@ -11,7 +11,8 @@ const userWithEmail = await User.findOne({ where: { email } }).catch(
   }
   );
   console.log(userWithEmail)
-  const verifico = bycrypt.compare(password, userWithEmail.password)
+  const verifico = await bycrypt.compare(password, userWithEmail.password)
+  console.log(verifico)
   console.log(password)
   console.log(userWithEmail.password)
   if (!userWithEmail)
