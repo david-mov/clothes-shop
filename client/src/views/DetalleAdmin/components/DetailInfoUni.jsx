@@ -9,7 +9,7 @@ const genData = () => ({
   datasets: [
     {
       type: 'bar',
-      label: 'cout view',
+      label: 'Cout Views',
       borderColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
       borderWidth: 2,
       fill: false,
@@ -17,7 +17,7 @@ const genData = () => ({
     },
     {
       type: 'bar',
-      label: 'cout raiting',
+      label: 'Cout Rating',
       backgroundColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
       data: [0, 49, 65, 20, 40, 15, 10],
       borderColor: 'white',
@@ -25,7 +25,7 @@ const genData = () => ({
     },
     {
       type: 'line',
-      label: 'Total stars',
+      label: 'Total Stars',
       backgroundColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
       data: [2, 3, 4, 2, 5, 5, 5],
     },
@@ -40,7 +40,7 @@ const options = {
       },
       title: {
         display: true,
-        text: 'Inform Product'
+        text: 'REPORT PRODUCT'
       },
       legend: {
           display: true,
@@ -65,19 +65,7 @@ export default function InformeProducto () {
   }, []);
 
   return (
-    <div className=" dataInfiUni">
-      <div className='header'>
-      <h2 className='title'>Id Product</h2>
-      <h3 className='title'>id</h3>
-      <h2 className='title'>Name Product</h2>
-      <h3 className='title'>name</h3>
-      <h2 className='title'>Date Created</h2>
-      <h3 className='title'>date</h3>
-      <h2 className='title'>Last Update</h2>
-      <h3 className='title'>date</h3>
-      <h2 className='title'>Product Status</h2>
-      <h3 className='title'>state</h3>        
-      </div>
+    <div className=" dataInfiUni">      
       <Bar data={data} options={options} />   
     </div>
   );
