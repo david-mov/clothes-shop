@@ -15,7 +15,7 @@ const getProductsByCategory = async (req, res, next) => {
 				model: Type,
 				attributes: ['name'],
 			}],
-			attributes: ['name', 'price', 'stock', 'description']
+			attributes: ['name', 'price', 'stock', 'description', 'id']
 		})
 		productsFiltered = allProducts.filter(p => {
 			return p.categories.some(c => c.name === categoryName)

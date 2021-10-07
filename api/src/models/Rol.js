@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('rol', {
    name: {
-       type: DataTypes.ENUM("superAdmin", "admin", "user"),
+       type: DataTypes.ENUM("superAdmin", "admin", "user", "banned", "inactive"),
        allowNull: false
    },
    enabled: {
