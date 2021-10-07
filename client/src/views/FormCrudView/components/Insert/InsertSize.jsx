@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PostSize } from "../../../../stateManagement/actions/postSize";
-import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { Link } from "react-router-dom";
 import "./Insert.css";
 
@@ -9,13 +8,12 @@ const InsertSizes = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(PostSize());
-    dispatch(getAllsizes());
   }, [dispatch]);
   const [input, setInput] = useState({
     name: "",
   });
   let sizesInput = useSelector((state) => state.sizesReducer.sizes);
-  const handleChange = async (e) => {
+  const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -23,9 +21,8 @@ const InsertSizes = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const sizesExits = sizesInput.filter((e) => e.name.includes(input.name));
-    if (sizesExits.length === 0) {
-      console.log("exist", sizesExits);
+    const sizesExits = sizesInput.find((e) => e.name === input.name);
+    if (!sizesExits) {
       dispatch(PostSize(input));
       alert("Product has created correctly");
       setInput({
@@ -42,13 +39,13 @@ const InsertSizes = () => {
           <div>
             <h3 className="h3_insert">Insert Size</h3>
           </div>
-
           <div className="insert_label">
             <label className="label_Insert">Name</label>
             <input
               className="form-control"
               name="name"
               type="text"
+              value={input.name}
               onChange={handleChange}
             />
             <div className="crud_Form_Insert_cancelar">

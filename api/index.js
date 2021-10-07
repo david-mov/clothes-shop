@@ -24,10 +24,26 @@ const { conn, Category, Size, Type, Rol } = require("./src/db.js");
 const { DB_PORT } = process.env;
 
 async function preload() {
-  const categoriesData = ["Elegant","Casual","Vintage","Punk","Sport","Futbol"];
-  const sizesData = ["XXS","XS","S","M","L","XL","XXL"];
-  const typesData = ["Dress","Sweater","Hoodie","Shirt","Short","Jean","Shoes","Hats"];
-  const rolesData = ["superAdmin","admin","user", "banned", "inactive"];
+  const categoriesData = [
+    "Elegant",
+    "Casual",
+    "Vintage",
+    "Punk",
+    "Sport",
+    "Futbol",
+  ];
+  const sizesData = ["XXS", "XS", "S", "M", "L", "XL", "XXL"];
+  const typesData = [
+    "Dress",
+    "Sweater",
+    "Hoodie",
+    "Shirt",
+    "Short",
+    "Jean",
+    "Shoes",
+    "Hats",
+  ];
+  const rolesData = ["superAdmin", "admin", "user", "banned", "inactive"];
 
   for (categoryData of categoriesData) {
     await Category.findOrCreate({

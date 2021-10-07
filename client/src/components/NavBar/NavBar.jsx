@@ -77,64 +77,58 @@ function NavBar() {
   // };
 
   return (
-    <div className="todo">
-      <div className="navbar">
-        <div className="navbar__logo">
-          <img
-            className="img"
-            src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
-            alt="clothes-Shop"
-            border="0"
-          ></img>
-        </div>
-        <div className="cart__link">
-          <div>Categories</div>
-          <select
-            className=""
-            value={categoryValue}
-            onChange={onSelectCategory}
-          >
-            <option value="none">All</option>
-            {OptionsCategories}
-          </select>
-        </div>
-        <div className="cart__link">
-          <div>Types</div>
-          <select className="" value={typeValue} onChange={onSelectTypes}>
-            <option value="none">All</option>
-            {OptionsTypes}
-          </select>
-        </div>
-        <div className="cart__link">
-          <div>Price</div>
-          <select className="pintar" onChange={onChangePrice}>
-            <option value="none">None</option>
-            <option value="H">Higher</option>
-            <option value="L">Lower</option>
-          </select>
-        </div>
-        <div className="SearchInput">
-          <input
-            type="text"
-            onChange={onChangeSearch}
-            placeholder="Search products..."
-            className=""
-          />
-        </div>
-        <ul className="navbar__links">
-          <li className="saco">
-            <Link to="/cart" className="cart__link">
-              <i className="fas fa-shopping-cart"></i>
-              <span>
-                Cart <span className="cartlogo__badge">{}</span>
-              </span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/list">Lists</Link>
-          </li>
-        </ul>
+    <div className="navbar">
+      <div className="navbar__logo">
+        <img
+          className="img"
+          src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+          alt="clothes-Shop"
+          border="0"
+        ></img>
       </div>
+      <div className="cart__link">
+        <div>Categories</div>
+        <select className="" value={categoryValue} onChange={onSelectCategory}>
+          <option value="none">All</option>
+          {OptionsCategories}
+        </select>
+      </div>
+      <div className="cart__link">
+        <div>Types</div>
+        <select className="" value={typeValue} onChange={onSelectTypes}>
+          <option value="none">All</option>
+          {OptionsTypes}
+        </select>
+      </div>
+      <div className="cart__link">
+        <div>Price</div>
+        <select className="pintar" onChange={onChangePrice}>
+          <option value="none">None</option>
+          <option value="H">Higher</option>
+          <option value="L">Lower</option>
+        </select>
+      </div>
+      <div className="SearchInput">
+        <input
+          type="text"
+          onChange={onChangeSearch}
+          placeholder="Search products..."
+          className=""
+        />
+      </div>
+      <ul className="navbar__links">
+        <li className="saco">
+          <Link to="/cart" className="cart__link">
+            <i className="fas fa-shopping-cart"></i>
+            <span>
+              Cart <span className="cartlogo__badge">{}</span>
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/list">Lists</Link>
+        </li>
+      </ul>
     </div>
   );
 }
