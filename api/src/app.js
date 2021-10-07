@@ -36,6 +36,12 @@ server.use(passport.initialize());
 server.use(passport.session());
 require("./passportConfig/localPassportConfig")(passport);
 
+server.use((req, res, next) => {
+  console.log(req.session);
+  console.log(req.user);
+  next();
+});
+
 const loginUser = (req, res) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
@@ -45,14 +51,14 @@ const loginUser = (req, res) => {
         // console.log(user)
         if (err) throw err;
         res.send("Successfully Authenticated");
-        console.log(req.user)
+        // console.log(req.user)
       });
     }
   })(req, res);
 }
 
 const getUser = (req, res, next) => {
-  console.log(req.user);
+  // console.log(req.user);
   res.json({ name: 'pablito', email: 'pablito12@mail.com' })
 }
 

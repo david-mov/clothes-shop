@@ -7,9 +7,9 @@ module.exports = function (passport) {
     new localStrategy({
       usernameField: 'email',
       passwordField: 'password'
-    },(username, password, done) => {
+    },(email, password, done) => {
       User.findOne({
-        where: { email: username }
+        where: { email: email }
       })
       .then((user) => {
         if (!user) return done(null, false);
@@ -22,25 +22,21 @@ module.exports = function (passport) {
           }
         })
       })
-      .catch(err => console.error(err));
+      .catch(err => done(err));
     })
   );
 
-  passport.serializeUser((user, cb) => {
-    cb(null, user.id);
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
   });
 
-  passport.deserializeUser((id, cb) => {
-    User.findOne(id)
+  passport.deserializeUser((id, done) => {
+    User.findByPk(id)
     .then(user => {
-      const userInformation = {
-        name: user.name,
-        email: user.email,
-      };
-      cb(null, userInformation);
+      return done(null, user);
     })
     .catch(err => {
-      cb(err, {});
+      return done(err);
     })
   });
 };
