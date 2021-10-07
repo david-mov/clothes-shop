@@ -61,11 +61,11 @@ export default function ProductosLista() {
         </tr>
       <tr>
         <th className="table__th">Name</th>
-        <th className="table__th">Policy</th>
+        <th className="table__th">Price</th>
         <th className="table__th">Stock</th>
         <th className="table__th">Insert image</th>
         <th className="table__th">Update Product</th>
-        <th className="table__th">Vew detail</th>
+        <th className="table__th">Top Secret</th>
         <th className="table__th">Delete Product</th>
       </tr>
       </thead>
@@ -109,9 +109,11 @@ export default function ProductosLista() {
              </Link>
             </td>
             <td className="table-row__td">
+            <Link to={`/info/product/${e.id}`}> 
               <p>
-              <i class="far fa-eye fa-2x"></i>
+              <i class="fas fa-user-secret fa-9x"></i>
               </p>
+              </Link>
             </td>
 
             <td className="table-row__td">
