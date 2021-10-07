@@ -11,15 +11,14 @@ const userWithEmail = await User.findOne({ where: { email } }).catch(
   }
   );
   console.log(userWithEmail)
-  const verifico = await bycrypt.compare(password, userWithEmail.password)
-  console.log(verifico)
   console.log(password)
-  console.log(userWithEmail.password)
+  
   if (!userWithEmail)
-    return res
-      .status(400)
-      .json({ message: "Email or password does not match!" });
-
+  return res
+  .status(400)
+  .json({ message: "Email or password does not match!" });
+  
+  const verifico = await bycrypt.compare(password, userWithEmail?.password)
   if (!verifico)
     return res
       .status(400)
