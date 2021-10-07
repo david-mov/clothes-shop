@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { getAllProducts } from '../../../stateManagement/actions/getAllProducts'
 import TablaList from './ListTable'
 import './styles.css'
+import Select from "react-select";
 
 export default function ProductosLista() {
   const dispatch = useDispatch()
@@ -50,13 +51,21 @@ export default function ProductosLista() {
         <tr>
           <th className="table__th">
           <div >
-              <input 
+              <input  className='button placeHolderSearch'  
             type = "text"
             value = {Input}
             placeholder = "search"
             onChange = {onInputChange}
             />
          </div>
+          </th>
+          <th className="table__th">
+          <Select
+              className="select-style"
+              //value={vista}
+              //options={OptionSelect}
+              //onChange= {handleChangeSelect}
+            />
           </th>
         </tr>
       <tr>
@@ -76,6 +85,8 @@ export default function ProductosLista() {
     return  filterProducts()
 
       .map((e, i) => {
+        var status = "status--green";
+        if(e.stock <= 5) status = "status--red";
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -89,7 +100,7 @@ export default function ProductosLista() {
               </div>
             </td>
             <td data-column="Policy status" className="table-row__td">
-              <p className="table-row__p-status status--green status">
+              <p className= {`table-row__p-status ${status} status`}>
                 {e.stock}
               </p>
             </td>

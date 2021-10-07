@@ -59,6 +59,7 @@ export default function TypeList() {
        </div>
         </th>
       </tr>
+      
       <tr>
         <th className="table__th">Name</th>
         <th className="table__th">Update Type</th>
