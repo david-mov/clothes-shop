@@ -1,47 +1,32 @@
-const bcrypt = require('bcryptjs');
 const { User } = require("../db");
+const bcrypt = require('bcryptjs');
 
+const RegisterUser =  async (req, res) => {
+  const { name, email, password } = req.body;
+  console.log(req.body)
+console.log(req.body)
+  const alreadyExistsUser = await User.findOne({
+     where: { email } 
+    })
+    .catch(
+    (err) => {console.log("Error: ", err);}
+  );
 
-const registerUser = async(req, res, next) => {
- const {email, password, name} = req.body
- try{
-    const user = await User.findOne({ 
-    where: {
-        email
-    }
-})
-    if(user){
-        return res.send("user already exists")
-    }else{
-        const hashedPassword = await bcrypt.hash(password, 10)
-        await User.create({
-            name,
-            email,
-            password: hashedPassword
-        })
-        res.send("user created correctly")
-    }
-}
- catch(err){
-    next(err)
-}
-}
-
-module.exports =  registerUser;
-
-/*app.post("/register", (req, res) => {
-  User.findOne({ username: req.body.username }, async (err, doc) => {
-    if (err) throw err;
-    if (doc) res.send("User Already Exists");
-    if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-      const newUser = new User({
-        username: req.body.username,
-        password: hashedPassword,
-      });
-      await newUser.save();
-      res.send("User Created");
-    }
+  if (alreadyExistsUser) {
+    return res.status(409).json({ message: "User with email already exists!" });
+  }
+  const hashedPassword = await bcrypt.hash(password, 10)
+            const newUser = await User.create({
+                name,
+                email,
+                password: hashedPassword
+            });
+  const savedUser = await newUser.save().catch((err) => {
+    console.log("Error: ", err);
+    res.status(500).json({ error: "Cannot register user at the moment!" });
   });
-});*/
+
+  if (savedUser) res.json({ message: "Thanks for registering" });
+};
+
+module.exports = RegisterUser;

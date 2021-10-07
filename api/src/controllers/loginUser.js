@@ -1,17 +1,34 @@
-const passport = require("passport");
+const bycrypt = require("bcryptjs")
+const { User } = require("../db");
+const jwt = require("jsonwebtoken");
 
-const loginUser = (req, res) => {
-passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.send("No User Exists");
-    else {
-      req.logIn(user, (err) => {
-        console.log(user)
-        if (err) throw err;
-        res.send("Successfully Authenticated");
-      });
-    }
-  })(req, res);
-}
+const loginUser =  async (req, res) => {
+  const { email, password } = req.body;
+console.log(req.body)
+const userWithEmail = await User.findOne({ where: { email } }).catch(
+  (err) => {
+    console.log("Error: ", err);
+  }
+  );
+  console.log(userWithEmail)
+  const verifico = bycrypt.compare(password, userWithEmail.password)
+  console.log(password)
+  console.log(userWithEmail.password)
+  if (!userWithEmail)
+    return res
+      .status(400)
+      .json({ message: "Email or password does not match!" });
+
+  if (!verifico)
+    return res
+      .status(400)
+      .json({ message: "Email or password does not match!" });
+
+  const jwtToken = jwt.sign(
+    { id: userWithEmail.id, email: userWithEmail.email },
+    process.env.JWT_SECRET
+  );
+  res.json({ message: "Welcome Back!", token: jwtToken });
+};
 
 module.exports = loginUser;

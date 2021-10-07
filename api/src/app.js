@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const session = require('express-session');
 const passport = require('passport');
-
+require("./passportConfig/localPassportConfig")
 
 
 require('./db.js');
@@ -13,7 +13,7 @@ require('./db.js');
 const server = express();
 
 server.name = 'API';
-
+require("dotenv").config()
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser("secretcode"));
@@ -34,7 +34,7 @@ server.use(
 )
 server.use(passport.initialize());
 server.use(passport.session());
-require("./passportConfig/localPassportConfig")(passport);
+require("./passportConfig/localPassportConfig")
 
 
 server.use('/', routes);
