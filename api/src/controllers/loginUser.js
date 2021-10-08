@@ -1,18 +1,16 @@
 const bycrypt = require("bcryptjs")
 const { User } = require("../db");
 const jwt = require("jsonwebtoken");
+const decode = require('jwt-decode')
+
 
 const loginUser =  async (req, res) => {
   const { email, password } = req.body;
-console.log(req.body)
 const userWithEmail = await User.findOne({ where: { email } }).catch(
   (err) => {
     console.log("Error: ", err);
   }
   );
-  console.log(userWithEmail)
-  console.log(password)
-  
   if (!userWithEmail)
   return res
   .status(400)
@@ -26,8 +24,11 @@ const userWithEmail = await User.findOne({ where: { email } }).catch(
 
   const jwtToken = jwt.sign(
     { id: userWithEmail.id, email: userWithEmail.email },
-    process.env.JWT_SECRET
+    process.env.JWT_SECRET,
   );
+
+  const decodeo = decode(jwtToken)
+  console.log(decodeo)
   res.json({ message: "Welcome Back!", token: jwtToken });
 };
 
