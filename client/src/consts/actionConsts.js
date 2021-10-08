@@ -12,6 +12,7 @@ const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
 const POST_LOGIN = "POST_LOGIN";
 const POST_REGISTER = "POST_REGISTER"
 const GET_USER = "GET_USER";
+const GET_LOGOUT = 'GET_LOGOUT';
 
 
 module.exports = {
@@ -28,5 +29,6 @@ module.exports = {
 	POST_LOGIN,
 	POST_REGISTER,
 	GET_USER,
+	GET_LOGOUT,
 }
 

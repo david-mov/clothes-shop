@@ -4,7 +4,7 @@ import { HOST, PORT } from "../../consts/portConsts";
 
 export const postLogin = (user) => async (dispatch) => {
   try {
-    const login = await axios.post(`http://${HOST}:${PORT}/user/login`, user);
+    const login = await axios.post(`http://${HOST}:${PORT}/user/login`, user, {withCredentials: true});
     return dispatch({ type: POST_LOGIN, payload: login.data });
   } catch (err) {
     console.error(err);

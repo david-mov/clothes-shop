@@ -7,7 +7,6 @@ exports.isAuthenticated = (req, res, next) => {
 }
 
 exports.isUnauthenticated = (req, res, next) => {
-	console.log(req)
 	if (req.isUnauthenticated()) {
 		next()
 	} else {
