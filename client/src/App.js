@@ -14,6 +14,7 @@ import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
 import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
 import AddImage from './views/FormCrudView/FormAddImg';
+import InfoProduct from './views/DetalleAdmin/AdminInfoView';
 import FormCrudView from './views/FormCrudView/FormCrudView';
 import CheckoutPage from './views/CatalogueView/Checkoutpage/CheckoutPage';
 
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
         <Route exact path="/addimage/:productId" component={AddImage} />
+        <Route exact path="/info/product/:productId" component={InfoProduct} />
 
         <Route path="*" component={NotFoundView} />
       </Switch>

@@ -6,7 +6,7 @@ const initialState = {
 	types: [],
 };
 
-export default function productsReducer(state = initialState, action) {
+export default function typesReducer(state = initialState, action) {
 	switch(action.type) {
 		case GET_ALL_TYPES:
 			return {

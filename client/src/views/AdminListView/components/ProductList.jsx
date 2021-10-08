@@ -4,12 +4,27 @@ import { useEffect, useState } from 'react'
 import { getAllProducts } from '../../../stateManagement/actions/getAllProducts'
 import TablaList from './ListTable'
 import './styles.css'
+import Select from "react-select";
 
 export default function ProductosLista() {
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(0)
   const [actualCurrent, setactualCurrent] = useState(1)
   var countP = 5
+  var dataCompleta = [];
+   const [Input, setInput] = useState('');
+   const product = useSelector((state) => state.productsReducer.products)
+   const filterProducts = () => {
+     if(Input !== ''){
+       return dataCompleta = product.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
+     }
+     return dataCompleta = product;
+   }
+
+  const onInputChange = (Input) =>{  
+    setInput(Input.target.value);
+}
+
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
       setactualCurrent(actualCurrent + 1)
@@ -32,24 +47,48 @@ export default function ProductosLista() {
   var totalCurrent = Math.ceil(products.length / countP)
   function headers() {
     return (
+      <thead className="table__thead">
+        <tr>
+          <th className="table__th">
+          <div >
+              <input  className='button placeHolderSearch'  
+            type = "text"
+            value = {Input}
+            placeholder = "search"
+            onChange = {onInputChange}
+            />
+         </div>
+          </th>
+          <th className="table__th">
+          <Select
+              className="select-style"
+              //value={vista}
+              //options={OptionSelect}
+              //onChange= {handleChangeSelect}
+            />
+          </th>
+        </tr>
       <tr>
         <th className="table__th">Name</th>
-        <th className="table__th">Policy</th>
+        <th className="table__th">Price</th>
         <th className="table__th">Stock</th>
         <th className="table__th">Insert image</th>
         <th className="table__th">Update Product</th>
-        <th className="table__th">Vew detail</th>
+        <th className="table__th">Top Secret</th>
         <th className="table__th">Delete Product</th>
       </tr>
+      </thead>
     )
   }
 
   function bodyTable() {
-    return products
+    return  filterProducts()
+
       .map((e, i) => {
+        var status = "status--green";
+        if(e.stock <= 5) status = "status--red";
         return (
           <tr key={i} className="table-row table-row--chris">
-            <input value={e.id} hidden />
             <td className="table-row__td">
               <div className="table-row__info">
                 <p className="table-row__name">{e.name}</p>
@@ -61,7 +100,7 @@ export default function ProductosLista() {
               </div>
             </td>
             <td data-column="Policy status" className="table-row__td">
-              <p className="table-row__p-status status--green status">
+              <p className= {`table-row__p-status ${status} status`}>
                 {e.stock}
               </p>
             </td>
@@ -74,18 +113,18 @@ export default function ProductosLista() {
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/update/product/${e.id}`}>
-
-                {' '}
+              <Link to={`/update/product/${e.id}`}>  
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>
-                </p>{' '}
+                </p>
              </Link>
             </td>
             <td className="table-row__td">
+            <Link to={`/info/product/${e.id}`}> 
               <p>
-              <i class="far fa-eye fa-2x"></i>
+              <i class="fas fa-user-secret fa-9x"></i>
               </p>
+              </Link>
             </td>
 
             <td className="table-row__td">
@@ -99,14 +138,9 @@ export default function ProductosLista() {
       .slice(currentPage, currentPage + 5)
   }
 
-  console.log('pr', products.length)
 
   return (
     <div>
-      <div className='productList'>
-      <Link className='productListLink' to='/'>GO TO BACK</Link>
-      <Link className='productListLink' to='/create/product'>Insert</Link>
-      </div>
     <div className='body' >
 
       <TablaList

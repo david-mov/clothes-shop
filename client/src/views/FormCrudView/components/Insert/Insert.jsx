@@ -123,6 +123,7 @@ const Insert = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
+    
     setErrors(
       validate({
         ...input,

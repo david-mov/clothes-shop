@@ -1,50 +1,43 @@
 import React, { useState } from "react";
-import ListaProducts from "../AdminListView/components/ProductList";
-import CategoryList from "./components/CategoryLista";
-import SizeList from "./components/SizeLista";
-import TypeList from "./components/TypeLista";
-import "../../components/NavBar/NavBar.css"
 import Select from "react-select";
 import { Link } from "react-router-dom";
+import DetailInformeProducto from "./components/DetailInfoUni";
+import ReportProductU from './components/TableReportU';
 
-const ListaAdmin = () => {
-  const [vista, setvista] = useState({label: "list products", value: "list products"})
-  const [label, setlabel] = useState("list products")
+
+const DetailsInformeP = () => {
+
+  const [vista, setvista] = useState({label: "Graphic product", value: "Graphic product"})
+  const [label, setlabel] = useState("Graphic product")
 
   
   const FilterStateInit = () => { 
       
     switch (label){
 
-      case "list Products":
-        return (<ListaProducts />)
-      case "list Category":
-        return (<CategoryList />)
-      case "list Size": 
-        return (<SizeList />)
-      case "list Type":          
-        return (<TypeList />)     
+      case "Graphic Product":
+        return (<DetailInformeProducto />)
+      case "Table Product":          
+        return (<ReportProductU />)     
       default:            
-        return (<ListaProducts />)
+        return (<DetailInformeProducto />)
     }
     
 }
   const OptionSelect = [
-    {label: "list Products", value: "list Products"},
-    {label: "list Category", value: "list Category"},
-    {label: "list Size", value: "list Size"},
-    {label: "list Type", value: "list Type"}
+    {label: "Graphic Product", value: "Graphic Product"},
+    {label: "Table Product", value: "Table Product"}
    
   ]
 
   const handleChangeSelect = (vista) =>{
     setvista(vista);
     setlabel(vista.label);
-  } 
+  }
 
   return (
     <div>
-      <div className="todo">
+    <div className="todo">
       <div className="navbar">
         <div className="navbar__logo">
           <img
@@ -74,9 +67,9 @@ const ListaAdmin = () => {
         </ul>
     </div>
     </div>
-    {FilterStateInit()}
+      {FilterStateInit()}
     </div>
   );
 };
 
-export default ListaAdmin;
+export default DetailsInformeP;
