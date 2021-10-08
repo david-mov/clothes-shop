@@ -6,8 +6,6 @@ const routes = require('./routes/index.js');
 const session = require('express-session');
 const passport = require('passport');
 
-
-
 require('./db.js');
 
 const server = express();
@@ -42,29 +40,6 @@ server.use((req, res, next) => {
   next();
 });
 
-const loginUser = (req, res) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.status(404).send("No User Exists");
-    else {
-      req.logIn(user, (err) => {
-        // console.log(user)
-        if (err) throw err;
-        res.send("Successfully Authenticated");
-        // console.log(req.user)
-      });
-    }
-  })(req, res);
-}
-
-const getUser = (req, res, next) => {
-  // console.log(req.user);
-  res.json({ name: 'pablito', email: 'pablito12@mail.com' })
-}
-
-server.post('/user/login', loginUser);
-server.get('/user', getUser);
-
 server.use('/', routes);
 
 // Error catching endware.
@@ -75,7 +50,4 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-module.exports = {
-  server,
-  passport,
-};
+module.exports = server;

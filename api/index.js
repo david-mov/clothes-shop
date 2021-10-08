@@ -19,7 +19,7 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 require("dotenv").config();
-const { server } = require("./src/app.js");
+const server = require("./src/app.js");
 const { conn, Category, Size, Type, Rol } = require("./src/db.js");
 const { DB_PORT } = process.env;
 

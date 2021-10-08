@@ -15,7 +15,7 @@ const registerUser = async(req, res, next) => {
                 email,
                 password: hashedPassword
             });
-            await newUser.setRol(3);
+            await newUser.setRol(3); //hardcoded
             res.send("User created correctly")
         }
     }
@@ -25,20 +25,3 @@ const registerUser = async(req, res, next) => {
 }
 
 module.exports =  registerUser;
-
-/*app.post("/register", (req, res) => {
-  User.findOne({ username: req.body.username }, async (err, doc) => {
-    if (err) throw err;
-    if (doc) res.send("User Already Exists");
-    if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-      const newUser = new User({
-        username: req.body.username,
-        password: hashedPassword,
-      });
-      await newUser.save();
-      res.send("User Created");
-    }
-  });
-});*/

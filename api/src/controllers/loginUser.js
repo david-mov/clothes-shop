@@ -1,18 +1,18 @@
-const passport = require("passport");
+const passport = require('passport');
 
-const loginUser = (req, res) => {
+const loginUser = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.status(404).send("No User Exists");
+    if (err) return next(err);
+    if (!user) {
+      return res.status(404).send("No User Exists");
+    }
     else {
       req.logIn(user, (err) => {
-        // console.log(user)
-        if (err) throw err;
-        res.send("Successfully Authenticated");
-        // console.log(req.user)
+        if (err) return next(err);
+        return res.send("Successfully Authenticated");
       });
     }
-  })(req, res);
+  })(req, res, next);
 }
 
 module.exports = loginUser;
