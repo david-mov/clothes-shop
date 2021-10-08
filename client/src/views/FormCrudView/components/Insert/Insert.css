@@ -12,11 +12,26 @@
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+.Link_insert {
+  color: rgba(255, 255, 255, 0.781);
+  text-decoration: none;
+  background-color: rgba(0, 255, 255, 0.425);
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+}
+.Link_insert:hover {
+  background-color: rgba(173, 233, 233, 0.753);
+}
 @media (min-width: 768px) {
   .crud_form {
     display: flex;
     min-height: 400px;
   }
+}
+.nav_Insert {
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 .crud_Form_Insert_cancelar {
   padding-bottom: 1rem;

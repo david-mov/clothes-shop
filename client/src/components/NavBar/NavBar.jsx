@@ -80,7 +80,10 @@ function NavBar() {
     // return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
     // };
 
+
+  const OptionsTypes = types.map((e, i) => {
     return (
+
         <div className="todo">
             <div className="navbar">
                 <Link to="/">
@@ -137,6 +140,7 @@ function NavBar() {
             </div>
         </div>
     )
+
 }
 
-export default NavBar
+export default NavBar;

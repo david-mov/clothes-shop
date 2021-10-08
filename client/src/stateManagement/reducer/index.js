@@ -10,7 +10,9 @@ export default combineReducers({
 	categoriesReducer,
 	productsReducer,
 	typesReducer,
+
 	sizesReducer,
 	checkoutReducer
+
 })
 
