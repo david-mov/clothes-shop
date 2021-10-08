@@ -72,17 +72,9 @@ function NavBar() {
         dispatch(getPrice(e.target.value))
     }
 
-    //const Navbar = ({ click }) => {
-    // const cart = useSelector((state) => state.cart);
-    // const { cartItems } = cart;
-    //}
-    //const getCartCount = () => {
-    // return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
-    // };
-
-
   const OptionsTypes = types.map((e, i) => {
     return (
+
 
         <div className="todo">
             <div className="navbar">

@@ -1,14 +1,14 @@
 .crud_form {
-  color: rgba(255, 255, 255, 0.781);
+  color: rgba(255, 255, 255, 0.548);
   display: flex;
   justify-content: center;
-  background-color: #171717;
+  background: -webkit-linear-gradient(to right, #8ab9c5, #87c2f1);
   width: 98%;
   border-radius: 1rem;
   /*** 1200px;**/
   margin: 0 auto;
-  max-width: 800px;
-  min-height: 600px;
+  max-width: 700px;
+  min-height: 500px;
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
@@ -34,24 +34,37 @@
   padding-bottom: 1rem;
 }
 .crud_Form_Insert_cancelar {
+  background-color: rgba(255, 255, 255, 0.548);
+  padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: center;
 }
+.crud_Form_Insert_cancelar:hover {
+  background-color: rgba(255, 255, 255, 0.548);
+}
 .crud_Form_Insert_cancelar_button_danger {
+  background-color: rgba(255, 255, 255, 0.548);
   margin-left: 1rem;
 }
+.crud_Form_Insert_cancelar_button_danger:hover {
+  background-color: rgb(128, 107, 107);
+}
 button {
+  border-radius: 0.3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.3rem;
+  text-align: center;
   cursor: pointer;
 }
-button:hover {
-  color: blueviolet;
-}
+
 .insert_label {
   padding-top: 0.5rem;
   text-align: center;
-  padding-bottom: 1rem;
 }
 .label_Insert {
+  font-size: 1.3rem;
+  color: black;
   display: flex;
   padding-right: 1rem;
   padding-left: 0.5rem;
@@ -81,4 +94,12 @@ button:hover {
   padding-top: 1rem;
   text-transform: uppercase;
   font-size: 2rem;
+  color: black;
+}
+.form-control {
+  font-size: 1.5rem;
+  border-radius: 0.3rem;
+}
+.p {
+  color: red;
 }

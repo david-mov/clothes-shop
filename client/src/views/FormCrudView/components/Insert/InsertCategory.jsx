@@ -32,7 +32,6 @@ const InsertCategories = () => {
       alert("No se puede crear,intenta con otro");
     }
   };
-
   return (
     <div className="crud_form">
       <form>
@@ -40,13 +39,13 @@ const InsertCategories = () => {
           <div>
             <h3 className="h3_insert">Insert Category</h3>
           </div>
-
           <div className="insert_label">
             <label className="label_Insert">Name</label>
             <input
               className="form-control"
               name="name"
               type="text"
+              value={input.name}
               onChange={handleChange}
             />
             <div className="crud_Form_Insert_cancelar">
@@ -54,6 +53,7 @@ const InsertCategories = () => {
                 type="submit"
                 className="crud_Form_Insert_cancelar_button"
                 onClick={(e) => handleSubmit(e)}
+                disabled={!input.name}
               >
                 Insert
               </button>
