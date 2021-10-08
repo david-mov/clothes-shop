@@ -5,6 +5,7 @@ import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
 import ProductCart from "./views/ProductCart/ProductCart";
+
 import CatalogueView from "./views/CatalogueView/CatalogueView";
 import UpdateProduct from "./views/FormCrudView/components/Update/UpdateProduct";
 import Insert from "./views/FormCrudView/components/Insert/Insert";
@@ -13,6 +14,8 @@ import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
 import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
 import AddImage from './views/FormCrudView/FormAddImg';
+import FormCrudView from './views/FormCrudView/FormCrudView';
+import CheckoutPage from './views/CatalogueView/Checkoutpage/CheckoutPage';
 
 
 
@@ -33,12 +36,14 @@ function App() {
         <Route path="/update/size" component={UpdateProduct} />
         <Route path="/update/type" component={UpdateProduct} />
         <Route exact path='/product/:productId' component={ProductView} />
+        <Route exact path='/CheckoutPage' component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
         <Route exact path="/addimage/:productId" component={AddImage} />
+
         <Route path="*" component={NotFoundView} />
       </Switch>
-    </Router>
+    </Router >
   );
 }
 
