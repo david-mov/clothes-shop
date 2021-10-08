@@ -13,8 +13,8 @@ import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
 import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
 import AddImage from './components/agregarImagenProduct/FormAddImg'
-import LoginView from "./views/Login/LoginView";
-import RegisterView from "./views/Register/RegisterView";
+import LoginView from "./views/LoginView/LoginView";
+import SignupView from "./views/SignupView/SignupView";
 
 
 
@@ -39,7 +39,7 @@ function App() {
         <Route exact path="/list" component={ListAdmin} />
         <Route exact path="/addimage" component={AddImage} />
         <Route path="/login" component={LoginView} />
-        <Route path="/register" component={RegisterView} />
+        <Route path="/signup" component={SignupView} />
         <Route path="*" component={NotFoundView} />
       </Switch>
     </Router>

@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const loginUser = (req, res, next) => {
+const postLogin = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
     if (!user) {
@@ -15,4 +15,4 @@ const loginUser = (req, res, next) => {
   })(req, res, next);
 }
 
-module.exports = loginUser;
+module.exports = postLogin;

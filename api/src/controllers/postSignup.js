@@ -2,8 +2,8 @@ const bcrypt = require('bcryptjs');
 const { User, Rol } = require("../db");
 
 
-const registerUser = async(req, res, next) => {
-    const {email, password, name} = req.body
+const postSignup = async(req, res, next) => {
+    const {email, password} = req.body
     try{
         const user = await User.findOne({ where: { email }})
         if(user){
@@ -11,11 +11,10 @@ const registerUser = async(req, res, next) => {
         }else{
             const hashedPassword = await bcrypt.hash(password, 10)
             const newUser = await User.create({
-                name,
-                email,
+                ...req.body,
                 password: hashedPassword
             });
-            await newUser.setRol(3); //hardcoded
+            await newUser.setRol(3); // normal user by default
             res.send("User created correctly")
         }
     }
@@ -24,4 +23,4 @@ const registerUser = async(req, res, next) => {
     }
 }
 
-module.exports =  registerUser;
+module.exports =  postSignup;
