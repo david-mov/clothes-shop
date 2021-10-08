@@ -1,7 +1,11 @@
+//import NotFoundView1  from "./components/NotFoundView1";
+import NotFoundView3  from "./components/NotFoundView3";
+
+
 export default function NotFoundView() {
 	return (
 		<div>
-			<h1>Page Not Found</h1>
+			<NotFoundView3 />
 		</div>
 	)
 }
