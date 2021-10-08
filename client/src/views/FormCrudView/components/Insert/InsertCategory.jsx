@@ -53,6 +53,7 @@ const InsertCategories = () => {
                 type="submit"
                 className="crud_Form_Insert_cancelar_button"
                 onClick={(e) => handleSubmit(e)}
+                disabled={!input.name}
               >
                 Insert
               </button>

@@ -246,6 +246,18 @@ const Insert = () => {
               type="submit"
               className="crud_Form_Insert_cancelar_button"
               onClick={(e) => handleSubmit(e)}
+              disabled={
+                !(
+                  input.categories.length &&
+                  input.sizes.length &&
+                  input.name &&
+                  input.price &&
+                  input.stock &&
+                  input.description &&
+                  input.color &&
+                  input.type_product
+                )
+              }
             >
               Insert
             </button>
