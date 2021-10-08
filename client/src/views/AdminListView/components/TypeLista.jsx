@@ -1,3 +1,4 @@
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -23,26 +24,29 @@ export default function TypeList() {
     setInput(Input.target.value);
 }
 
+
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
-      setactualCurrent(actualCurrent + 1)
-      setCurrentPage(currentPage + countP)
+      setactualCurrent(actualCurrent + 1);
+      setCurrentPage(currentPage + countP);
     }
-  }
+  };
 
   const prevPage = () => {
     if (actualCurrent > 1) {
-      setactualCurrent(actualCurrent - 1)
-      setCurrentPage(currentPage - countP)
+      setactualCurrent(actualCurrent - 1);
+      setCurrentPage(currentPage - countP);
     }
-  }
+  };
 
   useEffect(() => {
+
     dispatch(getAllTypes())
   }, [dispatch])
 
   const types = useSelector((state) => state.typesReducer.types)
   var totalCurrent = Math.ceil(types.length / countP)
+
 
   function headers() {
     return (
@@ -65,8 +69,10 @@ export default function TypeList() {
         <th className="table__th">Update Type</th>
         <th className="table__th">Delete Type</th>
       </tr>
+
       </thead>
     )
+
   }
 
   function bodyTable() {
@@ -81,9 +87,11 @@ export default function TypeList() {
 
           <td className="table-row__td">
             <Link to="/">
+
               <p>
                 <i className="fas fa-pencil-alt  fa-2x"></i>
               </p>
+
             </Link>
           </td>
           <td className="table-row__td">
@@ -92,22 +100,26 @@ export default function TypeList() {
             </p>
           </td>
         </tr>
+
       )
     }).slice(currentPage, currentPage + 5)
   }
+
 
   return (
     <div>
       <div className="body">
         <TablaList
+
           title={'TYPES'}
+
           headers={headers()}
           data={types}
           bodyTable={bodyTable()}
-          url = {'/create/type'}
+          url={"/create/type"}
         />
       </div>
-      <div className='buttonList'>
+      <div className="buttonList">
         <button className="button2" onClick={prevPage}>
           PREV
         </button>
@@ -121,5 +133,5 @@ export default function TypeList() {
         </button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,3 +1,4 @@
+
 import {useDispatch,useSelector} from 'react-redux';
 import { useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
@@ -32,13 +33,14 @@ export default function SizeList() {
         setactualCurrent(actualCurrent + 1)
         setCurrentPage(currentPage + countP)
       }
+
     }
-  
-    const prevPage = () => {
-      if (actualCurrent > 1) {
-        setactualCurrent(actualCurrent - 1)
-        setCurrentPage(currentPage - countP)
-      }
+  };
+
+  const prevPage = () => {
+    if (actualCurrent > 1) {
+      setactualCurrent(actualCurrent - 1);
+      setCurrentPage(currentPage - countP);
     }
     
     useEffect(() => {
@@ -71,10 +73,19 @@ export default function SizeList() {
           </thead>
         )
     };
-    
 
-    function bodyTable (){
-        return (
+
+  function bodyTable() {
+    return sizes.map((e, i) => {
+      return (
+        <tr key={i} className="table-row table-row--chris">
+          <input value={e.id} hidden />
+          <td className="table-row__td">
+            <div className="table-row__info">
+              <p className="table-row__name">{e.name}</p>
+            </div>
+          </td>
+
 
           filterSizes().map((e,i)=>{
                 return(
@@ -109,23 +120,22 @@ export default function SizeList() {
             data={sizes}
             bodyTable={bodyTable()}
             url = {'/create/size'}
+
         />
-         </div>
-        <div className='buttonList'>
-        <button className="button2" onClick={prevPage}>
-        PREV
-      </button>
-   
-    <h1>
-      {actualCurrent} De {totalCurrent}
-    </h1>
-   
-      <button className="button2" onClick={nextPage}>
-        NEXT
-      </button>
       </div>
- 
-  </div>
-    )
-    
+      <div className="buttonList">
+        <button className="button2" onClick={prevPage}>
+          PREV
+        </button>
+
+        <h1>
+          {actualCurrent} De {totalCurrent}
+        </h1>
+
+        <button className="button2" onClick={nextPage}>
+          NEXT
+        </button>
+      </div>
+    </div>
+  );
 }

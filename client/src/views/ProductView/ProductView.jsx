@@ -5,7 +5,7 @@ import { getProductDetails } from '../../stateManagement/actions/getProductDetai
 import "./ProductView.css"
 
 export default function ProductView() {
-    const { productId } = useParams();
+   const { productId } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProductDetails(productId));
@@ -16,6 +16,7 @@ export default function ProductView() {
 			<Link type="backHome" to="/">
                 <button>Back home</button>
             </Link>
+
             <div className="productscreen__left">
                 <div className="left__image">
                     <img
