@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom'
 import "../ProductCard/ProductCard.css"
 import { AddShoppingCart } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
+import { useDispatch } from "react-redux";
+import getAddToCart from "../../../../stateManagement/actions/getAddToCart"
+import { useSelector } from "react-redux";
 
 
-function ProductCard({ name, price, description, stock, productId }) {
+function ProductCard(props) {
+    const { name, price, stock, description, image, rating, productId } = props;
+    const dispatch = useDispatch();
+    const addToCart = () => {
+        dispatch(getAddToCart(props));
+    }
+
     return (
 
         <div className="product">
@@ -20,7 +29,7 @@ function ProductCard({ name, price, description, stock, productId }) {
                 <p className="info__description">{description}</p>
                 <p className="info__description">{stock}</p>
                 <IconButton aria-label='Add to Cart'>
-                    <AddShoppingCart fontSize='medium' />
+                    <AddShoppingCart fontSize='medium' onClick={(ev) => addToCart(ev)} />
                 </IconButton>
                 <Link to={`/product/${productId}`}>
                     <h3 className="info__button">Detail</h3>

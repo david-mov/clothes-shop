@@ -3,8 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 //import { useStateValue } from "../../../StateProvider"
-import CheckoutCard from "../../../components/Checkout/CheckoutCard";
-//import Total from "../components/Total";
+import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
+import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
+import ProductCard from '../ProductCards/ProductCard/ProductCard';
+import { useSelector } from "react-redux";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,13 +19,15 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutPage = () => {
     const classes = useStyles();
     //const [{ basket }, dispatch] = useStateValue();
-
+    var { basket } = useSelector(state => state.checkoutReducer)
+    console.log(basket, "Linea 100")
+    /*var { products } = useSelector(state => state.productsReducer)*/
     function FormRow() {
         return (
             <React.Fragment>
-                {basket?.map((item) => (
+                {basket?.map((product) => (
                     <Grid item xs={12} sm={8} md={6} lg={4}>
-                        <CheckoutCard key={item.id} product={item} />
+                        <CheckoutCard key={product.id} product={product} />
                     </Grid>
                 ))}
             </React.Fragment>
@@ -42,8 +47,7 @@ const CheckoutPage = () => {
                 </Grid>
                 <Grid item xs={12} sm={4} md={3}>
                     <Typography align='center' gutterBottom variant='h4'>
-                        Total
-                        {/*<Total />*/}
+                        <TotalCheckout />
                     </Typography>
                 </Grid>
             </Grid>

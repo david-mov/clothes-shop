@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -6,10 +7,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useStateValue } from "../../StateProvider";
+import getAddToCart from "../../stateManagement/actions/getAddToCart"
+import getRemoveItem from "../../stateManagement/actions/getRemoveItem"
+//import { useStateValue } from "../../StateProvider";
 import accounting from "accounting";
-import { actionTypes } from "../../stateManagement/reducer/checkoutReducer";
+//import { actionTypes } from "../../stateManagement/reducer/checkoutReducer";
 import { makeStyles } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,21 +31,46 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "space-between",
         textAlign: "center",
     },
+
     cardRating: {
         display: "flex",
     },
+
 }));
 
-const CheckoutCard = ({ product: { id, name, image, price } }) => {
-    const classes = useStyles();
-    const [{ basket }, dispatch] = useStateValue();
+export default function CheckoutCard({
+    product, key
+}) {
 
-    const removeItem = () => {
-        dispatch({
-            type: actionTypes.REMOVE_ITEM,
-            id: id,
-        });
+    console.log(product, "Productos en el Carrito")
+    const { id, name, price, image, rating, description } = product;
+    const classes = useStyles();
+    const [expanded, setExpanded] = useState(false);
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
     };
+
+    /* var { basket } = useSelector(state => state.checkoutReducer)
+ 
+     const dispatch = useDispatch();
+     const idCart = basket.map((e) => {
+         return { value: e.id }
+     })
+     /*const addToCart = () => {
+         dispatch(getAddToCart(idCart));
+ 
+     }*/
+    //const CheckoutCard = ({ product: { id, name, image, price } }) => {
+    //const classes = useStyles();
+    //const [/*{ basket}*/dispatch] = useStateValue();
+
+    const dispatch = useDispatch();
+    const RemoveItem = (event, id) => {
+        event.preventDefault();
+        dispatch(getRemoveItem(id));
+    };
+
     return (
         <Card className={classes.root}>
             <CardHeader
@@ -58,19 +87,19 @@ const CheckoutCard = ({ product: { id, name, image, price } }) => {
                 subheader='in Stock'
             />
             <CardMedia className={classes.media} image={image} title={name} />
-            <CardActions disableSpacing className={classes.cardActions}>
-                <div /*className={classes.cardRating}*/>
-                    {Array(4)
+            <CardActions disableSpacing className={classes.cardActions} >
+                <div className={classes.cardRating}>
+                    {Array(rating)
                         .fill()
                         .map((_, i) => (
                             <p>&#11088;</p>
                         ))}
                 </div>
-                <IconButton onClick={removeItem}>
+                <IconButton onClick={(event) => RemoveItem(event, id)}>
                     <DeleteIcon fontSize='large' />
                 </IconButton>
             </CardActions>
-        </Card>
+        </Card >
+
     );
 };
-export default CheckoutCard

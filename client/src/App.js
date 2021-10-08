@@ -9,7 +9,7 @@ import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from './views/CatalogueView/CatalogueView';
 import FormCrudView from './views/FormCrudView/FormCrudView';
 import CheckoutPage from './views/CatalogueView/Checkoutpage/CheckoutPage';
-import CheckoutCart from './components/Checkout/CheckoutCard';
+
 
 function App() {
   return (
@@ -22,10 +22,9 @@ function App() {
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path='/CheckoutPage' component={CheckoutPage} />
-        <Route exact path='/CheckoutCart' component={CheckoutCart} />
         <Route path="*" component={NotFoundView} />
       </Switch>
-    </Router>
+    </Router >
   );
 }
 
