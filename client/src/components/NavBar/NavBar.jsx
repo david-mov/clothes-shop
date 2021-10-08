@@ -72,7 +72,6 @@ function NavBar() {
         dispatch(getPrice(e.target.value))
     }
 
-  const OptionsTypes = types.map((e, i) => {
     return (
 
 
