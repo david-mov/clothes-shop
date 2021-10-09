@@ -4,12 +4,13 @@ const multer = require('multer');
 
 const multerConfig = multer.diskStorage({
     destination: (req, file, callback) => {
-        //const {id} = req.query;        
-        callback(null,'public/imageProduct/');
+        const {id} = req.query;        
+        callback(null,'../client/src/assets/imageProduct/');
+
     },
     filename: (req, file, callback) => {
         const {image_product} = req.query;
-        //const ext = file.mimetype.split('/')[1];
+        const ext = file.mimetype.split('/')[1];
         const nombre = file.originalname;
         callback(null,`img-product-${image_product}.${nombre}`);
     }
