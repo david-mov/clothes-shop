@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 0,
-        paddingTop: "56.25%", // 16:9
+        paddingTop: "56.25%", 
     },
     cardActions: {
         display: "flex",
@@ -43,7 +43,7 @@ export default function CheckoutCard({
 }) {
 
     console.log(product, "Productos en el Carrito")
-    const { id, name, price, image, rating, stock, description } = product;
+    const { productId, name, price, image, rating, stock, description } = product;
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
 
@@ -51,28 +51,15 @@ export default function CheckoutCard({
         setExpanded(!expanded);
     };
 
-    /* var { basket } = useSelector(state => state.checkoutReducer)
- 
-     const dispatch = useDispatch();
-     const idCart = basket.map((e) => {
-         return { value: e.id }
-     })
-     /*const addToCart = () => {
-         dispatch(getAddToCart(idCart));
- 
-     }*/
-    //const CheckoutCard = ({ product: { id, name, image, price } }) => {
-    //const classes = useStyles();
-    //const [/*{ basket}*/dispatch] = useStateValue();
 
     const dispatch = useDispatch();
-    const RemoveItem = (event, id) => {
+    const RemoveItem = (event, productId) => {
         event.preventDefault();
-        dispatch(getRemoveItem(id));
+        console.log("desde checkout card", productId)
+        dispatch(getRemoveItem(productId));
     };
 
     return (
-        // <Card className={classes.root}>
         <tr className="table-row table-row--chris">
         
             <td className="table-row__td">
@@ -118,7 +105,7 @@ export default function CheckoutCard({
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    
-                    <IconButton onClick={(event) => RemoveItem(event, id)}>
+                    <IconButton onClick={(event) => RemoveItem(event, productId)}>
                         <DeleteIcon fontSize='large' />
                     </IconButton>
                 </CardActions>
@@ -126,7 +113,7 @@ export default function CheckoutCard({
             </td>
 
         </tr>
-    // </Card >
+
 
     );
 };

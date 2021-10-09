@@ -10,9 +10,11 @@ export default function ProductView() {
 
     const { productId } = useParams();
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getProductDetails(productId));
+    }, [])
     
     const product = useSelector(state => state.productsReducer.productDetails);
-    console.log("data ", product);
     return (
         <div className="productscreen">
             <Link type="backHome" to="/">
