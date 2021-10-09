@@ -1,3 +1,4 @@
+import '../../../styles/styleChecPage.css';
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -7,6 +8,8 @@ import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
 import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
 import ProductCard from '../ProductCards/ProductCard/ProductCard';
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,13 +27,39 @@ const CheckoutPage = () => {
     /*var { products } = useSelector(state => state.productsReducer)*/
     function FormRow() {
         return (
-            <React.Fragment>
-                {basket?.map((product) => (
-                    <Grid item xs={12} sm={8} md={6} lg={4}>
-                        <CheckoutCard key={product.id} product={product} />
-                    </Grid>
-                ))}
-            </React.Fragment>
+            // <React.Fragment>
+            <div className="container">
+                <div className="row row--top-20">
+                    <div className="col-md-12">
+                        <div className="table-container">
+                            <table className="table">
+                                <thead className="table__thead">
+                                    <tr>
+                                        <th className="table__th">Name</th>
+                                        <th className="table__th">Price</th>
+                                        <th className="table__th">Qty</th>
+                                        <th className="table__th">Progress</th>
+                                        <th className="table__th">Rating</th>
+                                        <th className="table__th">aumentar y disminuir cantidad</th>
+                                        <th className="table__th"></th>
+                                    </tr>
+                                </thead>
+                                <tbody className="table__tbody">
+
+                                    {basket?.map((product) => (
+
+                                        <CheckoutCard key={product.id} product={product} />
+
+                                    ))}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         );
     }
 
@@ -39,7 +68,31 @@ const CheckoutPage = () => {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Typography align='center' gutterBottom variant='h4'>
-                        Shopping Cart
+                        <div className="todo">
+                            <div className="navbar">
+                                <div className="navbar__logo">
+                                    <img
+                                        className="img"
+                                        src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+                                        alt="clothes-Shop"
+                                        border="0"
+                                    ></img>
+                                </div>
+                                <div className="cart__link">
+                                    <h2>Shopping Cart</h2>
+                                </div>
+                                <ul className="navbar__links">
+                                    <li className="saco">
+                                        <Link to="/" className="cart__link">
+                                            <i className="fas fa-arrow-left fa-1x"></i>
+                                            <span>
+                                                Go to back <span className="cartlogo__badge">{ }</span>
+                                            </span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </Typography>
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} container spacing={2}>

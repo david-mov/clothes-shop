@@ -5,17 +5,17 @@ import { getBasketTotal } from "../../stateManagement/reducer/checkoutReducer";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "20vh",
-    },
-    button: {
-        maxWidth: "200px",
-        marginTop: "2rem",
-    },
+    // root: {
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    //     height: "20vh",
+    // },
+    // button: {
+    //     maxWidth: "200px",
+    //     marginTop: "2rem",
+    // },
 }));
 
 const Total = () => {
