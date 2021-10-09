@@ -4,32 +4,32 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
+import { getUpdateProductDetails } from "../../../../stateManagement/actions/getUpdatePDetail";
 import "./update.css";
-import { useHistory } from "react-router-dom";
-
+import { useHistory, useParams } from "react-router-dom";
 
 const validate = (input) => {
   let errors = {};
-  if(!input.categories.length) {
-    errors.categories = "Required field"
+  if (!input.categories.length) {
+    errors.categories = "Required field";
   } else if (!input.valueSize) {
     errors.sizes = "Required field enter a size";
   } else if (!input.name) {
     errors.name = "Required field enter a name";
-  } else if ((!input.price)) {
+  } else if (!input.price) {
     errors.price = "Required field. enter a value greater than zero";
-  } else if (!input.description ) {
+  } else if (!input.description) {
     errors.description = "Required field enter a Description";
   } else if (!input.stock) {
     errors.stock = "Required field enter a amount";
   } else if (!input.color) {
     errors.color = "Required field enter a color";
-  }  if(!input.categories.length) {
-    errors.categories = "Required field"
+  }
+  if (!input.categories.length) {
+    errors.categories = "Required field";
   }
   return errors;
 };
-
 
 const Update = ({
   id = 1,
@@ -51,31 +51,29 @@ const Update = ({
     { id: 1, name: "big" },
     { id: 2, name: "medium" },
   ],
-  
 }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllsizes());
     dispatch(getAllTypes());
+    dispatch(getUpdateProductDetails(productId));
     // dispatch(putProduct())
   }, [dispatch]);
 
+  const { productId } = useParams();
 
-  const history = (useHistory())
+  const product = useSelector(
+    (state) => state.productsReducer.productUpdateDetails
+  );
+  console.log("data desde el detalle de update", product);
 
-
-
-  
-
-
+  const history = useHistory();
 
   // console.log("*********************************************", mapCategories)
   let categoriess = useSelector((state) => state.categoriesReducer.categories);
   let sizess = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
-
-  
 
   const mapCategories = categories.map((e) => ({
     value: e.id,
@@ -86,11 +84,8 @@ const Update = ({
     value: e.id,
     label: e.name,
   }));
- 
 
   const mapType = { value: type_product, label: type.name };
-
-  
 
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
@@ -99,17 +94,14 @@ const Update = ({
   const [input, setInput] = useState({
     name,
     description,
-    color,    
+    color,
     stock,
     type_product,
     categories: valueCate,
     sizes: valueSize,
-    price
-  })
+    price,
+  });
   const [errors, setErrors] = useState({});
-
-
- 
 
   const Options = categoriess.map((e) => {
     return {
@@ -135,10 +127,12 @@ const Update = ({
       ...input,
       [e.target.name]: e.target.value,
     });
-    setErrors(validate({
-      ...input,
-      [e.target.name]: e.target.value
-    }))
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const onSelectChangeNew = (valueCate) => {
@@ -177,8 +171,7 @@ const Update = ({
     });
   };
 
-  const onSelectChangeNewType = (valueType) => {  
-
+  const onSelectChangeNewType = (valueType) => {
     setInput({
       ...input,
       type_Product: valueType.value,
@@ -189,38 +182,33 @@ const Update = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
 
-      let mapCategorie = input.categories.map(e => e.value);
-      let mapSizes = input.sizes.map(e => e.value);
+    let mapCategorie = input.categories.map((e) => e.value);
+    let mapSizes = input.sizes.map((e) => e.value);
 
-      let obj = {
-        name: input.name,
-        description: input.description,
-        color:input.color,
-        image:input.image,
-        stock:input.stock,
-        type_product:input.type_product,
-        categories: mapCategorie,
-        sizes: mapSizes,
-        price:input.price
-      }
+    let obj = {
+      name: input.name,
+      description: input.description,
+      color: input.color,
+      image: input.image,
+      stock: input.stock,
+      type_product: input.type_product,
+      categories: mapCategorie,
+      sizes: mapSizes,
+      price: input.price,
+    };
 
-      // dispatch(putProduct(obj));
-      
-      console.log("OBJ",obj);
-      console.log("INPUT",input)
-      
-      alert("Successfully edited product")
-      history.push("/list");
+    // dispatch(putProduct(obj));
 
-    
+    console.log("OBJ", obj);
+    console.log("INPUT", input);
 
-    
+    alert("Successfully edited product");
+    history.push("/list");
   };
 
   const cerrarModalInsertar = () => {
-    setInput({ modalInsertar: false });
+    history.push("/list");
   };
 
   console.log(input);
@@ -250,7 +238,7 @@ const Update = ({
               onChange={(e) => onSelectChangeNew(e)}
             />
           </div>
-            {errors.categories && <p className="error">{errors.categories}</p>}
+          {errors.categories && <p className="error">{errors.categories}</p>}
           <div className="insert_label">
             <label>Zise</label>
             <Select
@@ -277,17 +265,17 @@ const Update = ({
               onChange={handleChange}
               value={input.name}
             />
-            {errors.name && <p className ="error">{errors.name}</p>}
+            {errors.name && <p className="error">{errors.name}</p>}
             <label className="label_Insert">Price:</label>
             <input
               className="form-control"
               name="price"
               type="number"
-              min= "0"              
+              min="0"
               onChange={handleChange}
               value={input.price}
             />
-            {errors.price && <p className= "error">{errors.price}</p>}
+            {errors.price && <p className="error">{errors.price}</p>}
 
             <label className="label_Insert">Description:</label>
             <input
@@ -297,8 +285,10 @@ const Update = ({
               onChange={handleChange}
               value={input.description}
             />
-            {errors.description && <p className ="error">{errors.description}</p>}
-            
+            {errors.description && (
+              <p className="error">{errors.description}</p>
+            )}
+
             <label className="label_Insert">Stock:</label>
             <input
               className="form-control"
@@ -308,7 +298,7 @@ const Update = ({
               onChange={handleChange}
               value={input.stock}
             />
-            {errors.stock && <p className = "error">{errors.stock}</p>}
+            {errors.stock && <p className="error">{errors.stock}</p>}
             <label className="label_Insert">Color:</label>
             <input
               className="form-control"
@@ -322,10 +312,22 @@ const Update = ({
             <label className="label_Insert">Image:</label>
           </div>
           <div className="crud_Form_Insert_cancelar">
-            <button 
-            className="crud_Form_Insert_cancelar_button" 
-            type="submit"
-            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
+            <button
+              className="crud_Form_Insert_cancelar_button"
+              type="submit"
+              disabled={
+                !(
+                  input.name &&
+                  input.description &&
+                  input.color &&
+                  input.stock &&
+                  input.type_product &&
+                  input.sizes.length &&
+                  input.categories.length &&
+                  input.price
+                )
+              }
+            >
               Editar
             </button>
             <button

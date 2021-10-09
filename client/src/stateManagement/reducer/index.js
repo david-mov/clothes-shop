@@ -4,13 +4,15 @@ import productsReducer from './productsReducer.js'
 import typesReducer from "./typesReducer.js"
 import sizesReducer from './sizesReducer.js'
 import userReducer from './userReducer.js'
+import checkoutReducer from './checkoutReducer.js'
 
 
-export default combineReducers({ 
+export default combineReducers({
 	categoriesReducer,
 	productsReducer,
 	typesReducer,
-  	sizesReducer,
-  	userReducer,
+  userReducer,
+	sizesReducer,
+	checkoutReducer
 })
 

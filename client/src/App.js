@@ -12,12 +12,12 @@ import InsertCategory from "./views/FormCrudView/components/Insert/InsertCategor
 import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
 import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
-import AddImage from './components/agregarImagenProduct/FormAddImg'
 import LoginView from "./views/LoginView/LoginView";
 import SignupView from "./views/SignupView/SignupView";
-
-
-
+import AddImage from './views/FormCrudView/FormAddImg';
+import InfoProduct from './views/DetalleAdmin/AdminInfoView';
+import FormCrudView from './views/FormCrudView/FormCrudView';
+import CheckoutPage from './views/CatalogueView/Checkoutpage/CheckoutPage';
 
 function App() {
   return (
@@ -26,23 +26,25 @@ function App() {
         <Route exact path='/' component={HomeView} />
         <Route exact path='/catalogue' component={CatalogueView} />
         <Route exact path='/profile' component={ProfileView} />
-        <Route path="/create/product" component={Insert} />
+        <Route path="/create/product/" component={Insert} />
         <Route path="/create/category" component={InsertCategory} />
         <Route path="/create/size" component={InsertSize} />
         <Route path="/create/type" component={InsertType} />
-        <Route path="/update/product" component={UpdateProduct} />
+        <Route path="/update/product/:productId" component={UpdateProduct} />
         <Route path="/update/category" component={UpdateProduct} />
         <Route path="/update/size" component={UpdateProduct} />
         <Route path="/update/type" component={UpdateProduct} />
         <Route exact path='/product/:productId' component={ProductView} />
+        <Route exact path='/CheckoutPage' component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />
-        <Route exact path="/addimage" component={AddImage} />
         <Route path="/login" component={LoginView} />
         <Route path="/signup" component={SignupView} />
+        <Route exact path="/addimage/:productId" component={AddImage} />
+        <Route exact path="/info/product/:productId" component={InfoProduct} />
         <Route path="*" component={NotFoundView} />
       </Switch>
-    </Router>
+    </Router >
   );
 }
 
