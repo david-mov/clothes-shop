@@ -6,12 +6,13 @@ import { getType } from "../../stateManagement/actions/getType";
 import { getPrice } from "../../stateManagement/actions/getPrice";
 import { getSearch } from "../../stateManagement/actions/getSearch";
 import { Link } from "react-router-dom";
+import UserOptionsLog from "../UserOptionsLog/UserOptionsLog";
 import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 
 function NavBar() {
-
+    const [selected, setSelected] = useState("");
     const [categoryValue, setCategoryValue] = useState('C');
     const [typeValue, setTypeValue] = useState("T")
 
@@ -121,6 +122,9 @@ const OptionsTypes = types.map((e,i) => {
             className=""
           />
         </div>
+        <div className="">
+      <UserOptionsLog selected={selected} setSelected={setSelected} />
+    </div>
         <ul className="navbar__links">
           <li className="saco">
             <Link to="/cart" className="cart__link">

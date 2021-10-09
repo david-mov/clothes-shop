@@ -15,6 +15,7 @@ import ListAdmin from './views/AdminListView/AdminListView';
 import AddImage from './components/agregarImagenProduct/FormAddImg'
 import LoginView from "./views/Login/LoginView";
 import RegisterView from "./views/Register/RegisterView";
+import UserOptionsLog from "./components/UserOptionsLog/UserOptionsLog";
 
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/addimage" component={AddImage} />
         <Route path="/login" component={LoginView}></Route>
         <Route path="/register" component={RegisterView}></Route>
+        <Route path="/algo" component={UserOptionsLog}/>
         <Route path="*" component={NotFoundView} />
       </Switch>
     </Router>
