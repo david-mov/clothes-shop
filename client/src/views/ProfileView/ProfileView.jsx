@@ -15,10 +15,11 @@ export default function ProfileView() {
 	}
 	return (
 		<div>
+			<p>id: {user.id}</p>			
 			<p>name: {user?.name}</p>
 			<p>email: {user?.email}</p>
+			<p>rol: {user?.user_rol}</p>
 			<button onClick={() => handleLogout()}>Logout</button>
-		</div>
+		</div> 
 	)
-
 }
