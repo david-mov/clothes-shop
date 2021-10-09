@@ -2,9 +2,8 @@
   margin: 0 auto;
   background-color: #171717;
   display: block;
+  padding: 1.5rem 1rem;
   z-index: 50;
-  height: 150px;
-  margin-bottom: 8rem;
   padding: 1rem;
 }
 

@@ -88,7 +88,7 @@ function NavBar() {
           </div>
         </Link>
         <div className="cart__link">
-          <div>Categories</div>
+          <span>Categories</span>
           <select
             className=""
             value={categoryValue}

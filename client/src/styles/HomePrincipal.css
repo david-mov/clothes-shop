@@ -1,0 +1,13 @@
+.HomePrincipal {
+  margin: 0 auto;
+}
+.NavbarPaincipal {
+  display: flex;
+  justify-content: space-between;
+  background-color: #171717;
+  padding: 2rem;
+}
+.spanHomePrincipal {
+  color: aliceblue;
+  text-decoration: none;
+}
