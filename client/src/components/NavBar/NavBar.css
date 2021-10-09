@@ -8,6 +8,7 @@
   z-index: 50;
   height: 100px;
 }
+
 @media (min-width: 768px) {
   .navbar {
     min-width: 98%;

@@ -26,13 +26,13 @@ function ProductCard(props) {
             />
 
             <div className="product__info">
-                <p className="info__price">{price}</p>
-                <p className="info__description">{description}</p>
-                <p className="info__description">{stock}</p>
+                <p className="info__price">Price US${price}</p>
+                <p className="info__description">Description: {description}</p>
+                <p className="info__stock">stock {stock}</p>
                 <IconButton aria-label='Add to Cart'>
                     <AddShoppingCart fontSize='medium' onClick={(ev) => addToCart(ev)} />
                 </IconButton>
-                <Link to={`/product/${productId}`}>
+                <Link className='Link' to={`/product/${productId}`}>
                     <h3 className="info__button">Detail</h3>
                 </Link>
             </div>

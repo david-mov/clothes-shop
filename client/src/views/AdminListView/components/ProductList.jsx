@@ -1,66 +1,69 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getAllProducts } from '../../../stateManagement/actions/getAllProducts'
-import TablaList from './ListTable'
-import './styles.css'
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../../../stateManagement/actions/getAllProducts";
+import TablaList from "./ListTable";
+//import "./style3s.css";
 import Select from "react-select";
 
 export default function ProductosLista() {
-  const dispatch = useDispatch()
-  const [currentPage, setCurrentPage] = useState(0)
-  const [actualCurrent, setactualCurrent] = useState(1)
-  var countP = 5
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [actualCurrent, setactualCurrent] = useState(1);
+  var countP = 5;
   var dataCompleta = [];
-   const [Input, setInput] = useState('');
-   const product = useSelector((state) => state.productsReducer.products)
-   const filterProducts = () => {
-     if(Input !== ''){
-       return dataCompleta = product.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
-     }
-     return dataCompleta = product;
-   }
+  const [Input, setInput] = useState("");
+  const product = useSelector((state) => state.productsReducer.products);
+  const filterProducts = () => {
+    if (Input !== "") {
+      return (dataCompleta = product.filter((e) =>
+        e.name.toLowerCase().includes(Input.toLowerCase())
+      ));
+    }
+    return (dataCompleta = product);
+  };
 
-  const onInputChange = (Input) =>{  
+  const onInputChange = (Input) => {
     setInput(Input.target.value);
-}
+  };
 
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
-      setactualCurrent(actualCurrent + 1)
-      setCurrentPage(currentPage + countP)
+      setactualCurrent(actualCurrent + 1);
+      setCurrentPage(currentPage + countP);
     }
-  }
+  };
 
   const prevPage = () => {
     if (actualCurrent > 1) {
-      setactualCurrent(actualCurrent - 1)
-      setCurrentPage(currentPage - countP)
+      setactualCurrent(actualCurrent - 1);
+      setCurrentPage(currentPage - countP);
     }
-  }
+  };
 
   useEffect(() => {
-    dispatch(getAllProducts())
-  }, [dispatch])
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
-  const products = useSelector((state) => state.productsReducer.products)
-  var totalCurrent = Math.ceil(products.length / countP)
+  const products = useSelector((state) => state.productsReducer.products);
+  var totalCurrent = Math.ceil(products.length / countP);
   function headers() {
     return (
       <thead className="table__thead">
         <tr>
           <th className="table__th">
-          <div >
-              <input  className='button placeHolderSearch'  
-            type = "text"
-            value = {Input}
-            placeholder = "search"
-            onChange = {onInputChange}
-            />
-         </div>
+            <div>
+              <input
+                className="button placeHolderSearch"
+                type="text"
+                value={Input}
+                placeholder="search"
+                onChange={onInputChange}
+              />
+            </div>
           </th>
           <th className="table__th">
-          <Select
+            <Select
               className="select-style"
               //value={vista}
               //options={OptionSelect}
@@ -68,25 +71,24 @@ export default function ProductosLista() {
             />
           </th>
         </tr>
-      <tr>
-        <th className="table__th">Name</th>
-        <th className="table__th">Price</th>
-        <th className="table__th">Stock</th>
-        <th className="table__th">Insert image</th>
-        <th className="table__th">Update Product</th>
-        <th className="table__th">Top Secret</th>
-        <th className="table__th">Delete Product</th>
-      </tr>
+        <tr>
+          <th className="table__th">Name</th>
+          <th className="table__th">Price</th>
+          <th className="table__th">Stock</th>
+          <th className="table__th">Insert image</th>
+          <th className="table__th">Update Product</th>
+          <th className="table__th">Top Secret</th>
+          <th className="table__th">Delete Product</th>
+        </tr>
       </thead>
-    )
+    );
   }
 
   function bodyTable() {
-    return  filterProducts()
-
+    return filterProducts()
       .map((e, i) => {
         var status = "status--green";
-        if(e.stock <= 5) status = "status--red";
+        if (e.stock <= 5) status = "status--red";
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -100,30 +102,30 @@ export default function ProductosLista() {
               </div>
             </td>
             <td data-column="Policy status" className="table-row__td">
-              <p className= {`table-row__p-status ${status} status`}>
+              <p className={`table-row__p-status ${status} status`}>
                 {e.stock}
               </p>
             </td>
 
             <td className="table-row__td">
-            <Link to={`/addimage/${e.id}`}>
-              <p>
-              <i class="far fa-image fa-2x"></i>
-              </p>
+              <Link to={`/addimage/${e.id}`}>
+                <p>
+                  <i class="far fa-image fa-2x"></i>
+                </p>
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/update/product/${e.id}`}>  
+              <Link to={`/update/product/${e.id}`}>
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>
                 </p>
-             </Link>
+              </Link>
             </td>
             <td className="table-row__td">
-            <Link to={`/info/product/${e.id}`}> 
-              <p>
-              <i class="fas fa-user-secret fa-9x"></i>
-              </p>
+              <Link to={`/info/product/${e.id}`}>
+                <p>
+                  <i class="fas fa-user-secret fa-9x"></i>
+                </p>
               </Link>
             </td>
 
@@ -133,38 +135,35 @@ export default function ProductosLista() {
               </p>
             </td>
           </tr>
-        )
+        );
       })
-      .slice(currentPage, currentPage + 5)
+      .slice(currentPage, currentPage + 5);
   }
-
 
   return (
     <div>
-    <div className='body' >
-
-      <TablaList
-        title={'Porducts'}
-        headers={headers()}
-        data={products}
-        bodyTable={bodyTable()}
-        url = {'/create/product'}
-      />
-       </div>
-     <div className='buttonList'>
+      <div className="body">
+        <TablaList
+          title={"Porducts"}
+          headers={headers()}
+          data={products}
+          bodyTable={bodyTable()}
+          url={"/create/product"}
+        />
+      </div>
+      <div className="buttonList">
         <button className="button2" onClick={prevPage}>
           PREV
         </button>
-     
-      <h1>
-        {actualCurrent} De {totalCurrent}
-      </h1>
-     
+
+        <h1>
+          {actualCurrent} De {totalCurrent}
+        </h1>
+
         <button className="button2" onClick={nextPage}>
           NEXT
         </button>
-        </div>
+      </div>
     </div>
-    
-  )
+  );
 }
