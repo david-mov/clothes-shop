@@ -13,6 +13,9 @@ import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
 import InsertType from "./views/FormCrudView/components/Insert/InsertType";
 import ListAdmin from './views/AdminListView/AdminListView';
 import AddImage from './views/FormCrudView/FormAddImg';
+import UpdateCategories from "./views/FormCrudView/components/Update/UpdateCategories";
+import UpdateZises from "./views/FormCrudView/components/Update/UpdateSizes";
+import UpdateType from "./views/FormCrudView/components/Update/UpdateType";
 
 
 
@@ -29,9 +32,9 @@ function App() {
         <Route path="/create/size" component={InsertSize} />
         <Route path="/create/type" component={InsertType} />
         <Route path="/update/product/:productId" component={UpdateProduct} />
-        <Route path="/update/category" component={UpdateProduct} />
-        <Route path="/update/size" component={UpdateProduct} />
-        <Route path="/update/type" component={UpdateProduct} />
+        <Route path="/update/category" component={UpdateCategories} />
+        <Route path="/update/size" component={UpdateZises} />
+        <Route path="/update/type" component={UpdateType} />
         <Route exact path='/product/:productId' component={ProductView} />
         <Route exact path="/cart" component={ProductCart} /> 
         <Route exact path="/list" component={ListAdmin} />

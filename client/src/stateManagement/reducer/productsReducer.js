@@ -6,6 +6,7 @@ import {
 	GET_SEARCH,
 	GET_PRODUCT_DETAILS,
 	GET_UPDATE_PRODUCT_DETAILS,
+	CLEAN_UPDATE_PRODUCT_DETAILS,
 } from '../../consts/actionConsts';
 
 const initialState = {
@@ -67,6 +68,12 @@ export default function productsReducer(state = initialState, action) {
 				return {
 					...state,
 					productUpdateDetails: action.payload
+				}
+			}
+			case CLEAN_UPDATE_PRODUCT_DETAILS : {
+				return {
+					...state,
+					productUpdateDetails: {}
 				}
 			}
 		default:

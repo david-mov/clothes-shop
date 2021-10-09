@@ -7,11 +7,13 @@ import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
 import { getUpdateProductDetails } from '../../../../stateManagement/actions/getUpdatePDetail'
 import "./update.css";
 import { useHistory, useParams } from "react-router-dom";
+import {putProduct} from "../../../../stateManagement/actions/putProduct";
+import { cleanUpdate } from "../../../../stateManagement/actions/CleanPutUpdate";
 
 
 const validate = (input) => {
   let errors = {};
-  if(!input.categories.length) {
+  if(!input.categories) {
     errors.categories = "Required field"
   } else if (!input.valueSize) {
     errors.sizes = "Required field enter a size";
@@ -25,43 +27,44 @@ const validate = (input) => {
     errors.stock = "Required field enter a amount";
   } else if (!input.color) {
     errors.color = "Required field enter a color";
-  }  if(!input.categories.length) {
-    errors.categories = "Required field"
-  }
+  }  
   return errors;
 };
 
 
-const Update = ({
-  id = 1,
-  name = "rodri",
-  price = 200,
-  description = "sads",
-  color = "rojo",
-  stock = 1,
-  type_product = 2,
-  type = {
-    name: "pantalon",
-  },
-  categories = [
-    { id: 2, name: "futbol" },
-    { id: 5, name: "elegante" },
-    { id: 4, name: "sport" },
-  ],
-  sizes = [
-    { id: 1, name: "big" },
-    { id: 2, name: "medium" },
-  ],
-  
-}) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllCategories());
-    dispatch(getAllsizes());
-    dispatch(getAllTypes());
-    dispatch(getUpdateProductDetails(productId));
-    // dispatch(putProduct())
+const Update = () => {
+ const dispatch = useDispatch();
+  useEffect(() => {  
+     
+    dispatch(getUpdateProductDetails(productId))      
   }, [dispatch]);
+
+  
+  useEffect(() => {
+    dispatch(getAllCategories());    
+  }, [dispatch]);
+
+  useEffect(() => {    
+    dispatch(getAllsizes());
+    
+  }, [dispatch]);
+
+  useEffect(() => {   
+    dispatch(getAllTypes());       
+  }, [dispatch]);
+
+ 
+
+  
+
+
+  useEffect( () => {
+    const get = async () => {
+      await dispatch(getUpdateProductDetails(productId)) 
+    } 
+    get()
+        
+	},[dispatch])
 
   const { productId } = useParams();
 
@@ -78,20 +81,27 @@ const Update = ({
   let sizess = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
 
-  
+  console.log("TYPES")
 
-  const mapCategories = categories.map((e) => ({
+  const mapCategories = product.categories ? product.categories.map((e) => ({
     value: e.id,
     label: e.name,
-  }));
+  })):null;
 
-  const mapSizes = sizes.map((e) => ({
+  const mapSizes = product.sizes ? product.sizes.map((e) => ({
     value: e.id,
     label: e.name,
-  }));
+  })): null;
+
+  let nombreType = "";
+  types.forEach(e => {
+    if(e.id === product.type_product) {
+      nombreType = e.name
+    }
+  });
  
-
-  const mapType = { value: type_product, label: type.name };
+  console.log("sizess", sizess)
+  const mapType = { value: product.type_product, label: nombreType };
 
   
 
@@ -100,14 +110,14 @@ const Update = ({
   const [valueType, setvalueType] = useState(mapType);
 
   const [input, setInput] = useState({
-    name,
-    description,
-    color,    
-    stock,
-    type_product,
+    name: product ? product.name :null,
+    description:product ? product.description :null,
+    color: product ? product.color :null,    
+    stock: product ? product.stock :null,
+    type_product: product ? product.type_product :null,
     categories: valueCate,
     sizes: valueSize,
-    price
+    price: product ? product.price:null
   })
   const [errors, setErrors] = useState({});
 
@@ -184,15 +194,14 @@ const Update = ({
 
     setInput({
       ...input,
-      type_Product: valueType.value,
+      type_product: valueType.value,
     });
 
     setvalueType(valueType);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+  const handleSubmit = (e) => {
+      e.preventDefault()
 
       let mapCategorie = input.categories.map(e => e.value);
       let mapSizes = input.sizes.map(e => e.value);
@@ -208,14 +217,18 @@ const Update = ({
         sizes: mapSizes,
         price:input.price
       }
+      
 
-      // dispatch(putProduct(obj));
+      dispatch(putProduct(productId,obj));
+      
       
       console.log("OBJ",obj);
+      
+      setInput({name:"fran"})
       console.log("INPUT",input)
       
-      alert("Successfully edited product")
-      history.push("/list");
+      // alert("Successfully edited product")
+      // history.push("/list");
 
     
 
@@ -223,7 +236,8 @@ const Update = ({
   };
 
   const cerrarModalInsertar = () => {
-    setInput({ modalInsertar: false });
+    setInput({})    
+    history.push("/list")
   };
 
   console.log(input);
@@ -243,7 +257,7 @@ const Update = ({
           <div className="insert_label">
             <div className="labelUpdate">
               <label className="labelUpdate_label">Categories</label>
-              <input name="categories" type="text" value={id} readOnly />
+              <input name="categories" type="text" value={productId} readOnly />
             </div>
             <Select
               name="categories"
@@ -328,7 +342,7 @@ const Update = ({
             <button 
             className="crud_Form_Insert_cancelar_button" 
             type="submit"
-            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
+            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes && input.categories && input.price)}>
               Editar
             </button>
             <button
