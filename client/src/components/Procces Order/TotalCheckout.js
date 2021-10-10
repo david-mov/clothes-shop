@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, makeStyles } from "@material-ui/core";
 import accounting from "accounting";
 import { getBasketTotal } from "../../stateManagement/reducer/checkoutReducer";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     // root: {
@@ -19,13 +20,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Total = () => {
+    const basket = useSelector(state => state.checkoutReducer.basket)
+    console.log(basket)
     const classes = useStyles();
+    var total = 0
     //const [{ basket }, dispatch] = useStateValue();
+    basket.map((e) => (total = e.price + total) )        
 
+    let miBasket = basket.length
     return (
         <div className={classes.root}>
-            <h5>Total items : 3 {/*{basket?.length}*/}</h5>
-            <h5>{accounting.formatMoney(50, "$")} {/*(getBasketTotal(basket), "$")*/}</h5>
+            <h5>Total items: {miBasket}</h5>
+            <h5>Total Amount: {parseInt(total)}</h5>
             <Button
                 component={Link}
                 to='/checkout'
