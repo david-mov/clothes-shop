@@ -5,14 +5,23 @@ import { AddShoppingCart } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
 import getAddToCart from "../../../../stateManagement/actions/getAddToCart"
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 
 function ProductCard(props) {
+
+   const [contador, setContador] = useState(1) 
+    const [tengo, setTengo] = useState(false)
+     const basket = useSelector(state => state.checkoutReducer.basket)
     const { name, price, stock, description, image, rating, productId } = props;
     const dispatch = useDispatch();
     const addToCart = () => {
+        basket.find((e) => e.productId === productId) ? setTengo(true) : 
         dispatch(getAddToCart(props));
     }
+
+    console.log("ESTE ES EL CONTADOR", contador)
     var nameImagen = "";
     
     if(image !== undefined){
@@ -47,5 +56,4 @@ function ProductCard(props) {
         </div>
     )
 }
-
 export default ProductCard

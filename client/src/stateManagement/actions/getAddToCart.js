@@ -1,8 +1,8 @@
 import { ADD_TO_BASKET } from "../../consts/actionConsts";
 
 
-const getAddToCart = (id) => (dispatch) => {
-console.log("SUPUESTO ID", id)
+const getAddToCart = (id, contador) => (dispatch) => {
+console.log("SUPUESTO ID", id, contador)
     try {
         return dispatch({
             type: ADD_TO_BASKET,
