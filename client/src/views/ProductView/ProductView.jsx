@@ -3,16 +3,34 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../stateManagement/actions/getProductDetails.js'
 import "./ProductView.css";
-var imageName = "img-product-2.calabera1.jpg"
+import "../../styles/styleDetallesCD.css";
+
+
 
 export default function ProductView() {
 
 
     const { productId } = useParams();
     const dispatch = useDispatch();
-    
-    const product = useSelector(state => state.productsReducer.productDetails);
-    console.log("data ", product);
+    useEffect(() => {
+        dispatch(getProductDetails(productId));
+    }, [])
+    const product = useSelector(state => state.productsReducer.productDetails);    
+    const rendeImages = () => {
+        if (Object.entries(product).length !== 0) {
+            return (
+                product.images.map((e) => {
+                    return (
+                        <div className="body">
+                           <img className="zoom image" src={require(`../../assets/imageProduct/${e.name}`).default} data-zoom={require(`../../assets/imageProduct/${e.name}`).default} />
+                        </div>
+                    )
+                })
+            )
+        }
+
+    }
+
     return (
         <div className="productscreen">
             <Link type="backHome" to="/">
@@ -21,8 +39,7 @@ export default function ProductView() {
 
             <div className="productscreen__left">
                 <div className="left__image">
-               
-                    <img src={require(`../../assets/imageProduct/${imageName}`).default} />
+                    {rendeImages()}
                 </div>
                 <div className="left__info">
                     <p className="left__name"> {product.name}</p>

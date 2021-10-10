@@ -8,12 +8,11 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import getAddToCart from "../../stateManagement/actions/getAddToCart"
-import getRemoveItem from "../../stateManagement/actions/getRemoveItem"
-//import { useStateValue } from "../../StateProvider";
+import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
 import accounting from "accounting";
-//import { actionTypes } from "../../stateManagement/reducer/checkoutReducer";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch } from "react-redux";
+//{require(`../../assets/imageProduct/${e.name}`).default}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,28 +41,20 @@ export default function CheckoutCard({
     product, key
 }) {
 
-    console.log(product, "Productos en el Carrito")
     const { id, name, price, image, rating, stock, description } = product;
     const classes = useStyles();
-    const [expanded, setExpanded] = useState(false);
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
+    const rendeImages = () => {
+        if (Object.entries(product).length !== 0) {
+            console.log("aca ba el codigo ", product);
+            // return (
+            //     console.log("prueba ", product.images[0])
+                
+            // )
+        }
 
-    /* var { basket } = useSelector(state => state.checkoutReducer)
- 
-     const dispatch = useDispatch();
-     const idCart = basket.map((e) => {
-         return { value: e.id }
-     })
-     /*const addToCart = () => {
-         dispatch(getAddToCart(idCart));
- 
-     }*/
-    //const CheckoutCard = ({ product: { id, name, image, price } }) => {
-    //const classes = useStyles();
-    //const [/*{ basket}*/dispatch] = useStateValue();
+    }
+   
 
     const dispatch = useDispatch();
     const RemoveItem = (event, id) => {
@@ -72,11 +63,10 @@ export default function CheckoutCard({
     };
 
     return (
-        // <Card className={classes.root}>
         <tr className="table-row table-row--chris">
         
             <td className="table-row__td">
-                
+                {rendeImages()}
                     <img className="table-row__img" src="https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="not image"/>
                
                 <div className="table-row__info">
@@ -126,7 +116,6 @@ export default function CheckoutCard({
             </td>
 
         </tr>
-    // </Card >
 
     );
 };
