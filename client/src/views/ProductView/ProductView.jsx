@@ -54,7 +54,7 @@ export default function ProductView() {
 
     return (
         <div className="productscreen">
-            <Link type="backHome" to="/">
+            <Link type="backHome" to="/catalogue">
                 <button>Back home</button>
             </Link>
 

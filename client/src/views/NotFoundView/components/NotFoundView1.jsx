@@ -1,11 +1,10 @@
 import '../../../styles/styleNotFound.css';
-
+import { Link } from "react-router-dom";
 
 export default function NotFoundView() {
 
     return (
         <div>
-            <h1>1</h1>
             <section className="page_404">
                 <div className="container">
                     <div className="row">
@@ -21,8 +20,7 @@ export default function NotFoundView() {
                                     </h3>
 
                                     <p>the page you are looking for not avaible!</p>
-
-                                    <a href="" className="link_404">Go to Home</a>
+                                    <Link to="/" className="link_404">Go to Home</Link>
                                 </div>
                             </div>
                         </div>
