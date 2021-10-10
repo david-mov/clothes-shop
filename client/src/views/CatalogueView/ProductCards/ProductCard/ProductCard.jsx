@@ -20,7 +20,7 @@ function ProductCard(props) {
         dispatch(getAddToCart(props));
     }
     
-    var nameImagen = "";
+    var nameImagen = "";    
     
     if(image !== undefined){
         nameImagen = "imageProduct/"+image.name;
@@ -28,23 +28,20 @@ function ProductCard(props) {
         nameImagen = "products/logo JK&A.png";
     }
 
-
-
     return (
         <div className="product">
-
-            <div className="product__name">
-                <p className="info__name">{name}</p>
-            </div>
             <img src={require(`../../../../assets/${nameImagen}`).default}
                 alt={nameImagen}
-
             />
             <div className="product__info">
                 <p className="info__name">{name}</p>
-                <p className="info__price">Price US${price}</p>
-                {/* <p className="info__description">Description: {description}</p> */}
-                <p className="info__stock">stock {stock}</p>
+                <p className="info__price">Price US: ${price}</p>
+                <p className="info__stock">stock: {stock}</p>
+                <p>Rating: {Array(rating)
+                            .fill()
+                            .map((_, i) => (
+                                <span>&#11088;</span>
+                            ))}</p>
                 <IconButton aria-label='Add to Cart'>
                     <AddShoppingCart fontSize='medium' onClick={(ev) => addToCart(ev)} />
                 </IconButton>

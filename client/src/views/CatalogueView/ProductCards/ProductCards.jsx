@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 const Product = () => {
  
     var { products } = useSelector(state => state.productsReducer)   
-
+    //aca el estado ratin
+    var rating = 5;
     return (
         <div className="homescreen__products">
 
@@ -16,6 +17,7 @@ const Product = () => {
                     description={e.description}
                     stock={e.stock}
                     productId={e.id}
+                    rating={rating}
                     image={e.images[0]}
                 />
             ))}
