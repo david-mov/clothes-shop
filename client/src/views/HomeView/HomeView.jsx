@@ -15,21 +15,86 @@ export default function HomeView() {
             ></img>
           </div>
         </Link>
-        <Link className="spanHomePrincipal" to="/catalogue">
-          <span>Catalogo</span>
-        </Link>
-        <Link className="spanHomePrincipal" to="#">
-          <span>About</span>
-        </Link>
-        <Link className="spanHomePrincipal" to="#">
-          <span> Login</span>
-        </Link>
-        <Link className="spanHomePrincipal" to="#">
-          <span> Signup</span>
-        </Link>
+        <div className="abaout">
+          <Link className="spanHomePrincipal" to="/catalogue">
+            <span>Catalogo</span>
+          </Link>
+          {/* <Link className="spanHomePrincipal" to="#">
+            <span>About</span>
+          </Link> */}
+          <Link className="spanHomePrincipal" to="/login">
+            <span> Login</span>
+          </Link>
+          <Link className="spanHomePrincipal" to="/signup">
+            <span> Signup</span>
+          </Link>
+        </div>
       </div>
-      <div>
-        <h1>Cuerpo</h1>
+      <div className="container">
+        <h1 className="titulo">Home</h1>
+        <div className="container_about">
+          <img
+            className="imgHomePrincipal"
+            src={require("../../assets/products/imagen_2.jpg").default}
+            alt="No encontrada"
+          />
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Reprehenderit necessitatibus, id voluptas quidem in et omnis illo
+            soluta libero quia a, ex suscipit minus possimus nostrum aperiam
+            deleniti illum quas. Lorem ipsum dolor, sit amet consectetur
+            adipisicing elit. Reprehenderit necessitatibus, id voluptas quidem
+            in et omnis illo soluta libero quia a, ex suscipit minus possimus
+            nostrum aperiam deleniti illum quas.
+          </p>
+          <img
+            className="imgHomePrincipal"
+            src={require("../../assets/products/imagen_2.jpeg").default}
+            alt="Not found"
+          />
+
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Reprehenderit necessitatibus, id voluptas quidem in et omnis illo
+            soluta libero quia a, ex suscipit minus possimus nostrum aperiam
+            deleniti illum quas. Lorem ipsum dolor, sit amet consectetur
+            adipisicing elit. Reprehenderit necessitatibus, id voluptas quidem
+            in et omnis illo soluta libero quia a, ex suscipit minus possimus
+            nostrum aperiam deleniti illum quas.
+          </p>
+        </div>
+      </div>
+      <div className="container">
+        <div className="container_about">
+          <img
+            className="imgHomePrincipal"
+            src={require("../../assets/products/imagen_2.jpg").default}
+            alt="No encontrada"
+          />
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Reprehenderit necessitatibus, id voluptas quidem in et omnis illo
+            soluta libero quia a, ex suscipit minus possimus nostrum aperiam
+            deleniti illum quas. Lorem ipsum dolor, sit amet consectetur
+            adipisicing elit. Reprehenderit necessitatibus, id voluptas quidem
+            in et omnis illo soluta libero quia a, ex suscipit minus possimus
+            nostrum aperiam deleniti illum quas.
+          </p>
+          <img
+            className="imgHomePrincipal"
+            src={require("../../assets/products/imagen_2.jpeg").default}
+            alt="Not found"
+          />
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+            Reprehenderit necessitatibus, id voluptas quidem in et omnis illo
+            soluta libero quia a, ex suscipit minus possimus nostrum aperiam
+            deleniti illum quas. Lorem ipsum dolor, sit amet consectetur
+            adipisicing elit. Reprehenderit necessitatibus, id voluptas quidem
+            in et omnis illo soluta libero quia a, ex suscipit minus possimus
+            nostrum aperiam deleniti illum quas.
+          </p>
+        </div>
       </div>
     </div>
   );
