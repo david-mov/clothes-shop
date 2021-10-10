@@ -3,10 +3,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
-//import { useStateValue } from "../../../StateProvider"
 import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
 import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
-import ProductCard from '../ProductCards/ProductCard/ProductCard';
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -21,13 +19,9 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckoutPage = () => {
     const classes = useStyles();
-    //const [{ basket }, dispatch] = useStateValue();
     var { basket } = useSelector(state => state.checkoutReducer)
-    console.log(basket, "Linea 100")
-    /*var { products } = useSelector(state => state.productsReducer)*/
     function FormRow() {
         return (
-            // <React.Fragment>
             <div className="container">
                 <div className="row row--top-20">
                     <div className="col-md-12">
@@ -45,7 +39,7 @@ const CheckoutPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="table__tbody">
-
+                
                                     {basket?.map((product) => (
 
                                         <CheckoutCard key={product.id} product={product} />

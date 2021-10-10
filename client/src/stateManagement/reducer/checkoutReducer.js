@@ -1,37 +1,21 @@
 const initialState = {
   basket: [],
-  //user: null,
-  //shippingData: {},
-  //paymentMessage: "",
+  contadorState: []
 };
 
 
-
-export const getBasketTotal = (basket) =>
-  basket?.reduce((amount, item) => item.price + amount, 0);
-
 const checkoutReducer = (state = initialState, action) => {
-  console.log(action, "linea 20");
   switch (action.type) {
     case "ADD_TO_BASKET":
-      console.log(action.payload, "Linea 22")
       return {
         ...state,
-        basket: [...state.basket, action.payload],
+        basket: [...state.basket, action.payload]
       };
     case "REMOVE_ITEM":
-      const index = state.basket.findIndex(
-        (basketItem) => basketItem.id === action.payload
-      );
-      let newBasket = [...state.basket];
-      if (index >= 0) {
-        newBasket.splice(index, 1);
-      } else {
-        console.log(`Cant remove product (id: ${action.payload})!`);
-      }
+      console.log("ACA ESTOY", action.payload)
       return {
         ...state,
-        basket: newBasket,
+        basket:  state.basket.filter(e => e.productId !== action.payload)
       };
     case "EMPTY_BASKET":
       return {
@@ -53,6 +37,12 @@ const checkoutReducer = (state = initialState, action) => {
         ...state,
         paymentMessage: action.paymentMessage,
       };
+      case "GET_CONTADOR":
+        console.log("EL REDUCER CONTADOR", state.contador)
+        return {
+          ...state,
+          contadorState: action.payload
+        }
     default:
       return state;
   }

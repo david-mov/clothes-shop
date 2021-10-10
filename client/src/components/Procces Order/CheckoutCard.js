@@ -8,12 +8,13 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import getAddToCart from "../../stateManagement/actions/getAddToCart"
-import getRemoveItem from "../../stateManagement/actions/getRemoveItem"
-//import { useStateValue } from "../../StateProvider";
+import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
 import accounting from "accounting";
-//import { actionTypes } from "../../stateManagement/reducer/checkoutReducer";
 import { makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import getContador from "../../stateManagement/actions/getContador"
+
+//{require(`../../assets/imageProduct/${e.name}`).default}
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 0,
-        paddingTop: "56.25%", // 16:9
+        paddingTop: "56.25%", 
     },
     cardActions: {
         display: "flex",
@@ -41,43 +42,38 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckoutCard({
     product, key
 }) {
-
-    console.log(product, "Productos en el Carrito")
-    const { id, name, price, image, rating, stock, description } = product;
+    const basket = useSelector(state => state.checkoutReducer.basket)
+    var [contador, setContador] = useState(1)
+    const dispatch = useDispatch()
+    
+    const { productId, name, price, image, rating, stock } = product;
+    
     const classes = useStyles();
-    const [expanded, setExpanded] = useState(false);
+    
+    const onChangeContador = async(e) => {
+       await((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
+    }
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    
+    
+    const RemoveItem = (event, productId) => {
+        event.preventDefault();        
+        dispatch(getRemoveItem(productId));
     };
 
-    /* var { basket } = useSelector(state => state.checkoutReducer)
- 
-     const dispatch = useDispatch();
-     const idCart = basket.map((e) => {
-         return { value: e.id }
-     })
-     /*const addToCart = () => {
-         dispatch(getAddToCart(idCart));
- 
-     }*/
-    //const CheckoutCard = ({ product: { id, name, image, price } }) => {
-    //const classes = useStyles();
-    //const [/*{ basket}*/dispatch] = useStateValue();
+    var nameImagen = "";
 
-    const dispatch = useDispatch();
-    const RemoveItem = (event, id) => {
-        event.preventDefault();
-        dispatch(getRemoveItem(id));
-    };
+    if(image !== undefined){
+        nameImagen = "imageProduct/"+image.name;
+    }else{
+        nameImagen = "products/logo JK&A.png";
+    }
 
     return (
-        // <Card className={classes.root}>
         <tr className="table-row table-row--chris">
         
             <td className="table-row__td">
-                
-                    <img className="table-row__img" src="https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="not image"/>
+                    <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image"/>
                
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>
@@ -92,7 +88,7 @@ export default function CheckoutCard({
             </td>
 
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">12</p>
+                <p className="table-row__progress status--blue status">{contador}</p>
             </td>
 
             <td data-column="Progress" className="table-row__td">
@@ -113,12 +109,12 @@ export default function CheckoutCard({
 
             </td>
             <td className="table-row__td">
-               {/* aca van los botones de aumentar y disminuir */}
-
+               <button value="-" onClick={onChangeContador}>+</button>
+               <button value="+" onClick={onChangeContador}>-</button>
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    
-                    <IconButton onClick={(event) => RemoveItem(event, id)}>
+                    <IconButton onClick={(event) => RemoveItem(event, productId)}>
                         <DeleteIcon fontSize='large' />
                     </IconButton>
                 </CardActions>
@@ -126,7 +122,7 @@ export default function CheckoutCard({
             </td>
 
         </tr>
-    // </Card >
+
 
     );
 };

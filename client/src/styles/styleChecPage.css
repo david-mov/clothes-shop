@@ -67,8 +67,8 @@ GENERAL
 }
 
 .table-row__img{
-   width: 50px;
-    height: 50px;
+   width: 100px;
+    height: 100px;
     display: inline-block;
     border-radius: 50%;
    vertical-align: middle;
