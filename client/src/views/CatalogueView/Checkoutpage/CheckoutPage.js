@@ -1,5 +1,5 @@
 import '../../../styles/styleChecPage.css';
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckoutPage = () => {
+
+    const [Quantity, setQuantity] = useState()
     const classes = useStyles();
     //const [{ basket }, dispatch] = useStateValue();
     var { basket } = useSelector(state => state.checkoutReducer)
@@ -45,10 +47,9 @@ const CheckoutPage = () => {
                                 </thead>
                                 <tbody className="table__tbody">
                 
-                                    {basket?.map((product) => (
-
+                                     {basket?.map((product) => (
+                                        basket.includes(product.productId) ? setQuantity(Quantity+1) :
                                         <CheckoutCard key={product.id} product={product} />
-
                                     ))}
 
                                 </tbody>
