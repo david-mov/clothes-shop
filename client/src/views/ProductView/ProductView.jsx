@@ -20,9 +20,9 @@ export default function ProductView() {
 
     var nameImagen = "";
     const rendeImages = () => {
-        if (product.images !== undefined || product.images.length !== 0) {
+        if (product.images !== undefined) {
 
-            if ( product.images !== undefined && product.images.length !== 0) {
+            if (product.images.length !== 0) {
                 
                 return (
                     product.images.map((e) => {
