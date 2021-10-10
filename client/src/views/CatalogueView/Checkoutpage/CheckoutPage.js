@@ -23,7 +23,6 @@ const CheckoutPage = () => {
     const classes = useStyles();
     //const [{ basket }, dispatch] = useStateValue();
     var { basket } = useSelector(state => state.checkoutReducer)
-    console.log(basket, "Linea 100")
     /*var { products } = useSelector(state => state.productsReducer)*/
     function FormRow() {
         return (
@@ -45,7 +44,7 @@ const CheckoutPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="table__tbody">
-
+                
                                     {basket?.map((product) => (
 
                                         <CheckoutCard key={product.id} product={product} />

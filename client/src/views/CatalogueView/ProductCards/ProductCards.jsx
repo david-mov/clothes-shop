@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 const Product = () => {
 
     var { products } = useSelector(state => state.productsReducer)
-    console.log(products, "ID")
     return (
         <div className="homescreen__products">
 

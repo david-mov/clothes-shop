@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: 0,
-        paddingTop: "56.25%", // 16:9
+        paddingTop: "56.25%", 
     },
     cardActions: {
         display: "flex",
@@ -41,7 +41,10 @@ export default function CheckoutCard({
     product, key
 }) {
 
-    const { id, name, price, image, rating, stock, description } = product;
+
+    console.log(product, "Productos en el Carrito")
+    const { productId, name, price, image, rating, stock, description } = product;
+
     const classes = useStyles();
 
     const rendeImages = () => {
@@ -53,13 +56,14 @@ export default function CheckoutCard({
             // )
         }
 
+
     }
-   
 
     const dispatch = useDispatch();
-    const RemoveItem = (event, id) => {
+    const RemoveItem = (event, productId) => {
         event.preventDefault();
-        dispatch(getRemoveItem(id));
+        console.log("desde checkout card", productId)
+        dispatch(getRemoveItem(productId));
     };
 
     return (
@@ -108,7 +112,7 @@ export default function CheckoutCard({
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    
-                    <IconButton onClick={(event) => RemoveItem(event, id)}>
+                    <IconButton onClick={(event) => RemoveItem(event, productId)}>
                         <DeleteIcon fontSize='large' />
                     </IconButton>
                 </CardActions>
@@ -116,6 +120,7 @@ export default function CheckoutCard({
             </td>
 
         </tr>
+
 
     );
 };

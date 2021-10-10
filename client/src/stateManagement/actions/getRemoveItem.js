@@ -1,15 +1,13 @@
 import { REMOVE_ITEM } from "../../consts/actionConsts";
 
 
-const getRemoveItem = (id) => {
-
+const getRemoveItem = (productId) => (dispatch) => {
+console.log("DESDE GETREMOVE", productId)
     try {
-        return {
+        return dispatch ({
             type: REMOVE_ITEM,
-            payload: id
-        }
-
-        /*dispatch ({ type: ADD_TO_BASKET, payload: id });*/
+            payload: productId
+        }) 
     } catch (err) {
         console.error(err);
     }

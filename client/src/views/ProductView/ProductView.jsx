@@ -15,6 +15,7 @@ export default function ProductView() {
     useEffect(() => {
         dispatch(getProductDetails(productId));
     }, [])
+
     const product = useSelector(state => state.productsReducer.productDetails);    
     const rendeImages = () => {
         if (Object.entries(product).length !== 0) {
