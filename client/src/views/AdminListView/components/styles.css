@@ -345,7 +345,9 @@ body {
   margin-bottom: 4px;
   text-align: center;
 }
-
+.button1 {
+  color: red;
+}
 .button2 {
   padding-left: 10px;
   color: black;

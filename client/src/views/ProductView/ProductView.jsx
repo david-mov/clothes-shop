@@ -24,11 +24,13 @@ export default function ProductView() {
                         alt={product.name}
                     />
                 </div>
-                <div className="left__info">
+            </div>
+            <div className='mirar'>
+                    <div className="left__info">
                     <p className="left__name"> {product.name}</p>
                     <p>Price: {product.price} U$D</p>
                     <p>Description: {product.description}</p>
-                </div>
+                     </div>
             </div>
             <div className="productscreen__right">
                 <div className="right__info">

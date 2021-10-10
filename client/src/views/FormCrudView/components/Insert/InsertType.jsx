@@ -37,10 +37,6 @@ const InsertTypes = () => {
     <div className="crud_form">
       <form>
         <div className="insertar">
-          <div>
-            <h3 className="h3_insert">Insert Types</h3>
-          </div>
-
           <div className="insert_label">
             <label className="label_Insert">Name</label>
             <input

@@ -36,9 +36,6 @@ const InsertSizes = () => {
     <div className="crud_form">
       <form>
         <div className="insertar">
-          <div>
-            <h3 className="h3_insert">Insert Size</h3>
-          </div>
           <div className="insert_label">
             <label className="label_Insert">Name</label>
             <input
