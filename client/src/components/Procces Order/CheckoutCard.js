@@ -42,36 +42,31 @@ export default function CheckoutCard({
 }) {
 
 
-    console.log(product, "Productos en el Carrito")
-    const { productId, name, price, image, rating, stock, description } = product;
-
+    
+    const { productId, name, price, image, rating, stock } = product;
+    
     const classes = useStyles();
-
-    const rendeImages = () => {
-        if (Object.entries(product).length !== 0) {
-            console.log("aca ba el codigo ", product);
-            // return (
-            //     console.log("prueba ", product.images[0])
-                
-            // )
-        }
-
-
-    }
-
+   
+    
     const dispatch = useDispatch();
     const RemoveItem = (event, productId) => {
-        event.preventDefault();
-        console.log("desde checkout card", productId)
+        event.preventDefault();        
         dispatch(getRemoveItem(productId));
     };
+
+    var nameImagen = "";
+
+    if(image !== undefined){
+        nameImagen = "imageProduct/"+image.name;
+    }else{
+        nameImagen = "products/logo JK&A.png";
+    }
 
     return (
         <tr className="table-row table-row--chris">
         
             <td className="table-row__td">
-                {rendeImages()}
-                    <img className="table-row__img" src="https://images.pexels.com/photos/428333/pexels-photo-428333.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="not image"/>
+                    <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image"/>
                
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>

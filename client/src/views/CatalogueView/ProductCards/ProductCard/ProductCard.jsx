@@ -5,7 +5,6 @@ import { AddShoppingCart } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
 import getAddToCart from "../../../../stateManagement/actions/getAddToCart"
-import { useSelector } from "react-redux";
 
 
 function ProductCard(props) {
@@ -14,6 +13,14 @@ function ProductCard(props) {
     const addToCart = () => {
         dispatch(getAddToCart(props));
     }
+    var nameImagen = "";
+    
+    if(image !== undefined){
+        nameImagen = "imageProduct/"+image.name;
+    }else{
+        nameImagen = "products/logo JK&A.png";
+    }
+
 
     return (
 
@@ -21,8 +28,8 @@ function ProductCard(props) {
             <div className="product__name">
                 <p className="info__name">{name}</p>
             </div>
-            <img src=/*{imageUrl}*/"https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
-                alt="Product Name" /*{name}*/
+            <img src={require(`../../../../assets/${nameImagen}`).default}
+                alt={nameImagen}
             />
 
             <div className="product__info">

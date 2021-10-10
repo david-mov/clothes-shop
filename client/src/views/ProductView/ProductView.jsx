@@ -16,18 +16,34 @@ export default function ProductView() {
         dispatch(getProductDetails(productId));
     }, [])
 
-    const product = useSelector(state => state.productsReducer.productDetails);    
+    const product = useSelector(state => state.productsReducer.productDetails);
+
+    var nameImagen = "";
     const rendeImages = () => {
-        if (Object.entries(product).length !== 0) {
-            return (
-                product.images.map((e) => {
-                    return (
-                        <div className="body">
-                           <img className="zoom image" src={require(`../../assets/imageProduct/${e.name}`).default} data-zoom={require(`../../assets/imageProduct/${e.name}`).default} />
-                        </div>
-                    )
-                })
-            )
+        if (product.images !== undefined || product.images.length !== 0) {
+
+            if ( product.images !== undefined && product.images.length !== 0) {
+                
+                return (
+                    product.images.map((e) => {
+                        nameImagen = "imageProduct/" + e.name;
+                        return (
+                            <div className="body">
+                                <img className="zoom image" src={require(`../../assets/${nameImagen}`).default} data-zoom={require(`../../assets/${nameImagen}`).default} />
+                            </div>
+                        )
+                    })
+                )
+            } else {
+                
+                nameImagen = "products/logo JK&A.png";
+                return (
+                    <div className="body">
+                        <img className="zoom image" src={require(`../../assets/${nameImagen}`).default} data-zoom={require(`../../assets/${nameImagen}`).default} />
+                    </div>
+                )
+            }
+
         }
 
     }
