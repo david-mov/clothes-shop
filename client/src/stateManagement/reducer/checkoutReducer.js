@@ -38,7 +38,6 @@ const checkoutReducer = (state = initialState, action) => {
         paymentMessage: action.paymentMessage,
       };
       case "GET_CONTADOR":
-        console.log("EL REDUCER CONTADOR", state.contador)
         return {
           ...state,
           contadorState: action.payload

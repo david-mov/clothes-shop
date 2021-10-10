@@ -50,8 +50,8 @@ export default function CheckoutCard({
     
     const classes = useStyles();
     
-    const onChangeContador = async(e) => {
-       await((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
+    const onChangeContador = (e) => {
+       ((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
     }
 
     
