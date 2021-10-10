@@ -1,9 +1,7 @@
 const initialState = {
-  basket: []
+  basket: [],
+  contadorState: []
 };
-
-
-
 
 
 const checkoutReducer = (state = initialState, action) => {
@@ -39,6 +37,12 @@ const checkoutReducer = (state = initialState, action) => {
         ...state,
         paymentMessage: action.paymentMessage,
       };
+      case "GET_CONTADOR":
+        console.log("EL REDUCER CONTADOR", state.contador)
+        return {
+          ...state,
+          contadorState: action.payload
+        }
     default:
       return state;
   }

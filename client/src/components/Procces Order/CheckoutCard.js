@@ -11,7 +11,9 @@ import getAddToCart from "../../stateManagement/actions/getAddToCart"
 import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
 import accounting from "accounting";
 import { makeStyles } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import getContador from "../../stateManagement/actions/getContador"
+
 //{require(`../../assets/imageProduct/${e.name}`).default}
 
 const useStyles = makeStyles((theme) => ({
@@ -40,15 +42,20 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckoutCard({
     product, key
 }) {
-
-
+    const basket = useSelector(state => state.checkoutReducer.basket)
+    var [contador, setContador] = useState(1)
+    const dispatch = useDispatch()
     
     const { productId, name, price, image, rating, stock } = product;
     
     const classes = useStyles();
-   
     
-    const dispatch = useDispatch();
+    const onChangeContador = async(e) => {
+       await((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
+    }
+
+    
+    
     const RemoveItem = (event, productId) => {
         event.preventDefault();        
         dispatch(getRemoveItem(productId));
@@ -81,7 +88,7 @@ export default function CheckoutCard({
             </td>
 
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">12</p>
+                <p className="table-row__progress status--blue status">{contador}</p>
             </td>
 
             <td data-column="Progress" className="table-row__td">
@@ -102,8 +109,8 @@ export default function CheckoutCard({
 
             </td>
             <td className="table-row__td">
-               {/* aca van los botones de aumentar y disminuir */}
-
+               <button value="-" onClick={onChangeContador}>+</button>
+               <button value="+" onClick={onChangeContador}>-</button>
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    
