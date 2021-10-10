@@ -8,7 +8,6 @@ import getAddToCart from "../../../../stateManagement/actions/getAddToCart"
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-
 function ProductCard(props) {
 
    const [contador, setContador] = useState(1) 
@@ -20,8 +19,7 @@ function ProductCard(props) {
         basket.find((e) => e.productId === productId) ? setTengo(true) : 
         dispatch(getAddToCart(props));
     }
-
-    console.log("ESTE ES EL CONTADOR", contador)
+    
     var nameImagen = "";
     
     if(image !== undefined){
@@ -31,19 +29,21 @@ function ProductCard(props) {
     }
 
 
-    return (
 
+    return (
         <div className="product">
+
             <div className="product__name">
                 <p className="info__name">{name}</p>
             </div>
             <img src={require(`../../../../assets/${nameImagen}`).default}
                 alt={nameImagen}
-            />
 
+            />
             <div className="product__info">
+                <p className="info__name">{name}</p>
                 <p className="info__price">Price US${price}</p>
-                <p className="info__description">Description: {description}</p>
+                {/* <p className="info__description">Description: {description}</p> */}
                 <p className="info__stock">stock {stock}</p>
                 <IconButton aria-label='Add to Cart'>
                     <AddShoppingCart fontSize='medium' onClick={(ev) => addToCart(ev)} />
@@ -52,7 +52,6 @@ function ProductCard(props) {
                     <h3 className="info__button">Detail</h3>
                 </Link>
             </div>
-
         </div>
     )
 }

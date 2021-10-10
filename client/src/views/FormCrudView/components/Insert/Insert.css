@@ -1,4 +1,5 @@
 .crud_form {
+  padding-top: 2rem;
   color: rgba(255, 255, 255, 0.548);
   display: flex;
   justify-content: center;
@@ -12,6 +13,32 @@
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+.Login {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  color: rgba(255, 255, 255, 0.548);
+  background: -webkit-linear-gradient(to right, #8ab9c5, #87c2f1);
+  padding: 2rem;
+  border-radius: 1rem;
+  /*** 1200px;**/
+  margin: 0 auto;
+  max-width: 700px;
+  min-height: 500px;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+@media (min-width: 768px) {
+  .Login_mail {
+    font-size: 1rem;
+  }
+}
+.Login_mail {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 0.4rem;
+  text-align: center;
+}
 .Link_insert {
   color: rgba(255, 255, 255, 0.781);
   text-decoration: none;
@@ -21,6 +48,11 @@
 }
 .Link_insert:hover {
   background-color: rgba(173, 233, 233, 0.753);
+}
+.Inser_Img {
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
 }
 @media (min-width: 768px) {
   .crud_form {

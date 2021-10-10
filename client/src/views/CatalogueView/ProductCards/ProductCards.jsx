@@ -1,9 +1,9 @@
-import React from 'react'
-import ProductCard from './ProductCard/ProductCard'
-import { useSelector } from 'react-redux'
+import React from "react";
+import ProductCard from "./ProductCard/ProductCard";
+import { useSelector } from "react-redux";
 
 const Product = () => {
-
+ 
     var { products } = useSelector(state => state.productsReducer)   
 
     return (
@@ -24,3 +24,4 @@ const Product = () => {
 }
 
 export default Product
+

@@ -123,7 +123,7 @@ const Insert = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
-    
+
     setErrors(
       validate({
         ...input,
@@ -157,9 +157,7 @@ const Insert = () => {
     <div>
       <form className="crud_form">
         <div className="insertar">
-          <div>
-            <h3 className="h3_insert">Insert Product</h3>
-          </div>
+          <div></div>
           <div className="insert_label">
             <label>Categories</label>
             <Select
