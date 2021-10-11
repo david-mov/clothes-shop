@@ -31,7 +31,9 @@ const CheckoutPage = () => {
                     <th className="table__th">Qty</th>
                     <th className="table__th">Progress</th>
                     <th className="table__th">Rating</th>
-                    <th className="table__th">aumentar y disminuir cantidad</th>
+                    <th className="table__th">
+                      Increase and decrease Quantity
+                    </th>
                     <th className="table__th"></th>
                   </tr>
                 </thead>

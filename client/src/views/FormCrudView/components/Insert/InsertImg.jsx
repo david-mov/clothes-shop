@@ -26,7 +26,7 @@ export default function AddImgProduct({ id, name }) {
     var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
     if (!allowedExtensions.exec(file.name)) {
       alert(
-        `"Please upload file having extensions .jpeg/.jpg/.png/.gif only, TU archivo es ${file.name}`
+        `"Please upload file having extensions .jpeg/.jpg/.png/.gif only, your file is ${file.name}`
       );
       file.value = "";
       return false;
