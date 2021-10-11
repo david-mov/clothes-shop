@@ -12,8 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 
 export default function ProductView() {
-    //aca el estado ratin
-    var rating = 5;
+    
     const { productId } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -24,12 +23,23 @@ export default function ProductView() {
     }, [])
 
     const product = useSelector(state => state.productsReducer.productDetails);
+
+    //aca el estado ratin Math.max(...product.ratings)
+    var rating = 1;
+    // if(Object.keys(product).length !== 0) {rating = 
+    //     product.ratings?.map((e) => {            
+    //         return rating = e.amount;
+    //     });
+    //     rating =  Math.max(...rating);
+    // ;}
+   
+    
     const [tengo, setTengo] = useState(false)
     const basket = useSelector(state => state.checkoutReducer.basket)
     const addToCart = () => {
         basket.find((e) => e.productId === productId) ? setTengo(true) : 
         dispatch(getAddToCart(product));
-    }
+    }    
 
     var nameImagen = "";
     const rendeImages = () => {

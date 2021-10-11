@@ -4,7 +4,16 @@ import { useSelector } from "react-redux";
 
 const Product = () => {
  
-    var { products } = useSelector(state => state.productsReducer)   
+    var { products } = useSelector(state => state.productsReducer);
+    //console.log("vvv", products) 
+    // if(products.length !== 0) {rating = 
+    //     products.ratings?.map((e) => {            
+    //         return rating = e.amount;
+    //     });
+    //     rating =  Math.max(...rating);
+    //     console.log("ratiiii", rating)
+    // ;} 
+
     //aca el estado ratin
     var rating = 5;
     return (
