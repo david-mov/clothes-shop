@@ -79,49 +79,52 @@ User.belongsTo(Rol,{
   }
 })
 
-Rating.hasMany(Product,{
+Product.hasMany(Rating,{
   foreignKey:{
       name: 'Rating_product'
   } 
 })
-Product.belongsTo(Rating,{
+Rating.belongsTo(Product,{
   foreignKey:{
       name: 'Rating_product'
   } 
 })
 
-Rating.hasMany(User,{
+User.hasMany(Rating,{
   foreignKey:{
-      name: 'user_Rating'
-  }
+      name: 'Rating_User'
+  } 
 })
-User.belongsTo(Rating,{
+Rating.belongsTo(User,{
   foreignKey:{
-      name: 'user_Rating'
-  }
+      name: 'Rating_User'
+  } 
 })
 
-View.hasMany(Product,{
+Product.hasMany(View,{
   foreignKey:{
       name: 'View_product'
   } 
 })
-Product.belongsTo(View,{
+View.belongsTo(Product,{
   foreignKey:{
       name: 'View_product'
   } 
 })
 
-View.hasMany(User,{
+User.hasMany(View,{
   foreignKey:{
-      name: 'user_View'
-  }
+      name: 'View_User'
+  } 
 })
-User.belongsTo(View,{
+View.belongsTo(User,{
   foreignKey:{
-      name: 'user_View'
-  }
+      name: 'View_User'
+  } 
 })
+
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

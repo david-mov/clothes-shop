@@ -1,19 +1,21 @@
 const { Rating, Product, User } = require('../db.js')
 
 const addRating = async (req, res, next) => {
-	const { idUser, idProduct } = req.params;
-    const {rating} = req.body;
+	
+    const {amount, Rating_User, Rating_product} = req.body;
+    console.log("data",amount, Rating_User, Rating_product)
 	try {
-		const addRating = await Rating.findOne({
-            rating,
-            idProduct,
-            idUser,			
+		const addRating = await Rating.create({
+            amount,
+            Rating_product,
+            Rating_User,			
         }, {include: [Product]
         }, {include: [User]})
 		res.json('Rating Add correctly');
 	}
 	catch (err) {
-		next(err);
+        console.log(err)
+		//next(err);
 	}
 }
  
