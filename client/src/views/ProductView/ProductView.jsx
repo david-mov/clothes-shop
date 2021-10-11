@@ -8,6 +8,8 @@ import "./ProductView.css";
 import "../../styles/styleDetallesCD.css";
 import { AddShoppingCart } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
+import { Badge } from "@material-ui/core";
+import { ShoppingCart } from "@material-ui/icons";
 
 export default function ProductView() {
   //aca el estado ratin
@@ -86,6 +88,19 @@ export default function ProductView() {
               </Link>
             </li>
           </ul>
+          <li className="saco">
+            <Link to="/CheckoutPage">
+              <IconButton aria-label="show cart items" color="inherit">
+                <Badge badgeContent={basket?.length} color="secondary">
+                  <ShoppingCart
+                    className="temp"
+                    fontSize="large"
+                    color="ligth"
+                  />
+                </Badge>
+              </IconButton>
+            </Link>
+          </li>
         </div>
       </div>
 
@@ -132,6 +147,7 @@ export default function ProductView() {
                 })}
               </select>
             </p>
+
             <p>
               <IconButton aria-label="Add to Cart">
                 <AddShoppingCart
