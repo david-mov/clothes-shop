@@ -25,7 +25,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomeView} />
         <Route exact path="/catalogue" component={CatalogueView} />
-        <Route exact path="/profile" component={ProfileView} />
+        <ProtectedRoute exact path="/profile" component={ProfileView} roles={[1,2,3]}/>
         <Route path="/create/product/" component={Insert} />
         <Route path="/create/category" component={InsertCategory} />
         <Route path="/create/size" component={InsertSize} />
@@ -37,7 +37,7 @@ function App() {
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} />
-        <ProtectedRoute exact path="/list" component={ListAdmin} roles={[1,2]} />
+        <Route exact path="/list" component={ListAdmin} />
         <Route path="/login" component={LoginView} />
         <Route path="/signup" component={SignupView} />
         <Route exact path="/addimage/:productId" component={AddImage} />
