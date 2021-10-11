@@ -17,7 +17,10 @@
   margin-bottom: 5px;
   font-weight: bold;
 }
-
+.img_product {
+  width: 250px;
+  height: 250px;
+}
 .product > img {
   width: 100%;
   object-fit: contain;
