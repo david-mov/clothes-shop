@@ -4,13 +4,16 @@ import {
 	GET_TYPE,
 	GET_FILTER_BY_PRICE,
 	GET_SEARCH,
-	GET_PRODUCT_DETAILS
+	GET_PRODUCT_DETAILS,
+	GET_UPDATE_PRODUCT_DETAILS,
+	CLEAN_DETAIL_P_OBGETO,
 } from '../../consts/actionConsts';
 
 const initialState = {
 	products: [],
 	productsCopy: [],
-	productDetails: {}
+	productDetails: {},
+	productUpdateDetails: {}
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -59,6 +62,18 @@ export default function productsReducer(state = initialState, action) {
 				return {
 					...state,
 					productDetails: action.payload
+				}
+			} 
+			case GET_UPDATE_PRODUCT_DETAILS: {
+				return {
+					...state,
+					productUpdateDetails: action.payload
+				}
+			}
+			case CLEAN_DETAIL_P_OBGETO: {
+				return {
+					...state,
+					productDetails: {}
 				}
 			}
 		default:

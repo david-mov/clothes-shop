@@ -6,17 +6,18 @@ import { getAllCategories } from "../../../../stateManagement/actions/getAllCate
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
 import "./Insert.css";
+import { Link } from "react-router-dom";
 
 const validate = (input) => {
   let errors = {};
   if (!input.name) {
     errors.name = "Required field enter a name";
   } else if (!input.price) {
-    errors.price = "Required field enter a Price";
+    errors.price = "Required field enter a Number";
   } else if (!input.description) {
     errors.description = "Required field enter a Description";
   } else if (!input.stock) {
-    errors.stock = "Required field enter a amount";
+    errors.stock = "Required field enter a Number";
   } else if (!input.color) {
     errors.color = "Required field enter a color";
   } else if (!input.valueSize) {
@@ -45,12 +46,12 @@ const Insert = () => {
     images: [],
   });
 
-  let categories = useSelector((state) => state.categories);
-  let sizes = useSelector((state) => state.sizes);
-  let types = useSelector((state) => state.types);
-  const [valueCate, setvalueCate] = useState(null);
-  const [valueSize, setvalueSize] = useState(null);
-  const [valueType, setvalueType] = useState(null);
+  let categories = useSelector((state) => state.categoriesReducer.categories);
+  let sizes = useSelector((state) => state.sizesReducer.sizes);
+  let types = useSelector((state) => state.typesReducer.types);
+  const [valueCate, setvalueCate] = useState();
+  const [valueSize, setvalueSize] = useState();
+  const [valueType, setvalueType] = useState();
   const [errors, setErrors] = useState({});
   const Options = categories.map((e) => {
     return {
@@ -87,18 +88,18 @@ const Insert = () => {
     });
   };
   const onSelectChangeNewSize = (valueSize) => {
-    var tipesEnv = "";
+    var sizesEnv = "";
     if (valueSize) {
-      tipesEnv = valueSize.map((e) => {
+      sizesEnv = valueSize.map((e) => {
         return e.value;
       });
     }
     setvalueSize(valueSize);
-    addSizes(tipesEnv);
+    addSizes(sizesEnv);
     setErrors(
       validate({
         ...input,
-        [valueSize.target.name]: valueSize.target.value,
+        sizes: valueSize,
       })
     );
   };
@@ -122,6 +123,7 @@ const Insert = () => {
       ...input,
       [e.target.name]: e.target.value,
     });
+
     setErrors(
       validate({
         ...input,
@@ -150,14 +152,12 @@ const Insert = () => {
       images: [],
     });
   };
-
+  console.log("datosss", input);
   return (
-    <div className="crud_form">
-      <form>
+    <div>
+      <form className="crud_form">
         <div className="insertar">
-          <div>
-            <h3 className="h3_insert">Insert Product</h3>
-          </div>
+          <div></div>
           <div className="insert_label">
             <label>Categories</label>
             <Select
@@ -197,34 +197,39 @@ const Insert = () => {
               value={input.name}
               onChange={handleChange}
             />
-            {errors.name && <p>{errors.name}</p>}
+            {errors.name && <p className="p">{errors.name}</p>}
             <label className="label_Insert">Price</label>
             <input
               className="form-control"
               name="price"
-              type="text"
+              type="number"
               value={input.price}
               onChange={handleChange}
+              step="1"
+              pattern="[0-9]+"
             />
-            {errors.price && <p>{errors.price}</p>}
+            {errors.price && <p className="p">{errors.price}</p>}
             <label className="label_Insert">Description</label>
-            <input
+            <textarea
               className="form-control"
               name="description"
               type="text"
               value={input.description}
+              pattern="[A-Za-z]{4-16}"
               onChange={handleChange}
             />
-            {errors.description && <p>{errors.description}</p>}
+            {errors.description && <p className="p">{errors.description}</p>}
             <label className="label_Insert">Stock</label>
             <input
               className="form-control"
               name="stock"
               type="number"
-              min="0"
-              onClick={handleChange}
+              value={input.stock}
+              step="1"
+              pattern="[0-9]+"
+              onChange={handleChange}
             />
-            {errors.stock && <p>{errors.stock}</p>}
+            {errors.stock && <p className="p">{errors.stock}</p>}
             <label className="label_Insert">Color</label>
             <input
               className="form-control"
@@ -233,22 +238,36 @@ const Insert = () => {
               value={input.color}
               onChange={handleChange}
             />
-            {errors.color && <p>{errors.color}</p>}
+            {errors.color && <p className="p">{errors.color}</p>}
           </div>
           <div className="crud_Form_Insert_cancelar">
             <button
               type="submit"
               className="crud_Form_Insert_cancelar_button"
               onClick={(e) => handleSubmit(e)}
+              disabled={
+                !(
+                  input.categories.length &&
+                  input.sizes.length &&
+                  input.name &&
+                  input.price &&
+                  input.stock &&
+                  input.description &&
+                  input.color &&
+                  input.type_product
+                )
+              }
             >
               Insert
             </button>
-            <button
-              className="crud_Form_Insert_cancelar_button_danger"
-              onClick={(e) => cerrarModalInsertar(e)}
-            >
-              Return
-            </button>
+            <Link to="/list">
+              <button
+                className="crud_Form_Insert_cancelar_button_danger"
+                onClick={(e) => cerrarModalInsertar(e)}
+              >
+                Return
+              </button>
+            </Link>
           </div>
         </div>
       </form>
