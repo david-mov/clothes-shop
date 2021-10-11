@@ -4,11 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
-import { getUpdateProductDetails } from '../../../../stateManagement/actions/getUpdatePDetail'
 import "./update.css";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory,} from "react-router-dom";
 import {putProduct} from "../../../../stateManagement/actions/putProduct";
-import { cleanUpdate } from "../../../../stateManagement/actions/CleanPutUpdate";
+
 
 
 const validate = (input) => {
@@ -27,102 +26,70 @@ const validate = (input) => {
     errors.stock = "Required field enter a amount";
   } else if (!input.color) {
     errors.color = "Required field enter a color";
-  }  
+  }
   return errors;
 };
 
 
-const Update = () => {
+const Update = ({name, categories, price, description, color, sizes, type, type_product, stock, productId}) => {
+
+  
+
  const dispatch = useDispatch();
-  useEffect(() => {  
-     
-    dispatch(getUpdateProductDetails(productId))      
-  }, [dispatch]);
+ const history = (useHistory())
 
-  
   useEffect(() => {
-    dispatch(getAllCategories());    
-  }, [dispatch]);
 
-  useEffect(() => {    
+    dispatch(getAllCategories());
     dispatch(getAllsizes());
-    
+    dispatch(getAllTypes());
+
   }, [dispatch]);
 
-  useEffect(() => {   
-    dispatch(getAllTypes());       
-  }, [dispatch]);
 
- 
-
-  
-
-
-  useEffect( () => {
-    const get = async () => {
-      await dispatch(getUpdateProductDetails(productId)) 
-    } 
-    get()
-        
-	},[dispatch])
-
-  const { productId } = useParams();
-
-  const product = useSelector(state => state.productsReducer.productUpdateDetails);
-  console.log("data desde el detalle de update", product)
-
-  const history = (useHistory())
-  
-
-
-
-  // console.log("*********************************************", mapCategories)
   let categoriess = useSelector((state) => state.categoriesReducer.categories);
   let sizess = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
 
-  console.log("TYPES")
 
-  const mapCategories = product.categories ? product.categories.map((e) => ({
+  const mapCategories = categories.map((e) => ({
     value: e.id,
     label: e.name,
-  })):null;
+  }));
 
-  const mapSizes = product.sizes ? product.sizes.map((e) => ({
+  const mapSizes = sizes.map((e) => ({
     value: e.id,
     label: e.name,
-  })): null;
+  }));
 
   let nombreType = "";
   types.forEach(e => {
-    if(e.id === product.type_product) {
+    if(e.id === type_product) {
       nombreType = e.name
     }
   });
- 
-  console.log("sizess", sizess)
-  const mapType = { value: product.type_product, label: nombreType };
 
-  
+  const mapType = { value: type_product, label: nombreType };
+
 
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
   const [valueType, setvalueType] = useState(mapType);
 
   const [input, setInput] = useState({
-    name: product ? product.name :null,
-    description:product ? product.description :null,
-    color: product ? product.color :null,    
-    stock: product ? product.stock :null,
-    type_product: product ? product.type_product :null,
+    name,
+    description,
+    color,
+    stock,
+    type_product,
+    type:valueType,
     categories: valueCate,
     sizes: valueSize,
-    price: product ? product.price:null
-  })
+    price
+    }); 
+
   const [errors, setErrors] = useState({});
 
-
- 
 
   const Options = categoriess.map((e) => {
     return {
@@ -130,12 +97,14 @@ const Update = () => {
       label: e.name,
     };
   });
+
   const Optionsize = sizess.map((e) => {
     return {
       value: e.id,
       label: e.name,
     };
   });
+
   const OptionType = types.map((e) => {
     return {
       value: e.id,
@@ -144,53 +113,68 @@ const Update = () => {
   });
 
   const handleChange = (e) => {
+
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
+
     setErrors(validate({
       ...input,
       [e.target.name]: e.target.value
     }))
+
   };
 
   const onSelectChangeNew = (valueCate) => {
+
     let tipesEnv = "";
+
     if (valueCate) {
       tipesEnv = valueCate.map((e) => {
         return e.value;
       });
     }
+    
     setvalueCate(valueCate);
     addcategories(tipesEnv);
+
   };
 
   const addcategories = (tipesEnv) => {
+
     setInput({
       ...input,
       categories: tipesEnv,
     });
+
   };
 
   const onSelectChangeNewSize = (valueSize) => {
+
     let tipesEnv = "";
+
     if (valueSize) {
       tipesEnv = valueSize.map((e) => {
         return e.value;
       });
     }
+
     setvalueSize(valueSize);
     addSizes(tipesEnv);
+
   };
 
   const addSizes = (tipesEnv) => {
+
     setInput({
       ...input,
       sizes: tipesEnv,
     });
+
   };
 
-  const onSelectChangeNewType = (valueType) => {  
+  const onSelectChangeNewType = (valueType) => {
 
     setInput({
       ...input,
@@ -198,9 +182,11 @@ const Update = () => {
     });
 
     setvalueType(valueType);
+
   };
 
   const handleSubmit = (e) => {
+    
       e.preventDefault()
 
       let mapCategorie = input.categories.map(e => e.value);
@@ -209,38 +195,43 @@ const Update = () => {
       let obj = {
         name: input.name,
         description: input.description,
-        color:input.color,
-        image:input.image,
+        color:input.color,        
         stock:input.stock,
         type_product:input.type_product,
         categories: mapCategorie,
         sizes: mapSizes,
         price:input.price
       }
-      
+
 
       dispatch(putProduct(productId,obj));
-      
-      
-      console.log("OBJ",obj);
-      
-      setInput({name:"fran"})
-      console.log("INPUT",input)
-      
-      // alert("Successfully edited product")
-      // history.push("/list");
 
-    
+      setInput({
+        name: "",
+        description: "",
+        color:"",        
+        stock:0,
+        type_product:"",
+        categories: [],
+        sizes: [],
+        price:0
+      })
 
-    
+      alert("Successfully edited product")
+
+      history.push("/list");
+
   };
 
   const cerrarModalInsertar = () => {
-    setInput({})    
+
+    setInput({})
+
     history.push("/list")
+    
   };
 
-  console.log(input);
+  
 
   return (
     <div className="crud_form">
@@ -300,7 +291,7 @@ const Update = () => {
               className="form-control"
               name="price"
               type="number"
-              min= "0"              
+              min= "0"
               onChange={handleChange}
               value={input.price}
             />
@@ -315,7 +306,7 @@ const Update = () => {
               value={input.description}
             />
             {errors.description && <p className ="error">{errors.description}</p>}
-            
+
             <label className="label_Insert">Stock:</label>
             <input
               className="form-control"
@@ -339,17 +330,17 @@ const Update = () => {
             <label className="label_Insert">Image:</label>
           </div>
           <div className="crud_Form_Insert_cancelar">
-            <button 
-            className="crud_Form_Insert_cancelar_button" 
+            <button
+            className="crud_Form_Insert_cancelar_button"
             type="submit"
-            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes && input.categories && input.price)}>
+            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
               Editar
             </button>
             <button
               className="crud_Form_Insert_cancelar_button_danger"
               onClick={(e) => cerrarModalInsertar(e)}
             >
-              Cancel
+              Return  
             </button>
           </div>
         </div>

@@ -6,7 +6,7 @@ import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
 import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from "./views/CatalogueView/CatalogueView";
-import UpdateProduct from "./views/FormCrudView/components/Update/UpdateProduct";
+import UpdateProduct from "./views/FormCrudView/FormUpdateView";
 import Insert from "./views/FormCrudView/components/Insert/Insert";
 import InsertCategory from "./views/FormCrudView/components/Insert/InsertCategory";
 import InsertSize from "./views/FormCrudView/components/Insert/InsertSize";
