@@ -6,14 +6,14 @@ import "../FormCrudView/components/Insert/Insert.css";
 
 function LoginView() {
   const dispatch = useDispatch();
-  const [state, setState] = useState();
+  const [state, setState] = useState({});
 
   const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(postLogin(state));
   };
 
-  const HandleChange = (e) => {
+  const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -53,16 +53,16 @@ function LoginView() {
           type="email"
           name="email"
           placeholder="email"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <input
           className="Login_mail"
           type="password"
           name="password"
           placeholder="password"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
-        <button type="submit">login</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
