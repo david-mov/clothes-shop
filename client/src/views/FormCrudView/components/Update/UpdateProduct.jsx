@@ -4,14 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
-import { getUpdateProductDetails } from "../../../../stateManagement/actions/getUpdatePDetail";
 import "./update.css";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory,} from "react-router-dom";
+import {putProduct} from "../../../../stateManagement/actions/putProduct";
 
 const validate = (input) => {
   let errors = {};
-  if (!input.categories.length) {
-    errors.categories = "Required field";
+
+  if(!input.categories) {
+    errors.categories = "Required field"
+
   } else if (!input.valueSize) {
     errors.sizes = "Required field enter a size";
   } else if (!input.name) {
@@ -25,52 +27,30 @@ const validate = (input) => {
   } else if (!input.color) {
     errors.color = "Required field enter a color";
   }
-  if (!input.categories.length) {
-    errors.categories = "Required field";
-  }
   return errors;
 };
 
-const Update = ({
-  id = 1,
-  name = "rodri",
-  price = 200,
-  description = "sads",
-  color = "rojo",
-  stock = 1,
-  type_product = 2,
-  type = {
-    name: "pantalon",
-  },
-  categories = [
-    { id: 2, name: "futbol" },
-    { id: 5, name: "elegante" },
-    { id: 4, name: "sport" },
-  ],
-  sizes = [
-    { id: 1, name: "big" },
-    { id: 2, name: "medium" },
-  ],
-}) => {
-  const dispatch = useDispatch();
+
+
+const Update = ({name, categories, price, description, color, sizes, type, type_product, stock, productId}) => {
+
+  
+
+ const dispatch = useDispatch();
+ const history = (useHistory());
+
   useEffect(() => {
+
     dispatch(getAllCategories());
     dispatch(getAllsizes());
     dispatch(getAllTypes());
-    dispatch(getUpdateProductDetails(productId));
-    // dispatch(putProduct())
+
+
   }, [dispatch]);
 
-  const { productId } = useParams();
-
-  const product = useSelector(
-    (state) => state.productsReducer.productUpdateDetails
-  );
-  console.log("data desde el detalle de update", product);
 
   const history = useHistory();
 
-  // console.log("*********************************************", mapCategories)
   let categoriess = useSelector((state) => state.categoriesReducer.categories);
   let sizess = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
@@ -85,8 +65,15 @@ const Update = ({
     label: e.name,
   }));
 
-  const mapType = { value: type_product, label: type.name };
+  let nombreType = "";
+  types.forEach(e => {
+    if(e.id === type_product) {
+      nombreType = e.name
+    }
+  });
 
+  const mapType = { value: type_product, label: nombreType };
+  
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
   const [valueType, setvalueType] = useState(mapType);
@@ -97,10 +84,12 @@ const Update = ({
     color,
     stock,
     type_product,
+    type:valueType,
     categories: valueCate,
     sizes: valueSize,
-    price,
-  });
+    price
+    }); 
+
   const [errors, setErrors] = useState({});
 
   const Options = categoriess.map((e) => {
@@ -109,12 +98,14 @@ const Update = ({
       label: e.name,
     };
   });
+
   const Optionsize = sizess.map((e) => {
     return {
       value: e.id,
       label: e.name,
     };
   });
+
   const OptionType = types.map((e) => {
     return {
       value: e.id,
@@ -123,95 +114,125 @@ const Update = ({
   });
 
   const handleChange = (e) => {
+
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }))
   };
 
   const onSelectChangeNew = (valueCate) => {
+
     let tipesEnv = "";
+
     if (valueCate) {
       tipesEnv = valueCate.map((e) => {
         return e.value;
       });
     }
+    
     setvalueCate(valueCate);
     addcategories(tipesEnv);
+
   };
 
   const addcategories = (tipesEnv) => {
+
     setInput({
       ...input,
       categories: tipesEnv,
     });
+
   };
 
   const onSelectChangeNewSize = (valueSize) => {
+
     let tipesEnv = "";
+
     if (valueSize) {
       tipesEnv = valueSize.map((e) => {
         return e.value;
       });
     }
+
     setvalueSize(valueSize);
     addSizes(tipesEnv);
+
   };
 
   const addSizes = (tipesEnv) => {
+
     setInput({
       ...input,
       sizes: tipesEnv,
     });
+
   };
 
   const onSelectChangeNewType = (valueType) => {
+
     setInput({
       ...input,
-      type_Product: valueType.value,
+      type_product: valueType.value,
     });
 
     setvalueType(valueType);
+
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    let mapCategorie = input.categories.map((e) => e.value);
-    let mapSizes = input.sizes.map((e) => e.value);
+  const handleSubmit = (e) => {
+    
+      e.preventDefault()
 
-    let obj = {
-      name: input.name,
-      description: input.description,
-      color: input.color,
-      image: input.image,
-      stock: input.stock,
-      type_product: input.type_product,
-      categories: mapCategorie,
-      sizes: mapSizes,
-      price: input.price,
-    };
+      let mapCategorie = input.categories.map(e => e.value);
+      let mapSizes = input.sizes.map(e => e.value);
 
-    // dispatch(putProduct(obj));
+      let obj = {
+        name: input.name,
+        description: input.description,
+        color:input.color,        
+        stock:input.stock,
+        type_product:input.type_product,
+        categories: mapCategorie,
+        sizes: mapSizes,
+        price:input.price
+      }
 
-    console.log("OBJ", obj);
-    console.log("INPUT", input);
 
-    alert("Successfully edited product");
-    history.push("/list");
+      dispatch(putProduct(productId,obj));
+
+      setInput({
+        name: "",
+        description: "",
+        color:"",        
+        stock:0,
+        type_product:"",
+        categories: [],
+        sizes: [],
+        price:0
+      })
+
+      alert("Successfully edited product")
+
+      history.push("/list");
+
   };
 
   const cerrarModalInsertar = () => {
-    history.push("/list");
+
+    setInput({})
+
+    history.push("/list")
+    
   };
 
-  console.log(input);
+  
 
   return (
     <div className="crud_form">
@@ -228,7 +249,7 @@ const Update = ({
           <div className="insert_label">
             <div className="labelUpdate">
               <label className="labelUpdate_label">Categories</label>
-              <input name="categories" type="text" value={id} readOnly />
+              <input name="categories" type="text" value={productId} readOnly />
             </div>
             <Select
               name="categories"
@@ -271,7 +292,7 @@ const Update = ({
               className="form-control"
               name="price"
               type="number"
-              min="0"
+              min= "0"
               onChange={handleChange}
               value={input.price}
             />
@@ -285,9 +306,8 @@ const Update = ({
               onChange={handleChange}
               value={input.description}
             />
-            {errors.description && (
-              <p className="error">{errors.description}</p>
-            )}
+
+            {errors.description && <p className ="error">{errors.description}</p>}
 
             <label className="label_Insert">Stock:</label>
             <input
@@ -313,28 +333,18 @@ const Update = ({
           </div>
           <div className="crud_Form_Insert_cancelar">
             <button
-              className="crud_Form_Insert_cancelar_button"
-              type="submit"
-              disabled={
-                !(
-                  input.name &&
-                  input.description &&
-                  input.color &&
-                  input.stock &&
-                  input.type_product &&
-                  input.sizes.length &&
-                  input.categories.length &&
-                  input.price
-                )
-              }
-            >
+
+            className="crud_Form_Insert_cancelar_button"
+            type="submit"
+            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
+
               Editar
             </button>
             <button
               className="crud_Form_Insert_cancelar_button_danger"
               onClick={(e) => cerrarModalInsertar(e)}
             >
-              Cancel
+              Return  
             </button>
           </div>
         </div>
