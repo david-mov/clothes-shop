@@ -6,6 +6,7 @@ const FormCrudView = () => {
   return (
     <div>
       <UpdateCategories />
+
     </div>
   );
 };

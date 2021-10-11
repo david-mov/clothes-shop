@@ -185,10 +185,17 @@ body {
 }
 
 .status--green {
-  color: #6cdb56;
+  color: #266818;
 }
 .status--green:before {
   background-color: #6cdb56;
+}
+.status--red {
+  color: #9c2525;
+}
+
+.status--red:before {
+  background-color: #8d3838;
 }
 
 .status--grey {
@@ -338,7 +345,9 @@ body {
   margin-bottom: 4px;
   text-align: center;
 }
-
+.button1 {
+  color: red;
+}
 .button2 {
   padding-left: 10px;
   color: black;
@@ -373,4 +382,24 @@ body {
   padding-left: 15px;
   font-size: 20px;
   font-weight: 300;
+}
+
+.button {
+  border-radius: 10px;
+  background: #8e9eab;
+  background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);
+  background: linear-gradient(to right, #eef2f3, #8e9eab);
+  color: black;
+  font-size: 20px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.select-style {
+  border: grey;
+  color: black;
+  font-size: 10px;
+}
+.placeHolderSearch {
+  text-align: center;
 }

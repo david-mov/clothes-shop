@@ -8,19 +8,19 @@ import "./update.css";
 import { useHistory,} from "react-router-dom";
 import {putProduct} from "../../../../stateManagement/actions/putProduct";
 
-
-
 const validate = (input) => {
   let errors = {};
+
   if(!input.categories) {
     errors.categories = "Required field"
+
   } else if (!input.valueSize) {
     errors.sizes = "Required field enter a size";
   } else if (!input.name) {
     errors.name = "Required field enter a name";
-  } else if ((!input.price)) {
+  } else if (!input.price) {
     errors.price = "Required field. enter a value greater than zero";
-  } else if (!input.description ) {
+  } else if (!input.description) {
     errors.description = "Required field enter a Description";
   } else if (!input.stock) {
     errors.stock = "Required field enter a amount";
@@ -31,12 +31,13 @@ const validate = (input) => {
 };
 
 
+
 const Update = ({name, categories, price, description, color, sizes, type, type_product, stock, productId}) => {
 
   
 
  const dispatch = useDispatch();
- const history = (useHistory())
+ const history = (useHistory());
 
   useEffect(() => {
 
@@ -44,13 +45,15 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
     dispatch(getAllsizes());
     dispatch(getAllTypes());
 
+
   }, [dispatch]);
 
+
+  const history = useHistory();
 
   let categoriess = useSelector((state) => state.categoriesReducer.categories);
   let sizess = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
-
 
   const mapCategories = categories.map((e) => ({
     value: e.id,
@@ -70,8 +73,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
   });
 
   const mapType = { value: type_product, label: nombreType };
-
-
+  
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
   const [valueType, setvalueType] = useState(mapType);
@@ -89,7 +91,6 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
     }); 
 
   const [errors, setErrors] = useState({});
-
 
   const Options = categoriess.map((e) => {
     return {
@@ -123,7 +124,6 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
       ...input,
       [e.target.name]: e.target.value
     }))
-
   };
 
   const onSelectChangeNew = (valueCate) => {
@@ -184,6 +184,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
     setvalueType(valueType);
 
   };
+
 
   const handleSubmit = (e) => {
     
@@ -258,7 +259,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               onChange={(e) => onSelectChangeNew(e)}
             />
           </div>
-            {errors.categories && <p className="error">{errors.categories}</p>}
+          {errors.categories && <p className="error">{errors.categories}</p>}
           <div className="insert_label">
             <label>Zise</label>
             <Select
@@ -285,7 +286,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               onChange={handleChange}
               value={input.name}
             />
-            {errors.name && <p className ="error">{errors.name}</p>}
+            {errors.name && <p className="error">{errors.name}</p>}
             <label className="label_Insert">Price:</label>
             <input
               className="form-control"
@@ -295,7 +296,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               onChange={handleChange}
               value={input.price}
             />
-            {errors.price && <p className= "error">{errors.price}</p>}
+            {errors.price && <p className="error">{errors.price}</p>}
 
             <label className="label_Insert">Description:</label>
             <input
@@ -305,6 +306,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               onChange={handleChange}
               value={input.description}
             />
+
             {errors.description && <p className ="error">{errors.description}</p>}
 
             <label className="label_Insert">Stock:</label>
@@ -316,7 +318,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               onChange={handleChange}
               value={input.stock}
             />
-            {errors.stock && <p className = "error">{errors.stock}</p>}
+            {errors.stock && <p className="error">{errors.stock}</p>}
             <label className="label_Insert">Color:</label>
             <input
               className="form-control"
@@ -331,9 +333,11 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
           </div>
           <div className="crud_Form_Insert_cancelar">
             <button
+
             className="crud_Form_Insert_cancelar_button"
             type="submit"
             disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
+
               Editar
             </button>
             <button

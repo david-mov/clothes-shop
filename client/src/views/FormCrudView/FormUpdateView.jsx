@@ -5,12 +5,10 @@ import { getUpdateProductDetails } from "../../stateManagement/actions/getUpdate
 import { cleanUpdate } from "../../stateManagement/actions/CleanPutUpdate";
 import { useParams } from "react-router";
 
-
 const FormTypeView = () => {
 
   const dispatch = useDispatch();
-  const { productId } = useParams();
- 
+  const { productId } = useParams(); 
   
   useEffect(() => {      
     dispatch(getUpdateProductDetails(productId))
@@ -42,9 +40,7 @@ const FormTypeView = () => {
 
       )
     }
-
   }
-
 
   return (
     <div>
@@ -54,4 +50,4 @@ const FormTypeView = () => {
 };
 
 export default FormTypeView;
-
+v
