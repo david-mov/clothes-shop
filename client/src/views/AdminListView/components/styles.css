@@ -346,7 +346,13 @@ body {
   text-align: center;
 }
 .button1 {
-  color: red;
+  background-color: -webkit-linear-gradient(
+    to right,
+    #eaeaea,
+    #dbdbdb,
+    #f2f2f2,
+    #ada996
+  );
 }
 .button2 {
   padding-left: 10px;

@@ -106,6 +106,9 @@ export default function ProductView() {
                   <span>&#11088;</span>
                 ))}
             </p>
+            <p>
+              Color: <span>{product.color}</span>
+            </p>
           </div>
         </div>
         <div className="productscreen__right">
