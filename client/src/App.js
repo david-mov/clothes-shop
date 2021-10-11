@@ -17,6 +17,7 @@ import SignupView from "./views/SignupView/SignupView";
 import AddImage from "./views/FormCrudView/FormAddImg";
 import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
 import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} />
-        <Route exact path="/list" component={ListAdmin} />
+        <ProtectedRoute exact path="/list" component={ListAdmin} roles={[1,2]} />
         <Route path="/login" component={LoginView} />
         <Route path="/signup" component={SignupView} />
         <Route exact path="/addimage/:productId" component={AddImage} />
