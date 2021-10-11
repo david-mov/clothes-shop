@@ -24,7 +24,6 @@ const Total = () => {
     console.log(basket)
     const classes = useStyles();
     var total = 0
-    //const [{ basket }, dispatch] = useStateValue();
     basket.map((e) => (total = e.price + total) )        
 
     let miBasket = basket.length
