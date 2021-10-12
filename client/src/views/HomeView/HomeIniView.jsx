@@ -95,7 +95,7 @@ export default function HomeIniView() {
               <a href="#marvel-captain" className="c-accordion__action">
                 <div className="c-accordion__content">
                   <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    Marvel Captain
+                    Puma Hero
                   </h2>
                   <p className="c-accordion__description">
                     Carol Danvers becomes one of the universe's most powerful
@@ -105,7 +105,7 @@ export default function HomeIniView() {
                 </div>
                 <div className="c-accordion__aside">
                   <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    Marvel Captain
+                    Puma Hero
                   </h2>
                 </div>
               </a>
