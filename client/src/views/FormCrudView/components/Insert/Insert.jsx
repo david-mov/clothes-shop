@@ -49,9 +49,9 @@ const Insert = () => {
   let categories = useSelector((state) => state.categoriesReducer.categories);
   let sizes = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
-  const [valueCate, setvalueCate] = useState();
-  const [valueSize, setvalueSize] = useState();
-  const [valueType, setvalueType] = useState();
+  const [valueCate, setvalueCate] = useState("C");
+  const [valueSize, setvalueSize] = useState("S");
+  const [valueType, setvalueType] = useState("T");
   const [errors, setErrors] = useState({});
   const Options = categories.map((e) => {
     return {
@@ -140,6 +140,9 @@ const Insert = () => {
 
     dispatch(postAllProducts(input));
     alert("Product has created correctly");
+    setvalueCate("C");
+    setvalueSize("S");
+    setvalueType("T");
     return setInput({
       name: "",
       price: "",
@@ -152,12 +155,10 @@ const Insert = () => {
       images: [],
     });
   };
-  console.log("datosss", input);
   return (
     <div>
       <form className="crud_form">
         <div className="insertar">
-          <div></div>
           <div className="insert_label">
             <label>Categories</label>
             <Select

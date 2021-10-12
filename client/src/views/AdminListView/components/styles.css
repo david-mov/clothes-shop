@@ -185,10 +185,10 @@ body {
 }
 
 .status--green {
-  color: #266818;
+  color: #0c3603;
 }
 .status--green:before {
-  background-color: #6cdb56;
+  background-color: #0c3803;
 }
 .status--red {
   color: #9c2525;
@@ -263,7 +263,9 @@ body {
 .table-row--red {
   background-color: #fff2f2;
 }
-
+.table__thead {
+  justify-content: center;
+}
 @media screen and (max-width: 991px) {
   .table__thead {
     display: none;
@@ -339,14 +341,23 @@ body {
   border: 2px solid #555555;
 }
 .button2 {
-  background-color: rgb(42, 141, 158);
+  background-color: rgb(4, 20, 22);
   color: black;
   border: 2px solid #008cba;
   margin-bottom: 4px;
   text-align: center;
 }
 .button1 {
-  color: red;
+  background-color: -webkit-linear-gradient(
+    to right,
+    #eaeaea,
+    #dbdbdb,
+    #f2f2f2,
+    #ada996
+  );
+}
+.table-container {
+  text-align: center;
 }
 .button2 {
   padding-left: 10px;

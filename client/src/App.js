@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomeView from "./views/HomeView/HomeView";
+import HomeView from "./views/HomeView/HomeIniView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
@@ -18,6 +18,9 @@ import AddImage from "./views/FormCrudView/FormAddImg";
 import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
 import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
+import UpdateZises from "./views/FormCrudView/InsertSizeView";
+import UpdateType from "./views/FormCrudView/InsertTypeView";
 
 function App() {
   return (
@@ -31,9 +34,9 @@ function App() {
         <Route exact path="/create/size" component={InsertSize} />
         <Route exact path="/create/type" component={InsertType} />
         <Route exact path="/update/product/:productId" component={UpdateProduct} />
-        <Route exact path="/update/category" component={UpdateProduct} />
-        <Route exact path="/update/size" component={UpdateProduct} />
-        <Route exact path="/update/type" component={UpdateProduct} />
+        <Route exact path="/update/category" component={UpdateCategories} />
+        <Route exact path="/update/size" component={UpdateZises} />
+        <Route exact path="/update/type" component={UpdateType} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} />
