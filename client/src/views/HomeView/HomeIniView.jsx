@@ -1,4 +1,4 @@
-//import '../../styles/styleHIView.css';
+import '../../styles/styleHIView.css';
 import "../../styles/HomePrincipal.css";
 import { Link } from "react-router-dom";
 
@@ -32,7 +32,7 @@ export default function HomeIniView() {
                 </div>
             </div>
             <div className="container">
-                <div className="body">
+                <div className="body_hiview">
                     <ul className="c-accordion">
                         <li id="joker" className="c-accordion__item" >
                             <a href="#joker" className="c-accordion__action">

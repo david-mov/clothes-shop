@@ -3,7 +3,7 @@
     --color-primary: #3e66a0;
     --cover-placeholder: var(--color-primary);
 }
-.body {
+.body_hiview {
     padding: 0;
     margin: 0;
     height: 100vh;
