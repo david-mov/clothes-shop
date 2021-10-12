@@ -10,7 +10,8 @@ const checkoutReducer = (state = initialState, action) => {
     case "ADD_TO_BASKET":
       return {
         ...state,
-        basket: [...state.basket, action.payload]
+        basket: [...state.basket, action.payload],
+        totalAmount: parseInt(state.totalAmount + action.payload.price)
       };
     case "REMOVE_ITEM":
       console.log("ACA ESTOY", action.payload)

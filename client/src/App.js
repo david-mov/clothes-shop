@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomeView from "./views/HomeView/HomeIniView";
+import HomeView from "./views/HomeView/HomeView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
@@ -17,9 +17,6 @@ import SignupView from "./views/SignupView/SignupView";
 import AddImage from "./views/FormCrudView/FormAddImg";
 import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
 import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
-import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
-import UpdateZises from "./views/FormCrudView/InsertSizeView";
-import UpdateType from "./views/FormCrudView/InsertTypeView";
 
 function App() {
   return (
@@ -33,9 +30,9 @@ function App() {
         <Route path="/create/size" component={InsertSize} />
         <Route path="/create/type" component={InsertType} />
         <Route path="/update/product/:productId" component={UpdateProduct} />
-        <Route path="/update/category" component={UpdateCategories} />
-        <Route path="/update/size" component={UpdateZises} />
-        <Route path="/update/type" component={UpdateType} />
+        <Route path="/update/category" component={UpdateProduct} />
+        <Route path="/update/size" component={UpdateProduct} />
+        <Route path="/update/type" component={UpdateProduct} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} />
