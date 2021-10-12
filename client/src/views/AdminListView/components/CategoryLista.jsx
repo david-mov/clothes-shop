@@ -1,12 +1,9 @@
-import {useDispatch,useSelector} from 'react-redux';
-import { useEffect,useState} from 'react';
-import { Link } from 'react-router-dom';
-import {getAllCategories} from '../../../stateManagement/actions/getAllCategories';
-import TablaList from './ListTable';
-import './styles.css'
-
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getAllCategories } from "../../../stateManagement/actions/getAllCategories";
+import TablaList from "./ListTable";
+import "./styles.css";
 
 export default function CategoryList() {
 
@@ -31,23 +28,28 @@ export default function CategoryList() {
         setactualCurrent(actualCurrent + 1)
         setCurrentPage(currentPage + countP)
       }
-    }
-  
-    const prevPage = () => {
-      if (actualCurrent > 1) {
-        setactualCurrent(actualCurrent - 1)
-        setCurrentPage(currentPage - countP)
-      }
-    }
-    
-    useEffect(() => {
-      dispatch (getAllCategories());  
-    }, [dispatch]);
 
+    }
+  };
+
+  const prevPage = () => {
+    if (actualCurrent > 1) {
+      setactualCurrent(actualCurrent - 1);
+      setCurrentPage(currentPage - countP);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
+<<<<<<< HEAD
     
 
     const categorys = useSelector(state => state.categoriesReducer.categories);
     var totalCurrent = Math.ceil(categorys.length / countP)
+=======
+>>>>>>> 7eb17d14a8be37d991013f1b3da0518596dc7b5f
 
     function headers (){
         return (
@@ -74,8 +76,18 @@ export default function CategoryList() {
         )
     };
 
-    function bodyTable (){
-        return (
+
+  function bodyTable() {
+    return categorys.map((e, i) => {
+      return (
+        <tr key={i} className="table-row table-row--chris">
+          <input value={e.id} hidden />
+          <td className="table-row__td">
+            <div className="table-row__info">
+              <p className="table-row__name">{e.name}</p>
+            </div>
+          </td>
+
 
           filterCategory().map((e,i)=>{
                 return(
@@ -111,22 +123,20 @@ export default function CategoryList() {
             bodyTable={bodyTable()}
             url = {'/create/category'}
         />
-        </div>
-        <div className='buttonList'>
-        <button className="button2" onClick={prevPage}>
-        PREV
-      </button>
-   
-    <h1>
-      {actualCurrent} De {totalCurrent}
-    </h1>
-   
-      <button className="button2" onClick={nextPage}>
-        NEXT
-      </button>
-   
       </div>
-  </div>
-    )
-    
+      <div className="buttonList">
+        <button className="button2" onClick={prevPage}>
+          PREV
+        </button>
+
+        <h1>
+          {actualCurrent} De {totalCurrent}
+        </h1>
+
+        <button className="button2" onClick={nextPage}>
+          NEXT
+        </button>
+      </div>
+    </div>
+  );
 }
