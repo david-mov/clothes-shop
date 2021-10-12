@@ -1,10 +1,9 @@
 import axios from "axios";
 import { GET_ALL_CATEGORIES } from "../../consts/actionConsts";
-import { HOST, PORT } from "../../consts/portConsts";
 
 export const getAllCategories = () => async (dispatch) => {
   try {
-    const allCategories = await axios.get(`http://${HOST}:${PORT}/category`);
+    const allCategories = await axios.get('/category');
 
     return dispatch({ type: GET_ALL_CATEGORIES, payload: allCategories.data });
   } catch (err) {
