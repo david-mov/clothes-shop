@@ -7,6 +7,8 @@ import "../../components/NavBar/NavBar.css"
 import Select from "react-select";
 import { Link } from "react-router-dom";
 
+
+
 const ListaAdmin = () => {
   const [vista, setvista] = useState({label: "list products", value: "list products"})
   const [label, setlabel] = useState("list products")

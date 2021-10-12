@@ -5,23 +5,67 @@ import { getAllProducts } from '../../../stateManagement/actions/getAllProducts'
 import TablaList from './ListTable'
 import './styles.css'
 import Select from "react-select";
+import { getPrice } from "../../../stateManagement/actions/getPrice";
+
+
+
 
 export default function ProductosLista() {
+  
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(0)
   const [actualCurrent, setactualCurrent] = useState(1)
   var countP = 5
   var dataCompleta = [];
    const [Input, setInput] = useState('');
+   const [value, setValue] = useState('');
+   const [search, setsearch] = useState({label: 'none', value: 'none'});
+  console.log("search",search.value)
    const product = useSelector((state) => state.productsReducer.products)
+   console.log("data",product)
    const filterProducts = () => {
-     if(Input !== ''){
-       return dataCompleta = product.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
-     }
-     return dataCompleta = product;
+    
+     switch (value){
+      case "input":
+        return dataCompleta = product.filter(e => e.name.toLowerCase().includes(Input.toLowerCase()));
+      case "higher price":
+        return dataCompleta = product.sort((a,b)=>{
+          const priceA = a.price;
+          const priceB = b.price;
+          if (priceA < priceB) {
+            return -1;
+          }
+          if (priceA > priceB) {
+            return 1;
+          }       
+          return 0
+        })
+      case "lower price":
+        return ("menor precio")
+      case "higher stock": 
+        return ("mayor stock")
+      case "lower stock":          
+        return ("menor stock")     
+      default:            
+      return dataCompleta = product;
+    }
    }
+   
+   const OptionSelect = [
+    {label: "none", value: "none"},
+    {label: "higher price", value: "higher price"},
+    {label: "lower price", value: "lower price"},
+    {label: "higher stock", value: "higher stock"},
+    {label: "lower stock", value: "lower stock"},
+   
+  ]
 
+  const handleChangeSelect = (search) =>{
+    setsearch(search);
+    setValue(search.value)
+  } 
   const onInputChange = (Input) =>{  
+    setValue("input")
     setInput(Input.target.value);
 }
 
@@ -38,11 +82,11 @@ export default function ProductosLista() {
       setCurrentPage(currentPage - countP)
     }
   }
-
+  
   useEffect(() => {
-    dispatch(getAllProducts())
-  }, [dispatch])
-
+    dispatch (getAllProducts());  
+  }, [dispatch]);
+  
   const products = useSelector((state) => state.productsReducer.products)
   var totalCurrent = Math.ceil(products.length / countP)
   function headers() {
@@ -58,14 +102,17 @@ export default function ProductosLista() {
             onChange = {onInputChange}
             />
          </div>
+         
           </th>
           <th className="table__th">
-          <Select
-              className="select-style"
-              //value={vista}
-              //options={OptionSelect}
-              //onChange= {handleChangeSelect}
+            <div >
+            <Select
+              className="button placeHolderSearch"
+              value={search}
+              options={OptionSelect}
+              onChange= {handleChangeSelect}
             />
+            </div>
           </th>
         </tr>
       <tr>

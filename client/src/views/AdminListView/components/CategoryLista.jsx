@@ -44,6 +44,8 @@ export default function CategoryList() {
       dispatch (getAllCategories());  
     }, [dispatch]);
 
+    
+
     const categorys = useSelector(state => state.categoriesReducer.categories);
     var totalCurrent = Math.ceil(categorys.length / countP)
 
