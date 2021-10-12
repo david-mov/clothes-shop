@@ -144,7 +144,7 @@ function NavBar() {
           </li>
           <li>
             <Link className="List_return" to="/list">
-              Lists
+              Admin Lists
             </Link>
           </li>
         </ul>
