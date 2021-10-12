@@ -17,10 +17,9 @@ import SignupView from "./views/SignupView/SignupView";
 import AddImage from "./views/FormCrudView/FormAddImg";
 import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
 import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
-import UpdateCategories from "./views/FormCrudView/components/Update/UpdateCategories";
-import UpdateZises from "./views/FormCrudView/components/Update/UpdateSizes";
-import UpdateType from "./views/FormCrudView/components/Update/UpdateType";
-
+import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
+import UpdateZises from "./views/FormCrudView/InsertSizeView";
+import UpdateType from "./views/FormCrudView/InsertTypeView";
 
 function App() {
   return (

@@ -11,7 +11,7 @@ export default function AddImgProduct({ id, name }) {
   const { productId } = useParams();
   useEffect(() => {
     dispatch(getUpdateProductDetails(productId));
-  }, [dispatch]);
+  }, [dispatch, productId]);
   const product = useSelector(
     (state) => state.productsReducer.productUpdateDetails
   );

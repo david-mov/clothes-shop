@@ -155,12 +155,10 @@ const Insert = () => {
       images: [],
     });
   };
-  // console.log("datosss", input);
   return (
     <div>
       <form className="crud_form">
         <div className="insertar">
-          <div></div>
           <div className="insert_label">
             <label>Categories</label>
             <Select

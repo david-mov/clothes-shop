@@ -8,8 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 // import { putCategory } from "../../../../stateManagement/actions/putCategory";
 // import {putCategory} from "../../../../stateManagement/actions/putCategory";
 
-
-const UpdateCategories = ({id = 1,name = "Elegant",enabled = true}) => {
+const UpdateCategories = ({ id = 1, name = "Elegant", enabled = true }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());
@@ -21,55 +20,56 @@ const UpdateCategories = ({id = 1,name = "Elegant",enabled = true}) => {
 
   const { productId } = useParams();
 
-  const product = useSelector(state => state.productsReducer.productUpdateDetails);
-  console.log("data desde el detalle de update", product)
+  const product = useSelector(
+    (state) => state.productsReducer.productUpdateDetails
+  );
+  console.log("data desde el detalle de update", product);
 
-  const history = (useHistory())
-  
-  let categoriess = useSelector((state) => state.categoriesReducer.categories);  
+  const history = useHistory();
+
+  let categoriess = useSelector((state) => state.categoriesReducer.categories);
 
   const [input, setInput] = useState({
-    name    
-  })
-  const [errors, setErrors] = useState({}); 
-  
-  
+    name,
+  });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
-    });    
-  };   
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();    
-    let namesCategories = categoriess.map(e => e.name);   
-    //BUSCO SI HAY ALGUNA CATEGORIA QUE ESTE REPETIDA
-    let repetida = namesCategories.find(e => e === input.name && input.name !== name)     
-    
-    if(repetida) {
-      alert("La Categoria que esta ingresando ya se encuentra en nuestra base de datos. por favor ingrese otra")
-    }else {
-      alert("Excelente")
-      
-      let obj = {
-        name: name,
-      }
-      console.log("OBJ", obj)
-      // dispatch(putCategory(id,obj));
-      // history.push("/list");
-    }    
-      
-      setInput({}) 
-
+    });
   };
 
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let namesCategories = categoriess.map((e) => e.name);
+    //BUSCO SI HAY ALGUNA CATEGORIA QUE ESTE REPETIDA
+    let repetida = namesCategories.find(
+      (e) => e === input.name && input.name !== name
+    );
+
+    if (repetida) {
+      alert(
+        "La Categoria que esta ingresando ya se encuentra en nuestra base de datos. por favor ingrese otra"
+      );
+    } else {
+      alert("Excelente");
+
+      let obj = {
+        name: name,
+      };
+      console.log("OBJ", obj);
+      // dispatch(putCategory(id,obj));
+      // history.push("/list");
+    }
+
+    setInput({});
+  };
 
   const cerrarModalInsertar = () => {
-    setInput({})    
-    history.push("/list")
+    setInput({});
+    history.push("/list");
   };
 
   console.log(input);
@@ -82,10 +82,6 @@ const UpdateCategories = ({id = 1,name = "Elegant",enabled = true}) => {
         }}
       >
         <div className="insertar">
-          <div>
-            <h3 className="h3_insert">Edit Category</h3>
-          </div>  
-          
           <div className="insert_label">
             <label className="label_Insert">Name:</label>
             <input
@@ -95,13 +91,14 @@ const UpdateCategories = ({id = 1,name = "Elegant",enabled = true}) => {
               onChange={handleChange}
               value={input.name}
             />
-            {errors.name && <p className ="error">{errors.name}</p>}            
+            {errors.name && <p className="error">{errors.name}</p>}
           </div>
           <div className="crud_Form_Insert_cancelar">
-            <button 
-            className="crud_Form_Insert_cancelar_button" 
-            type="submit"
-            disabled = {!(input.name)}>
+            <button
+              className="crud_Form_Insert_cancelar_button"
+              type="submit"
+              disabled={!input.name}
+            >
               Editar
             </button>
             <button

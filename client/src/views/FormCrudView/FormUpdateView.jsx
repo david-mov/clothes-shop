@@ -14,7 +14,7 @@ const FormTypeView = () => {
     return () => {
       dispatch(cleanUpdate());
     };
-  }, [dispatch]);
+  }, [dispatch, productId]);
 
   const product = useSelector(
     (state) => state.productsReducer.productUpdateDetails

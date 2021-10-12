@@ -21,7 +21,7 @@ export default function ProductView() {
     return () => {
       dispatch(cleanUpObjet());
     };
-  }, []);
+  }, [dispatch, productId]);
 
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [tengo, setTengo] = useState(false);
@@ -44,6 +44,7 @@ export default function ProductView() {
                 className="zoom image"
                 src={require(`../../assets/${nameImagen}`).default}
                 data-zoom={require(`../../assets/${nameImagen}`).default}
+                alt="Not fount"
               />
             </div>
           );
@@ -56,6 +57,7 @@ export default function ProductView() {
               className="zoom image"
               src={require(`../../assets/${nameImagen}`).default}
               data-zoom={require(`../../assets/${nameImagen}`).default}
+              alt="Not fount"
             />
           </div>
         );
