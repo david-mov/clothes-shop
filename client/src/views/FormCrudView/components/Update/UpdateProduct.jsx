@@ -5,15 +5,14 @@ import { getAllCategories } from "../../../../stateManagement/actions/getAllCate
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
 import "./update.css";
-import { useHistory,} from "react-router-dom";
-import {putProduct} from "../../../../stateManagement/actions/putProduct";
+import { useHistory } from "react-router-dom";
+import { putProduct } from "../../../../stateManagement/actions/putProduct";
 
 const validate = (input) => {
   let errors = {};
 
-  if(!input.categories) {
-    errors.categories = "Required field"
-
+  if (!input.categories) {
+    errors.categories = "Required field";
   } else if (!input.valueSize) {
     errors.sizes = "Required field enter a size";
   } else if (!input.name) {
@@ -30,26 +29,26 @@ const validate = (input) => {
   return errors;
 };
 
-
-
-const Update = ({name, categories, price, description, color, sizes, type, type_product, stock, productId}) => {
-
-  
-
- const dispatch = useDispatch();
- const history = (useHistory());
+const Update = ({
+  name,
+  categories,
+  price,
+  description,
+  color,
+  sizes,
+  type,
+  type_product,
+  stock,
+  productId,
+}) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
-
     dispatch(getAllCategories());
     dispatch(getAllsizes());
     dispatch(getAllTypes());
-
-
   }, [dispatch]);
-
-
-  const history = useHistory();
 
   let categoriess = useSelector((state) => state.categoriesReducer.categories);
   let sizess = useSelector((state) => state.sizesReducer.sizes);
@@ -66,14 +65,14 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
   }));
 
   let nombreType = "";
-  types.forEach(e => {
-    if(e.id === type_product) {
-      nombreType = e.name
+  types.forEach((e) => {
+    if (e.id === type_product) {
+      nombreType = e.name;
     }
   });
 
   const mapType = { value: type_product, label: nombreType };
-  
+
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
   const [valueType, setvalueType] = useState(mapType);
@@ -84,11 +83,11 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
     color,
     stock,
     type_product,
-    type:valueType,
+    type: valueType,
     categories: valueCate,
     sizes: valueSize,
-    price
-    }); 
+    price,
+  });
 
   const [errors, setErrors] = useState({});
 
@@ -114,20 +113,20 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
   });
 
   const handleChange = (e) => {
-
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
 
-    setErrors(validate({
-      ...input,
-      [e.target.name]: e.target.value
-    }))
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const onSelectChangeNew = (valueCate) => {
-
     let tipesEnv = "";
 
     if (valueCate) {
@@ -135,23 +134,19 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
         return e.value;
       });
     }
-    
+
     setvalueCate(valueCate);
     addcategories(tipesEnv);
-
   };
 
   const addcategories = (tipesEnv) => {
-
     setInput({
       ...input,
       categories: tipesEnv,
     });
-
   };
 
   const onSelectChangeNewSize = (valueSize) => {
-
     let tipesEnv = "";
 
     if (valueSize) {
@@ -162,77 +157,64 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
 
     setvalueSize(valueSize);
     addSizes(tipesEnv);
-
   };
 
   const addSizes = (tipesEnv) => {
-
     setInput({
       ...input,
       sizes: tipesEnv,
     });
-
   };
 
   const onSelectChangeNewType = (valueType) => {
-
     setInput({
       ...input,
       type_product: valueType.value,
     });
 
     setvalueType(valueType);
-
   };
 
-
   const handleSubmit = (e) => {
-    
-      e.preventDefault()
+    e.preventDefault();
 
-      let mapCategorie = input.categories.map(e => e.value);
-      let mapSizes = input.sizes.map(e => e.value);
+    let mapCategorie = input.categories.map((e) => e.value);
+    let mapSizes = input.sizes.map((e) => e.value);
 
-      let obj = {
-        name: input.name,
-        description: input.description,
-        color:input.color,        
-        stock:input.stock,
-        type_product:input.type_product,
-        categories: mapCategorie,
-        sizes: mapSizes,
-        price:input.price
-      }
+    let obj = {
+      name: input.name,
+      description: input.description,
+      color: input.color,
+      stock: input.stock,
+      type_product: input.type_product,
+      categories: mapCategorie,
+      sizes: mapSizes,
+      price: input.price,
+    };
 
+    dispatch(putProduct(productId, obj));
 
-      dispatch(putProduct(productId,obj));
+    setInput({
+      name: "",
+      description: "",
+      color: "",
+      stock: 0,
+      type_product: "",
+      categories: [],
+      sizes: [],
+      price: 0,
+    });
 
-      setInput({
-        name: "",
-        description: "",
-        color:"",        
-        stock:0,
-        type_product:"",
-        categories: [],
-        sizes: [],
-        price:0
-      })
+    alert("Successfully edited product");
 
-      alert("Successfully edited product")
-
-      history.push("/list");
-
+    history.push("/list");
   };
 
   const cerrarModalInsertar = () => {
+    setInput({});
 
-    setInput({})
-
-    history.push("/list")
-    
+    history.push("/list");
   };
-
-  
 
   return (
     <div className="crud_form">
@@ -292,7 +274,7 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               className="form-control"
               name="price"
               type="number"
-              min= "0"
+              min="0"
               onChange={handleChange}
               value={input.price}
             />
@@ -307,7 +289,9 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
               value={input.description}
             />
 
-            {errors.description && <p className ="error">{errors.description}</p>}
+            {errors.description && (
+              <p className="error">{errors.description}</p>
+            )}
 
             <label className="label_Insert">Stock:</label>
             <input
@@ -333,18 +317,28 @@ const Update = ({name, categories, price, description, color, sizes, type, type_
           </div>
           <div className="crud_Form_Insert_cancelar">
             <button
-
-            className="crud_Form_Insert_cancelar_button"
-            type="submit"
-            disabled = {!(input.name && input.description && input.color  && input.stock  && input.type_product && input.sizes.length && input.categories.length && input.price)}>
-
+              className="crud_Form_Insert_cancelar_button"
+              type="submit"
+              disabled={
+                !(
+                  input.name &&
+                  input.description &&
+                  input.color &&
+                  input.stock &&
+                  input.type_product &&
+                  input.sizes.length &&
+                  input.categories.length &&
+                  input.price
+                )
+              }
+            >
               Editar
             </button>
             <button
               className="crud_Form_Insert_cancelar_button_danger"
               onClick={(e) => cerrarModalInsertar(e)}
             >
-              Return  
+              Return
             </button>
           </div>
         </div>
