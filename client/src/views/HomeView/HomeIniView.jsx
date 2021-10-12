@@ -1,4 +1,4 @@
-import '../../styles/styleHIView.css';
+//import '../../styles/styleHIView.css';
 import "../../styles/HomePrincipal.css";
 import { Link } from "react-router-dom";
 
