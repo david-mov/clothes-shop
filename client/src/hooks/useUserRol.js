@@ -10,7 +10,12 @@ export const useUserRol = () => {
 	useEffect(() => {
 		(async function getRol() {
 			try {
-				const res = await axios.get(`http://${HOST}:${PORT}/user/rol`, { withCredentials: true })
+				const res = await axios({
+					method: 'GET',
+					url: `http://${HOST}:${PORT}/user/rol`,
+					withCredentials: true,
+					httpOnly: true,
+				})
 				setRol(res.data)
 				setOk(true)
 			}
