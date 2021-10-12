@@ -14,7 +14,7 @@ import { ShoppingCart } from "@material-ui/icons";
 export default function ProductView() {
   //aca el estado ratin
   var rating = 5;
-  const { productId } = useParams();
+  var { productId } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductDetails(productId));
@@ -27,9 +27,8 @@ export default function ProductView() {
   const [tengo, setTengo] = useState(false);
   const basket = useSelector((state) => state.checkoutReducer.basket);
   const addToCart = () => {
-    basket.find((e) => e.productId === productId)
-      ? setTengo(true)
-      : dispatch(getAddToCart(product));
+    console.log("ACAAAA", productId)
+    basket.find((e) => e.productId !== productId) ? setTengo(true) : dispatch(getAddToCart(product));
   };
 
   var nameImagen = "";
