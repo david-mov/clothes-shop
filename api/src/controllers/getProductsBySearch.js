@@ -4,7 +4,6 @@ const { Product, Image, Type, Category } = require('../db.js')
 
 const getProductsBySearch = async (req, res, next) => {
 	const { query } = req.query;
-	console.log("ACA ESTA QUERY", query)
 	try {
 		const productsFound = await Product.findAll({
 			where: { 
@@ -21,7 +20,7 @@ const getProductsBySearch = async (req, res, next) => {
                 model: Category,
                 attributes: ['name'],
             }],
-			attributes: ['name', 'price','description','stock'],
+			attributes: ['name', 'price','description','stock', 'id'],
 		})
 		res.json(productsFound);
 	}

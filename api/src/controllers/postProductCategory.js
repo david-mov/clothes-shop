@@ -2,7 +2,6 @@
 const { Product, Category } = require('../db.js');
 
 const postProductCategory = async (req, res, next) => {
-	console.log('enter to post product category')
 	const { id, categoryId } = req.params;
 	try {
 		const productFound = await Product.findOne({
@@ -12,7 +11,6 @@ const postProductCategory = async (req, res, next) => {
 			where: { id: categoryId, enabled: true }
 		})
 		if (productFound && categoryFound) {
-			console.log('enter to if')
 			await productFound.addCategory(categoryId)
 			return res.json('Category added to the product correctly.')
 		} else {
