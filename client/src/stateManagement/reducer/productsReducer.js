@@ -19,12 +19,12 @@ const initialState = {
 
 export default function productsReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_ALL_PRODUCTS:
-      return {
-        ...state,
-        products: action.payload,
-        productsCopy: action.payload,
-      };
+		case GET_ALL_PRODUCTS:
+			return {
+				...state,
+				products: action.payload.filter(e => e.stock > 0),
+				productsCopy: action.payload
+			}
     case GET_CATEGORY:
       return {
         ...state,
@@ -65,11 +65,11 @@ export default function productsReducer(state = initialState, action) {
         };
       }
     case GET_SEARCH: {
-      return {
-        ...state,
-        products: action.payload,
-      };
-    }
+					return {
+						...state,
+						products: action.payload.filter(e => e.stock > 0)
+					}
+				}
     case GET_PRODUCT_DETAILS: {
       return {
         ...state,

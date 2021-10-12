@@ -21,7 +21,7 @@ export default function HomeIniView() {
                 </Link>
                 <div className="abaout">
                     <Link className="spanHomePrincipal" to="/catalogue">
-                        <span>Catalogo</span>
+                        <span>Catalogue</span>
                     </Link>
                     <Link className="spanHomePrincipal" to="/login">
                         <span> Login</span>
