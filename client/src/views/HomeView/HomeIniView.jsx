@@ -1,5 +1,6 @@
 import "../../styles/styleHIView.css";
 import "../../styles/HomePrincipal.css";
+import { Authorizer } from "../../components/Authorizer/Authorizer.jsx";
 import { Link } from "react-router-dom";
 
 export default function HomeIniView() {
@@ -20,12 +21,17 @@ export default function HomeIniView() {
           <Link className="spanHomePrincipal" to="/catalogue">
             <span>Catalogue</span>
           </Link>
-          <Link className="spanHomePrincipal" to="/login">
-            <span> Login</span>
-          </Link>
-          <Link className="spanHomePrincipal" to="/signup">
-            <span> Signup</span>
-          </Link>
+          {/* <Link className="spanHomePrincipal" to="#">
+            <span>About</span>
+          </Link> */}
+          <Authorizer roles={[0]}>
+            <Link className="spanHomePrincipal" to="/login">
+              <span> Login</span>
+            </Link>
+            <Link className="spanHomePrincipal" to="/signup">
+              <span> Signup</span>
+            </Link>
+          </Authorizer>
         </div>
       </div>
       <div className="container">
