@@ -44,9 +44,13 @@ function App() {
           path="/update/product/:productId"
           component={UpdateProduct}
         />
-        <Route exact path="/update/category" component={UpdateCategories} />
-        <Route exact path="/update/size" component={UpdateZises} />
-        <Route exact path="/update/type" component={UpdateType} />
+        <Route
+          exact
+          path="/update/category/:productId"
+          component={UpdateCategories}
+        />
+        <Route exact path="/update/size/:productId" component={UpdateZises} />
+        <Route exact path="/update/type/:productId" component={UpdateType} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} />
