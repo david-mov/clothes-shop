@@ -12,7 +12,7 @@
 .NavbarPaincipal {
   display: flex;
   background-color: var(--oscuro);
-  padding: 1rem;
+
   justify-content: space-between;
 }
 .abaout {
