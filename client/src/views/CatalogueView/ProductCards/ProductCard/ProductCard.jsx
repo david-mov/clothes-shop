@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import getAddToCart from "../../../../stateManagement/actions/getAddToCart"
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import sumaContador from '../../../../stateManagement/actions/sumaContador';
 
 function ProductCard(props) {
 
@@ -18,6 +19,7 @@ function ProductCard(props) {
     const addToCart = () => {
         basket.find((e) => e.productId === productId) ? setTengo(true) : 
         dispatch(getAddToCart(props));
+        dispatch(sumaContador(price))
     }
     
     var nameImagen = "";

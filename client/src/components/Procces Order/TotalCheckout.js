@@ -21,16 +21,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Total = () => {
     const basket = useSelector(state => state.checkoutReducer.basket)
-    console.log(basket)
+    var totalAmount = useSelector(state => state.checkoutReducer.totalAmount)
     const classes = useStyles();
     var total = 0
     basket.map((e) => (total = e.price + total) )        
-
     let miBasket = basket.length
     return (
         <div className={classes.root}>
             <h5>Total items: {miBasket}</h5>
-            <h5>Total Amount: {parseInt(total)}</h5>
+            <h5>Total Amount: {parseInt(totalAmount)}</h5>
             <Button
                 component={Link}
                 to='/checkout'

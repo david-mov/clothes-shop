@@ -17,6 +17,7 @@ const Product = () => {
                     stock={e.stock}
                     productId={e.id}
                     image={e.images[0]}
+                    cantity={e.cantity}
                 />
             ))}
         </div>

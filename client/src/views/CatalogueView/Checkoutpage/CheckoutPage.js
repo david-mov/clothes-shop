@@ -41,7 +41,7 @@ const CheckoutPage = () => {
                                 <tbody className="table__tbody">
                 
                                     {basket?.map((product) => (
-
+                                        
                                         <CheckoutCard key={product.id} product={product} />
 
                                     ))}
