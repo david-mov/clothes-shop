@@ -3,7 +3,6 @@ import './ProductCards.css';
 import ProductCard from "./ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 
-
 const Product = () => {
   var { products } = useSelector((state) => state.productsReducer);
   //aca el estado ratin

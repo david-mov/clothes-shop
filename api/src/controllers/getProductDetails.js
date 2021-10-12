@@ -1,4 +1,4 @@
-const { Product, Type, Size, Category, Image } = require('../db.js')
+const { Product, Type, Size, Category, Image, Rating, View } = require('../db.js')
 
 const getProductDetails = async (req, res, next) => {
 	const { id } = req.params;
@@ -20,6 +20,12 @@ const getProductDetails = async (req, res, next) => {
             	}, {
             		model: Size,
             		attributes:['name']
+            	}, {
+            		model: Rating,
+            		attributes:['amount']
+            	}, {
+            		model: View,
+            		attributes:['amount']
             	}],
             attributes: ['name', 'price', 'stock', 'description', 'color']
 		});

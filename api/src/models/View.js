@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('view_product', {   
+  sequelize.define('view', {   
     amount: {
      type: DataTypes.INTEGER,
      defaultValue: 1
