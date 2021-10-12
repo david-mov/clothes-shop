@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Authorizer } from '../../components/Authorizer/Authorizer.jsx'
 import "../../styles/HomePrincipal.css";
 
 export default function HomeView() {
@@ -22,12 +23,14 @@ export default function HomeView() {
           {/* <Link className="spanHomePrincipal" to="#">
             <span>About</span>
           </Link> */}
-          <Link className="spanHomePrincipal" to="/login">
-            <span> Login</span>
-          </Link>
-          <Link className="spanHomePrincipal" to="/signup">
-            <span> Signup</span>
-          </Link>
+          <Authorizer roles={[0]}>
+            <Link className="spanHomePrincipal" to="/login">
+              <span> Login</span>
+            </Link>
+            <Link className="spanHomePrincipal" to="/signup">
+              <span> Signup</span>
+            </Link>
+          </Authorizer>
         </div>
       </div>
       <div className="container">
