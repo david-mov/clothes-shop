@@ -139,7 +139,7 @@ export default function ProductosLista() {
     <div>
       <div className="body">
         <TablaList
-          title={"Porducts"}
+          title={"Products"}
           headers={headers()}
           data={products}
           bodyTable={bodyTable()}
@@ -152,7 +152,7 @@ export default function ProductosLista() {
         </button>
 
         <h1>
-          {actualCurrent} De {totalCurrent}
+          {actualCurrent} / {totalCurrent}
         </h1>
 
         <button className="button2" onClick={nextPage}>

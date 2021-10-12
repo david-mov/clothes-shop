@@ -18,7 +18,7 @@ export default function HomeIniView() {
         </Link>
         <div className="abaout">
           <Link className="spanHomePrincipal" to="/catalogue">
-            <span>Catalogo</span>
+            <span>Catalogue</span>
           </Link>
           <Link className="spanHomePrincipal" to="/login">
             <span> Login</span>
@@ -29,13 +29,13 @@ export default function HomeIniView() {
         </div>
       </div>
       <div className="container">
-        <div className="body">
+        <div className="body_hiview">
           <ul className="c-accordion">
             <li id="joker" className="c-accordion__item">
               <a href="#joker" className="c-accordion__action">
                 <div className="c-accordion__content">
                   <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    Nike
+                    Jocker
                   </h2>
                   <p className="c-accordion__description">
                     In Gotham City, mentally troubled comedian Arthur Fleck is
@@ -46,7 +46,7 @@ export default function HomeIniView() {
                 </div>
                 <div className="c-accordion__aside">
                   <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    Nike
+                    Jocker
                   </h2>
                 </div>
               </a>
