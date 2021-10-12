@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomeView from "./views/HomeView/HomeView";
+import HomeView from "./views/HomeView/HomeIniView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
@@ -28,12 +28,22 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomeView} />
         <Route exact path="/catalogue" component={CatalogueView} />
-        <ProtectedRoute exact path="/profile" component={ProfileView} roles={[1,2,3]} other="/login" />
+        <ProtectedRoute
+          exact
+          path="/profile"
+          component={ProfileView}
+          roles={[1, 2, 3]}
+          other="/login"
+        />
         <Route exact path="/create/product/" component={Insert} />
         <Route exact path="/create/category" component={InsertCategory} />
         <Route exact path="/create/size" component={InsertSize} />
         <Route exact path="/create/type" component={InsertType} />
-        <Route exact path="/update/product/:productId" component={UpdateProduct} />
+        <Route
+          exact
+          path="/update/product/:productId"
+          component={UpdateProduct}
+        />
         <Route exact path="/update/category" component={UpdateCategories} />
         <Route exact path="/update/size" component={UpdateZises} />
         <Route exact path="/update/type" component={UpdateType} />
@@ -41,8 +51,20 @@ function App() {
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path="/list" component={ListAdmin} />
-        <ProtectedRoute exact path="/login" component={LoginView} roles={[0]} other="/" />
-        <ProtectedRoute exact path="/signup" component={SignupView} roles={[0]} other="/" />
+        <ProtectedRoute
+          exact
+          path="/login"
+          component={LoginView}
+          roles={[0]}
+          other="/"
+        />
+        <ProtectedRoute
+          exact
+          path="/signup"
+          component={SignupView}
+          roles={[0]}
+          other="/"
+        />
         <Route exact path="/addimage/:productId" component={AddImage} />
         <Route exact path="/info/product/:productId" component={InfoProduct} />
         <Route path="*" component={NotFoundView} />

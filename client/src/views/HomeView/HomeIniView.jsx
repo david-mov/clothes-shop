@@ -35,7 +35,7 @@ export default function HomeIniView() {
               <a href="#joker" className="c-accordion__action">
                 <div className="c-accordion__content">
                   <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    Jocker
+                    Kike
                   </h2>
                   <p className="c-accordion__description">
                     In Gotham City, mentally troubled comedian Arthur Fleck is
@@ -46,7 +46,7 @@ export default function HomeIniView() {
                 </div>
                 <div className="c-accordion__aside">
                   <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    Jocker
+                    Nike
                   </h2>
                 </div>
               </a>
@@ -75,7 +75,7 @@ export default function HomeIniView() {
               <a href="#black-panther" className="c-accordion__action">
                 <div className="c-accordion__content">
                   <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    Black Panther
+                    New Wallas
                   </h2>
                   <p className="c-accordion__description">
                     T'Challa, heir to the hidden but advanced kingdom of
@@ -86,7 +86,7 @@ export default function HomeIniView() {
                 </div>
                 <div className="c-accordion__aside">
                   <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    Black Panther
+                    New Wallas
                   </h2>
                 </div>
               </a>
