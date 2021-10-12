@@ -15,41 +15,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CheckoutPage = () => {
-  const classes = useStyles();
-  var { basket } = useSelector((state) => state.checkoutReducer);
-  function FormRow() {
-    return (
-      <div className="container">
-        <div className="row row--top-20">
-          <div className="col-md-12">
-            <div className="table-container">
-              <table className="table">
-                <thead className="table__thead">
-                  <tr>
-                    <th className="table__th">Name</th>
-                    <th className="table__th">Price</th>
-                    <th className="table__th">Qty</th>
-                    <th className="table__th">Progress</th>
-                    <th className="table__th">Rating</th>
-                    <th className="table__th">
-                      Increase and decrease Quantity
-                    </th>
-                    <th className="table__th"></th>
-                  </tr>
-                </thead>
-                <tbody className="table__tbody">
-                  {basket?.map((product) => (
-                    <CheckoutCard key={product.id} product={product} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+    const classes = useStyles();
+    var { basket } = useSelector(state => state.checkoutReducer)
+    var { totalAmount} = useSelector(state => state.checkoutReducer)
+    function FormRow() {
+        return (
+            <div className="container">
+                <div className="row row--top-20">
+                    <div className="col-md-12">
+                        <div className="table-container">
+                            <table className="table">
+                                <thead className="table__thead">
+                                    <tr>
+                                        <th className="table__th">Name</th>
+                                        <th className="table__th">Price</th>
+                                        <th className="table__th">Qty</th>
+                                        <th className="table__th">Progress</th>
+                                        <th className="table__th">Rating</th>
+                                        <th className="table__th">aumentar y disminuir cantidad</th>
+                                        <th className="table__th"></th>
+                                    </tr>
+                                </thead>
+                                <tbody className="table__tbody">
+                                    {basket?.map((product) => (
+                                        <CheckoutCard key={product.id} product={product} />
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
+
+            </div>
+        );
+    }
+    
   return (
     <div className={classes.root}>
       <Grid container spacing={3}>
@@ -87,7 +88,7 @@ const CheckoutPage = () => {
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
           <Typography align="center" gutterBottom variant="h4">
-            <TotalCheckout />
+            <TotalCheckout totalAmount={totalAmount}/>
           </Typography>
         </Grid>
       </Grid>

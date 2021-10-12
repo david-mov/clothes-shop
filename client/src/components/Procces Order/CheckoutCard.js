@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -13,6 +13,8 @@ import accounting from "accounting";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import getContador from "../../stateManagement/actions/getContador"
+import restaContador from '../../stateManagement/actions/restaContador';
+import sumaContador from '../../stateManagement/actions/sumaContador';
 
 //{require(`../../assets/imageProduct/${e.name}`).default}
 
@@ -42,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckoutCard({
     product, key
 }) {
+
+    var [cantidadTotal, setCantidadTotal] = useState(0)
     const basket = useSelector(state => state.checkoutReducer.basket)
     var [contador, setContador] = useState(1)
     const dispatch = useDispatch()
@@ -49,12 +53,20 @@ export default function CheckoutCard({
     const { productId, name, price, image, rating, stock } = product;
     
     const classes = useStyles();
-    
-    const onChangeContador = async(e) => {
-       await((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
+    var total;
+    /*const onChangeContador = (e) => {
+       ((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
+       setCantidadTotal({ 
+           ...cantidadTotal,
+           cantidadTotal: (contador * price)})
+        console.log("ACA", price, contador)
+    }*/
+    var onChangeContador = (e) => {
+        (e.target.value === "+") ? dispatch(sumaContador(price)) : dispatch(restaContador(price))
     }
-
     
+
+
     
     const RemoveItem = (event, productId) => {
         event.preventDefault();        
@@ -68,6 +80,7 @@ export default function CheckoutCard({
     }else{
         nameImagen = "products/logo JK&A.png";
     }
+    var Amount;
 
     return (
         <tr className="table-row table-row--chris">
@@ -90,6 +103,9 @@ export default function CheckoutCard({
             <td data-column="Progress" className="table-row__td">
                 <p className="table-row__progress status--blue status">{contador}</p>
             </td>
+            <td data-column="Progress" className="table-row__td">
+                <p className="table-row__progress status--blue status">{Amount=(contador * price)}</p>
+            </td>
 
             <td data-column="Progress" className="table-row__td">
                 <p className="table-row__progress status--blue status">On Track</p>
@@ -109,8 +125,8 @@ export default function CheckoutCard({
 
             </td>
             <td className="table-row__td">
-               <button value="-" onClick={onChangeContador}>+</button>
-               <button value="+" onClick={onChangeContador}>-</button>
+               <button value="+" onClick={onChangeContador}>+</button>
+               <button value="-" onClick={onChangeContador}>-</button>
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    

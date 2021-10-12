@@ -1,6 +1,7 @@
 const initialState = {
   basket: [],
-  contadorState: []
+  contadorState: [],
+  totalAmount: [0],
 };
 
 
@@ -42,7 +43,23 @@ const checkoutReducer = (state = initialState, action) => {
         return {
           ...state,
           contadorState: action.payload
-        }
+        };
+        case "GET_TOTALAMOUNT":
+          return {
+            ...state,
+            totalAmount: action.payload
+          }
+          case "SUMA_CONTADOR":
+            console.log("EL TOTAL AMOUNT EN REDUCER", state.totalAmount, action.payload)
+            return{
+              ...state,
+              totalAmount: parseInt(state.totalAmount + action.payload)
+            }
+          case "RESTA_CONTADOR":
+            return{
+              ...state,
+              totalAmount: action.payload >= state.totalAmount  ? 0 : parseInt(state.totalAmount - action.payload)
+            }
     default:
       return state;
   }
