@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
 import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
 import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
-import { getUpdateProductDetails } from "../../../../stateManagement/actions/getUpdatePDetail";
 import "./update.css";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { putProduct } from "../../../../stateManagement/actions/putProduct";
 
 const validate = (input) => {
   let errors = {};
-  if (!input.categories.length) {
+
+  if (!input.categories) {
     errors.categories = "Required field";
   } else if (!input.valueSize) {
     errors.sizes = "Required field enter a size";
@@ -25,52 +26,30 @@ const validate = (input) => {
   } else if (!input.color) {
     errors.color = "Required field enter a color";
   }
-  if (!input.categories.length) {
-    errors.categories = "Required field";
-  }
   return errors;
 };
 
 const Update = ({
-  id = 1,
-  name = "rodri",
-  price = 200,
-  description = "sads",
-  color = "rojo",
-  stock = 1,
-  type_product = 2,
-  type = {
-    name: "pantalon",
-  },
-  categories = [
-    { id: 2, name: "futbol" },
-    { id: 5, name: "elegante" },
-    { id: 4, name: "sport" },
-  ],
-  sizes = [
-    { id: 1, name: "big" },
-    { id: 2, name: "medium" },
-  ],
+  name,
+  categories,
+  price,
+  description,
+  color,
+  sizes,
+  type,
+  type_product,
+  stock,
+  productId,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllsizes());
     dispatch(getAllTypes());
-    dispatch(getUpdateProductDetails(productId));
-    // dispatch(putProduct())
   }, [dispatch]);
 
-  const { productId } = useParams();
-
-  const product = useSelector(
-    (state) => state.productsReducer.productUpdateDetails
-  );
-  console.log("data desde el detalle de update", product);
-
-  const history = useHistory();
-
-  // console.log("*********************************************", mapCategories)
   let categoriess = useSelector((state) => state.categoriesReducer.categories);
   let sizess = useSelector((state) => state.sizesReducer.sizes);
   let types = useSelector((state) => state.typesReducer.types);
@@ -85,7 +64,14 @@ const Update = ({
     label: e.name,
   }));
 
-  const mapType = { value: type_product, label: type.name };
+  let nombreType = "";
+  types.forEach((e) => {
+    if (e.id === type_product) {
+      nombreType = e.name;
+    }
+  });
+
+  const mapType = { value: type_product, label: nombreType };
 
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
@@ -97,10 +83,12 @@ const Update = ({
     color,
     stock,
     type_product,
+    type: valueType,
     categories: valueCate,
     sizes: valueSize,
     price,
   });
+
   const [errors, setErrors] = useState({});
 
   const Options = categoriess.map((e) => {
@@ -109,12 +97,14 @@ const Update = ({
       label: e.name,
     };
   });
+
   const Optionsize = sizess.map((e) => {
     return {
       value: e.id,
       label: e.name,
     };
   });
+
   const OptionType = types.map((e) => {
     return {
       value: e.id,
@@ -127,6 +117,7 @@ const Update = ({
       ...input,
       [e.target.name]: e.target.value,
     });
+
     setErrors(
       validate({
         ...input,
@@ -137,11 +128,13 @@ const Update = ({
 
   const onSelectChangeNew = (valueCate) => {
     let tipesEnv = "";
+
     if (valueCate) {
       tipesEnv = valueCate.map((e) => {
         return e.value;
       });
     }
+
     setvalueCate(valueCate);
     addcategories(tipesEnv);
   };
@@ -155,11 +148,13 @@ const Update = ({
 
   const onSelectChangeNewSize = (valueSize) => {
     let tipesEnv = "";
+
     if (valueSize) {
       tipesEnv = valueSize.map((e) => {
         return e.value;
       });
     }
+
     setvalueSize(valueSize);
     addSizes(tipesEnv);
   };
@@ -174,171 +169,189 @@ const Update = ({
   const onSelectChangeNewType = (valueType) => {
     setInput({
       ...input,
-      type_Product: valueType.value,
+      type_product: valueType.value,
     });
 
     setvalueType(valueType);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
     let mapCategorie = input.categories.map((e) => e.value);
     let mapSizes = input.sizes.map((e) => e.value);
-
     let obj = {
       name: input.name,
       description: input.description,
       color: input.color,
-      image: input.image,
       stock: input.stock,
       type_product: input.type_product,
       categories: mapCategorie,
       sizes: mapSizes,
       price: input.price,
     };
-
-    // dispatch(putProduct(obj));
-
-    console.log("OBJ", obj);
-    console.log("INPUT", input);
+    dispatch(putProduct(productId, obj));
 
     alert("Successfully edited product");
     history.push("/list");
   };
 
   const cerrarModalInsertar = () => {
+    setInput({});
+
     history.push("/list");
   };
 
-  console.log(input);
-
   return (
-    <div className="crud_form">
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <div className="insertar">
-          <div>
-            <h3 className="h3_insert">Edit Product</h3>
+    <div>
+      <div className="todo">
+        <div className="navbar">
+          <div className="navbar__logo">
+            <img
+              className="img"
+              src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+              alt="clothes-Shop"
+              border="0"
+            ></img>
           </div>
-
-          <div className="insert_label">
-            <div className="labelUpdate">
-              <label className="labelUpdate_label">Categories</label>
-              <input name="categories" type="text" value={id} readOnly />
-            </div>
-            <Select
-              name="categories"
-              value={valueCate}
-              options={Options}
-              isMulti
-              onChange={(e) => onSelectChangeNew(e)}
-            />
+          <div className="cart__link">
+            <h2>Edit Product</h2>
           </div>
-          {errors.categories && <p className="error">{errors.categories}</p>}
-          <div className="insert_label">
-            <label>Zise</label>
-            <Select
-              value={valueSize}
-              options={Optionsize}
-              isMulti
-              onChange={(e) => onSelectChangeNewSize(e)}
-            />
-          </div>
-          <div className="insert_label">
-            <label>Type</label>
-            <Select
-              value={valueType}
-              options={OptionType}
-              onChange={(e) => onSelectChangeNewType(e)}
-            />
-          </div>
-          <div className="insert_label">
-            <label className="label_Insert">Name:</label>
-            <input
-              className="form-control"
-              name="name"
-              type="text"
-              onChange={handleChange}
-              value={input.name}
-            />
-            {errors.name && <p className="error">{errors.name}</p>}
-            <label className="label_Insert">Price:</label>
-            <input
-              className="form-control"
-              name="price"
-              type="number"
-              min="0"
-              onChange={handleChange}
-              value={input.price}
-            />
-            {errors.price && <p className="error">{errors.price}</p>}
-
-            <label className="label_Insert">Description:</label>
-            <input
-              className="form-control"
-              name="description"
-              type="text"
-              onChange={handleChange}
-              value={input.description}
-            />
-            {errors.description && (
-              <p className="error">{errors.description}</p>
-            )}
-
-            <label className="label_Insert">Stock:</label>
-            <input
-              className="form-control"
-              name="stock"
-              type="number"
-              min="0"
-              onChange={handleChange}
-              value={input.stock}
-            />
-            {errors.stock && <p className="error">{errors.stock}</p>}
-            <label className="label_Insert">Color:</label>
-            <input
-              className="form-control"
-              name="color"
-              type="text"
-              onChange={handleChange}
-              value={input.color}
-            />
-            {errors.color && <p className="error">{errors.color}</p>}
-
-            <label className="label_Insert">Image:</label>
-          </div>
-          <div className="crud_Form_Insert_cancelar">
-            <button
-              className="crud_Form_Insert_cancelar_button"
-              type="submit"
-              disabled={
-                !(
-                  input.name &&
-                  input.description &&
-                  input.color &&
-                  input.stock &&
-                  input.type_product &&
-                  input.sizes.length &&
-                  input.categories.length &&
-                  input.price
-                )
-              }
-            >
-              Editar
-            </button>
-            <button
-              className="crud_Form_Insert_cancelar_button_danger"
-              onClick={(e) => cerrarModalInsertar(e)}
-            >
-              Cancel
-            </button>
+          <div className="cart__link">
+            <ul className="navbar__links">
+              <li className="saco">
+                <Link to="/list" className="cart__link">
+                  <i class="fas fa-arrow-left fa-1x"></i>
+                  <span>
+                    Go to back <span className="cartlogo__badge">{}</span>
+                  </span>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-      </form>
+      </div>
+      <div className="crud_form">
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <div className="insertar">
+            <div className="insert_label">
+              <Select
+                className="selected"
+                name="categories"
+                value={valueCate}
+                options={Options}
+                isMulti
+                onChange={(e) => onSelectChangeNew(e)}
+              />
+            </div>
+            {errors.categories && <p className="error">{errors.categories}</p>}
+            <div className="insert_label">
+              <label>Zise</label>
+              <Select
+                className="selected"
+                value={valueSize}
+                options={Optionsize}
+                isMulti
+                onChange={(e) => onSelectChangeNewSize(e)}
+              />
+            </div>
+            <div className="insert_label">
+              <label>Type</label>
+              <Select
+                className="selected"
+                value={valueType}
+                options={OptionType}
+                onChange={(e) => onSelectChangeNewType(e)}
+              />
+            </div>
+            <div className="insert_label">
+              <label className="label_Insert">Name:</label>
+              <input
+                className="form-control"
+                name="name"
+                type="text"
+                onChange={handleChange}
+                value={input.name}
+              />
+              {errors.name && <p className="error">{errors.name}</p>}
+              <label className="label_Insert">Price:</label>
+              <input
+                className="form-control"
+                name="price"
+                type="number"
+                min="0"
+                onChange={handleChange}
+                value={input.price}
+              />
+              {errors.price && <p className="error">{errors.price}</p>}
+
+              <label className="label_Insert">Description:</label>
+              <input
+                className="form-control"
+                name="description"
+                type="text"
+                onChange={handleChange}
+                value={input.description}
+              />
+
+              {errors.description && (
+                <p className="error">{errors.description}</p>
+              )}
+
+              <label className="label_Insert">Stock:</label>
+              <input
+                className="form-control"
+                name="stock"
+                type="number"
+                min="0"
+                onChange={handleChange}
+                value={input.stock}
+              />
+              {errors.stock && <p className="error">{errors.stock}</p>}
+              <label className="label_Insert">Color:</label>
+              <input
+                className="form-control"
+                name="color"
+                type="text"
+                onChange={handleChange}
+                value={input.color}
+              />
+              {errors.color && <p className="error">{errors.color}</p>}
+
+              <label className="label_Insert">Image:</label>
+            </div>
+            <div className="crud_Form_Insert_cancelar">
+              <button
+                className="crud_Form_Insert_cancelar_button"
+                type="submit"
+                disabled={
+                  !(
+                    input.name &&
+                    input.description &&
+                    input.color &&
+                    input.stock &&
+                    input.type_product &&
+                    input.sizes.length &&
+                    input.categories.length &&
+                    input.price
+                  )
+                }
+              >
+                Editar
+              </button>
+              <button
+                className="crud_Form_Insert_cancelar_button_danger"
+                onClick={(e) => cerrarModalInsertar(e)}
+              >
+                Return
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

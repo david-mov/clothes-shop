@@ -1,37 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UpdateProduct from "./components/Update/UpdateProduct";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUpdateProductDetails } from "../../stateManagement/actions/getUpdatePDetail";
+import { cleanUpdate } from "../../stateManagement/actions/CleanPutUpdate";
+import { useParams } from "react-router";
+
 const FormTypeView = () => {
-  return (
-    <div>
-      <div className="todo">
-        <div className="navbar">
-          <div className="navbar__logo">
-            <img
-              className="img"
-              src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
-              alt="clothes-Shop"
-              border="0"
-            ></img>
-          </div>
-          <div className="cart__link">
-            <h2>Shopping Cart</h2>
-          </div>
-          <ul className="navbar__links">
-            <li className="saco">
-              <Link to="/list" className="cart__link">
-                <i className="fas fa-arrow-left fa-1x"></i>
-                <span>
-                  Go to back <span className="cartlogo__badge">{}</span>
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <UpdateProduct />
-    </div>
+  const dispatch = useDispatch();
+  const { productId } = useParams();
+
+  useEffect(() => {
+    dispatch(getUpdateProductDetails(productId));
+    return () => {
+      dispatch(cleanUpdate());
+    };
+  }, [dispatch, productId]);
+
+  const product = useSelector(
+    (state) => state.productsReducer.productUpdateDetails
   );
+
+  const formulario = () => {
+    if (Object.keys(product).length !== 0) {
+      return (
+        <UpdateProduct
+          name={product.name}
+          categories={product.categories}
+          price={product.price}
+          description={product.description}
+          color={product.color}
+          sizes={product.sizes}
+          type={product.type}
+          type_product={product.type_product}
+          stock={product.stock}
+          productId={productId}
+        />
+      );
+    }
+  };
+
+  return <div>{formulario()}</div>;
 };
 
 export default FormTypeView;

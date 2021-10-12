@@ -1,10 +1,18 @@
+:root {
+  --blanco: #ffffff;
+  --primario: #ffc107;
+  --secundario: #0097a7;
+  --gris: #757575;
+  --oscuro: #212121;
+}
+
 .HomePrincipal {
   margin: 0 auto;
 }
 .NavbarPaincipal {
   display: flex;
-  background-color: #171717;
-  padding: 1rem;
+  background-color: var(--oscuro);
+
   justify-content: space-between;
 }
 .abaout {
@@ -30,7 +38,7 @@
   width: 150px;
 }
 .spanHomePrincipal {
-  color: aliceblue;
+  color: var(--blanco);
   text-decoration: none;
   padding-left: 3rem;
 }
@@ -54,6 +62,6 @@
 }
 
 .footer {
-  background-color: #171717;
+  background-color: var(--oscuro);
   padding-bottom: 0.5rem;
 }

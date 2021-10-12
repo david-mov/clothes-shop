@@ -1,6 +1,6 @@
 import React from "react";
+import UpdateCategories from "./components/Update/UpdateCategories";
 import { Link } from "react-router-dom";
-import UpdateProducts from "./components/Update/UpdateProduct";
 
 const UpdateCategoriesView = () => {
   return (
@@ -16,21 +16,23 @@ const UpdateCategoriesView = () => {
             ></img>
           </div>
           <div className="cart__link">
-            <h2>Update Categories</h2>
+            <h2>Edit Categories</h2>
           </div>
-          <ul className="navbar__links">
-            <li className="saco">
-              <Link to="/list" className="cart__link">
-                <i className="fas fa-arrow-left fa-1x"></i>
-                <span>
-                  Go to back <span className="cartlogo__badge">{}</span>
-                </span>
-              </Link>
-            </li>
-          </ul>
+          <div className="cart__link">
+            <ul className="navbar__links">
+              <li className="saco">
+                <Link to="/list" className="cart__link">
+                  <i class="fas fa-arrow-left fa-1x"></i>
+                  <span>
+                    Go to back <span className="cartlogo__badge">{}</span>
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <UpdateProducts />
+      <UpdateCategories />
     </div>
   );
 };

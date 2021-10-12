@@ -14,11 +14,9 @@ export default function ProfileView() {
 		dispatch(getLogout());
 	}
 	return (
-		<div>
-			<p>id: {user.id}</p>			
+		<div>			
 			<p>name: {user?.name}</p>
 			<p>email: {user?.email}</p>
-			<p>rol: {user?.user_rol}</p>
 			<button onClick={() => handleLogout()}>Logout</button>
 		</div> 
 	)

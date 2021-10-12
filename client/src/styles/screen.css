@@ -1,13 +1,20 @@
-/* .homescreen {
+.homescreen {
   display: grid;
   max-width: 1500px;
   justify-content: center;
   align-items: center;
-} */
+}
+:root {
+  --blanco: #ffffff;
+  --primario: #ffc107;
+  --secundario: #0097a7;
+  --gris: #757575;
+  --oscuro: #212121;
+}
 
 .homescreen__title {
   font-size: 1.5rem;
-  color: #171717;
+  color: var(--oscuro);
   margin-bottom: 1rem;
   margin-left: 18px;
 }
@@ -42,8 +49,8 @@
   }
 }
 
-/* .total {
+.total {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 5px;
-} */
+}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../stateManagement/actions/getAllProducts";
 import TablaList from "./ListTable";
-//import "./style3s.css";
+import "./styles.css";
 import Select from "react-select";
 
 export default function ProductosLista() {
@@ -52,7 +52,7 @@ export default function ProductosLista() {
       <thead className="table__thead">
         <tr>
           <th className="table__th">
-            <div>
+            <div className="placeHolderSearch">
               <input
                 className="button placeHolderSearch"
                 type="text"
@@ -63,12 +63,7 @@ export default function ProductosLista() {
             </div>
           </th>
           <th className="table__th">
-            <Select
-              className="select-style"
-              //value={vista}
-              //options={OptionSelect}
-              //onChange= {handleChangeSelect}
-            />
+            <Select className="select-style" />
           </th>
         </tr>
         <tr>
@@ -144,7 +139,7 @@ export default function ProductosLista() {
     <div>
       <div className="body">
         <TablaList
-          title={"Porducts"}
+          title={"Products"}
           headers={headers()}
           data={products}
           bodyTable={bodyTable()}
@@ -157,7 +152,7 @@ export default function ProductosLista() {
         </button>
 
         <h1>
-          {actualCurrent} De {totalCurrent}
+          {actualCurrent} / {totalCurrent}
         </h1>
 
         <button className="button2" onClick={nextPage}>

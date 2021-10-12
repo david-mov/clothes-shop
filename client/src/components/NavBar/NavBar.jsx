@@ -88,7 +88,7 @@ function NavBar() {
           </div>
         </Link>
         <div className="cart__link">
-          <span>Categories</span>
+          <span className="cart_Link_name">Categories</span>
           <select
             className=""
             value={categoryValue}
@@ -99,14 +99,14 @@ function NavBar() {
           </select>
         </div>
         <div className="cart__link">
-          <div>Types</div>
+          <span className="cart_Link_name">Types</span>
           <select className="" value={typeValue} onChange={onSelectTypes}>
             <option value="none">All</option>
             {OptionsTypes}
           </select>
         </div>
         <div className="cart__link">
-          <div>Price</div>
+          <span className="cart_Link_name">Price</span>
           <select className="pintar" onChange={onChangePrice}>
             <option value="none">-</option>
             <option value="H">Higher</option>
@@ -126,7 +126,11 @@ function NavBar() {
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
                 <Badge badgeContent={basket?.length} color="secondary">
-                  <ShoppingCart fontSize="large" color="ligth" />
+                  <ShoppingCart
+                    className="temp"
+                    fontSize="large"
+                    color="ligth"
+                  />
                 </Badge>
               </IconButton>
             </Link>
@@ -139,7 +143,9 @@ function NavBar() {
                         </Link>*/}
           </li>
           <li>
-            <Link to="/list">Lists</Link>
+            <Link className="List_return" to="/list">
+              Admin Lists
+            </Link>
           </li>
         </ul>
       </div>

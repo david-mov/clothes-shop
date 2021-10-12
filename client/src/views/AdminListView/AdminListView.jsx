@@ -62,7 +62,7 @@ const ListaAdmin = () => {
           </div>
           <ul className="navbar__links">
             <li className="saco">
-              <Link to="/" className="cart__link">
+              <Link to="/catalogue" className="cart__link">
                 <i class="fas fa-arrow-left fa-1x"></i>
                 <span>
                   Go to back <span className="cartlogo__badge">{}</span>
