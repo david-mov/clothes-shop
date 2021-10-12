@@ -44,7 +44,7 @@ export default function productsReducer(state = initialState, action) {
             : state.productsCopy.filter((e) => e.type?.name === action.payload),
       };
     case GET_FILTER_BY_PRICE:
-      if (action.payload == "none") {
+      if (action.payload === "none") {
         return {
           ...state,
           products: state.productsCopy,
