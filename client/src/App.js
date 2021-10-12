@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomeView from "./views/HomeView/HomeView";
+import HomeView from "./views/HomeView/HomeIniView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView";
