@@ -1,11 +1,10 @@
-//import NotFoundView1  from "./components/NotFoundView1";
-import NotFoundView3  from "./components/NotFoundView3";
+import NotFoundView1  from "./components/NotFoundView1";
 
 
 export default function NotFoundView() {
 	return (
 		<div>
-			<NotFoundView3 />
+			<NotFoundView1 />
 		</div>
 	)
 }

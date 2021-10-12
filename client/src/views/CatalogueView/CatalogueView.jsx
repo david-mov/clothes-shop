@@ -5,8 +5,7 @@ import "../../styles/screen.css";
 export default function CatalogueView() {
   return (
     <div className="homescreen">
-      <NavBar></NavBar>
-      <h1>Catalogue</h1>
+      <NavBar />
       <div className="homescreen__products">
         <ProductCards />
       </div>

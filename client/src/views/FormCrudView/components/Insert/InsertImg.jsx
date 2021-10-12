@@ -23,6 +23,14 @@ export default function AddImgProduct({ id, name }) {
 
     const formData = new FormData();
     formData.append("img", file);
+    var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
+    if (!allowedExtensions.exec(file.name)) {
+      alert(
+        `"Please upload file having extensions .jpeg/.jpg/.png/.gif only, your file is ${file.name}`
+      );
+      file.value = "";
+      return false;
+    }
     dispatch(postAllImagesProducts(productId, formData));
     alert("Successfully insert image");
     history.push("/list");
@@ -31,7 +39,6 @@ export default function AddImgProduct({ id, name }) {
   const InputChange = (e) => {
     setfile(e.target.files[0]);
   };
-  //console.log("data ", file.type);
 
   return (
     <div className="crud_form">
