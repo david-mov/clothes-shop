@@ -1,30 +1,28 @@
 import { Route, Redirect } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getUser } from '../../stateManagement/actions/getUser';
+import { useUserRol } from '../../hooks/useUserRol';
 
-export const ProtectedRoute = ({component: Component, roles, ...rest}) => {
-	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getUser());
-	}, [])
-	const { user_rol } = useSelector(state => state.userReducer.user);
-	return (
-		<Route {...rest} render={
-			(props) => {
-				if (roles.some(e => e === user_rol)) {
-					return <Component {...props}/>
-				} else {
-					return <Redirect to={
-						{
-							pathname:'/',
-							state: {
-								from: props.location
-							}							
-						}
-					}/>
+export const ProtectedRoute = ({component: View, roles, other, ...rest}) => {
+	let [rol,ok] = useUserRol();
+	if (ok) {
+		return (
+			<Route {...rest} render={
+				(props) => {
+					if (roles.some(e => e === rol)) {
+						return <View {...rest} {...props} />
+					} else {
+						return <Redirect to={
+							{
+								pathname: other,
+								state: {
+									from: props.location
+								}
+							}
+						}/>
+					}
 				}
-			}
-		}/>
-	)
+			}/>
+		)
+	} else {
+		return (null)
+	}
 }

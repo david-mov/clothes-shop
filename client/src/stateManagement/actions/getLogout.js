@@ -5,7 +5,7 @@ import { HOST, PORT } from "../../consts/portConsts";
 export const getLogout = () => async (dispatch) => {
 	try {
 		const res = await axios.get(`http://${HOST}:${PORT}/user/logout`, {withCredentials: true})
-		dispatch({ type: GET_LOGOUT, payload: res.data })
+		dispatch({ type: GET_LOGOUT, payload: res })
 	}
 	catch (err) {
 		console.error(err);
