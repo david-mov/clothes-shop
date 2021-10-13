@@ -132,7 +132,7 @@ export default function CheckoutCard({
 
             </td>
             <td className="table-row__td">
-                    <input onChange={onChangeContador} type="number" min="0" max={stock}> 
+                    <input onChange={onChangeContador} type="number" min="0" max={stock-1}> 
                     </input>
             </td>
             <td className="table-row__td">

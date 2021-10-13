@@ -55,8 +55,7 @@ const checkoutReducer = (state = initialState, action) => {
             console.log("EL TOTAL AMOUNT EN REDUCER", state.totalAmount, action.payload)
             return{
               ...state,
-              totalAmount: state.anterior <= action.payload.cantidad ? parseInt((action.payload.cantidad * action.payload.price)) : parseInt((action.payload.cantidad * action.payload.price)),
-              anterior: action.payload.cantidad
+              totalAmount: state.totalAmount + action.payload
             }
           case "RESTA_CONTADOR":
             return{
