@@ -44,7 +44,7 @@ export default function TypeList() {
   }, [dispatch]);
 
   const types = useSelector((state) => state.typesReducer.types);
-  var totalCurrent = Math.ceil(types.length / countP);
+  var totalCurrent =types ? Math.ceil(types.length / countP): null;
 
   function headers() {
     return (
@@ -73,8 +73,7 @@ export default function TypeList() {
   }
 
   function bodyTable() {
-    return filterTypes()
-      .map((e, i) => {
+    return filterTypes() ? filterTypes().map((e, i) => {
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -84,7 +83,7 @@ export default function TypeList() {
             </td>
 
             <td className="table-row__td">
-              <Link to="/update/type">
+              <Link to={`/update/type/${e.id}`}>
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>
                 </p>
@@ -98,7 +97,7 @@ export default function TypeList() {
           </tr>
         );
       })
-      .slice(currentPage, currentPage + 5);
+      .slice(currentPage, currentPage + 5):null;
   }
 
   return (
