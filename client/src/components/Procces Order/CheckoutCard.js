@@ -45,28 +45,36 @@ export default function CheckoutCard({
     product, key
 }) {
 
-    var [cantidadTotal, setCantidadTotal] = useState(0)
+    var [cantidadTotal, setCantidadTotal] = useState()
     const basket = useSelector(state => state.checkoutReducer.basket)
     var [contador, setContador] = useState(1)
     const dispatch = useDispatch()
-    
+    var [guardo, setGuardo] = useState(false)
+
     const { productId, name, price, image, rating, stock } = product;
     
     const classes = useStyles();
     var total;
-    /*const onChangeContador = (e) => {
-       ((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
-       setCantidadTotal({ 
-           ...cantidadTotal,
-           cantidadTotal: (contador * price)})
-        console.log("ACA", price, contador)
-    }*/
-    var onChangeContador = (e) => {
-        (e.target.value === "+") ? dispatch(sumaContador(price)) : dispatch(restaContador(price))
+    const onChangeContador = (e) => {
+        if(e.target.value >= contador){
+            setContador(++contador)
+            setCantidadTotal((contador * price))
+        }else{
+            setContador(--contador)
+            setCantidadTotal((contador * price))
+        }
     }
     
+    
 
-
+    /*const onChangeContador = (e) => {
+       ((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
+       setCantidadTotal((contador * price))
+    }*/
+       
+        const miContador = (contador) => {
+            setContador(contador+1)
+        }
     
     const RemoveItem = (event, productId) => {
         event.preventDefault();        
@@ -81,7 +89,6 @@ export default function CheckoutCard({
         nameImagen = "products/logo JK&A.png";
     }
     var Amount;
-
     return (
         <tr className="table-row table-row--chris">
         
@@ -104,7 +111,7 @@ export default function CheckoutCard({
                 <p className="table-row__progress status--blue status">{contador}</p>
             </td>
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">{Amount=(contador * price)}</p>
+                <p className="table-row__progress status--blue status">{cantidadTotal}</p>
             </td>
 
             <td data-column="Progress" className="table-row__td">
@@ -125,8 +132,8 @@ export default function CheckoutCard({
 
             </td>
             <td className="table-row__td">
-               <button value="+" onClick={onChangeContador}>+</button>
-               <button value="-" onClick={onChangeContador}>-</button>
+                    <input onChange={onChangeContador} type="number" min="0" max={stock}> 
+                    </input>
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    

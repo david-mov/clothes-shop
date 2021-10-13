@@ -27,7 +27,6 @@ export default function ProductView() {
   const [tengo, setTengo] = useState(false);
   const basket = useSelector((state) => state.checkoutReducer.basket);
   const addToCart = () => {
-    console.log("ACAAAA", productId)
     basket.find((e) => e.productId !== productId) ? setTengo(true) : dispatch(getAddToCart(product));
   };
 
