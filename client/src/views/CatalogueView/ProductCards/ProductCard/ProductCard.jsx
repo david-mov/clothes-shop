@@ -6,20 +6,25 @@ import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
 import getAddToCart from "../../../../stateManagement/actions/getAddToCart";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {postAddToCart} from "../../../../stateManagement/actions/postAddToCart"
+import {getAllCart} from "../../../../stateManagement/actions/getAllCart"
 
 function ProductCard(props) {
   const [contador, setContador] = useState(1);
   const [tengo, setTengo] = useState(false);
-  const basket = useSelector((state) => state.checkoutReducer.basket);
+  const cart = useSelector((state) => state.checkoutReducer.cart);
   const { name, price, stock, description, image, rating, productId } = props;
   const dispatch = useDispatch();
-  const addToCart = () => {
-    basket.find((e) => e.productId === productId)
-      ? setTengo(true)
-      : dispatch(getAddToCart(props));
-  };
-
+  
+  
+  const addToCart = (ev) => {
+    dispatch(getAllCart())
+    var Cart_product = productId
+    var quantity = 1
+    var subtotal = price * quantity
+    cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({Cart_product, subtotal, quantity }))
+  }
   var nameImagen = "";
 
   if (image !== undefined) {

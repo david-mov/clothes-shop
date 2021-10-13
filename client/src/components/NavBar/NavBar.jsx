@@ -12,9 +12,10 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
+import { getAllCart } from "../../stateManagement/actions/getAllCart";
 
 function NavBar() {
-  var { basket } = useSelector((state) => state.checkoutReducer);
+  
 
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
@@ -40,6 +41,9 @@ function NavBar() {
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllCart());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getAllTypes());
@@ -47,7 +51,7 @@ function NavBar() {
 
   var types = useSelector((state) => state.typesReducer.types);
   var categories = useSelector((state) => state.categoriesReducer.categories);
-  console.log(categories);
+  var { cart } = useSelector((state) => state.checkoutReducer);
 
   const OptionsCategories = categories.map((e, i) => {
     return (
@@ -125,7 +129,7 @@ function NavBar() {
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={basket?.length} color="secondary">
+                <Badge badgeContent={cart?.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"

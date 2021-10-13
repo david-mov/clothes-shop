@@ -10,6 +10,7 @@ const imageRouter = require('./image');
 const userRouter = require('./user');
 const ratingRouter = require('./rating');
 const viewRouter = require('./view');
+const postCart = require("./cart")
 
 
 router.use('/products', productsRouter);
@@ -21,5 +22,7 @@ router.use('/image', imageRouter);
 router.use('/user', userRouter);
 router.use('/rating', isUnauthenticated, ratingRouter);
 router.use('/view', viewRouter);
+router.use("/cart", postCart);
+
 
 module.exports = router;

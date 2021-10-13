@@ -1,5 +1,5 @@
 const initialState = {
-  basket: [],
+  cart: [],
   contadorState: [],
   totalAmount: [0],
   anterior: [0]
@@ -8,12 +8,12 @@ const initialState = {
 
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case "GET_ALL_CART":
+      console.log("EN EL REDUCER", action.payload)
       return {
         ...state,
-        basket: [...state.basket, action.payload],
-        totalAmount: parseInt(state.totalAmount + action.payload.price)
-      };
+        cart: action.payload
+      }
     case "REMOVE_ITEM":
       console.log("ACA ESTOY", action.payload)
       return {

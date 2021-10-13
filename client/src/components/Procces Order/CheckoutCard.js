@@ -41,17 +41,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function CheckoutCard({
-    product, key
-}) {
+export default function CheckoutCard({name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating}) {
 
-    var [cantidadTotal, setCantidadTotal] = useState()
-    const basket = useSelector(state => state.checkoutReducer.basket)
-    var [contador, setContador] = useState(1)
     const dispatch = useDispatch()
-    var [guardo, setGuardo] = useState(false)
-
-    const { productId, name, price, image, rating, stock } = product;
+    const cart = useSelector(state => state.checkoutReducer.cart)
+    var [cantidadTotal, setCantidadTotal] = useState()
+    var [contador, setContador] = useState(1)
     
     const classes = useStyles();
     var total;
@@ -108,14 +103,14 @@ export default function CheckoutCard({
             </td>
 
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">{contador}</p>
+                <p className="table-row__progress status--blue status">{quantity}</p>
             </td>
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">{cantidadTotal}</p>
+                <p className="table-row__progress status--blue status">{subtotal}</p>
             </td>
 
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">On Track</p>
+                <p className="table-row__progress status--blue status">{size}</p>
             </td>
 
             <td className="table-row__td">
