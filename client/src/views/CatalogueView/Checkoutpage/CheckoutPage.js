@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CheckoutPage = () => {
     const classes = useStyles();
-    var { basket } = useSelector(state => state.checkoutReducer)
+    var { cart } = useSelector(state => state.checkoutReducer)
     var { totalAmount} = useSelector(state => state.checkoutReducer)
     function FormRow() {
         return (
@@ -37,8 +37,19 @@ const CheckoutPage = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="table__tbody">
-                                    {basket?.map((product) => (
-                                        <CheckoutCard key={product.id} product={product} />
+                                    {cart?.map((e) => (
+                                        <CheckoutCard key={e.product.id} 
+                                        name={e.product.name}
+                                        stock={e.product.stock}                         
+                                        productId={e.product.id}
+                                        idCarrito={e.id}
+                                        quantity={e.quantity}
+                                        price={e.product.price}
+                                        image={e.product.images[0]}
+                                        subtotal={e.subtotal}
+                                        size={e.product.size}
+                                        color={e.product.color}
+                                         />
                                     ))}
                                 </tbody>
                             </table>
