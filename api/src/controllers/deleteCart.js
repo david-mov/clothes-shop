@@ -1,4 +1,4 @@
-const { Cart } = require('../db.js')
+const { Cart, Product, Image } = require('../db.js')
 
 const deleteCart = async(req,res,next) => {
 const {productId} = req.params   
@@ -9,7 +9,12 @@ try{
     }
     })
     if(busco){
-        res.json(busco)
+        const traigoCarrito = await Cart.findAll({
+            include: [
+                {model: Product, include: [Image] }
+              ]
+        })
+        res.json(traigoCarrito)
     }else{
         res.json(false)
     }

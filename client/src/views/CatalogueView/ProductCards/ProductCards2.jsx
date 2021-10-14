@@ -3,12 +3,9 @@ import "../../../styles/stylePaginator.css";
 import "../../../styles/styleCata2.css";
 import ProductCard2 from "./ProductCard/ProductCard2";
 import { useSelector } from "react-redux";
-<<<<<<< HEAD
 import { getAllCart } from "../../../stateManagement/actions/getAllCart";
 import { useDispatch } from "react-redux";
-=======
 import Paginator from '../../PaginatorView/PaginatorView';
->>>>>>> cba7679ae1cabce7993b8ef7b150a27f9f1e795a
 
 const Product = () => {
   const dispatch = useDispatch()
