@@ -1,23 +1,24 @@
 const initialState = {
-  basket: [],
+  cart: [],
   contadorState: [],
   totalAmount: [0],
+  anterior: [0]
 };
 
 
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case "GET_ALL_CART":
+      console.log("EN EL REDUCER", action.payload)
       return {
         ...state,
-        basket: [...state.basket, action.payload],
-        totalAmount: parseInt(state.totalAmount + action.payload.price)
-      };
+        cart: action.payload
+      }
     case "REMOVE_ITEM":
       console.log("ACA ESTOY", action.payload)
       return {
         ...state,
-        basket:  state.basket.filter(e => e.productId !== action.payload)
+        cart: state.cart.filter(e => e.product.id !== action.payload)
       };
     case "EMPTY_BASKET":
       return {
@@ -54,12 +55,12 @@ const checkoutReducer = (state = initialState, action) => {
             console.log("EL TOTAL AMOUNT EN REDUCER", state.totalAmount, action.payload)
             return{
               ...state,
-              totalAmount: parseInt(state.totalAmount + action.payload)
+              totalAmount: state.totalAmount + action.payload
             }
           case "RESTA_CONTADOR":
             return{
               ...state,
-              totalAmount: action.payload >= state.totalAmount  ? 0 : parseInt(state.totalAmount - action.payload)
+              totalAmount: action.payload >= state.totalAmount  ? 0 : parseInt(state.totalAmount - (action.payload.cantidad * action.payload.price - action.payload.price))
             }
     default:
       return state;

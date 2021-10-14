@@ -22,7 +22,8 @@ export default function productsReducer(state = initialState, action) {
 		case GET_ALL_PRODUCTS:
 			return {
 				...state,
-				products: action.payload.filter(e => e.stock > 0),
+				//products: action.payload.filter(e => e.stock > 0),
+        products: action.payload,
 				productsCopy: action.payload
 			}
     case GET_CATEGORY:
