@@ -8,7 +8,7 @@ import getAddToCart from "../../../../stateManagement/actions/getAddToCart";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-function ProductCard(props) {
+function ProductCard2(props) {
   const [contador, setContador] = useState(1);
   const [tengo, setTengo] = useState(false);
   const basket = useSelector((state) => state.checkoutReducer.basket);
@@ -57,4 +57,4 @@ function ProductCard(props) {
     </div>
   );
 }
-export default ProductCard;
+export default ProductCard2;

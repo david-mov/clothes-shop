@@ -1,5 +1,5 @@
 import NavBar from "../../components/NavBar/NavBar.jsx";
-import ProductCards from "./ProductCards/ProductCards.jsx";
+import ProductCards2 from "./ProductCards/ProductCards2.jsx";
 import "../../styles/screen.css";
 
 export default function CatalogueView() {
@@ -7,7 +7,7 @@ export default function CatalogueView() {
     <div className="homescreen">
       <NavBar />
       <div className="homescreen__products">
-        <ProductCards />
+        <ProductCards2 />
       </div>
     </div>
   );

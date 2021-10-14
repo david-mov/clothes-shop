@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeView from "./views/HomeView/HomeIniView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
-import ProductView from "./views/ProductView/ProductView";
+import ProductView from "./views/ProductView/ProductView2";
 import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from "./views/CatalogueView/CatalogueView";
 import UpdateProduct from "./views/FormCrudView/FormUpdateView";
