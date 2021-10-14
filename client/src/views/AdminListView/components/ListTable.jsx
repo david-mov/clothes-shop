@@ -6,7 +6,7 @@ export default function TablaList({ title, headers, data, bodyTable, url }) {
       <div className="row row--top-40">
         <div className="col-md-12">
           <h2 className="row__title">
-            Total {title} {data.length}
+            Total {title} {data ? data.length : null}
           </h2>
         </div>
       </div>

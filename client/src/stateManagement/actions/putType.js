@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const putCategory = (id,payload) => {
+export const putType = (id,payload) => {
   return async (dispatch) => {
     try {
-      await axios.put(`/category/update/${id}`, payload);
+      await axios.put(`/type/update/${id}`, payload);
      
     } catch (err) {
       console.error(err);

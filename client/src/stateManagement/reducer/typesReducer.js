@@ -1,9 +1,11 @@
 import { 
-	GET_ALL_TYPES
+	CLEAN_UPDATE_PRODUCT_DETAILS,
+	GET_ALL_TYPES, GET_UPDATE_TYPE_DETAILS
 } from '../../consts/actionConsts';
 
 const initialState = {
 	types: [],
+	updateTypeDetails: {}
 };
 
 export default function typesReducer(state = initialState, action) {
@@ -13,6 +15,16 @@ export default function typesReducer(state = initialState, action) {
 				...state,
 				types: action.payload,
 			}
+			case GET_UPDATE_TYPE_DETAILS:
+				return {
+					...state,
+					updateTypeDetails: action.payload
+				}
+				case CLEAN_UPDATE_PRODUCT_DETAILS:
+					return {
+						state,
+						updateTypeDetails: {}
+					}
 		default:
 			return ({ ...state });
 	}

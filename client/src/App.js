@@ -19,8 +19,8 @@ import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
 import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
-import UpdateZises from "./views/FormCrudView/InsertSizeView";
-import UpdateType from "./views/FormCrudView/InsertTypeView";
+import UpdateZises from "./views/FormCrudView/UpdateSizesView";
+import UpdateType from "./views/FormCrudView/UpdateTypesView";
 
 function App() {
   return (
