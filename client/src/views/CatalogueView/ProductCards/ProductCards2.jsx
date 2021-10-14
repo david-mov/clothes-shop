@@ -3,6 +3,7 @@ import "../../../styles/stylePaginator.css";
 import "../../../styles/styleCata2.css";
 import ProductCard2 from "./ProductCard/ProductCard2";
 import { useSelector } from "react-redux";
+import Paginator from '../../PaginatorView/PaginatorView';
 
 const Product = () => {
   var { products } = useSelector((state) => state.productsReducer);
@@ -11,13 +12,7 @@ const Product = () => {
   
   return (
     <div>
-    <div className="pagination">
-          <a href="#" className="pagination-item ">prev</a>
-          <a href="#" className="pagination-item active">1</a>
-          <a href="#" className="pagination-item ">TO</a>
-          <a href="#" className="pagination-item ">33</a>
-          <a href="#" className="pagination-item ">next</a>
-        </div>
+    <Paginator />
     <div className="homescreen__products">
       {products?.map((e) => (
         <ProductCard2
@@ -33,6 +28,7 @@ const Product = () => {
       ))}      
         
       </div>
+      <Paginator />
       
     </div>
   );
