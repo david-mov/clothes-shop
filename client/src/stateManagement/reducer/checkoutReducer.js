@@ -18,7 +18,7 @@ const checkoutReducer = (state = initialState, action) => {
       console.log("ACA ESTOY", action.payload)
       return {
         ...state,
-        basket:  state.basket.filter(e => e.productId !== action.payload)
+        cart: state.cart.filter(e => e.product.id !== action.payload)
       };
     case "EMPTY_BASKET":
       return {

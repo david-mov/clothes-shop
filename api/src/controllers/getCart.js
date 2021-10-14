@@ -7,7 +7,6 @@ const getCart = async(req,res,next) => {
                 {model: Product, include: [Image] }
               ]
         })
-        console.log("ER CARRO",traigoCarrito)
         res.json(traigoCarrito)
     }catch(err){
         next(err)
