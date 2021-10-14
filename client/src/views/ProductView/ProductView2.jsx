@@ -39,18 +39,16 @@ export default function ProductView() {
                 return product.images.map((e) => {
                     nameImagen = "imageProduct/" + e.name;
                     return (
-                        <div><img classNameName="imgProd" src={require(`../../assets/${nameImagen}`).default}></img></div>
-                            
-                      
-
-
+                        <div className="div_carrousel">
+                            <img src={require(`../../assets/${nameImagen}`).default}></img>
+                        </div>
                     );
                 });
             } else {
                 nameImagen = "products/logo JK&A.png";
                 return (
-                    <div>
-                        <img classNameName="imgProd" src={require(`../../assets/${nameImagen}`).default}></img>
+                    <div className="div_carrousel">
+                        <img  src={require(`../../assets/${nameImagen}`).default}></img>
                     </div>
                 );
             }
@@ -125,51 +123,49 @@ export default function ProductView() {
                                 </svg>
                             </div>
                             <div className="zoom_imgOrigin wrapperImg">
-                                <div className="zoom_imgSource imagen" >
-                                    <svg fill="none" viewBox="0 0 50 50" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-                                        <foreignObject width="100%" height="100%">
-                                            <div xmlns="http://www.w3.org/1999/xhtml">
-                                                <div id="emotes">
-                                                {rendeImages()}
-                                                </div>
-                                            </div>
-                                        </foreignObject>
-                                    </svg>                                    
+                                <div id="emotes" className="zoom_imgSource imagen " >
+                                   
+                                        {rendeImages()}
+                                    
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="texto">
-                        <div className="wrapper">
-                            <p className="nombre">{product.name}</p>
-                            <div className="precios">
-                                <p className="precio">{product.price || product.price}</p>
-                                {product.price ? <p className="precioOferta">${product.price}</p> : ''}
-                            </div>
-                            <p className={`stock ${product.stock ? '' : 'out'} bold`}>{product.stock ? 'Disponible en tienda y listo para enviar' : 'Fuera de stock'}</p>
-                            <p className="codigo"><span className="bold">Stock Product: </span>{product.stock}</p>
-                            <p className="codigo"><span className="bold">Code Product: </span>{productId}</p>
-                            <div className="actions">
-                                <div className={`component_toCartCantidad ${!product.stock ? 'disabled' : ''}`}>
-                                    <div className={`toCartBoton menos ${contador === 1 ? 'disabled' : ''}`} onClick={removeCantidad}></div>
-                                    <div className="">{contador}</div>
-                                    <div className={`toCartBoton mas ${contador === product.stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
+                        <div className="texto">
+                            <div className="wrapper">
+                                <p className="nombre">{product.name}</p>
+                                <div className="precios">
+                                    <p className="precio">{product.price || product.price}</p>
+                                    {product.price ? <p className="precioOferta">${product.price}</p> : ''}
                                 </div>
-                                <div className={`botonTextoIcono ${!product.stock ? 'disabled' : ''}`}>
-                                    <label className="labelBoton">Add to Car</label>
-                                    <div className="icono">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-                                            <path d="M2 6h10l10 40h32l8-24H16"></path>
-                                            <circle cx="23" cy="54" r="4"></circle>
-                                            <circle cx="49" cy="54" r="4"></circle>
-                                        </svg>
+                                <p className={`stock ${product.stock ? '' : 'out'} bold`}>{product.stock ? 'Disponible en tienda y listo para enviar' : 'Fuera de stock'}</p>
+                                <p className="codigo"><span className="bold">Stock Product: </span>{product.stock}</p>
+                                <p className="codigo"><span className="bold">Code Product: </span>{productId}</p>
+                                <p className="descripcion"><span className="bold">Color: </span>{product.color}</p>
+                                <p className="descripcion"><span className="bold">Type: </span></p>
+                                <p className="descripcion"><span className="bold">Sizes: </span></p>
+                                <div className="actions">
+                                    <div className={`component_toCartCantidad ${!product.stock ? 'disabled' : ''}`}>
+                                        <div className={`toCartBoton menos ${contador === 1 ? 'disabled' : ''}`} onClick={removeCantidad}></div>
+                                        <div className="">{contador}</div>
+                                        <div className={`toCartBoton mas ${contador === product.stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
+                                    </div>
+                                    <div className={`botonTextoIcono ${!product.stock ? 'disabled' : ''}`}>
+                                        <label className="labelBoton">Add to Car</label>
+                                        <div className="icono">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+                                                <path d="M2 6h10l10 40h32l8-24H16"></path>
+                                                <circle cx="23" cy="54" r="4"></circle>
+                                                <circle cx="49" cy="54" r="4"></circle>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
+                                <p className="descripcion"><span className="bold">Description: </span></p>
+                                <p className="descripcion">{product.description}</p>
+                                <Link className="boton" to={`/product/${productId}`}>
+                                    Show Details
+                                </Link>
                             </div>
-                            <p className="descripcion">{product.description}</p>
-                            <Link className="boton" to={`/product/${productId}`}>
-                                Show Details
-                            </Link>
                         </div>
                     </div>
                 </div>
@@ -189,59 +185,66 @@ export default function ProductView() {
 
 
 
-                <div className="infoRapidaModal">
-                <div className="closeModal"></div>
-                <div className="modalContainer">
-                    <div className="topContent">
-                        <div className="imagenContainer zoom_section">
-                            <div className="zoom_launcher zoomWatch" title="Closed">X
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-                                    <path d="M2.002 40h22v22h-22z"></path>
-                                    <path d="M2 28V2h60v60H36"></path>
-                                    <path d="M30 34l22-22m-16 0h16v16"></path>
-                                </svg>
-                            </div>
-                            <div className="zoom_imgOrigin wrapperImg">
-                                    <div className="zoom_imgSource imagen" >
-                                        {rendeImages()}
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    <div className="texto">
-                        <div className="wrapper">
-                            <p className="nombre">{product.name}</p>
-                            <div className="precios">
-                                <p className="precio">{product.price || product.price}</p>
-                                {product.price ? <p className="precioOferta">${product.price}</p> : ''}
-                            </div>
-                            <p className={`stock ${product.stock ? '' : 'out'} bold`}>{product.stock ? 'Disponible en tienda y listo para enviar' : 'Fuera de stock'}</p>
-                            <p className="codigo"><span className="bold">Stock Product: </span>{product.stock}</p>
-                            <p className="codigo"><span className="bold">Code Product: </span>{productId}</p>
-                            <p className="descripcion"><span className="bold">Color: </span>{product.color}</p>
-                            <p className="descripcion"><span className="bold">Type: </span></p>
-                            <p className="descripcion"><span className="bold">Sizes: </span></p>
-                            <div className="actions">
-                                <div className={`component_toCartCantidad ${!product.stock ? 'disabled' : ''}`}>
-                                    <div className={`toCartBoton menos ${contador === 1 ? 'disabled' : ''}`} onClick={removeCantidad}></div>
-                                    <div className="">{contador}</div>
-                                    <div className={`toCartBoton mas ${contador === product.stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
-                                </div>
-                                <div className={`botonTextoIcono ${!product.stock ? 'disabled' : ''}`}>
-                                    <label className="labelBoton">Add to Car</label>
-                                    <div className="icono">
-                                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-                                            <path d="M2 6h10l10 40h32l8-24H16"></path>
-                                            <circle cx="23" cy="54" r="4"></circle>
-                                            <circle cx="49" cy="54" r="4"></circle>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <p className="descripcion"><span className="bold">Description: </span></p>
-                            <p className="descripcion">{product.description}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+            <svg fill="none" viewBox="0 0 50 50" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+        #emotes {
+          display: flex;
+          font-size: 40px;
+        }
+        #emotes > div {
+          display: flex;
+                    align-items: center;
+                    justify-content: center;
+          width: 100%;
+          min-width: 100%;
+          position: relative;
+          left: 0;
+          animation: carousel 10s linear infinite;
+        }
+        @keyframes carousel {
+          0% { left: 50px; }
+          1% { left: 0; }
+          9% { left: 0; }
+          10% { left: -50px; }
+          19% { left: -50px; }
+          20% { left: -100px; }
+          29% { left: -100px; }
+          30% { left: -150px; }
+          39% { left: -150px; }
+          40% { left: -200px; }
+          49% { left: -200px; }
+          50% { left: -250px; }
+          59% { left: -250px; }
+          60% { left: -300px; }
+          69% { left: -300px; }
+          70% { left: -350px; }
+          79% { left: -350px; }
+          80% { left: -400px; }
+          89% { left: -400px; }
+          90% { left: -450px; }
+          99% { left: -450px; }
+          100% { left: -500px; }
+        }
+            </style>
+            <div id="emotes">
+        <div>😃</div>
+        <div>😍</div>
+        <div>😜</div>
+        <div>😇</div>
+        <div>😘</div>
+        <div>😎</div>
+        <div>😭</div>
+        <div>🤯</div>
+        <div>🤑</div>
+        <div>😂</div>
+      </div>
+        </div>
+    </foreignObject>
+</svg>
+
 */

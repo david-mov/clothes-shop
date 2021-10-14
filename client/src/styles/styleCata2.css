@@ -802,7 +802,7 @@
 	display: flex;
 	font-size: 40px;
   }
-  #emotes > div {
+  #emotes > .div_carrousel {
 	display: flex;
 			  align-items: center;
 			  justify-content: center;
