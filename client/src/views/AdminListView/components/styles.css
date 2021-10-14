@@ -414,3 +414,14 @@ body {
 .placeHolderSearch {
   text-align: center;
 }
+
+.img1{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 5px;
+  padding-top: 15px;
+}
+
+img{
+  width: 100%;
+}

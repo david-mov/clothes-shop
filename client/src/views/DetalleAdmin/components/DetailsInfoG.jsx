@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-
+import '../../AdminListView/components/styles.css'
 
 export default function DetailProduct({
   name,
@@ -17,6 +17,8 @@ export default function DetailProduct({
   updatedAt,
   images,
 }) {
+
+
   return (
     <tbody className="table__tbody">
       <tr className="table-row table-row--chris">
@@ -110,14 +112,14 @@ export default function DetailProduct({
             </p>{' '}
           </Link>
         </td>
-        <td className="table-row__td">
+        <td >
           <p>
             <i className="fas fa-trash-alt fa-2x"></i>
           </p>
         </td>
       </tr>
-
-      <tr>
+  <div>
+      <tr  className='img1'>
         {images.map((e) => {
           var nameImagen = ''
 
@@ -129,16 +131,15 @@ export default function DetailProduct({
 
           return ( 
           <div>
-          <td><img src={require(`../../../assets/${nameImagen}`).default} alt="Not Image"></img></td>
-          
-          <td className="table-row__td">  
-             <p> <i className="fas fa-trash-alt fa-2x"></i></p>
-          
-          </td>
+           
+      <img src={require(`../../../assets/${nameImagen}`).default} alt="Not Image"></img>
+           <p>{e.id}<i className="fas fa-trash-alt fa-2x"></i></p>
+  
           </div>
           )
         })}
       </tr>
+     </div>
     </tbody>
   )
 }
