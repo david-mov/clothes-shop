@@ -47,12 +47,12 @@ async function preload() {
   ];
   const rolesData = ["superAdmin", "admin", "user", "banned", "inactive"];
 
-  const superAdmin = {
-    name: "Juan",
-    email:"juan123@gmail.com",
-    password: "12345",
-    rol: rolesData[0]    
-  } 
+  // const superAdmin = {
+  //   name: "Juan",
+  //   email:"juan123@gmail.com",
+  //   password: "12345",
+  //   rol: rolesData[0]    
+  // } 
 
   
  
@@ -87,17 +87,17 @@ async function preload() {
     });
   }
 
-  const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+  // const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
 
-  const newUser = await User.create({
+  // const newUser = await User.create({
    
-      email: superAdmin.email,
-      name: superAdmin.name,
-      password: hashedPassword
+  //     email: superAdmin.email,
+  //     name: superAdmin.name,
+  //     password: hashedPassword
     
-  });
+  // });
       
-  const nuevoUsuario =  await newUser.setRol(1)
+  // const nuevoUsuario =  await newUser.setRol(1)
   
 } // temporal function
 
