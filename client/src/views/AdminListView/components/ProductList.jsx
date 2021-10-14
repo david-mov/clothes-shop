@@ -5,6 +5,7 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
+import Paginator from '../../PaginatorView/PaginatorView';
 
 export default function ProductosLista() {
   const dispatch = useDispatch();
@@ -137,7 +138,7 @@ export default function ProductosLista() {
 
   return (
     <div>
-      <div className="body">
+      <div className="body">      
         <TablaList
           title={"Products"}
           headers={headers()}
@@ -147,7 +148,8 @@ export default function ProductosLista() {
         />
       </div>
       <div className="buttonList">
-        <button className="button2" onClick={prevPage}>
+      <Paginator />
+        {/* <button className="button2" onClick={prevPage}>
           PREV
         </button>
 
@@ -157,7 +159,7 @@ export default function ProductosLista() {
 
         <button className="button2" onClick={nextPage}>
           NEXT
-        </button>
+        </button> */}
       </div>
     </div>
   );

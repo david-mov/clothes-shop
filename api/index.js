@@ -47,12 +47,21 @@ async function preload() {
   ];
   const rolesData = ["superAdmin", "admin", "user", "banned", "inactive"];
 
+<<<<<<< HEAD
  /* const superAdmin = {
     name: "Juan",
     email:"juan123@gmail.com",
     password: "12345",
     rol: rolesData[0]    
   } 
+=======
+  // const superAdmin = {
+  //   name: "Juan",
+  //   email:"juan123@gmail.com",
+  //   password: "12345",
+  //   rol: rolesData[0]    
+  // } 
+>>>>>>> cba7679ae1cabce7993b8ef7b150a27f9f1e795a
 
   */
  
@@ -87,18 +96,27 @@ async function preload() {
     });
   }
 
+<<<<<<< HEAD
  /* const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+=======
+  // const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+>>>>>>> cba7679ae1cabce7993b8ef7b150a27f9f1e795a
 
-  const newUser = await User.create({
+  // const newUser = await User.create({
    
-      email: superAdmin.email,
-      name: superAdmin.name,
-      password: hashedPassword
+  //     email: superAdmin.email,
+  //     name: superAdmin.name,
+  //     password: hashedPassword
     
-  });
+  // });
       
+<<<<<<< HEAD
   const nuevoUsuario =  await newUser.setRol(1)
   */
+=======
+  // const nuevoUsuario =  await newUser.setRol(1)
+  
+>>>>>>> cba7679ae1cabce7993b8ef7b150a27f9f1e795a
 } // temporal function
 
 // Syncing all the models at once.

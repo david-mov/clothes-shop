@@ -89,7 +89,7 @@ export default function ProductView() {
               <Link to="/catalogue" className="cart__link">
                 <i className="fas fa-arrow-left fa-1x"></i>
                 <span>
-                  Go to back <span className="cartlogo__badge">{}</span>
+                  Go to back <span className="cartlogo__badge">{ }</span>
                 </span>
               </Link>
             </li>
@@ -140,7 +140,6 @@ export default function ProductView() {
                 </div>
               </div>
             </div>
-
             <div className="infoRapidaModal">
               <div className="closeModal"></div>
               <div className="modalContainer">
@@ -201,28 +200,24 @@ export default function ProductView() {
                       </p>
                       <div className="actions">
                         <div
-                          className={`component_toCartCantidad ${
-                            !product.stock ? "disabled" : ""
-                          }`}
+                          className={`component_toCartCantidad ${!product.stock ? "disabled" : ""
+                            }`}
                         >
                           <div
-                            className={`toCartBoton menos ${
-                              contador === 1 ? "disabled" : ""
-                            }`}
+                            className={`toCartBoton menos ${contador === 1 ? "disabled" : ""
+                              }`}
                             onClick={removeCantidad}
                           ></div>
                           <div className="">{contador}</div>
                           <div
-                            className={`toCartBoton mas ${
-                              contador === product.stock ? "disabled" : ""
-                            }`}
+                            className={`toCartBoton mas ${contador === product.stock ? "disabled" : ""
+                              }`}
                             onClick={addCantidad}
                           ></div>
                         </div>
                         <div
-                          className={`botonTextoIcono ${
-                            !product.stock ? "disabled" : ""
-                          }`}
+                          className={`botonTextoIcono ${!product.stock ? "disabled" : ""
+                            }`}
                         >
                           <label className="labelBoton">Add to Car</label>
                           <div className="icono">
@@ -260,72 +255,4 @@ export default function ProductView() {
   );
 }
 
-/*
 
-
-
-
-
-
-
-
-            <svg fill="none" viewBox="0 0 50 50" width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-    <foreignObject width="100%" height="100%">
-        <div xmlns="http://www.w3.org/1999/xhtml">
-            <style>
-        #emotes {
-          display: flex;
-          font-size: 40px;
-        }
-        #emotes > div {
-          display: flex;
-                    align-items: center;
-                    justify-content: center;
-          width: 100%;
-          min-width: 100%;
-          position: relative;
-          left: 0;
-          animation: carousel 10s linear infinite;
-        }
-        @keyframes carousel {
-          0% { left: 50px; }
-          1% { left: 0; }
-          9% { left: 0; }
-          10% { left: -50px; }
-          19% { left: -50px; }
-          20% { left: -100px; }
-          29% { left: -100px; }
-          30% { left: -150px; }
-          39% { left: -150px; }
-          40% { left: -200px; }
-          49% { left: -200px; }
-          50% { left: -250px; }
-          59% { left: -250px; }
-          60% { left: -300px; }
-          69% { left: -300px; }
-          70% { left: -350px; }
-          79% { left: -350px; }
-          80% { left: -400px; }
-          89% { left: -400px; }
-          90% { left: -450px; }
-          99% { left: -450px; }
-          100% { left: -500px; }
-        }
-            </style>
-            <div id="emotes">
-        <div>😃</div>
-        <div>😍</div>
-        <div>😜</div>
-        <div>😇</div>
-        <div>😘</div>
-        <div>😎</div>
-        <div>😭</div>
-        <div>🤯</div>
-        <div>🤑</div>
-        <div>😂</div>
-      </div>
-        </div>
-    </foreignObject>
-</svg>
-
-*/
