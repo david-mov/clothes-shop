@@ -14,9 +14,8 @@ const Product = () => {
     <div className="pagination">
           <a href="#" className="pagination-item ">prev</a>
           <a href="#" className="pagination-item active">1</a>
-          <a href="#" className="pagination-item ">2</a>
-          <a href="#" className="pagination-item ">3</a>
-          <a href="#" className="pagination-item ">4</a>
+          <a href="#" className="pagination-item ">TO</a>
+          <a href="#" className="pagination-item ">33</a>
           <a href="#" className="pagination-item ">next</a>
         </div>
     <div className="homescreen__products">

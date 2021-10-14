@@ -81,14 +81,14 @@ function ProductCard2(props) {
                             </div>
                             <div className="texto">
                                 <div className="wrapper">
-                                    <p className="nombre" onClick={hidenVistaRapida}>{name}</p>
-                                    <div className="precios" onClick={hidenVistaRapida}>
+                                    <p className="nombre">{name}</p>
+                                    <div className="precios">
                                         <p className="precio">{price || price}</p>
                                         {price ? <p className="precioOferta">${price}</p> : ''}
                                     </div>
-                                    <p className={`stock ${stock ? '' : 'out'} bold`} onClick={hidenVistaRapida}>{stock ? 'Disponible en tienda y listo para enviar' : 'Fuera de stock'}</p>
-                                    <p className="codigo"><span className="bold" onClick={hidenVistaRapida}>Stock Product: </span>{stock}</p>
-                                    <p className="codigo"><span className="bold" onClick={hidenVistaRapida}>Code Product: </span>{productId}</p>
+                                    <p className={`stock ${stock ? '' : 'out'} bold`}>{stock ? 'Disponible en tienda y listo para enviar' : 'Fuera de stock'}</p>
+                                    <p className="codigo"><span className="bold">Stock Product: </span>{stock}</p>
+                                    <p className="codigo"><span className="bold">Code Product: </span>{productId}</p>
                                     <div className="actions">
                                         <div className={`component_toCartCantidad ${!stock ? 'disabled' : ''}`}>
                                             <div className={`toCartBoton menos ${contador === 1 ? 'disabled' : ''}`} onClick={removeCantidad}></div>
