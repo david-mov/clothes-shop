@@ -21,7 +21,7 @@
 require("dotenv").config();
 const server = require("./src/app.js");
 const { conn, Category, Size, Type, Rol } = require("./src/db.js");
-const { DB_PORT } = process.env;
+const { PORT } = process.env;
 
 async function preload() {
   const categoriesData = [
@@ -77,8 +77,8 @@ async function preload() {
 
 // Syncing all the models at once.
 conn.sync({ force: false }).then(() => {
-  server.listen(DB_PORT, () => {
+  server.listen(PORT, () => {
     preload();
-    console.log(`%the best henry final project listening at ${DB_PORT}`); // eslint-disable-line no-console
+    console.log(`%the best henry final project listening at ${PORT}`); // eslint-disable-line no-console
   });
 });
