@@ -31,7 +31,6 @@ body li {
   list-style-type: none;
 }
 @keyframes anim_toCartCantidad {
-  0%,
   100% {
     transform: translateY(0);
     opacity: 1;
