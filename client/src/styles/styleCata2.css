@@ -49,10 +49,18 @@ body li {
   0% {
     transform: scale(1);
   }
-  50% {
-    transform: scale(1.2);
-  }
 }
+#emotes > .div_carrousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 100%;
+  position: relative;
+  left: 0;
+  animation: carousel 10s linear infinite;
+}
+
 .disabled {
   opacity: 0.5;
   cursor: not-allowed !important;

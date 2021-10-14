@@ -39,21 +39,21 @@ function ProductCard2(props) {
         setshowDetail(false);
     }
     const show = () => {
-        if(showDetail){
+        if (showDetail) {
             return vistaRapidaProduct();
-        }            
-    }   
-
-    const addCantidad = () => {  
-        if(contador !== stock){
-            setContador(contador + 1)
-        }      
+        }
     }
 
-    const removeCantidad= () => {
-        if(contador !==1){
+    const addCantidad = () => {
+        if (contador !== stock) {
+            setContador(contador + 1)
+        }
+    }
+
+    const removeCantidad = () => {
+        if (contador !== 1) {
             setContador(contador - 1)
-        }        
+        }
     }
 
     const vistaRapidaProduct = () => {
@@ -104,19 +104,19 @@ function ProductCard2(props) {
                                                     <circle cx="49" cy="54" r="4"></circle>
                                                 </svg>
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                     <p className="descripcion">{description}</p>
                                     <Link className="boton" to={`/product/${productId}`}>
-                                    Show Details
+                                        Show Details
                                     </Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
-            
+
         )
     }
 
@@ -153,6 +153,9 @@ function ProductCard2(props) {
                     </div>
                 </a>
                 <div className="actions">
+                    <Link className="boton" to={`/product/${productId}`}>
+                        Show Details
+                    </Link>
                     <div className="boton alCarrito">Agregar al carrito</div>
                     <div className="row-buttons">
                         <div className="aFavs favoritos">
@@ -166,8 +169,8 @@ function ProductCard2(props) {
                         </div>
                     </div>
                 </div>
-            </div> 
-            {show()}           
+            </div>
+            {show()}
         </div>
     );
 }
