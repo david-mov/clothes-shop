@@ -6,7 +6,7 @@ const deleteCart = require("../controllers/deleteCart");
 
 router.post('/', postCart);
 router.get('/', getCart);
-router.delete('/', deleteCart);
+router.get('/delete/:productId', deleteCart);
 
 /*
 router.put('/:id', modifyCategory);

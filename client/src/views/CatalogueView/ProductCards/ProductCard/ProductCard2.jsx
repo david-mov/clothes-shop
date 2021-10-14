@@ -4,24 +4,29 @@ import "../ProductCard/ProductCard.css";
 // import { AddShoppingCart } from "@material-ui/icons";
 // import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
-import getAddToCart from "../../../../stateManagement/actions/getAddToCart";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import {postAddToCart} from "../../../../stateManagement/actions/postAddToCart"
+import {getAllCart} from "../../../../stateManagement/actions/getAllCart"
 
 
 function ProductCard2(props) {
+    const dispatch = useDispatch();
+    const cart = useSelector((state) => state.checkoutReducer.cart);
     const [contador, setContador] = useState(1);
     const [tengo, setTengo] = useState(false);
     const [showDetail, setshowDetail] = useState(false);
-    const basket = useSelector((state) => state.checkoutReducer.basket);
     const { name, price, stock, description, image, rating, productId } = props;
-    const dispatch = useDispatch();
-    const addToCart = () => {
-        basket.find((e) => e.productId === productId)
-            ? setTengo(true)
-            : dispatch(getAddToCart(props));
-    };
+    
+    
+    const addToCart = (ev) => {
+        var Cart_product = productId
+        var quantity = 1
+        var subtotal = price * quantity
+        cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({Cart_product, subtotal, quantity}))
+    }
+    
+
 
     var nameImagen = "";
 
@@ -96,7 +101,7 @@ function ProductCard2(props) {
                                             <div className={`toCartBoton mas ${contador === stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
                                         </div>
                                         <div className={`botonTextoIcono ${!stock ? 'disabled' : ''}`}>
-                                            <label className="labelBoton">Add to Car</label>
+                                            <label className="labelBoton" onClick={(ev) => addToCart(ev)}>Add to Cart</label>
                                             <div className="icono">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                                                     <path d="M2 6h10l10 40h32l8-24H16"></path>
@@ -156,7 +161,7 @@ function ProductCard2(props) {
                     <Link className="boton" to={`/product/${productId}`}>
                         Show Details
                     </Link>
-                    <div className="boton alCarrito">Agregar al carrito</div>
+                    <div className="boton alCarrito" onClick={(ev) => addToCart(ev)}>Add to cart</div>
                     <div className="row-buttons">
                         <div className="aFavs favoritos">
                             <div className="icono">

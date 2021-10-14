@@ -8,7 +8,8 @@ const initialState = {
 
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_CART":
+    case "POST_CART":
+      console.log("CARRITOOO", state.cart)
       console.log("EN EL REDUCER", action.payload)
       return {
         ...state,

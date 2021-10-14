@@ -1,7 +1,7 @@
 const { Cart } = require('../db.js')
 
 const deleteCart = async(req,res,next) => {
-const {productId} = req.body
+const {productId} = req.params   
 try{
     const busco = await Cart.destroy({
         where: {
@@ -9,7 +9,7 @@ try{
     }
     })
     if(busco){
-        res.json(productId)
+        res.json(busco)
     }else{
         res.json(false)
     }

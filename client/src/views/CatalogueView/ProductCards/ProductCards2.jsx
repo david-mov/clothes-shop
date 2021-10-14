@@ -1,10 +1,18 @@
-import React from "react";
+import {React, useEffect} from "react";
 import "../../../styles/stylePaginator.css";
 import "../../../styles/styleCata2.css";
 import ProductCard2 from "./ProductCard/ProductCard2";
 import { useSelector } from "react-redux";
+import { getAllCart } from "../../../stateManagement/actions/getAllCart";
+import { useDispatch } from "react-redux";
 
 const Product = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllCart());
+  }, [dispatch]);
+
   var { products } = useSelector((state) => state.productsReducer);
   //aca el estado ratin
   var rating = 2;
