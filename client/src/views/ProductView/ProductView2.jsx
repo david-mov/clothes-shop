@@ -5,10 +5,11 @@ import { getProductDetails } from "../../stateManagement/actions/getProductDetai
 import getAddToCart from "../../stateManagement/actions/getAddToCart";
 import { cleanUpObjet } from "../../stateManagement/actions/cleanStateObjet";
 import "./ProductView.css";
-import "../../styles/styleCata2.css";
+import "../../styles/productDetails.css";
 import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
+import Select from "react-select";
 
 export default function ProductView() {
   //aca el estado ratin
@@ -54,6 +55,28 @@ export default function ProductView() {
       }
     }
   };
+
+  const sizesSelect = () => {
+  
+    if (product.sizes !== undefined){
+      const Optionsizes = product.sizes.map((e) => {
+        return {
+          label:e.name,
+          value:e.id
+        }
+      });
+      return (
+        <Select 
+          options={Optionsizes}
+          isMulti
+        />
+      )
+
+      
+    }else{
+      console.log("aqui nada")
+    }
+  }
 
   const addCantidad = () => {
     if (product.stock !== 0) {
@@ -109,7 +132,7 @@ export default function ProductView() {
           </li>
         </div>
       </div>
-      <div className="infoRapidaModal">
+      <div className="infoRapidaModal2">
         <div className="closeModal"></div>
         <div className="modalContainer">
           <div className="topContent">
@@ -198,6 +221,9 @@ export default function ProductView() {
                       <p className="descripcion">
                         <span className="bold">Sizes: </span>
                       </p>
+                      <p>
+                      {sizesSelect()}
+                      </p>
                       <div className="actions">
                         <div
                           className={`component_toCartCantidad ${!product.stock ? "disabled" : ""
@@ -236,18 +262,12 @@ export default function ProductView() {
                         <span className="bold">Description: </span>
                       </p>
                       <p className="descripcion">{product.description}</p>
-                      <Link className="boton" to={`/product/${productId}`}>
-                        Show Details
-                      </Link>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <p className="descripcion">{product.description}</p>
-            <Link className="boton" to={`/product/${productId}`}>
-              Show Details
-            </Link>
           </div>
         </div>
       </div>
