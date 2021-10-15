@@ -5,7 +5,6 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
-import Paginator from '../../PaginatorView/componentes/Paginator';
 
 export default function ProductosLista() {
 
@@ -14,8 +13,8 @@ export default function ProductosLista() {
     dispatch(getAllProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.productsReducer.products);
-
-  
+  const [search, setSearch] = useState('S')
+  const [valor, setValor] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   var countP = 5;
@@ -24,15 +23,46 @@ export default function ProductosLista() {
   const [Input, setInput] = useState("");
   
   const filterProducts = () => {
-    if (Input !== "") {
-      return (dataCompleta = products.filter((e) =>
-        e.name.toLowerCase().includes(Input.toLowerCase())
-      ));
+    switch (valor) {
+      case 'input':
+        return (dataCompleta = products.filter((e) =>
+          e.name.toLowerCase().includes(Input.toLowerCase()),
+        ))
+
+      case 'Max Stock':
+        return (dataCompleta = products.sort((a,b)=>{
+          const StockA = parseInt(a.stock);
+                const StockB = parseInt(b.stock);
+                if (StockA > StockB)return -1;
+                if (StockA < StockB)return 1;
+                return 0;
+        }))
+
+      case 'Min Stock':
+        return (dataCompleta = products.sort((a,b)=>{
+          return a.stock - b.stock
+        }))
+
+      case 'Max Price':
+        return (dataCompleta = products.sort((a,b)=>{
+          const PriceA = parseInt(a.price);
+                const PriceB = parseInt(b.price);
+                if (PriceA > PriceB)return -1;
+                if (PriceA < PriceB)return 1;
+                return 0;
+        }))
+
+      case 'Min Price':
+        return (dataCompleta = products.sort((a,b)=>{
+          return a.price - b.price
+        }))
+      default:
+        return (dataCompleta = products)
     }
-    return (dataCompleta = products);
   };
 
   const onInputChange = (Input) => {
+    setValor('input')
     setInput(Input.target.value)
   }
 
@@ -44,6 +74,8 @@ export default function ProductosLista() {
   ]
 
   const handleChangeSelect = (search) => {
+    setValor(search.value)
+    setSearch(search)
   }
 
   const nextPage = () => {
@@ -58,6 +90,7 @@ export default function ProductosLista() {
       setactualCurrent(actualCurrent - 1)
       setCurrentPage(currentPage - countP)
     }
+  }
 
   
   
@@ -113,7 +146,7 @@ export default function ProductosLista() {
           <th>
             <Select
               className="selected"
-             
+              value={search}
               options={OptionSelect}
               onChange={handleChangeSelect}
             />
@@ -188,7 +221,6 @@ export default function ProductosLista() {
       .slice(currentPage, currentPage + 5)
   }
 
-  console.log('ailyn')
   return (
     <div>
       <div className="body">      
@@ -206,4 +238,4 @@ export default function ProductosLista() {
       </div>
     </div>
   )
-}}
+}
