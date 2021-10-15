@@ -5,23 +5,31 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
-import Paginator from '../../PaginatorView/PaginatorView';
+import Paginator from '../../PaginatorView/componentes/Paginator';
 
 export default function ProductosLista() {
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+  const products = useSelector((state) => state.productsReducer.products);
+
+  
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   var countP = 5;
   var dataCompleta = [];
+  var totalCurrent = Math.ceil(products?.length / countP);
   const [Input, setInput] = useState("");
-  const product = useSelector((state) => state.productsReducer.products);
+  
   const filterProducts = () => {
     if (Input !== "") {
-      return (dataCompleta = product.filter((e) =>
+      return (dataCompleta = products.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
       ));
     }
-    return (dataCompleta = product);
+    return (dataCompleta = products);
   };
 
   const onInputChange = (Input) => {
@@ -41,13 +49,41 @@ export default function ProductosLista() {
       setCurrentPage(currentPage - countP);
     }
   };
+  
+  const show = () => {
+    if (actualCurrent === 1) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>next</p>
+        </div>
+      )
+    } else if (actualCurrent >= totalCurrent) {
 
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+        </div>
+      )
+    } else {
 
-  const products = useSelector((state) => state.productsReducer.products);
-  var totalCurrent = Math.ceil(products.length / countP);
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>next</p>
+        </div>
+      )
+    }
+  }
+  
   function headers() {
     return (
       <thead className="table__thead">
@@ -148,18 +184,8 @@ export default function ProductosLista() {
         />
       </div>
       <div className="buttonList">
-      <Paginator />
-        {/* <button className="button2" onClick={prevPage}>
-          PREV
-        </button>
-
-        <h1>
-          {actualCurrent} / {totalCurrent}
-        </h1>
-
-        <button className="button2" onClick={nextPage}>
-          NEXT
-        </button> */}
+      {show()}
+       
       </div>
     </div>
   );
