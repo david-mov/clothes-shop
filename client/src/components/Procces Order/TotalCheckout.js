@@ -24,16 +24,19 @@ const Total = () => {
     var totalAmount = useSelector(state => state.checkoutReducer.totalAmount)
     const classes = useStyles();
     
+   
+
     var total = 0
     for(var i = 0; i < cart.length; i++){
-       total +=  parseInt(cart[i].subtotal)
+    total = total + parseInt(cart[i].subtotal )
     }
-           
+
+
     let miBasket = cart.length
     return (
         <div className={classes.root}>
             <h5>Total items: {miBasket}</h5>
-            <h5>Total Amount: {parseInt(totalAmount)}</h5>
+            <h5>Total Amount: {parseInt(total)}</h5>
             <Button
                 component={Link}
                 to='/checkout'
