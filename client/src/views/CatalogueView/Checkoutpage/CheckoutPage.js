@@ -1,13 +1,13 @@
 import "../../../styles/styleChecPage.css";
-import React from "react";
+import {React, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
 import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import {postAddToCart} from "../../../stateManagement/actions/postAddToCart"
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CheckoutPage = () => {
+  const dispatch = useDispatch()
+  
     const classes = useStyles();
     var { cart } = useSelector(state => state.checkoutReducer)
     var { totalAmount} = useSelector(state => state.checkoutReducer)

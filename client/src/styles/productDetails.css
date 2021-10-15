@@ -31,6 +31,7 @@ body li {
   list-style-type: none;
 }
 @keyframes anim_toCartCantidad {
+  0%,
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -48,19 +49,10 @@ body li {
   0% {
     transform: scale(1);
   }
+  50% {
+    transform: scale(1.2);
+  }
 }
-
-#emotes > .div_carrousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-width: 100%;
-  position: relative;
-  left: 0;
-  animation: carousel 10s linear infinite;
-}
-
 .disabled {
   opacity: 0.5;
   cursor: not-allowed !important;
@@ -228,10 +220,12 @@ body li {
   align-content: center;
 }
 .card {
-  width: 100%;
+  width: 25%;
+  min-width: 300px;
 }
 .card .innerProd {
-  height: calc(100% - 40px);
+  height: calc(100% - 20px);
+  margin: 10px;
   border-radius: 5px;
   display: block;
   border: 1px solid #eee;
@@ -312,11 +306,10 @@ body li {
   transition: ease all 0.3s;
 }
 .card .innerProd .info {
-  text-decoration: none;
-  padding: 10px 10px;
+  padding: 20px 10px;
   text-align: center;
   display: block;
-  height: 100px;
+  height: 180px;
   box-sizing: border-box;
 }
 .card .innerProd .info .prodName {
@@ -354,13 +347,13 @@ body li {
   .innerProd
   .info
   .precios
-  .infoRapidaModal
+  .infoRapidaModal2
   .modalContainer
   .topContent
   .texto
   .wrapper
   .precioOferta,
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -370,7 +363,7 @@ body li {
   .info
   .precios
   .precioOferta {
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 600;
   color: #232f3d;
 }
@@ -379,13 +372,13 @@ body li {
   .innerProd
   .info
   .precios
-  .infoRapidaModal
+  .infoRapidaModal2
   .modalContainer
   .topContent
   .texto
   .wrapper
   .precioOferta:before,
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -557,7 +550,7 @@ body li {
   fill: red;
 }
 .card .innerProd .actions .row-buttons .favoritos .icono {
-  padding-right: 3.3rem;
+  width: 20px;
   height: 20px;
   margin-right: 5px;
   color: red;
@@ -572,23 +565,19 @@ body li {
   stroke-miterlimit: 10;
   transition: ease all 0.3s;
 }
-.infoRapidaModal {
+.infoRapidaModal2 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   align-content: center;
-  display: flex;
-  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  padding-top: 2rem;
   height: 100%;
-  background-color: rgba(18, 22, 24, 0.8);
-  z-index: 1000;
 }
-.infoRapidaModal .closeModal {
+.infoRapidaModal2 .closeModal {
   position: absolute;
   top: 0;
   left: 0;
@@ -596,14 +585,14 @@ body li {
   height: 100%;
   cursor: pointer;
 }
-.infoRapidaModal .modalContainer {
+.infoRapidaModal2 .modalContainer {
   width: 90%;
   margin: 0 auto;
   max-width: 1000px;
   background-color: #fff;
   position: relative;
 }
-.infoRapidaModal .modalContainer .topContent {
+.infoRapidaModal2 .modalContainer .topContent {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -612,7 +601,7 @@ body li {
   align-content: center;
   width: 100%;
 }
-.infoRapidaModal .modalContainer .topContent .imagenContainer {
+.infoRapidaModal2 .modalContainer .topContent .imagenContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -621,11 +610,13 @@ body li {
   align-content: center;
   width: 50%;
   min-height: 500px;
-  background-color: #eee;
   box-sizing: border-box;
-  position: relative;
+  /* position: relative; */
 }
-.infoRapidaModal .modalContainer .topContent .imagenContainer .zoomWatch {
+.infoRapidaModal2 .modalContainer .topContent .imagenContainer .zoomWatch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 20px;
   left: 20px;
@@ -634,12 +625,15 @@ body li {
   padding: 15px;
   border-radius: 50%;
   color: #121618;
-  background-color: #fff;
-  box-shadow: 0 0 10px 0 rgba(18, 22, 24, 0.1);
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   z-index: 1;
   cursor: pointer;
+  font-size: 1.3rem;
+  color: red;
+  font-weight: 600;
 }
-.infoRapidaModal
+/* .infoRapidaModal2
   .modalContainer
   .topContent
   .imagenContainer
@@ -650,8 +644,8 @@ body li {
   stroke-width: 2;
   stroke: currentColor;
   stroke-miterlimit: 10;
-}
-.infoRapidaModal .modalContainer .topContent .imagenContainer .wrapperImg {
+} */
+.infoRapidaModal2 .modalContainer .topContent .imagenContainer .wrapperImg {
   width: 100%;
   height: 100%;
   padding: 50px;
@@ -659,7 +653,7 @@ body li {
   position: relative;
   overflow: visible;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .imagenContainer
@@ -671,7 +665,7 @@ body li {
   width: 100%;
   height: 100%;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .imagenContainer
@@ -680,13 +674,13 @@ body li {
   position: absolute;
   top: 0;
   left: 0;
-  opacity: 0.5;
-  background-color: rgb(141, 9, 9);
+  opacity: 0.2;
+  background-color: #fff;
   border: 1px solid rgba(18, 22, 24, 0.2);
   box-sizing: border-box;
   cursor: move;
 }
-.infoRapidaModal .modalContainer .topContent .imagenContainer .zoomImg {
+.infoRapidaModal2 .modalContainer .topContent .imagenContainer .zoomImg {
   display: none;
   position: absolute;
   top: 0;
@@ -697,14 +691,14 @@ body li {
   overflow: visible;
   z-index: 1;
 }
-.infoRapidaModal .modalContainer .topContent .imagenContainer .zoomImg .zoom {
+.infoRapidaModal2 .modalContainer .topContent .imagenContainer .zoomImg .zoom {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
 }
-.infoRapidaModal .modalContainer .topContent .texto {
+.infoRapidaModal2 .modalContainer .topContent .texto {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -713,7 +707,7 @@ body li {
   align-content: center;
   width: 50%;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -726,7 +720,7 @@ body li {
   overflow: auto;
   box-sizing: border-box;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .actions {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .actions {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -735,7 +729,7 @@ body li {
   align-content: center;
   margin: 30px auto;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -744,7 +738,7 @@ body li {
   .botonTextoIcono {
   margin: 0 10px 0 20px;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -755,7 +749,7 @@ body li {
   border-color: currentColor;
   background-color: currentColor;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -763,7 +757,7 @@ body li {
   .actions
   .botonIcono.esFav:hover
   path,
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -773,7 +767,7 @@ body li {
   circle {
   fill: #fff;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -781,7 +775,7 @@ body li {
   .actions
   .botonIcono.esFav
   path,
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -791,7 +785,7 @@ body li {
   circle {
   fill: #fff;
 }
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -799,7 +793,7 @@ body li {
   .actions
   .botonIcono:hover
   path,
-.infoRapidaModal
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -810,17 +804,17 @@ body li {
   fill: red;
   stroke: red;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper p {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper p {
   font-size: 14px;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .bold {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .bold {
   font-weight: 600;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .nombre {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .nombre {
   font-size: 25px;
   font-weight: 900;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .precios {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .precios {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -829,8 +823,8 @@ body li {
   align-content: center;
   margin: 10px auto;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .precio,
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .precioOferta {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .precio,
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .precioOferta {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -842,8 +836,8 @@ body li {
   color: #232f3d;
   margin-bottom: 0;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .precio:before,
-.infoRapidaModal
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .precio:before,
+.infoRapidaModal2
   .modalContainer
   .topContent
   .texto
@@ -852,13 +846,13 @@ body li {
   font-size: 20px;
   content: var(--currencyPrefix);
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .precioOferta {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .precioOferta {
   color: red;
   font-size: 20px;
   margin-left: 10px;
   text-decoration: line-through;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .stock {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .stock {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -867,10 +861,15 @@ body li {
   align-content: center;
   margin-bottom: 5px;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .stock.out:before {
+.infoRapidaModal2
+  .modalContainer
+  .topContent
+  .texto
+  .wrapper
+  .stock.out:before {
   background-color: red;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .stock:before {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .stock:before {
   content: "";
   width: 10px;
   height: 10px;
@@ -879,48 +878,48 @@ body li {
   border-radius: 50%;
   background-color: green;
 }
-.infoRapidaModal .modalContainer .topContent .texto .wrapper .boton {
+.infoRapidaModal2 .modalContainer .topContent .texto .wrapper .boton {
   margin-top: 30px;
 }
 @media only screen and (max-width: 768px) {
-  .infoRapidaModal .modalContainer .topContent .imagenContainer,
-  .infoRapidaModal .modalContainer .topContent .texto {
+  .infoRapidaModal2 .modalContainer .topContent .imagenContainer,
+  .infoRapidaModal2 .modalContainer .topContent .texto {
     width: 100%;
   }
-  .infoRapidaModal .modalContainer .topContent .imagenContainer {
+  .infoRapidaModal2 .modalContainer .topContent .imagenContainer {
     min-height: 250px;
   }
-  .infoRapidaModal .modalContainer .topContent .imagenContainer .zoomWatch {
+  .infoRapidaModal2 .modalContainer .topContent .imagenContainer .zoomWatch {
     display: flex;
   }
-  .infoRapidaModal .modalContainer .topContent .imagenContainer .wrapperImg {
+  .infoRapidaModal2 .modalContainer .topContent .imagenContainer .wrapperImg {
     padding: 10px;
   }
-  .infoRapidaModal .modalContainer .topContent .imagenContainer .zoomImg {
+  .infoRapidaModal2 .modalContainer .topContent .imagenContainer .zoomImg {
     top: 100%;
     left: 0;
   }
-  .infoRapidaModal .modalContainer .topContent .texto .wrapper {
+  .infoRapidaModal2 .modalContainer .topContent .texto .wrapper {
     max-height: calc(90vh - 250px);
     padding: 20px;
   }
 }
 @media only screen and (max-width: 480px) {
-  .infoRapidaModal .modalContainer .topContent .imagenContainer {
+  .infoRapidaModal2 .modalContainer .topContent .imagenContainer {
     min-height: 200px;
   }
-  .infoRapidaModal .modalContainer .topContent .texto .wrapper {
+  .infoRapidaModal2 .modalContainer .topContent .texto .wrapper {
     max-height: calc(90vh - 200px);
   }
-  .infoRapidaModal .modalContainer .topContent .texto .wrapper .nombre {
+  .infoRapidaModal2 .modalContainer .topContent .texto .wrapper .nombre {
     font-size: 20px;
   }
-  .infoRapidaModal .modalContainer .topContent .texto .wrapper .actions {
+  .infoRapidaModal2 .modalContainer .topContent .texto .wrapper .actions {
     flex-direction: column;
     width: 100%;
     margin: 20px auto;
   }
-  .infoRapidaModal
+  .infoRapidaModal2
     .modalContainer
     .topContent
     .texto
@@ -929,7 +928,7 @@ body li {
     .botonTextoIcono {
     margin: 20px auto 0 auto;
   }
-  .infoRapidaModal
+  .infoRapidaModal2
     .modalContainer
     .topContent
     .texto
@@ -939,5 +938,92 @@ body li {
     position: absolute;
     top: 10px;
     right: 10px;
+  }
+}
+
+/*carrusel detalle producto*/
+
+#emotes {
+  display: flex;
+  font-size: 40px;
+}
+
+#emotes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 1rem;
+  min-width: 50%;
+  position: relative;
+  left: 0;
+  animation: carousel 10s linear infinite;
+}
+@keyframes carousel {
+  0% {
+    left: 90px;
+  }
+  1% {
+    left: 0;
+  }
+  9% {
+    left: 0;
+  }
+  10% {
+    left: -50px;
+  }
+  19% {
+    left: -50px;
+  }
+  20% {
+    left: -100px;
+  }
+  29% {
+    left: -100px;
+  }
+  30% {
+    left: -150px;
+  }
+  39% {
+    left: -150px;
+  }
+  40% {
+    left: -200px;
+  }
+  49% {
+    left: -200px;
+  }
+  50% {
+    left: -250px;
+  }
+  59% {
+    left: -250px;
+  }
+  60% {
+    left: -300px;
+  }
+  69% {
+    left: -300px;
+  }
+  70% {
+    left: -350px;
+  }
+  79% {
+    left: -350px;
+  }
+  80% {
+    left: -400px;
+  }
+  89% {
+    left: -400px;
+  }
+  90% {
+    left: -450px;
+  }
+  99% {
+    left: -450px;
+  }
+  100% {
+    left: -500px;
   }
 }

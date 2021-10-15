@@ -8,18 +8,26 @@ const initialState = {
 
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_ALL_CART":
+    case "POST_CART":
+      console.log("CARRITOOO", state.cart)
       console.log("EN EL REDUCER", action.payload)
       return {
         ...state,
-        cart: action.payload
+        cart: action.payload,
+        totalAmount: state.cart.map((e) => state.totalAmount + e.subtotal)
       }
     case "REMOVE_ITEM":
-      console.log("ACA ESTOY", action.payload)
       return {
         ...state,
-        cart: state.cart.filter(e => e.product.id !== action.payload)
+        cart: action.payload
       };
+      case "PUT_CART":
+        console.log("ACA ESTOY", action.payload)
+        return {
+          ...state,
+          cart: action.payload,
+          totalAmount: state.cart.map((e) => state.totalAmount + e.subtotal)
+        }
     case "EMPTY_BASKET":
       return {
         ...state,
