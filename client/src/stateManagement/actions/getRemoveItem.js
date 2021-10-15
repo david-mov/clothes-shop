@@ -2,11 +2,10 @@ import { REMOVE_ITEM } from "../../consts/actionConsts";
 import axios from "axios";
 
 
-export const getRemoveItem = (productId) => async(dispatch) => {
-console.log("DESDE GETREMOVE", productId)
+const getRemoveItem = (productId) => async(dispatch) => {
+    console.log("EL ID", productId)
 try {
-    const deleteProductCart = await axios.delete("/cart", productId)
-    console.log("DEL AXIOS",deleteProductCart.data )
+    const deleteProductCart = await axios.get(`/cart/delete/${productId}`)
     return dispatch({ type: REMOVE_ITEM, payload: deleteProductCart.data })
 }catch (err) {
         console.error(err);

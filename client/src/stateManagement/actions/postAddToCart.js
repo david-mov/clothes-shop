@@ -1,12 +1,11 @@
 import axios from "axios";
+import {POST_CART} from "../../consts/actionConsts"
 
-export const postAddToCart = (payload) => {
-    console.log("DESDE LA ACTION",payload )
-  return async () => {
+export const postAddToCart = (payload) => async (dispatch) => {
     try {
-      await axios.post('/cart', payload)
+     const traigo =  await axios.post('/cart', payload)
+      return dispatch({ type: POST_CART, payload: traigo.data})
     } catch (err) {
       console.error(err);
     }
   };
-};

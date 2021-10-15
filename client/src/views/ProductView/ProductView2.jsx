@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../stateManagement/actions/getProductDetails.js";
 import getAddToCart from "../../stateManagement/actions/getAddToCart";
 import { cleanUpObjet } from "../../stateManagement/actions/cleanStateObjet";
-// import "./ProductView.css";
 import "../../styles/productDetails.css";
 import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
@@ -39,7 +38,10 @@ export default function ProductView() {
         return product.images.map((e) => {
           nameImagen = "imageProduct/" + e.name;
           return (
-            <img src={require(`../../assets/${nameImagen}`).default}></img>
+            <img
+              src={require(`../../assets/${nameImagen}`).default}
+              alt="No imagen"
+            ></img>
           );
         });
       } else {
@@ -48,6 +50,7 @@ export default function ProductView() {
           <img
             className="img_card"
             src={require(`../../assets/${nameImagen}`).default}
+            alt="No imagen"
           ></img>
         );
       }
@@ -116,6 +119,7 @@ export default function ProductView() {
                 <div id="emotes"> {rendeImages()}</div>
               </div>
             </div>
+
             <div className="texto">
               <div className="wrapper">
                 <p className="nombre">{product.name}</p>
