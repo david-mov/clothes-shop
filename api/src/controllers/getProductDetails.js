@@ -16,7 +16,7 @@ const getProductDetails = async (req, res, next) => {
                 	attributes:['name']
             	},{
                 	model: Image,
-                	attributes:['name']
+                	attributes:['id','name']
             	}, {
             		model: Size,
             		attributes:['name']
@@ -27,7 +27,7 @@ const getProductDetails = async (req, res, next) => {
             		model: View,
             		attributes:['amount']
             	}],
-            attributes: ['name', 'price', 'stock', 'description', 'color']
+            attributes: ['name', 'price', 'stock', 'description', 'color', 'enabled']
 		});
 		res.json(productFound);		
 	}
