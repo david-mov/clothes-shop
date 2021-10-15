@@ -1,8 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../ProductCard/ProductCard.css";
-// import { AddShoppingCart } from "@material-ui/icons";
-// import IconButton from "@material-ui/core/IconButton";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";

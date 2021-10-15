@@ -4,10 +4,10 @@ import "../../styles/screen.css";
 
 export default function CheckoutView() {
   return (
-    <div className="homescreen">
+    <div>
       <NavBar />
       <h1>Checkout Cart</h1>
-      <div className="homescreen__products">
+      <div>
         <CheckoutPage />
       </div>
     </div>
