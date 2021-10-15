@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-export const useUserRol = () => {
+export const useUserId = () => {
 	let [id, setId] = useState(null);
 	let [idOk, setIdOk] = useState(false);
 	const { logged } = useSelector(state => state.userReducer);
