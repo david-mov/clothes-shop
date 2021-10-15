@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import getContador from "../../stateManagement/actions/getContador"
 import restaContador from '../../stateManagement/actions/restaContador';
 import sumaContador from '../../stateManagement/actions/sumaContador';
+import { getAllCart } from '../../stateManagement/actions/getAllCart';
+import {postAddToCart} from "../../stateManagement/actions/postAddToCart"
 
 //{require(`../../assets/imageProduct/${e.name}`).default}
 
@@ -59,6 +61,8 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
             setCantidadTotal((contador * price))
         }
     }
+
+    
     
     
 
@@ -66,13 +70,14 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
        ((e.target.value === "+") ? setContador(contador-1) : setContador(contador+1))
        setCantidadTotal((contador * price))
     }*/
+
+
        
         const miContador = (contador) => {
             setContador(contador+1)
         }
-    
+    console.log("MI CARRITO", cart)
     const RemoveItem = (event, productId) => {
-        event.preventDefault();        
         dispatch(getRemoveItem(productId));
     };
 

@@ -4,11 +4,9 @@ import "../../styles/screen.css";
 
 export default function CatalogueView() {
   return (
-    <div className="homescreen">
+    <div>
       <NavBar />
-      <div className="homescreen__products">
-        <ProductCards2 />
-      </div>
+      <ProductCards2 />
     </div>
   );
 }

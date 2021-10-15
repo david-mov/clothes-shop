@@ -49,6 +49,7 @@ body li {
     transform: scale(1);
   }
 }
+
 #emotes > .div_carrousel {
   display: flex;
   align-items: center;
@@ -227,12 +228,10 @@ body li {
   align-content: center;
 }
 .card {
-  width: 25%;
-  min-width: 300px;
+  width: 100%;
 }
 .card .innerProd {
-  height: calc(100% - 20px);
-  margin: 10px;
+  height: calc(100% - 40px);
   border-radius: 5px;
   display: block;
   border: 1px solid #eee;
@@ -313,10 +312,11 @@ body li {
   transition: ease all 0.3s;
 }
 .card .innerProd .info {
-  padding: 20px 10px;
+  text-decoration: none;
+  padding: 10px 10px;
   text-align: center;
   display: block;
-  height: 180px;
+  height: 100px;
   box-sizing: border-box;
 }
 .card .innerProd .info .prodName {
@@ -557,7 +557,7 @@ body li {
   fill: red;
 }
 .card .innerProd .actions .row-buttons .favoritos .icono {
-  width: 20px;
+  padding-right: 3.3rem;
   height: 20px;
   margin-right: 5px;
   color: red;
@@ -681,7 +681,7 @@ body li {
   top: 0;
   left: 0;
   opacity: 0.5;
-  background-color: #fff;
+  background-color: rgb(141, 9, 9);
   border: 1px solid rgba(18, 22, 24, 0.2);
   box-sizing: border-box;
   cursor: move;

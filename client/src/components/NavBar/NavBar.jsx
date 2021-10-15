@@ -41,6 +41,7 @@ function NavBar() {
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
+  
   useEffect(() => {
     dispatch(getAllCart());
   }, [dispatch]);
@@ -129,7 +130,7 @@ function NavBar() {
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={cart?.length} color="secondary">
+                <Badge badgeContent={cart.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"
