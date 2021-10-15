@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
 function SignupView() {
   const dispatch = useDispatch();
-  const [state, setState] = useState();
+  const [state, setState] = useState({});
 
   const onSubmitForm = (e) => {
     e.preventDefault();
     dispatch(postSignup(state));
   };
 
-  const HandleChange = (e) => {
+  const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -51,21 +51,21 @@ function SignupView() {
           className="Login_mail"
           name="name"
           placeholder="name"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <input
           className="Login_mail"
           type="email"
           name="email"
           placeholder="email"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <input
           className="Login_mail"
           type="password"
           name="password"
           placeholder="password"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <button type="submit">Sign up</button>
       </form>

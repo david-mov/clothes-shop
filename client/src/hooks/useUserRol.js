@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 export const useUserRol = () => {
 	let [rol, setRol] = useState(0);
-	let [ok, setOk] = useState(false);
+	let [rolOk, setRolOk] = useState(false);
 	const { logged } = useSelector(state => state.userReducer);
 	useEffect(() => {
 		(async function getRol() {
@@ -16,13 +16,13 @@ export const useUserRol = () => {
 					httpOnly: true,
 				})
 				setRol(res.data)
-				setOk(true)
+				setRolOk(true)
 			}
 			catch(err) {
 				console.error(err);
-				setOk(true);
+				setRolOk(true);
 			}
 		})();
 	}, [logged])
-	return [rol, ok];
+	return [rol, rolOk];
 }
