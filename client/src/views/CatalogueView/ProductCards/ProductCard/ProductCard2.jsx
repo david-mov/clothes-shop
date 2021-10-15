@@ -143,7 +143,7 @@ function ProductCard2(props) {
                                             <div className={`toCartBoton mas ${contador === stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
                                         </div>
                                         <div className={`botonTextoIcono ${!stock ? 'disabled' : ''}`}>
-                                            <label className="labelBoton" onClick={(ev) => addToCart(ev)}>Add to Cart</label>
+                                            <div className="labelBoton" onClick={(ev) => addToCart(ev)}>Add to Cart</div>
                                             <div className="icono">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                                                     <path d="M2 6h10l10 40h32l8-24H16"></path>
