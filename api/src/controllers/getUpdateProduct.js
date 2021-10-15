@@ -1,4 +1,4 @@
-const { Product, Type, Size, Category, Image } = require('../db.js')
+const { Product, Type, Size, Category, Image, Rating, View} = require('../db.js')
 
 const getUpdateProductDetails = async (req, res, next) => {
 	const { id } = req.params;
@@ -16,7 +16,12 @@ const getUpdateProductDetails = async (req, res, next) => {
                 	model: Image,
             	}, {
             		model: Size,
+            	}, {
+            		model: Rating,
+            	}, {
+            		model: View,
             	}],
+
 		});
 		res.json(productFound);		
 	}
