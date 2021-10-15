@@ -171,7 +171,7 @@ function ProductCard2(props) {
           <Link className="boton" to={`/product/${productId}`}>
             Show Details
           </Link>
-          <div className="boton alCarrito">Agregar al carrito</div>
+          <div className="boton alCarrito" onClick={(ev) => addToCart(ev)}>Add to Cart</div>
           <div className="row-buttons">
             <div className="aFavs favoritos">
               <div className="icono">

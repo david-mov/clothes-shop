@@ -65,7 +65,7 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
 
     const removeCantidad = () => {
         if (quantity !== 1) {
-            dispatch(putUpdateCart({productId, quantity: quantity-1}))
+            dispatch(putUpdateCart({productId, quantity: quantity-1, price}))
         }
     }
     
