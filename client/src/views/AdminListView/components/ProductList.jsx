@@ -33,7 +33,6 @@ export default function ProductosLista() {
   };
 
   const onInputChange = (Input) => {
-    setValor('input')
     setInput(Input.target.value)
   }
 
@@ -45,8 +44,6 @@ export default function ProductosLista() {
   ]
 
   const handleChangeSelect = (search) => {
-    setValor(search.value)
-    setSearch(search)
   }
 
   const nextPage = () => {
@@ -116,7 +113,7 @@ export default function ProductosLista() {
           <th>
             <Select
               className="selected"
-              value={search}
+             
               options={OptionSelect}
               onChange={handleChangeSelect}
             />
@@ -191,7 +188,7 @@ export default function ProductosLista() {
       .slice(currentPage, currentPage + 5)
   }
 
-  console.log('ailyn', product)
+  console.log('ailyn')
   return (
     <div>
       <div className="body">      
@@ -209,4 +206,4 @@ export default function ProductosLista() {
       </div>
     </div>
   )
-}
+}}
