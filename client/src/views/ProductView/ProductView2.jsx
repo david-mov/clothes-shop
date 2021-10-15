@@ -9,6 +9,7 @@ import "../../styles/styleCata2.css";
 import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
+import {postAddToCart} from "../../stateManagement/actions/postAddToCart"
 
 export default function ProductView() {
   //aca el estado ratin
@@ -22,14 +23,15 @@ export default function ProductView() {
     };
   }, [dispatch, productId]);
 
+
+  const products = useSelector((state) => state.productsReducer.products);
+
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [tengo, setTengo] = useState(false);
   const [contador, setContador] = useState(1);
-  const basket = useSelector((state) => state.checkoutReducer.basket);
+  const cart = useSelector((state) => state.checkoutReducer.cart);
   const addToCart = () => {
-    basket.find((e) => e.productId === productId)
-      ? setTengo(true)
-      : dispatch(getAddToCart(product));
+     dispatch(postAddToCart(productId));
   };
 
   var nameImagen = "";
@@ -97,7 +99,7 @@ export default function ProductView() {
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={basket?.length} color="secondary">
+                <Badge badgeContent={cart?.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"
@@ -219,7 +221,7 @@ export default function ProductView() {
                           className={`botonTextoIcono ${!product.stock ? "disabled" : ""
                             }`}
                         >
-                          <label className="labelBoton">Add to Car</label>
+                          <label className="labelBoton" onClick={(ev) => addToCart(ev)}>Add to Cart</label>
                           <div className="icono">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

@@ -16,11 +16,16 @@ const checkoutReducer = (state = initialState, action) => {
         cart: action.payload
       }
     case "REMOVE_ITEM":
-      console.log("ACA ESTOY", action.payload)
       return {
         ...state,
         cart: action.payload
       };
+      case "PUT_CART":
+        console.log("ACA ESTOY", action.payload)
+        return {
+          ...state,
+          cart: action.payload
+        }
     case "EMPTY_BASKET":
       return {
         ...state,
