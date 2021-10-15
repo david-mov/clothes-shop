@@ -17,6 +17,7 @@ import restaContador from '../../stateManagement/actions/restaContador';
 import sumaContador from '../../stateManagement/actions/sumaContador';
 import { getAllCart } from '../../stateManagement/actions/getAllCart';
 import {postAddToCart} from "../../stateManagement/actions/postAddToCart"
+import {putUpdateCart} from "../../stateManagement/actions/putUpdateCart"
 
 //{require(`../../assets/imageProduct/${e.name}`).default}
 
@@ -53,16 +54,20 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
     const classes = useStyles();
     var total;
     const onChangeContador = (e) => {
-        if(e.target.value >= contador){
-            setContador(++contador)
-            setCantidadTotal((contador * price))
-        }else{
-            setContador(--contador)
-            setCantidadTotal((contador * price))
+        dispatch(putUpdateCart({productId, quantity: e.target.value}))
+    }
+
+    const addCantidad = () => {
+        if (quantity !== stock) {
+            dispatch(putUpdateCart({productId, quantity: quantity+1, price}))
         }
     }
 
-    
+    const removeCantidad = () => {
+        if (quantity !== 1) {
+            dispatch(putUpdateCart({productId, quantity: quantity-1}))
+        }
+    }
     
     
 
@@ -73,9 +78,7 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
 
 
        
-        const miContador = (contador) => {
-            setContador(contador+1)
-        }
+
     console.log("MI CARRITO", cart)
     const RemoveItem = (event, productId) => {
         dispatch(getRemoveItem(productId));
@@ -108,10 +111,15 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
             </td>
 
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">{quantity}</p>
+            <div className={`component_toCartCantidad ${!stock ? 'disabled' : ''}`}>
+                                            <div className={`toCartBoton menos ${quantity === 1 ? 'disabled' : ''}`} onClick={removeCantidad}></div>
+                                            <div className="">{quantity}</div>
+                                            <div className={`toCartBoton mas ${quantity === stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
+              </div>
+                {/*<p className="table-row__progress status--blue status">{quantity}</p>*/}
             </td>
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">{subtotal}</p>
+                <p className="table-row__progress status--blue status">{price * quantity}</p>
             </td>
 
             <td data-column="Progress" className="table-row__td">
@@ -132,8 +140,7 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
 
             </td>
             <td className="table-row__td">
-                    <input onChange={onChangeContador} type="number" min="0" max={stock-1}> 
-                    </input>
+                    
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing className={classes.cardActions} >                    
