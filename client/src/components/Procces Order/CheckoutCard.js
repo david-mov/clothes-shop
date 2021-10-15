@@ -59,7 +59,7 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
 
     const addCantidad = () => {
         if (quantity !== stock) {
-            dispatch(putUpdateCart({productId, quantity: quantity+1}))
+            dispatch(putUpdateCart({productId, quantity: quantity+1, price}))
         }
     }
 
@@ -119,7 +119,7 @@ export default function CheckoutCard({name, productId, idCarrito, quantity, pric
                 {/*<p className="table-row__progress status--blue status">{quantity}</p>*/}
             </td>
             <td data-column="Progress" className="table-row__td">
-                <p className="table-row__progress status--blue status">{subtotal}</p>
+                <p className="table-row__progress status--blue status">{price * quantity}</p>
             </td>
 
             <td data-column="Progress" className="table-row__td">

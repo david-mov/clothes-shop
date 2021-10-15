@@ -33,7 +33,7 @@ const Total = () => {
     return (
         <div className={classes.root}>
             <h5>Total items: {miBasket}</h5>
-            <h5>Total Amount: {parseInt(total)}</h5>
+            <h5>Total Amount: {parseInt(totalAmount)}</h5>
             <Button
                 component={Link}
                 to='/checkout'

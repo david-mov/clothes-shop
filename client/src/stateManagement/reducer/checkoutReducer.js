@@ -13,7 +13,8 @@ const checkoutReducer = (state = initialState, action) => {
       console.log("EN EL REDUCER", action.payload)
       return {
         ...state,
-        cart: action.payload
+        cart: action.payload,
+        totalAmount: state.cart.map((e) => state.totalAmount + e.subtotal)
       }
     case "REMOVE_ITEM":
       return {
@@ -24,7 +25,8 @@ const checkoutReducer = (state = initialState, action) => {
         console.log("ACA ESTOY", action.payload)
         return {
           ...state,
-          cart: action.payload
+          cart: action.payload,
+          totalAmount: state.cart.map((e) => state.totalAmount + e.subtotal)
         }
     case "EMPTY_BASKET":
       return {
