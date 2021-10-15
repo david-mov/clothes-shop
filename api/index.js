@@ -47,15 +47,6 @@ async function preload() {
   ];
   const rolesData = ["superAdmin", "admin", "user", "banned", "inactive"];
 
-  /* const superAdmin = {
-    name: "Juan",
-    email: "juan123@gmail.com",
-    password: "12345",
-    rol: rolesData[0]    
-  } 
-
-  */
-
   for (categoryData of categoriesData) {
     await Category.findOrCreate({
       where: {
@@ -85,17 +76,23 @@ async function preload() {
     });
   }
 
-  // const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+  const superAdmin = {
+    name: "Juan",
+    email:"juan123@gmail.com",
+    password: "12345"  
+  } 
+  const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+  const [newUser, created] = await User.findOrCreate({
+      where: {
+        email: superAdmin.email,
+      },
+      defaults: {
+        name: superAdmin.name,
+        password: hashedPassword
+      }
+  });
+  await newUser.setRol(1)  
 
-  // const newUser = await User.create({
-
-  //     email: superAdmin.email,
-  //     name: superAdmin.name,
-  //     password: hashedPassword
-
-  // });
-
-  // const nuevoUsuario = await newUser.setRol(1);
 } // temporal function
 
 // Syncing all the models at once.

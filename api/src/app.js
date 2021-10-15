@@ -13,18 +13,23 @@ const server = express();
 
 server.name = 'API';
 
-server.use(cors())
+server.use(cors({
+  origin: process.env.CLIENT,
+  credentials: true,
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE']
+}))
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser(process.env.SECRET));
 server.use(morgan('dev'));
-server.use((req, res, next) => {
+/*server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', process.env.CLIENT); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
-});
+});*/
 server.use(
   session({
     secret: process.env.SECRET,

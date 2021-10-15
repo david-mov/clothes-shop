@@ -33,22 +33,36 @@ export default function ProductosLista() {
   };
 
   const onInputChange = (Input) => {
-    setInput(Input.target.value);
-  };
+    setValor('input')
+    setInput(Input.target.value)
+  }
+
+  const OptionSelect = [
+    { label: 'Max Stock', value: 'Max Stock' },
+    { label: 'Min Stock', value: 'Min Stock' },
+    { label: 'Max Price', value: 'Max Price' },
+    { label: 'Min Price', value: 'Min Price' },
+  ]
+
+  const handleChangeSelect = (search) => {
+    setValor(search.value)
+    setSearch(search)
+  }
 
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
-      setactualCurrent(actualCurrent + 1);
-      setCurrentPage(currentPage + countP);
+      setactualCurrent(actualCurrent + 1)
+      setCurrentPage(currentPage + countP)
     }
-  };
+  }
 
   const prevPage = () => {
     if (actualCurrent > 1) {
-      setactualCurrent(actualCurrent - 1);
-      setCurrentPage(currentPage - countP);
+      setactualCurrent(actualCurrent - 1)
+      setCurrentPage(currentPage - countP)
     }
-  };
+
+  
   
   const show = () => {
     if (actualCurrent === 1) {
@@ -99,8 +113,13 @@ export default function ProductosLista() {
               />
             </div>
           </th>
-          <th className="table__th">
-            <Select className="select-style" />
+          <th>
+            <Select
+              className="selected"
+              value={search}
+              options={OptionSelect}
+              onChange={handleChangeSelect}
+            />
           </th>
         </tr>
         <tr>
@@ -113,14 +132,14 @@ export default function ProductosLista() {
           <th className="table__th">Delete Product</th>
         </tr>
       </thead>
-    );
+    )
   }
 
   function bodyTable() {
     return filterProducts()
       .map((e, i) => {
-        var status = "status--green";
-        if (e.stock <= 5) status = "status--red";
+        var status = 'status--green'
+        if (e.stock <= 5) status = 'status--red'
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -167,20 +186,21 @@ export default function ProductosLista() {
               </p>
             </td>
           </tr>
-        );
+        )
       })
-      .slice(currentPage, currentPage + 5);
+      .slice(currentPage, currentPage + 5)
   }
 
+  console.log('ailyn', product)
   return (
     <div>
       <div className="body">      
         <TablaList
-          title={"Products"}
+          title={'Products'}
           headers={headers()}
           data={products}
           bodyTable={bodyTable()}
-          url={"/create/product"}
+          url={'/create/product'}
         />
       </div>
       <div className="buttonList">
@@ -188,5 +208,5 @@ export default function ProductosLista() {
        
       </div>
     </div>
-  );
+  )
 }
