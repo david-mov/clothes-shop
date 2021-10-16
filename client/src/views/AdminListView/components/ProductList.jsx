@@ -5,6 +5,7 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
+import { putProduct } from "../../../stateManagement/actions/putProduct";
 
 export default function ProductosLista() {
 
@@ -91,7 +92,12 @@ export default function ProductosLista() {
       setCurrentPage(currentPage - countP)
     }
   }
+  
 
+  const deleteProduct = (e)=>{
+    var obj = {enabled: false}
+    dispatch(putProduct(e,obj))
+  }
   
   
   const show = () => {
@@ -211,9 +217,10 @@ export default function ProductosLista() {
             </td>
 
             <td className="table-row__td">
-              <p>
+          
+              <p value={e.id} onClick={() => deleteProduct(e.id)} >
                 <i className="fas fa-trash-alt fa-2x"></i>
-              </p>
+                </p>
             </td>
           </tr>
         )
