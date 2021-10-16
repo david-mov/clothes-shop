@@ -2,6 +2,8 @@ const {Cart, Product, Image} = require('../db');
 
 const postCart = async (req, res, next) => {
     const {quantity, subtotal, Cart_product} = req.body;
+    // const {userId} = req.user;
+    console.log("EL USER", req.User)
     console.log("PROPSSSS",req.body)
     try {      
     if(req.query){
@@ -10,7 +12,10 @@ const postCart = async (req, res, next) => {
             const traigoCarrito = await Cart.findAll({
                 include: [
                     {model: Product, include: [Image] }
-                  ]
+                  ],
+                  order: [
+                    ['id', 'ASC']
+                ],
             })
             res.json(traigoCarrito)
         }else{ 
@@ -18,7 +23,10 @@ const postCart = async (req, res, next) => {
             const traigoCarrito = await Cart.findAll({
                 include: [
                     {model: Product, include: [Image] }
-                  ]
+                  ],
+                  order: [
+                    ['id', 'ASC']
+                ],
             })
             res.json(traigoCarrito)
         }
@@ -27,7 +35,10 @@ const postCart = async (req, res, next) => {
         const traigoCarrito = await Cart.findAll({
             include: [
                 {model: Product, include: [Image] }
-              ]
+              ],
+              order: [
+                ['id', 'ASC']
+            ],
         })
         res.json(traigoCarrito)
     } catch (error) {

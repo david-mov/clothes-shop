@@ -6,7 +6,7 @@ const routes = require('./routes/index.js');
 const session = require('express-session');
 const passport = require('passport');
 const cors = require('cors')
-
+//const mercadopago = require ('mercadopago');
 require('./db.js');
 
 const server = express();
@@ -46,6 +46,11 @@ server.use((req, res, next) => {
   console.log(req.user);
   next();
 });
+
+/*mercadopago.configure({
+  access_token: process.env.MERCADOPAGO
+});*/
+
 
 server.use('/', routes);
 

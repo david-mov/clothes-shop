@@ -27,9 +27,7 @@ const Total = () => {
    
 
     var total = 0
-    for(var i = 0; i < cart.length; i++){
-    total = total + parseInt(cart[i].subtotal )
-    }
+    let contador = cart.map(e => total += parseInt(e.subtotal))
 
 
     let miBasket = cart.length
