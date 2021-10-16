@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import '../../AdminListView/components/styles.css'
 import { deleteImage } from '../../../stateManagement/actions/deleteImage';
-
+import { getUpdateProductDetails } from '../../../stateManagement/actions/getUpdatePDetail';
 
 export default function DetailProduct({
+  idProduct,
   name,
   price,
   description,
@@ -25,6 +26,7 @@ export default function DetailProduct({
 
   const deleteProduct = (e)=>{
     dispatch(deleteImage(e))
+    dispatch(getUpdateProductDetails(idProduct));
   }
 
   return (

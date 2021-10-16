@@ -5,7 +5,8 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
-import { putProduct } from "../../../stateManagement/actions/putProduct";
+import { deleteProduct } from "../../../stateManagement/actions/deleteProduct";
+
 
 export default function ProductosLista() {
 
@@ -14,7 +15,7 @@ export default function ProductosLista() {
     dispatch(getAllProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.productsReducer.products);
-  const [search, setSearch] = useState('S')
+  const [search, setSearch] = useState({label:'filter to..', value: ''})
   const [valor, setValor] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
@@ -94,9 +95,9 @@ export default function ProductosLista() {
   }
   
 
-  const deleteProduct = (e)=>{
-    var obj = {enabled: false}
-    dispatch(putProduct(e,obj))
+  const deleteProducts = (e)=>{
+    dispatch(deleteProduct(e))
+    dispatch(getAllProducts());
   }
   
   
@@ -218,7 +219,7 @@ export default function ProductosLista() {
 
             <td className="table-row__td">
           
-              <p value={e.id} onClick={() => deleteProduct(e.id)} >
+              <p value={e.id} onClick={() => deleteProducts(e.id)} >
                 <i className="fas fa-trash-alt fa-2x"></i>
                 </p>
             </td>
