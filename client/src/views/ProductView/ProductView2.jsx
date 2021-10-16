@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../stateManagement/actions/getProductDetails.js";
-import getAddToCart from "../../stateManagement/actions/getAddToCart";
 import { cleanUpObjet } from "../../stateManagement/actions/cleanStateObjet";
 import "../../styles/productDetails.css";
 import IconButton from "@material-ui/core/IconButton";
@@ -24,17 +23,11 @@ export default function ProductView() {
     };
   }, [dispatch, productId]);
 
-
-  const products = useSelector((state) => state.productsReducer.products);
-
   const product = useSelector((state) => state.productsReducer.productDetails);
-  const [tengo, setTengo] = useState(false);
+  const [vauleS, setvauleS] = useState(false);
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
-  const addToCart = () => {
-     dispatch(postAddToCart(productId));
-  };
-
+  
   var nameImagen = "";
   const rendeImages = () => {
     if (product.images !== undefined) {
@@ -61,6 +54,23 @@ export default function ProductView() {
     }
   };
 
+  const onSelectChangeSize = (vauleS) => {
+    var sizesEnv = "";
+    if (vauleS) {
+      sizesEnv = vauleS.map((e) => {
+        return e.value;
+      });
+    }
+    setvauleS(vauleS);
+    //addSizes(sizesEnv);
+  };
+  // const addSizes = (tipesEnv) => {
+  //   setInput({
+  //     ...input,
+  //     sizes: tipesEnv,
+  //   });
+  // };
+
   const sizesSelect = () => {
 
     if (product.sizes !== undefined) {
@@ -72,14 +82,14 @@ export default function ProductView() {
       });
       return (
         <Select
+          value={vauleS}
           options={Optionsizes}
+          onChange={onSelectChangeSize}
           isMulti
         />
       )
 
 
-    } else {
-      console.log("aqui nada")
     }
   }
 
@@ -175,6 +185,16 @@ export default function ProductView() {
               <p className="descripcion">
                 <span className="bold">Color: </span>
                 {product.color}
+              </p>
+              <p className="descripcion">
+                <span className="bold">Rating: </span>
+              </p>
+              <p>
+              {Array(rating)
+                  .fill()
+                  .map((_, i) => (
+                    <span>&#11088;</span>
+                  ))}
               </p>
               <p className="descripcion">
                 <span className="bold">Type: </span>

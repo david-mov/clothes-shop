@@ -9,8 +9,6 @@ const initialState = {
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
     case "POST_CART":
-      console.log("CARRITOOO", state.cart)
-      console.log("EN EL REDUCER", action.payload)
       return {
         ...state,
         cart: action.payload,
@@ -21,7 +19,6 @@ const checkoutReducer = (state = initialState, action) => {
         cart: action.payload
       };
       case "PUT_CART":
-        console.log("ACA ESTOY", state.totalAmount)
         return {
           ...state,
           cart: action.payload
@@ -58,7 +55,6 @@ const checkoutReducer = (state = initialState, action) => {
             totalAmount: action.payload
           }
           case "SUMA_CONTADOR":
-            console.log("EL TOTAL AMOUNT EN REDUCER", state.totalAmount, action.payload)
             return{
               ...state,
               totalAmount: state.totalAmount + action.payload
