@@ -2,14 +2,12 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetails } from "../../stateManagement/actions/getProductDetails.js";
-import getAddToCart from "../../stateManagement/actions/getAddToCart";
 import { cleanUpObjet } from "../../stateManagement/actions/cleanStateObjet";
 import "../../styles/productDetails.css";
 import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Select from "react-select";
-import {postAddToCart} from "../../stateManagement/actions/postAddToCart"
 
 
 export default function ProductView() {
@@ -24,21 +22,12 @@ export default function ProductView() {
     };
   }, [dispatch, productId]);
 
-
-  const products = useSelector((state) => state.productsReducer.products);
-
   const product = useSelector((state) => state.productsReducer.productDetails);
-  const [tengo, setTengo] = useState(false);
+  const [vauleS, setvauleS] = useState(false);
+  const [Input, setInput] = useState(null); 
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
-  const addToCart = (ev) => {
-    var quantity = contador
-    var Cart_product = productId
-    console.log("ACA SI ENTRO BRO", productId, quantity, product.price)
-    var subtotal = product.price * quantity
-    cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({ Cart_product, subtotal, quantity }))
-  }
-
+  
   var nameImagen = "";
   const rendeImages = () => {
     if (product.images !== undefined) {
@@ -65,6 +54,23 @@ export default function ProductView() {
     }
   };
 
+  const onSelectChangeSize = (vauleS) => {
+    var sizesEnv = "";
+    if (vauleS) {
+      sizesEnv = vauleS.map((e) => {
+        return e.value;
+      });
+    }
+    setvauleS(vauleS);
+    addSizes(sizesEnv);
+  };
+  const addSizes = (tipesEnv) => {
+    setInput({
+      ...Input,
+      sizes: tipesEnv,
+    });
+  };
+
   const sizesSelect = () => {
 
     if (product.sizes !== undefined) {
@@ -76,14 +82,14 @@ export default function ProductView() {
       });
       return (
         <Select
+          value={vauleS}
           options={Optionsizes}
+          onChange={onSelectChangeSize}
           isMulti
         />
       )
 
 
-    } else {
-      console.log("aqui nada")
     }
   }
 
@@ -181,6 +187,16 @@ export default function ProductView() {
                 {product.color}
               </p>
               <p className="descripcion">
+                <span className="bold">Rating: </span>
+              </p>
+              <p>
+              {Array(rating)
+                  .fill()
+                  .map((_, i) => (
+                    <span>&#11088;</span>
+                  ))}
+              </p>
+              <p className="descripcion">
                 <span className="bold">Type: </span>
               </p>
               <p className="descripcion">
@@ -207,11 +223,10 @@ export default function ProductView() {
                   ></div>
                 </div>
                 <div
-                onClick={(ev) => addToCart(ev)}
                   className={`botonTextoIcono ${!product.stock ? "disabled" : ""
                     }`}
                 >
-                  <label className="labelBoton" onClick={(ev) => addToCart(ev)}>Add to Cart</label>
+                  <label className="labelBoton">Add to Car</label>
                   <div className="icono">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

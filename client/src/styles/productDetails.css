@@ -957,7 +957,17 @@ body li {
   min-width: 50%;
   position: relative;
   left: 0;
-  animation: carousel 10s linear infinite;
+  animation: carousel 7s linear infinite;
+}
+#emotes img {
+  width: 150px;
+}
+.texto {
+  background-color: rgb(233, 229, 229);
+  text-align: center;
+  border: 1px solid rgb(88, 87, 87);
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 @keyframes carousel {
   0% {

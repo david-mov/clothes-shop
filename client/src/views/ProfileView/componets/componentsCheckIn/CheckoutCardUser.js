@@ -1,19 +1,22 @@
+import '../../../../styles/styleCata2.css';
 import React, { useState } from 'react'
 import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import DeleteIcon from "@material-ui/icons/Delete";
-import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
+import getRemoveItem from "../../../../stateManagement/actions/getRemoveItem";
 import { useDispatch, useSelector } from "react-redux";
-import { putUpdateCart } from "../../stateManagement/actions/putUpdateCart";
+import { putUpdateCart } from "../../../../stateManagement/actions/putUpdateCart";
 import Select from "react-select";
 
 
-export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
+
+export default function CheckoutCardUserIn({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
 
     const dispatch = useDispatch()
     const cart = useSelector(state => state.checkoutReducer.cart)
+
     const [vauleS, setvauleS] = useState("S");
-    const [Input, setInput] = useState(null);    
+    const [Input, setInput] = useState(null);
 
     const addCantidad = () => {
         if (quantity !== stock) {
@@ -31,6 +34,14 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         dispatch(getRemoveItem(productId));
     };
 
+    var nameImagen = "";
+
+    if (image !== undefined) {
+        nameImagen = "imageProduct/" + image.name;
+    } else {
+        nameImagen = "products/logo JK&A.png";
+    }
+    
     const onSelectChangeSize = (vauleS) => {
         var sizesEnv = "";
         if (vauleS) {
@@ -54,20 +65,14 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
           value: e.id
         }
       });
-
-    var nameImagen = "";
-
-    if (image !== undefined) {
-        nameImagen = "imageProduct/" + image.name;
-    } else {
-        nameImagen = "products/logo JK&A.png";
-    }
+    
+      
    
     return (
         <tr className="table-row table-row--chris">
 
             <td className="table-row__td">
-                <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
+                <img className="table-row__img" src={require(`../../../../assets/${nameImagen}`).default} alt="not image" />
 
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>
@@ -102,8 +107,8 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
             </td>
 
             <td className="table-row__td">
-                <CardActions disableSpacing>
-                    <div >
+                <CardActions disableSpacing  >
+                    <div className="">
                         {Array(rating)
                             .fill()
                             .map((_, i) => (
@@ -118,7 +123,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
             <p className="table-row__policy">{color}</p>
             </td>
             <td className="table-row__td">
-                <CardActions disableSpacing >
+                <CardActions disableSpacing  >
                     <IconButton onClick={(event) => RemoveItem(event, productId)}>
                         <DeleteIcon fontSize='large' />
                     </IconButton>

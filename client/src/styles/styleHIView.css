@@ -3,15 +3,18 @@
   --color-primary: #3e66a0;
   --cover-placeholder: var(--color-primary);
 }
-
+.img {
+  width: 50px;
+}
 .body_hiview {
   padding: 0;
   margin: 0;
   height: 100vh;
 }
 #john-wick {
-  background-image: url("../assets/products/logo JK&A.png");
+  background-image: url("../assets/products/logo\ JK&A.png");
   background-repeat: no-repeat;
+  background-size: cover;
 }
 #black-panther {
   background-image: url("../assets/products/new_wallas.jpg");
@@ -131,7 +134,11 @@
 }
 .c-accordion__content {
   padding: 2rem 2.5rem 0 2rem;
-  width: 50%;
+}
+@media (min-width: 458px) {
+  .c-accordion__content {
+    width: 50%;
+  }
 }
 .c-accordion__description {
   color: white;
