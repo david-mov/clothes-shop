@@ -76,11 +76,13 @@ async function preload() {
     });
   }
 
+
   const superAdmin = {
     name: "Juan",
     email:"juan123@gmail.com",
     password: "12345"  
   } 
+
   const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
   const [newUser, created] = await User.findOrCreate({
       where: {

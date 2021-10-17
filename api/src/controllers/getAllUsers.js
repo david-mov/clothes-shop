@@ -1,3 +1,4 @@
+
 const {User, Rol} = require('../db');
 
 const getAllUsers = async (req, res, next) => {
@@ -17,3 +18,4 @@ const getAllUsers = async (req, res, next) => {
 }
 
 module.exports = getAllUsers;
+
