@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Select from "react-select";
-import {postAddToCart} from "../../stateManagement/actions/postAddToCart"
 
 
 export default function ProductView() {

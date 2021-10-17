@@ -35,7 +35,7 @@ function App() {
           exact
           path="/profile"
           component={ProfileView}
-          roles={[1, 2, 3]}
+          roles={[0,1, 2, 3]}
           other="/login"
         />
         <Route exact path="/create/product/" component={Insert} />

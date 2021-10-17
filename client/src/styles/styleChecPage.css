@@ -144,11 +144,11 @@ GENERAL
 }
 
 .status--blue:before {
-  background-color: #3fd2ea;
+  background-color: #5b5aac;
 }
 
 .status--blue {
-  color: #3fd2ea;
+  color: #60147e;
 }
 
 .status--yellow:before {

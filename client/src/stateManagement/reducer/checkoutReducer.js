@@ -1,3 +1,5 @@
+import { GET_ALL_CART } from "../../consts/actionConsts";
+
 const initialState = {
   cart: [],
   contadorState: [],
@@ -64,6 +66,11 @@ const checkoutReducer = (state = initialState, action) => {
               ...state,
               totalAmount: action.payload >= state.totalAmount  ? 0 : parseInt(state.totalAmount - (action.payload.cantidad * action.payload.price - action.payload.price))
             }
+            case GET_ALL_CART:
+              return {
+                ...state,
+                cart: action.payload,
+              }
     default:
       return state;
   }

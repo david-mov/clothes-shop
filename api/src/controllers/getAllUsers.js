@@ -5,7 +5,10 @@ const getAllUsers = async (req, res, next) => {
         const allUsers = await User.findAll({
             include: {
                 model: Rol
-            }
+            }, 
+            order: [
+                ['id', 'ASC'],
+            ]
         });        
         res.json(allUsers)
     } catch (error) {

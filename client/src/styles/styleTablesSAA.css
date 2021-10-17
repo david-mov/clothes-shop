@@ -9,6 +9,10 @@ GENERAL
   font-family: 'Roboto', sans-serif;
 }
 
+.table1-container {
+  display: flex;
+  justify-content: space-between;
+}
 .body-table1{
   display:table1;
   height:100%;
@@ -31,6 +35,7 @@ GENERAL
   margin-top: 20px;
 }
 .table1__th1 {
+  background-color: black;
     color: #9eabb4;
     font-weight: 500;
     font-size: 12px;
@@ -149,11 +154,11 @@ GENERAL
 }
 
 .status--blue:before{
-  background-color: #3fd2ea;
+  background-color: #8656dd;
 }
 
 .status--blue{
-  color: #3fd2ea;
+  color: #581d88;
 }
 
 .status--yellow:before{
@@ -193,7 +198,7 @@ GENERAL
 }
 
 .table1__select-row:hover{
-  border-color:#01b9d1;
+  border-color:#453a85;
 }
 
 .table1__select-row:checked {
