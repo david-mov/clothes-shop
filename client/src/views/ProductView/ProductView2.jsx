@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Select from "react-select";
-
+import { postAddToCart } from "../../stateManagement/actions/postAddToCart"
 
 export default function ProductView() {
   //aca el estado ratin
@@ -25,8 +25,17 @@ export default function ProductView() {
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [vauleS, setvauleS] = useState(false);
   const [Input, setInput] = useState(null); 
+  const [tengo, setTengo] = useState(false);
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
+
+  const addToCart = (ev) => {
+    var quantity = contador
+    var Cart_product = productId
+    console.log("ACA SI ENTRO BRO", productId, quantity, product.price)
+    var subtotal = product.price * quantity
+    cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({ Cart_product, subtotal, quantity }))
+  }
   
   var nameImagen = "";
   const rendeImages = () => {
@@ -223,10 +232,11 @@ export default function ProductView() {
                   ></div>
                 </div>
                 <div
+                onClick={(ev) => addToCart(ev)}
                   className={`botonTextoIcono ${!product.stock ? "disabled" : ""
                     }`}
                 >
-                  <label className="labelBoton">Add to Car</label>
+                  <label className="labelBoton">Add to Cart</label>
                   <div className="icono">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
