@@ -24,6 +24,7 @@ export default function ProductView() {
 
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [vauleS, setvauleS] = useState(false);
+  const [Input, setInput] = useState(null); 
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
   
@@ -61,14 +62,14 @@ export default function ProductView() {
       });
     }
     setvauleS(vauleS);
-    //addSizes(sizesEnv);
+    addSizes(sizesEnv);
   };
-  // const addSizes = (tipesEnv) => {
-  //   setInput({
-  //     ...input,
-  //     sizes: tipesEnv,
-  //   });
-  // };
+  const addSizes = (tipesEnv) => {
+    setInput({
+      ...Input,
+      sizes: tipesEnv,
+    });
+  };
 
   const sizesSelect = () => {
 
