@@ -1,8 +1,8 @@
-import CheckoutPage from "./CheckoutPage";
-import "../../../styles/screen.css";
+import React from "react";
+import AdminPage from "./components/AdminPage";
 import { Link } from "react-router-dom";
 
-export default function CheckoutView() {
+const ListasAdminUsers = () => {
   return (
     <div>
       <div className="todo">
@@ -16,21 +16,23 @@ export default function CheckoutView() {
             ></img>
           </div>
           <div className="cart__link">
-            <h2>Shopping Cart</h2>
+            <h2>List User</h2>
           </div>
           <ul className="navbar__links">
             <li className="saco">
-              <Link to="/catalogue" className="cart__link">
+              <Link to="/" className="cart__link">
                 <i className="fas fa-arrow-left fa-1x"></i>
                 <span>
-                  Go to back <span className="cartlogo__badge">{ }</span>
+                  Go to back <span className="cartlogo__badge">{}</span>
                 </span>
               </Link>
             </li>
           </ul>
         </div>
       </div>
-      <CheckoutPage />
+      <AdminPage />
     </div>
   );
-}
+};
+
+export default ListasAdminUsers;

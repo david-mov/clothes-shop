@@ -16,11 +16,14 @@ import LoginView from "./views/LoginView/LoginView";
 import SignupView from "./views/SignupView/SignupView";
 import AddImage from "./views/FormCrudView/FormAddImg";
 import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
-import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
+import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutView";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
 import UpdateZises from "./views/FormCrudView/UpdateSizesView";
 import UpdateType from "./views/FormCrudView/UpdateTypesView";
+import SuperAView from "./views/SuperAdminView/SuperAdminView";
+import AdminView from "./views/AdminView/AdminView";
+
 
 function App() {
   return (
@@ -32,7 +35,7 @@ function App() {
           exact
           path="/profile"
           component={ProfileView}
-          roles={[1, 2, 3]}
+          roles={[0,1, 2, 3]}
           other="/login"
         />
         <Route exact path="/create/product/" component={Insert} />
@@ -71,6 +74,8 @@ function App() {
         />
         <Route exact path="/addimage/:productId" component={AddImage} />
         <Route exact path="/info/product/:productId" component={InfoProduct} />
+        <Route exact path="/superadmin" component={SuperAView} />
+        <Route exact path="/admin" component={AdminView} />
         <Route path="*" component={NotFoundView} />
       </Switch>
     </Router>

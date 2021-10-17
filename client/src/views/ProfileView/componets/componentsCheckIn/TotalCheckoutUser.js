@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 
-const Total = () => {
-    const cart = useSelector(state => state.checkoutReducer.cart)  
-
+const TotalUserIn = () => {
+    const cart = useSelector(state => state.checkoutReducer.cart) 
     var total = 0
     for(var i = 0; i < cart.length; i++){
     total = total + parseInt(cart[i].subtotal )
@@ -30,4 +29,4 @@ const Total = () => {
     );
 };
 
-export default Total;
+export default TotalUserIn;
