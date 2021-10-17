@@ -1,56 +1,54 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../styles/styleHIView.css";
 import "../../styles/HomePrincipal.css";
-import { Link } from "react-router-dom";
-import Logo from "../../assets/products/barras.svg";
+import MenuButton from "./MenuButon";
+import NavbarHam from "./NavBarHam";
+import { HeaderWrapper } from "./Header";
 
 export default function HomeIniView() {
+  const [open, setOpen] = useState(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
   return (
     <div>
-      <header class="site-header inicio">
-        <div className="contenedor contenido-header">
-          <div className="barra">
-            <Link to="/">
-              <img
-                className="img"
-                src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
-                alt="clothes-Shop"
-                border="0"
-              />
-            </Link>
-            <div className="mobile-menu">
-              <Link to="#navegacion">
-                <img src={Logo} alt="icono menu" />
-              </Link>
-            </div>
-            <nav id="navegacion" className="navegacion">
-              <Link to="/catalogue">Catalogue</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
-            </nav>
+      <div className="contenedor contenido-header">
+        <Link to="/">
+          <img
+            className="img"
+            src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+            alt="clothes-Shop"
+            border="0"
+          />
+        </Link>
+        <HeaderWrapper>
+          <div className=" contenido-header">
+            <MenuButton open={open} handleClick={handleClick}></MenuButton>
           </div>
-        </div>
-      </header>
-      <div className="contenedor seccion">
-        <div className="container">
+          <NavbarHam open={open} />
+        </HeaderWrapper>
+      </div>
+      <div className="contenedor1 seccion">
+        <div className="container1">
           <div className="body_hiview">
             <ul className="c-accordion">
               <li id="joker" className="c-accordion__item">
                 <a href="#joker" className="c-accordion__action">
                   <div className="c-accordion__content">
                     <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                      Jocker
+                      Nike
                     </h2>
                     <p className="c-accordion__description">
-                      In Gotham City, mentally troubled comedian Arthur Fleck is
-                      disregarded and mistreated by society. He then embarks on
-                      a downward spiral of revolution and bloody crime. This
-                      path brings him face-to-face with his alter-ego: the
-                      Joker.
+                      La marca Nike representa el éxito empresarial. Grandes
+                      deportistas llevan sus prendas y zapatillas deportivas y
+                      millones de personas en todo el mundo compran sus
+                      productos.
                     </p>
                   </div>
                   <div className="c-accordion__aside">
                     <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                      Jocker
+                      Nike
                     </h2>
                   </div>
                 </a>
@@ -79,7 +77,7 @@ export default function HomeIniView() {
                 <a href="#black-panther" className="c-accordion__action">
                   <div className="c-accordion__content">
                     <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                      Black Panther
+                      New Wallas
                     </h2>
                     <p className="c-accordion__description">
                       T'Challa, heir to the hidden but advanced kingdom of
@@ -90,7 +88,7 @@ export default function HomeIniView() {
                   </div>
                   <div className="c-accordion__aside">
                     <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                      Black Panther
+                      New Wallas
                     </h2>
                   </div>
                 </a>
@@ -99,27 +97,22 @@ export default function HomeIniView() {
                 <a href="#marvel-captain" className="c-accordion__action">
                   <div className="c-accordion__content">
                     <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                      Marvel Captain
+                      Puma
                     </h2>
                     <p className="c-accordion__description">
-                      Carol Danvers becomes one of the universe's most powerful
-                      heroes when Earth is caught in the middle of a galactic
-                      war between two alien races.
+                      La nueva plataforma de marca tiene como objetivo hacer que
+                      Puma sea la marca deportiva más rápida del mundo”. El
+                      eslogan habla por sí solo: Forever Faster.
                     </p>
                   </div>
                   <div className="c-accordion__aside">
                     <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                      Marvel Captain
+                      Puma
                     </h2>
                   </div>
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
-        <div className="container">
-          <div className="container_about">
-            <h1>uuu</h1>
           </div>
         </div>
       </div>
