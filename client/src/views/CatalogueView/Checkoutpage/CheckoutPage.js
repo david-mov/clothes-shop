@@ -8,6 +8,7 @@ import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {postAddToCart} from "../../../stateManagement/actions/postAddToCart"
+import { getAllCart } from "../../../stateManagement/actions/getAllCart";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutPage = () => {
   const dispatch = useDispatch()
   
+  useEffect(() => {
+    dispatch(getAllCart())
+  }, [dispatch])
+
     const classes = useStyles();
     var { cart } = useSelector(state => state.checkoutReducer)
     var { totalAmount} = useSelector(state => state.checkoutReducer)

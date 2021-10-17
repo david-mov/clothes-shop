@@ -15,6 +15,11 @@ const checkoutReducer = (state = initialState, action) => {
         ...state,
         cart: action.payload,
       }
+      case "GET_ALL_CART":
+        return {
+          ...state,
+          cart: action.payload
+        }
     case "REMOVE_ITEM":
       return {
         ...state,
