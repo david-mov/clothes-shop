@@ -87,17 +87,17 @@ async function preload() {
     });
   }
 
-  // const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
-
-  // const newUser = await User.create({
-   
-  //     email: superAdmin.email,
-  //     name: superAdmin.name,
-  //     password: hashedPassword
-    
-  // });
-      
-  // const nuevoUsuario =  await newUser.setRol(1)
+  const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+  const [newUser, created] = await User.findOrCreate({
+      where: {
+        email: superAdmin.email,
+      },
+      defaults: {
+        name: superAdmin.name,
+        password: hashedPassword
+      }
+  });
+  await newUser.setRol(1)  
   
 } // temporal function
 

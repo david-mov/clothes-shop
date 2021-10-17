@@ -8,13 +8,17 @@ const { isAuthenticated, isUnauthenticated } = require('../passportConfig/authen
 const getAllUser = require('../controllers/getAllUsers');
 const giveAdmin = require('../controllers/giveAdmin');
 const getAllAdmin = require('../controllers/getAllAdmin');
-const getUser = require('../controllers/getUser');
+const getUserDetail = require('../controllers/getUserDetail');
+const createUserDetail = require('../controllers/createUserDetail');
+const getAllUserDetail = require('../controllers/getAllUserDetails');
 
 const router = require('express').Router();
 
+router.get("/allUserDetail", getAllUserDetail)
+router.get("/userDetail/:user_detail", getUserDetail);
+router.post("/userDetail/:user_detail", createUserDetail)
 router.get("/", getAllUser );
-router.get("/admin", getAllAdmin)
-router.get("/:id", getUser);
+router.get("/admin", getAllAdmin);
 router.put("/giveAdmin/:id", giveAdmin);
 router.post('/signup', isUnauthenticated, postSignup);
 router.post('/login', isUnauthenticated, postLogin);
