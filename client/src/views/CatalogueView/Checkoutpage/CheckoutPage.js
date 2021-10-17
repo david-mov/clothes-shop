@@ -5,7 +5,9 @@ import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
 import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
 import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import {getAllCart} from "../../../stateManagement/actions/getAllCart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
