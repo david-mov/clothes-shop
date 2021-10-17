@@ -1,9 +1,10 @@
-import {POST_LOGIN, GET_LOGOUT, GET_USERS} from "../../consts/actionConsts"
+import {POST_LOGIN, GET_LOGOUT, GET_USERS, GET_ALL_USER_DETAILS} from "../../consts/actionConsts"
 
 const initialState = {
 	users:[],
 	user: {},
 	logged: false,
+	allUserDetails: []
 };
 
 export default function userReducer(state = initialState, action) {
@@ -34,6 +35,12 @@ export default function userReducer(state = initialState, action) {
 			users: action.payload,
 
 		}
+
+		case GET_ALL_USER_DETAILS: 
+			return {
+				...state,
+				allUserDetails: action.payload
+			}
 		default:
 			return { ...state };
 	}
