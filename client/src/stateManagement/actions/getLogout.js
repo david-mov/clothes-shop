@@ -5,7 +5,7 @@ export const getLogout = () => async (dispatch) => {
 	try {
 		const res = await axios({
 			method: 'GET',
-			url: '/user/logout',
+			url: '/auth/logout',
 			withCredentials: true,
 			httpOnly: true,
 		})
