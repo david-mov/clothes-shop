@@ -12,7 +12,10 @@ const modifyCategory = async (req, res, next) => {
         var traigoTodos = await Cart.findAll({
             include: [
                 {model: Product, include: [Image] }
-              ]
+              ],
+              order: [
+                ['id', 'ASC']
+            ]
         })
 		res.json(traigoTodos);
 	}
