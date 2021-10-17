@@ -13,7 +13,7 @@ const getAllUserDetail = require('../controllers/getAllUserDetails');
 const getAllUsers = require('../controllers/getAllUsers');
 const putUser = require('../controllers/disableUser');
 const changeRolUsers = require('../controllers/chageRolUser');
-const { isAuthenticated, isUnauthenticated } = require('../passportConfig/authenticators.js');
+
 
 
 const router = require('express').Router();
