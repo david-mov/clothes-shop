@@ -13,12 +13,13 @@ function ProductCard2(props) {
   const [contador, setContador] = useState(1);
   const [tengo, setTengo] = useState(false);
   const [showDetail, setshowDetail] = useState(false);
-  const { name, price, stock, description, image, rating, productId } = props;
+  const { name, price, stock, description, image, rating, productId, quantity } = props;
 
 
   const addToCart = (ev) => {
+    var quantity = contador
     var Cart_product = productId
-    var quantity = 1
+    console.log("ACA SI ENTRO BRO", productId, quantity, price)
     var subtotal = price * quantity
     cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({ Cart_product, subtotal, quantity }))
   }
@@ -100,7 +101,7 @@ function ProductCard2(props) {
                       <div className="">{contador}</div>
                       <div className={`toCartBoton mas ${contador === stock ? 'disabled' : ''}`} onClick={addCantidad}></div>
                     </div>
-                    <div className={`botonTextoIcono ${!stock ? 'disabled' : ''}`}>
+                    <div onClick={(ev) => addToCart(ev)} className={`botonTextoIcono ${!stock ? 'disabled' : ''}`}>
                       <label className="labelBoton" onClick={(ev) => addToCart(ev)}>Add to Cart</label>
                       <div className="icono">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
