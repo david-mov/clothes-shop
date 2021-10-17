@@ -6,15 +6,20 @@ import TablaList from "./ListTable";
 import "./styles.css";
 
 export default function CategoryList() {
+
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [actualCurrent, setactualCurrent] = useState(1);
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+  const category = useSelector((state) => state.categoriesReducer.categories);
   var countP = 5;
   var dataCompleta = [];
+  var totalCurrent = Math.ceil(category?.length / countP);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [actualCurrent, setactualCurrent] = useState(1);
   const [Input, setInput] = useState("");
-  const category = useSelector((state) => state.categoriesReducer.categories);
-  var totalCurrent = Math.ceil(category.length / countP);
+  
   const filterCategory = () => {
     if (Input !== "") {
       return (dataCompleta = category.filter((e) =>
@@ -41,9 +46,7 @@ export default function CategoryList() {
     }
   };
 
-  useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
+  
 
   function headers() {
     return (
@@ -68,6 +71,40 @@ export default function CategoryList() {
         </tr>
       </thead>
     );
+  }
+
+  const show = () => {
+    if (actualCurrent === 1) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>next</p>
+        </div>
+      )
+    } else if (actualCurrent >= totalCurrent) {
+
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+        </div>
+      )
+    } else {
+
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>next</p>
+        </div>
+      )
+    }
   }
 
   function bodyTable() {
@@ -105,17 +142,7 @@ export default function CategoryList() {
         />
       </div>
       <div className="buttonList">
-        <button className="button2" onClick={prevPage}>
-          PREV
-        </button>
-
-        <h1>
-          {actualCurrent} De {totalCurrent}
-        </h1>
-
-        <button className="button2" onClick={nextPage}>
-          NEXT
-        </button>
+        {show()}
       </div>
     </div>
   );

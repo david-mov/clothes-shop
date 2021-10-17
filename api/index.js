@@ -23,7 +23,7 @@ const server = require("./src/app.js");
 
 const { conn, Category, Size, Type, Rol, User } = require("./src/db.js");
 const { PORT } = process.env;
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 async function preload() {
   const categoriesData = [
@@ -46,17 +46,6 @@ async function preload() {
     "Hats",
   ];
   const rolesData = ["superAdmin", "admin", "user", "banned", "inactive"];
-
-  const superAdmin = {
-    name: "Juan",
-    email:"juan123@gmail.com",
-    password: "12345",
-    rol: rolesData[0]    
-  } 
-
-  
- 
-    
 
   for (categoryData of categoriesData) {
     await Category.findOrCreate({
@@ -87,6 +76,13 @@ async function preload() {
     });
   }
 
+
+  const superAdmin = {
+    name: "Juan",
+    email:"juan123@gmail.com",
+    password: "12345"  
+  } 
+
   const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
   const [newUser, created] = await User.findOrCreate({
       where: {
@@ -98,7 +94,7 @@ async function preload() {
       }
   });
   await newUser.setRol(1)  
-  
+
 } // temporal function
 
 // Syncing all the models at once.

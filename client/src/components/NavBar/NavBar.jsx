@@ -15,8 +15,6 @@ import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 import { getAllCart } from "../../stateManagement/actions/getAllCart";
 
 function NavBar() {
-  
-
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
 
@@ -41,6 +39,7 @@ function NavBar() {
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
+
   useEffect(() => {
     dispatch(getAllCart());
   }, [dispatch]);
@@ -94,7 +93,7 @@ function NavBar() {
         <div className="cart__link">
           <span className="cart_Link_name">Categories</span>
           <select
-            className=""
+            className="pintar"
             value={categoryValue}
             onChange={onSelectCategory}
           >
@@ -104,7 +103,7 @@ function NavBar() {
         </div>
         <div className="cart__link">
           <span className="cart_Link_name">Types</span>
-          <select className="" value={typeValue} onChange={onSelectTypes}>
+          <select className="pintar" value={typeValue} onChange={onSelectTypes}>
             <option value="none">All</option>
             {OptionsTypes}
           </select>
@@ -117,19 +116,19 @@ function NavBar() {
             <option value="L">Lower</option>
           </select>
         </div>
-        <div className="SearchInput">
+        <div className="SearchInput1">
           <input
+            className="SearchInput"
             type="text"
             onChange={onChangeSearch}
             placeholder="Search products..."
-            className=""
           />
         </div>
         <ul className="navbar__links">
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={cart?.length} color="secondary">
+                <Badge badgeContent={cart.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"

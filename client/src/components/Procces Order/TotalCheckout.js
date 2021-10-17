@@ -1,43 +1,26 @@
-import React, { useState } from 'react'
-import { Button, makeStyles } from "@material-ui/core";
-import accounting from "accounting";
-import { getBasketTotal } from "../../stateManagement/reducer/checkoutReducer";
+import React from 'react'
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     height: "20vh",
-    // },
-    // button: {
-    //     maxWidth: "200px",
-    //     marginTop: "2rem",
-    // },
-}));
 
 const Total = () => {
-    const cart = useSelector(state => state.checkoutReducer.cart)
-    var totalAmount = useSelector(state => state.checkoutReducer.totalAmount)
-    const classes = useStyles();
-    
+    const cart = useSelector(state => state.checkoutReducer.cart)  
+
     var total = 0
     for(var i = 0; i < cart.length; i++){
-       total +=  parseInt(cart[i].subtotal)
+    total = total + parseInt(cart[i].subtotal )
     }
-           
+
+
     let miBasket = cart.length
     return (
-        <div className={classes.root}>
+        <div >
             <h5>Total items: {miBasket}</h5>
             <h5>Total Amount: {parseInt(total)}</h5>
             <Button
                 component={Link}
-                to='/checkout'
-                className={classes.button}
+                to='/checkout'                
                 variant='contained'
                 color='secondary'
             >

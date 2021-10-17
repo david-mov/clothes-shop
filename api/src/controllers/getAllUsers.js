@@ -1,19 +1,21 @@
-const {User } = require('../db');
 
-const getAllUser = async (req, res, next) => {
+const {User, Rol} = require('../db');
+
+const getAllUsers = async (req, res, next) => {
     try {
-        const allUser = await User.findAll({            
-             
-            attributes: ['name', "id", "email", "user_rol"],
-		});
-
-    let filterUser = allUser.filter(e => e.user_rol === 3) 
-		console.log("ALLUSER", allUser)
-    res.json(filterUser);
-	}
-	catch (e) {
-		next(e)
-	}
+        const allUsers = await User.findAll({
+            include: {
+                model: Rol
+            }, 
+            order: [
+                ['id', 'ASC'],
+            ]
+        });        
+        res.json(allUsers)
+    } catch (error) {
+        next(error);     
+    }
 }
 
-module.exports = getAllUser;
+module.exports = getAllUsers;
+

@@ -7,21 +7,26 @@ import "./styles.css";
 
 export default function SizeList() {
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [actualCurrent, setactualCurrent] = useState(1);
+  useEffect(() => {
+    dispatch(getAllsizes());
+  }, [dispatch]);
+  const sizes = useSelector((state) => state.sizesReducer.sizes);
+
   var countP = 5;
   var dataCompleta = [];
-
+  var totalCurrent = Math.ceil(sizes?.length / countP);
+  
+  const [currentPage, setCurrentPage] = useState(0);
+  const [actualCurrent, setactualCurrent] = useState(1);
   const [Input, setInput] = useState("");
-  const size = useSelector((state) => state.sizesReducer.sizes);
-  var totalCurrent = Math.ceil(size.length / countP);
+
   const filterSizes = () => {
     if (Input !== "") {
-      return (dataCompleta = size.filter((e) =>
+      return (dataCompleta = sizes.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
       ));
     }
-    return (dataCompleta = size);
+    return (dataCompleta = sizes);
   };
   const onInputChange = (Input) => {
     setInput(Input.target.value);
@@ -41,12 +46,8 @@ export default function SizeList() {
     }
 
   };
-  useEffect(() => {
-    dispatch(getAllsizes());
-  }, [dispatch]);
+  
 
-  const sizes = useSelector((state) => state.sizesReducer.sizes);
-  var totalCurrent = Math.ceil(sizes.length / countP);
 
     function headers (){
         return (
