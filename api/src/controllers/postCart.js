@@ -15,7 +15,7 @@ const postCart = async (req, res, next) => {
                     ['id', 'ASC']
                 ]
             })
-            res.json(traigoCarrito)
+           return res.json(traigoCarrito)
         }else{ 
             await Cart.create(req.body, {include: [Product]});
             const traigoCarrito = await Cart.findAll({
@@ -26,7 +26,7 @@ const postCart = async (req, res, next) => {
                     ['id', 'ASC']
                 ]
             })
-            res.json(traigoCarrito)
+             return res.json(traigoCarrito)
         }
     }else{
     }
@@ -38,7 +38,7 @@ const postCart = async (req, res, next) => {
                 ['id', 'ASC']
             ]
         })
-        res.json(traigoCarrito)
+        return res.json(traigoCarrito)
     } catch (error) {
         next(error);     
     }
