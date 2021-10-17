@@ -1,15 +1,15 @@
-const {Cart, Product, Image} = require('../db');
+const {Cart, Product, Image, Size} = require('../db');
 
 const postCart = async (req, res, next) => {
+    
     const {quantity, subtotal, Cart_product} = req.body;
-    console.log("PROPSSSS",req.body)
     try {      
     if(req.query){
         const existe = await Cart.findOne({where:{Cart_product}})
         if(existe){
             const traigoCarrito = await Cart.findAll({
                 include: [
-                    {model: Product, include: [Image] }
+                    {model: Product, include: [Image, Size] }
                   ],
                   order: [
                     ['id', 'ASC']
@@ -20,7 +20,7 @@ const postCart = async (req, res, next) => {
             await Cart.create(req.body, {include: [Product]});
             const traigoCarrito = await Cart.findAll({
                 include: [
-                    {model: Product, include: [Image] }
+                    {model: Product, include: [Image, Size] }
                   ],
                   order: [
                     ['id', 'ASC']
@@ -32,7 +32,7 @@ const postCart = async (req, res, next) => {
     }
         const traigoCarrito = await Cart.findAll({
             include: [
-                {model: Product, include: [Image] }
+                {model: Product, include: [Image, Size] }
               ],
               order: [
                 ['id', 'ASC']

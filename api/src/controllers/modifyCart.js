@@ -1,4 +1,4 @@
-const { Cart, Product, Image } = require('../db.js')
+const { Cart, Product, Image, Size} = require('../db.js')
 
 const modifyCategory = async (req, res, next) => {
 	const { productId, quantity, price } = req.body;
@@ -11,7 +11,7 @@ const modifyCategory = async (req, res, next) => {
 
         var traigoTodos = await Cart.findAll({
             include: [
-                {model: Product, include: [Image] }
+                {model: Product, include: [Image, Size] }
               ],
               order: [
                 ['id', 'ASC']
