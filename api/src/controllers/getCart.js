@@ -5,7 +5,10 @@ const getCart = async(req,res,next) => {
         const traigoCarrito = await Cart.findAll({
             include: [
                 {model: Product, include: [Image,Size] }
-              ]
+              ],
+              order: [
+                ['id', 'ASC']
+            ]
         })
         res.json(traigoCarrito)
     }catch(err){
