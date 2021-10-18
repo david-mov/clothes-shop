@@ -21,6 +21,7 @@ export default function userReducer(state = initialState, action) {
 			}
 		}
 		case GET_LOGOUT: {
+			
 			if (action.payload.status === 200) {
 				return {
 					...state,

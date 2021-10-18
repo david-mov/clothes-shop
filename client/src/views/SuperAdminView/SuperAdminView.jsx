@@ -1,8 +1,18 @@
 import React from "react";
 import SuperAdminPage from "./componentes/SuperAdminPage";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getLogout } from "../../stateManagement/actions/getLogout";
 
 const ListasAdminUsers = () => {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  function handleLogout() {
+		dispatch(getLogout());
+		history.push("/")
+	}
   return (
     <div>
       <div className="todo">
@@ -27,6 +37,13 @@ const ListasAdminUsers = () => {
                 </span>
               </Link>
             </li>
+            <li className="saco">
+							<button onClick={() => handleLogout()}>
+								<span>
+									Logout
+								</span>
+							</button>
+						</li>
           </ul>
         </div>
       </div>

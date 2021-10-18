@@ -1,22 +1,25 @@
 import '../../styles/styleTablesSAA.css';
-import { useUserProfile } from '../../hooks/useUserProfile';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getLogout } from '../../stateManagement/actions/getLogout'
 import CheckoutPageUserIn from "./componets/CheckoutPageUserIn";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { getAllCart } from '../../stateManagement/actions/getAllCart';
 import { useEffect } from 'react';
 import TableUser from './componets/TablaUser';
 
 export default function ProfileView() {
-	let user = useUserProfile();
+
+
 	const dispatch = useDispatch();
+	const history = useHistory();
+
 	function handleLogout() {
 		dispatch(getLogout());
+		history.push("/")
 	}
 
 	useEffect(() => {
-	  dispatch(getAllCart());
+		dispatch(getAllCart());
 	}, [dispatch]);
 
 	return (
@@ -36,12 +39,12 @@ export default function ProfileView() {
 						{/* <p>name: {user?.name}</p>
 						<p>email: {user?.email}</p> */}
 					</div>
-					<ul className="navbar__links">						
+					<ul className="navbar__links">
 						<li className="saco">
 							<Link to="/catalogue" className="cart__link">
 								<i className="fas fa-arrow-left fa-1x"></i>
 								<span>
-									Go to catalogue 
+									Go to catalogue
 								</span>
 							</Link>
 						</li>

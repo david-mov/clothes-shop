@@ -28,6 +28,7 @@ import CheckoutView from "./views/CheckoutPayment/CheckoutView";
 
 
 function App() {
+  
   return (
     <Router>
       <Switch>
@@ -37,7 +38,7 @@ function App() {
           exact
           path="/profile"
           component={ProfileView}
-          roles={[0,1, 2, 3]}
+          roles={[1,3]}
           other="/login"
         />
         <Route exact path="/create/product/" component={Insert} />
@@ -66,20 +67,22 @@ function App() {
           exact
           path="/login"
           component={LoginView}
-          roles={[0]}
-          other="/"
+          roles={[0,1,2,3]}
+          // other="/"
         />
         <ProtectedRoute
           exact
           path="/signup"
           component={SignupView}
-          roles={[0]}
+          roles={[0,1,2,3]}
           other="/"
         />
         <Route exact path="/addimage/:productId" component={AddImage} />
         <Route exact path="/info/product/:productId" component={InfoProduct} />
-        <Route exact path="/superadmin" component={SuperAView} />
-        <Route exact path="/admin" component={AdminView} />
+        <ProtectedRoute exact path="/superadmin" component={SuperAView}
+        roles={[1]} other="/login"/>
+        <ProtectedRoute exact path="/admin" component={AdminView}
+        roles={[2]} other="/login"/>
         <Route path="*" component={NotFoundView} />
 
       </Switch>
