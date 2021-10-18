@@ -96,6 +96,7 @@ async function preload() {
 
 // Syncing all the models at once.
 
+
 conn.sync({ force: false }).then(() => {
   server.listen(PORT, () => {
     preload();

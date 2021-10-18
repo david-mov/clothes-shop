@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart";
+import "../../../../styles/styleCata2.css";
 
 function ProductCard2(props) {
   const dispatch = useDispatch();
@@ -194,10 +195,11 @@ function ProductCard2(props) {
             </div>
             <p>Vista rapida</p>
           </div>
-          <div className="imgProd">
+          <div>
             <img
               className="imgProd"
               src={require(`../../../../assets/${nameImagen}`).default}
+              alt="Imag not found"
             ></img>
           </div>
         </div>
