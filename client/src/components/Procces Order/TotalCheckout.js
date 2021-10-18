@@ -8,9 +8,7 @@ const Total = () => {
     const cart = useSelector(state => state.checkoutReducer.cart)  
 
     var total = 0
-    for(var i = 0; i < cart.length; i++){
-    total = total + parseInt(cart[i].subtotal )
-    }
+    cart.map(e => total += parseInt(e.subtotal))
 
 
     let miBasket = cart.length

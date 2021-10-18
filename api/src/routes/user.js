@@ -17,7 +17,7 @@ const router = require('express').Router();
 
 router.get("/user/:id", getUserIdParams);
 router.get("/allUserDetail", getAllUserDetail)
-router.get("/userDetail/:user_detail", getUserDetail);
+router.get("/userDetail", getUserDetail);
 router.post("/userDetail/:user_detail", createUserDetail)
 router.post('/signup', isUnauthenticated, postSignup);
 router.post('/login', isUnauthenticated, postLogin);

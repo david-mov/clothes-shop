@@ -166,6 +166,16 @@ View.belongsTo(User,{
   } 
 })
 
+User.hasMany(UserDetail,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+UserDetail.belongsTo(User,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
 
 
 
