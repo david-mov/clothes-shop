@@ -1,16 +1,16 @@
 const router = require('express').Router();
 
 const postCartUsers = require('../controllers/postCartUsers');
-// const getCartUsers = require('../controllers/getCart');
-// const deleteCartUsers = require("../controllers/deleteCart");
-// const modifyCartUsers = require("../controllers/modifyCart");
+const getCartUsers = require('../controllers/getCartUsers');
+const deleteCartUsers = require("../controllers/deleteCartUsers");
+const modifyCartUsers = require("../controllers/modifyCartUsers");
 
 router.post('/', postCartUsers);
-// router.get('/', getCartUsers);
-// router.get('/delete/:productId', deleteCartUsers);
+router.get('/:Cart_Users', getCartUsers);
+router.post('/delete_cart', deleteCartUsers);
 
 
-// router.put('/', modifyCartUsers);
+router.put('/', modifyCartUsers);
 
 
 module.exports = router;

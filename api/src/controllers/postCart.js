@@ -2,7 +2,7 @@ const {Cart, Product, Image, Size} = require('../db');
 
 const postCart = async (req, res, next) => {
     
-    const {quantity, subtotal, Cart_product} = req.body;
+    const {Cart_product} = req.body;
     try {      
     if(req.query){
         const existe = await Cart.findOne({where:{Cart_product}})
