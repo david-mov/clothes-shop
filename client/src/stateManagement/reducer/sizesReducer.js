@@ -1,7 +1,8 @@
-import { GET_ALL_SIZES } from "../../consts/actionConsts";
+import { CLEAN_UPDATE_PRODUCT_DETAILS, GET_ALL_SIZES, GET_UPDATE_SIZE_DETAILS } from "../../consts/actionConsts";
 
 const initialState = {
   sizes: [],
+  updateSizeDetails: {}
 };
 
 export default function sizesReducer(state = initialState, action) {
@@ -10,7 +11,17 @@ export default function sizesReducer(state = initialState, action) {
       return {
         ...state,
         sizes: action.payload,
-      };
+      }
+      case GET_UPDATE_SIZE_DETAILS:
+        return {
+          ...state,
+          updateSizeDetails: action.payload
+        }
+      case CLEAN_UPDATE_PRODUCT_DETAILS:
+        return {
+          ...state,
+          updateSizeDetails: {}
+        }
     default:
       return { ...state };
   }

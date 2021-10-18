@@ -12,9 +12,12 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
+import { getAllCart } from "../../stateManagement/actions/getAllCart";
+import { useUserRol } from '../../hooks/useUserRol';
 
 function NavBar() {
-  var { basket } = useSelector((state) => state.checkoutReducer);
+
+  let [rol, ok] = useUserRol();
 
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
@@ -42,12 +45,29 @@ function NavBar() {
   }, [dispatch]);
 
   useEffect(() => {
+    dispatch(getAllCart());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getAllTypes());
   }, [dispatch]);
 
   var types = useSelector((state) => state.typesReducer.types);
   var categories = useSelector((state) => state.categoriesReducer.categories);
-  console.log(categories);
+  var { cart } = useSelector((state) => state.checkoutReducer);
+
+  const showList = () => {
+    console.log("desde showww")
+    if (rol === 1 || rol === 2) {
+      return (
+        <li>
+          <Link className="List_return" to="/list">
+            Admin Lists
+          </Link>
+        </li>
+      )
+    }
+  }
 
   const OptionsCategories = categories.map((e, i) => {
     return (
@@ -57,7 +77,7 @@ function NavBar() {
     );
   });
 
-  const OptionsTypes = types.map((e, i) => {
+  const OptionsTypes = types?.map((e, i) => {
     return (
       <option key={i} value={e.name}>
         {e.name}
@@ -90,7 +110,7 @@ function NavBar() {
         <div className="cart__link">
           <span className="cart_Link_name">Categories</span>
           <select
-            className=""
+            className="pintar"
             value={categoryValue}
             onChange={onSelectCategory}
           >
@@ -100,7 +120,7 @@ function NavBar() {
         </div>
         <div className="cart__link">
           <span className="cart_Link_name">Types</span>
-          <select className="" value={typeValue} onChange={onSelectTypes}>
+          <select className="pintar" value={typeValue} onChange={onSelectTypes}>
             <option value="none">All</option>
             {OptionsTypes}
           </select>
@@ -113,19 +133,19 @@ function NavBar() {
             <option value="L">Lower</option>
           </select>
         </div>
-        <div className="SearchInput">
+        <div className="SearchInput1">
           <input
+            className="SearchInput"
             type="text"
             onChange={onChangeSearch}
             placeholder="Search products..."
-            className=""
           />
         </div>
         <ul className="navbar__links">
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={basket?.length} color="secondary">
+                <Badge badgeContent={cart.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"
@@ -134,19 +154,8 @@ function NavBar() {
                 </Badge>
               </IconButton>
             </Link>
-            {/*<Link to="/checkoutPage" className="cart__link">
-                            <i className="fas fa-shopping-cart"></i>
-                            <span>
-                                Cart <span className="cartlogo__badge">{ }</span>
-                                <p>{basket.length} </p>
-                            </span>
-                        </Link>*/}
           </li>
-          <li>
-            <Link className="List_return" to="/list">
-              Admin Lists
-            </Link>
-          </li>
+          {showList()}
         </ul>
       </div>
     </div>

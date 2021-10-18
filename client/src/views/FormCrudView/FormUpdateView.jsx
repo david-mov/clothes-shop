@@ -30,7 +30,7 @@ const FormTypeView = () => {
           description={product.description}
           color={product.color}
           sizes={product.sizes}
-          type={product.type}
+          type={product?.type}
           type_product={product.type_product}
           stock={product.stock}
           productId={productId}

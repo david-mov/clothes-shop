@@ -1,12 +1,11 @@
 import axios from "axios";
 import { POST_LOGIN } from "../../consts/actionConsts";
-import { HOST, PORT } from "../../consts/portConsts";
 
 export const postLogin = (user) => async (dispatch) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: `http://${HOST}:${PORT}/user/login`,
+      url: '/user/login',
       data: user,
       withCredentials: true,
       httpOnly: true,

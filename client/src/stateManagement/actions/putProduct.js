@@ -1,12 +1,11 @@
 import axios from "axios";
-import { HOST, PORT } from "../../consts/portConsts";
-
+import GET_ALL_PRODUCTS from '../../consts/actionConsts';
 
 export const putProduct = (id,payload) => {
   return async (dispatch) => {
     try {
-      await axios.put(`http://${HOST}:${PORT}/products/${id}`, payload);
-     
+    const dataBd =  await axios.put(`/products/${id}`, payload);
+      dispatch({ type: GET_ALL_PRODUCTS, payload: dataBd.data})
     } catch (err) {
       console.error(err);
     }
@@ -14,4 +13,4 @@ export const putProduct = (id,payload) => {
 };
 
 
-//export default getAllProducts;
+

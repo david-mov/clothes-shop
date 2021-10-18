@@ -1,46 +1,83 @@
-import React, { useState } from 'react'
-import { Button, makeStyles } from "@material-ui/core";
-import accounting from "accounting";
-import { getBasketTotal } from "../../stateManagement/reducer/checkoutReducer";
+import React from 'react'
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { useUserId } from '../../hooks/useUserId';
 
-const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     height: "20vh",
-    // },
-    // button: {
-    //     maxWidth: "200px",
-    //     marginTop: "2rem",
-    // },
-}));
 
 const Total = () => {
-    const basket = useSelector(state => state.checkoutReducer.basket)
-    var totalAmount = useSelector(state => state.checkoutReducer.totalAmount)
-    const classes = useStyles();
+    const cart = useSelector(state => state.checkoutReducer.cart)  
+
+    
+    let [id, idOk] = useUserId();
+    console.log("IDDDD", id?.id, idOk)
     var total = 0
-    basket.map((e) => (total = e.price + total) )        
-    let miBasket = basket.length
-    return (
-        <div className={classes.root}>
-            <h5>Total items: {miBasket}</h5>
-            <h5>Total Amount: {parseInt(totalAmount)}</h5>
-            <Button
-                component={Link}
-                to='/checkout'
-                className={classes.button}
-                variant='contained'
-                color='secondary'
-            >
-                Check out
-            </Button>
-        </div>
-    );
-};
+    cart.map(e => total += parseInt(e.subtotal))
+
+
+    let miBasket = cart.length
+
+    if(id && !cart?.length){
+        return (
+            <div >
+                <h5>Total items: {miBasket}</h5>
+                <h5>Total Amount: {parseInt(total)}</h5>
+                <Button
+                    component={Link}
+                    to='/catalogue'                
+                    variant='contained'
+                    color='secondary'
+                >
+                    Check out
+                </Button>
+            </div>
+        );
+    }else if(!id && cart?.length){
+        return (
+            <div >
+                <h5>Total items: {miBasket}</h5>
+                <h5>Total Amount: {parseInt(total)}</h5>
+                <Button
+                    component={Link}
+                    to='/login'                
+                    variant='contained'
+                    color='secondary'
+                >
+                    Check out
+                </Button>
+            </div>
+        );
+    }else if(!id && !cart?.length){
+        return (
+            <div >
+                <h5>Total items: {miBasket}</h5>
+                <h5>Total Amount: {parseInt(total)}</h5>
+                <Button
+                    component={Link}
+                    to='/login'                
+                    variant='contained'
+                    color='secondary'
+                >
+                    Check out
+                </Button>
+            </div>
+        );
+    }else{
+        return (
+            <div >
+                <h5>Total items: {miBasket}</h5>
+                <h5>Total Amount: {parseInt(total)}</h5>
+                <Button
+                    component={Link}
+                    to='/checkout/Payment'                
+                    variant='contained'
+                    color='secondary'
+                >
+                    Check out
+                </Button>
+            </div>
+        );
+    }
+}
 
 export default Total;

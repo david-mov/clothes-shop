@@ -7,12 +7,19 @@ import "./styles.css";
 
 export default function TypeList() {
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [actualCurrent, setactualCurrent] = useState(1);
+  useEffect(() => {
+    dispatch(getAllTypes());
+  }, [dispatch]);
+  const type = useSelector((state) => state.typesReducer.types);
+
   var countP = 5;
   var dataCompleta = [];
+  var totalCurrent =type ? Math.ceil(type?.length / countP): null;
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [actualCurrent, setactualCurrent] = useState(1);  
   const [Input, setInput] = useState("");
-  const type = useSelector((state) => state.typesReducer.types);
+  
   const filterTypes = () => {
     if (Input !== "") {
       return (dataCompleta = type.filter((e) =>
@@ -37,14 +44,41 @@ export default function TypeList() {
       setactualCurrent(actualCurrent - 1);
       setCurrentPage(currentPage - countP);
     }
-  };
+  };  
+  
+  const show = () => {
+    if (actualCurrent === 1) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>next</p>
+        </div>
+      )
+    } else if (actualCurrent >= totalCurrent) {
 
-  useEffect(() => {
-    dispatch(getAllTypes());
-  }, [dispatch]);
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+        </div>
+      )
+    } else {
 
-  const types = useSelector((state) => state.typesReducer.types);
-  var totalCurrent = Math.ceil(types.length / countP);
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>next</p>
+        </div>
+      )
+    }
+  }
 
   function headers() {
     return (
@@ -73,8 +107,7 @@ export default function TypeList() {
   }
 
   function bodyTable() {
-    return filterTypes()
-      .map((e, i) => {
+    return filterTypes() ? filterTypes().map((e, i) => {
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -84,7 +117,7 @@ export default function TypeList() {
             </td>
 
             <td className="table-row__td">
-              <Link to="/update/type">
+              <Link to={`/update/type/${e.id}`}>
                 <p>
                   <i className="fas fa-pencil-alt  fa-2x"></i>
                 </p>
@@ -98,8 +131,9 @@ export default function TypeList() {
           </tr>
         );
       })
-      .slice(currentPage, currentPage + 5);
+      .slice(currentPage, currentPage + countP):null;
   }
+
 
   return (
     <div>
@@ -107,23 +141,13 @@ export default function TypeList() {
         <TablaList
           title={"TYPES"}
           headers={headers()}
-          data={types}
+          data={type}
           bodyTable={bodyTable()}
           url={"/create/type"}
         />
       </div>
       <div className="buttonList">
-        <button className="button2" onClick={prevPage}>
-          PREV
-        </button>
-
-        <h1>
-          {actualCurrent} De {totalCurrent}
-        </h1>
-
-        <button className="button2" onClick={nextPage}>
-          NEXT
-        </button>
+        {show()}
       </div>
     </div>
   );

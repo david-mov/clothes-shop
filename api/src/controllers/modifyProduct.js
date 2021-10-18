@@ -1,4 +1,4 @@
-const { Product } = require('../db.js')
+const { Product} = require('../db.js')
 
 const modifyProduct = async (req, res, next) => {
 	const { id } = req.params;
@@ -6,7 +6,8 @@ const modifyProduct = async (req, res, next) => {
 		const modifiedProduct = await Product.update(req.body, 
 			{ where: { id } }
 		)
-		res.json('Product modified correctly');
+		
+		res.json(modifiedProduct);
 	}
 	catch (err) {
 		next(err);

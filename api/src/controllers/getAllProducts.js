@@ -1,4 +1,4 @@
-const { Product, Type, Category, Image, Size } = require('../db.js');
+const { Product, Type, Category, Image, Size, Rating } = require('../db.js');
 
 const getAllProducts = async (req, res, next) => {
     try {
@@ -17,7 +17,10 @@ const getAllProducts = async (req, res, next) => {
             },{
                 model: Image,
                 attributes: ['name'],
-            }],
+            }, {
+                model: Rating,
+                attributes:['amount']
+            },],
             attributes: ['name', 'price','description','stock', 'id'],
 		});
 		res.json(allProducts);

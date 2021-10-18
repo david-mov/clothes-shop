@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeView from "./views/HomeView/HomeIniView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
-import ProductView from "./views/ProductView/ProductView";
+import ProductView from "./views/ProductView/ProductView2";
 import ProductCart from "./views/ProductCart/ProductCart";
 import CatalogueView from "./views/CatalogueView/CatalogueView";
 import UpdateProduct from "./views/FormCrudView/FormUpdateView";
@@ -16,13 +16,19 @@ import LoginView from "./views/LoginView/LoginView";
 import SignupView from "./views/SignupView/SignupView";
 import AddImage from "./views/FormCrudView/FormAddImg";
 import InfoProduct from "./views/DetalleAdmin/AdminInfoView";
-import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutPage";
+import CheckoutPage from "./views/CatalogueView/Checkoutpage/CheckoutView";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
-import UpdateZises from "./views/FormCrudView/InsertSizeView";
-import UpdateType from "./views/FormCrudView/InsertTypeView";
+import UpdateZises from "./views/FormCrudView/UpdateSizesView";
+import UpdateType from "./views/FormCrudView/UpdateTypesView";
+import SuperAView from "./views/SuperAdminView/SuperAdminView";
+import AdminView from "./views/AdminView/AdminView";
+import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
+import CheckoutView from "./views/CheckoutPayment/CheckoutView";
+
 
 function App() {
+  
   return (
     <Router>
       <Switch>
@@ -32,7 +38,7 @@ function App() {
           exact
           path="/profile"
           component={ProfileView}
-          roles={[1, 2, 3]}
+          roles={[1,3]}
           other="/login"
         />
         <Route exact path="/create/product/" component={Insert} />
@@ -44,30 +50,41 @@ function App() {
           path="/update/product/:productId"
           component={UpdateProduct}
         />
-        <Route exact path="/update/category" component={UpdateCategories} />
-        <Route exact path="/update/size" component={UpdateZises} />
-        <Route exact path="/update/type" component={UpdateType} />
+        <Route
+          exact
+          path="/update/category/:productId"
+          component={UpdateCategories}
+        />
+        <Route exact path="/update/size/:productId" component={UpdateZises} />
+        <Route exact path="/update/type/:productId" component={UpdateType} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
+          <Route path= "/checkout/:id" component ={CheckoutView} />
+        {/* <Route exact path="/Checkout" component={CheckoutPrePayment} /> */}
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path="/list" component={ListAdmin} />
         <ProtectedRoute
           exact
           path="/login"
           component={LoginView}
-          roles={[0]}
-          other="/"
+          roles={[0,1,2,3]}
+          // other="/"
         />
         <ProtectedRoute
           exact
           path="/signup"
           component={SignupView}
-          roles={[0]}
+          roles={[0,1,2,3]}
           other="/"
         />
         <Route exact path="/addimage/:productId" component={AddImage} />
         <Route exact path="/info/product/:productId" component={InfoProduct} />
+        <ProtectedRoute exact path="/superadmin" component={SuperAView}
+        roles={[1]} other="/login"/>
+        <ProtectedRoute exact path="/admin" component={AdminView}
+        roles={[2]} other="/login"/>
         <Route path="*" component={NotFoundView} />
+
       </Switch>
     </Router>
   );

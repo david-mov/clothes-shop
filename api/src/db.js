@@ -1,15 +1,38 @@
-require('dotenv').config();
 const { Sequelize, DataTypes } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, 
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/clothesshop`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+let sequelize =
+  process.env.NODE_ENV === "production"
+    ? new Sequelize({
+        database: DB_NAME,
+        dialect: "postgres",
+        host: DB_HOST,
+        port: 5432,
+        username: DB_USER,
+        password: DB_PASSWORD,
+        pool: {
+          max: 3,
+          min: 1,
+          idle: 10000,
+        },
+        dialectOptions: {
+          ssl: {
+            require: true,
+            // Ref.: https://github.com/brianc/node-postgres/issues/2009
+            rejectUnauthorized: false,
+          },
+          keepAlive: true,
+        },
+        ssl: true,
+      })
+    : new Sequelize(
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+        { logging: false, native: false }
+      );
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -30,7 +53,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Type, Rol, Product, Image, Category, Size } = sequelize.models;
+
+const { User, Type, Rol, Product, Image, Category, Size, Rating, View, Cart, UserDetail, CartUsers } = sequelize.models;
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -43,6 +68,50 @@ Product.belongsToMany(User, {through: "user_product"})
 
 Product.belongsToMany(Category, {through: "category_product"})
 Category.belongsToMany(Product, {through: "category_product"})
+
+User.hasMany(UserDetail,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+UserDetail.belongsTo(User,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+
+Product.hasMany(Cart,{
+  foreignKey:{
+      name: 'Cart_product'
+  } 
+})
+Cart.belongsTo(Product,{
+  foreignKey:{
+      name: 'Cart_product'
+  } 
+})
+
+Product.hasMany(CartUsers,{
+  foreignKey:{
+      name: 'CartU_product'
+  } 
+})
+CartUsers.belongsTo(Product,{
+  foreignKey:{
+      name: 'CartU_product'
+  } 
+})
+
+User.hasMany(CartUsers,{
+  foreignKey:{
+      name: 'Cart_Users'
+  } 
+})
+CartUsers.belongsTo(User,{
+  foreignKey:{
+      name: 'Cart_Users'
+  } 
+})
 
 Type.hasMany(Product,{
   foreignKey:{
@@ -76,6 +145,63 @@ User.belongsTo(Rol,{
       name: 'user_rol'
   }
 })
+
+Product.hasMany(Rating,{
+  foreignKey:{
+      name: 'Rating_product'
+  } 
+})
+Rating.belongsTo(Product,{
+  foreignKey:{
+      name: 'Rating_product'
+  } 
+})
+
+User.hasMany(Rating,{
+  foreignKey:{
+      name: 'Rating_User'
+  } 
+})
+Rating.belongsTo(User,{
+  foreignKey:{
+      name: 'Rating_User'
+  } 
+})
+
+Product.hasMany(View,{
+  foreignKey:{
+      name: 'View_product'
+  } 
+})
+View.belongsTo(Product,{
+  foreignKey:{
+      name: 'View_product'
+  } 
+})
+
+User.hasMany(View,{
+  foreignKey:{
+      name: 'View_User'
+  } 
+})
+View.belongsTo(User,{
+  foreignKey:{
+      name: 'View_User'
+  } 
+})
+
+User.hasMany(UserDetail,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+UserDetail.belongsTo(User,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

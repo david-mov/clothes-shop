@@ -20,8 +20,10 @@
 
 require("dotenv").config();
 const server = require("./src/app.js");
-const { conn, Category, Size, Type, Rol } = require("./src/db.js");
-const { DB_PORT } = process.env;
+
+const { conn, Category, Size, Type, Rol, User } = require("./src/db.js");
+const { PORT } = process.env;
+const bcrypt = require("bcryptjs");
 
 async function preload() {
   const categoriesData = [
@@ -73,12 +75,31 @@ async function preload() {
       },
     });
   }
+
+  const superAdmin = {
+    name: "Juan",
+    email: "juan123@gmail.com",
+    password: "12345",
+  };
+  const hashedPassword = await bcrypt.hash(superAdmin.password, 10);
+  const [newUser, created] = await User.findOrCreate({
+    where: {
+      email: superAdmin.email,
+    },
+    defaults: {
+      name: superAdmin.name,
+      password: hashedPassword,
+    },
+  });
+  await newUser.setRol(1);
 } // temporal function
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(DB_PORT, () => {
+
+
+conn.sync({ force: false }).then(() => {
+  server.listen(PORT, () => {
     preload();
-    console.log(`%the best henry final project listening at ${DB_PORT}`); // eslint-disable-line no-console
+    console.log(`%the best henry final project listening at ${PORT}`); // eslint-disable-line no-console
   });
 });

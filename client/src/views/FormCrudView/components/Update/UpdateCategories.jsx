@@ -1,29 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllCategories } from "../../../../stateManagement/actions/getAllCategories";
-import { getAllsizes } from "../../../../stateManagement/actions/getAllsizes";
-import { getAllTypes } from "../../../../stateManagement/actions/getAllTypes";
 import "./update.css";
-import { useHistory, useParams } from "react-router-dom";
-// import { putCategory } from "../../../../stateManagement/actions/putCategory";
-// import {putCategory} from "../../../../stateManagement/actions/putCategory";
+import { useHistory} from "react-router-dom";
+import { putCategory } from "../../../../stateManagement/actions/putCategory";
 
-const UpdateCategories = ({ id = 1, name = "Elegant", enabled = true }) => {
+const UpdateCategories = ({name, id}) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllCategories());
-    dispatch(getAllsizes());
-    dispatch(getAllTypes());
-    // dispatch(getUpdateProductDetails(productId));
-    // dispatch(putProduct())
-  }, [dispatch]);
-
-  const { productId } = useParams();
-
-  const product = useSelector(
-    (state) => state.productsReducer.productUpdateDetails
-  );
-  console.log("data desde el detalle de update", product);
+    dispatch(getAllCategories());     
+  }, [dispatch]); 
 
   const history = useHistory();
 
@@ -32,7 +18,7 @@ const UpdateCategories = ({ id = 1, name = "Elegant", enabled = true }) => {
   const [input, setInput] = useState({
     name,
   });
-  const [errors, setErrors] = useState({});
+  
 
   const handleChange = (e) => {
     setInput({
@@ -54,26 +40,27 @@ const UpdateCategories = ({ id = 1, name = "Elegant", enabled = true }) => {
         "La Categoria que esta ingresando ya se encuentra en nuestra base de datos. por favor ingrese otra"
       );
     } else {
-      alert("Excelente");
-
+      
       let obj = {
-        name: name,
+        name: input.name,
       };
-      console.log("OBJ", obj);
-      // dispatch(putCategory(id,obj));
-      // history.push("/list");
+      
+      dispatch(putCategory(id,obj));
+      
+      setInput({});
+  
+      history.push("/list");
+      alert("Excelente");
     }
+    
 
-    setInput({});
   };
 
   const cerrarModalInsertar = () => {
     setInput({});
     history.push("/list");
   };
-
-  console.log(input);
-
+  
   return (
     <div className="crud_form">
       <form
@@ -91,7 +78,7 @@ const UpdateCategories = ({ id = 1, name = "Elegant", enabled = true }) => {
               onChange={handleChange}
               value={input.name}
             />
-            {errors.name && <p className="error">{errors.name}</p>}
+           
           </div>
           <div className="crud_Form_Insert_cancelar">
             <button
