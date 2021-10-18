@@ -23,7 +23,8 @@ import UpdateZises from "./views/FormCrudView/UpdateSizesView";
 import UpdateType from "./views/FormCrudView/UpdateTypesView";
 import SuperAView from "./views/SuperAdminView/SuperAdminView";
 import AdminView from "./views/AdminView/AdminView";
-import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment"
+import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
+import CheckoutView from "./views/CheckoutPayment/CheckoutView";
 
 
 function App() {
@@ -57,7 +58,8 @@ function App() {
         <Route exact path="/update/type/:productId" component={UpdateType} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
-        <Route exact path="/Checkout" component={CheckoutPrePayment} />
+          <Route path= "/checkout/:id" component ={CheckoutView} />
+        {/* <Route exact path="/Checkout" component={CheckoutPrePayment} /> */}
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path="/list" component={ListAdmin} />
         <ProtectedRoute
@@ -79,6 +81,7 @@ function App() {
         <Route exact path="/superadmin" component={SuperAView} />
         <Route exact path="/admin" component={AdminView} />
         <Route path="*" component={NotFoundView} />
+
       </Switch>
     </Router>
   );

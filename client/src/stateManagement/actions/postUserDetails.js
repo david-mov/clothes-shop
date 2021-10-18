@@ -1,7 +1,7 @@
 import axios from "axios";
 import { POST_USER_DETAILS } from "../../consts/actionConsts";
 
-export const PostCategories = (user_detail,payload) => {
+export const postUserDetails = (user_detail,payload) => {
 
   return async (dispatch) => {
     try {

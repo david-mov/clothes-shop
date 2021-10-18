@@ -11,9 +11,11 @@ const { isAuthenticated, isUnauthenticated } = require('../passportConfig/authen
 const getUserDetail = require('../controllers/getUserDetail');
 const getAllUserDetail = require('../controllers/getAllUserDetails');
 const createUserDetail = require('../controllers/createUserDetail');
+const getUserIdParams = require('../controllers/getUserIdParams');
 
 const router = require('express').Router();
 
+router.get("/user/:id", getUserIdParams);
 router.get("/allUserDetail", getAllUserDetail)
 router.get("/userDetail/:user_detail", getUserDetail);
 router.post("/userDetail/:user_detail", createUserDetail)
