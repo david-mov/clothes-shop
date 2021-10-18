@@ -27,6 +27,7 @@ const TableReportProduct = () => {
         console.log(product.name,"product.name")
       return (
         <DetailProduct
+          idProduct={productId}
           name={product.name}
           categories={product.categories}
           price={product.price}

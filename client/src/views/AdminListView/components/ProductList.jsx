@@ -5,6 +5,8 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
+import { deleteProduct } from "../../../stateManagement/actions/deleteProduct";
+
 
 export default function ProductosLista() {
 
@@ -13,7 +15,7 @@ export default function ProductosLista() {
     dispatch(getAllProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.productsReducer.products);
-  const [search, setSearch] = useState('S')
+  const [search, setSearch] = useState({label:'filter to..', value: ''})
   const [valor, setValor] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
@@ -91,7 +93,12 @@ export default function ProductosLista() {
       setCurrentPage(currentPage - countP)
     }
   }
+  
 
+  const deleteProducts = (e)=>{
+    dispatch(deleteProduct(e))
+    dispatch(getAllProducts());
+  }
   
   
   const show = () => {
@@ -211,9 +218,10 @@ export default function ProductosLista() {
             </td>
 
             <td className="table-row__td">
-              <p>
+          
+              <p value={e.id} onClick={() => deleteProducts(e.id)} >
                 <i className="fas fa-trash-alt fa-2x"></i>
-              </p>
+                </p>
             </td>
           </tr>
         )
