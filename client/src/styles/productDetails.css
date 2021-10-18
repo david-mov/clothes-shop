@@ -914,7 +914,7 @@ body li {
   }
   .infoRapidaModal2 .modalContainer .topContent .texto .wrapper .actions {
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
     margin: 20px auto;
   }
   .infoRapidaModal2
@@ -952,12 +952,13 @@ body li {
   justify-content: center;
   width: 50%;
   border-radius: 1rem;
-  min-width: 50%;
+  /* min-width: 50%; */
   position: relative;
   left: 0;
   animation: carousel 7s linear infinite;
 }
 #emotes img {
+  padding-top: 1rem;
   width: 150px;
 }
 .texto {
