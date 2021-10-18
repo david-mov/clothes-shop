@@ -2,9 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart";
-import { getAllCart } from "../../../../stateManagement/actions/getAllCart";
 
 function ProductCard2(props) {
   const dispatch = useDispatch();
