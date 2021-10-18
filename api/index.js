@@ -78,21 +78,20 @@ async function preload() {
 
   const superAdmin = {
     name: "Juan",
-    email:"juan123@gmail.com",
-    password: "12345"  
-  } 
-  const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+    email: "juan123@gmail.com",
+    password: "12345",
+  };
+  const hashedPassword = await bcrypt.hash(superAdmin.password, 10);
   const [newUser, created] = await User.findOrCreate({
-      where: {
-        email: superAdmin.email,
-      },
-      defaults: {
-        name: superAdmin.name,
-        password: hashedPassword
-      }
+    where: {
+      email: superAdmin.email,
+    },
+    defaults: {
+      name: superAdmin.name,
+      password: hashedPassword,
+    },
   });
-  await newUser.setRol(1)  
-
+  await newUser.setRol(1);
 } // temporal function
 
 // Syncing all the models at once.
