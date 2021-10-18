@@ -13,9 +13,8 @@ function NavbarHam({ open }) {
   let [rol, ok] = useUserRol();
 
   function handleLogout() {
-    console.log("hizo click")
 		dispatch(getLogout());
-		history.push("/")
+		history.push("/catalogue")
 	}
 
   const showLinks = () => {

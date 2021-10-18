@@ -13,8 +13,12 @@ import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 import { getAllCart } from "../../stateManagement/actions/getAllCart";
+import { useUserRol } from '../../hooks/useUserRol';
 
 function NavBar() {
+
+  let [rol, ok] = useUserRol();
+
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
 
@@ -51,6 +55,19 @@ function NavBar() {
   var types = useSelector((state) => state.typesReducer.types);
   var categories = useSelector((state) => state.categoriesReducer.categories);
   var { cart } = useSelector((state) => state.checkoutReducer);
+
+  const showList = () => {
+    console.log("desde showww")
+    if (rol === 1 || rol === 2) {
+      return (
+        <li>
+          <Link className="List_return" to="/list">
+            Admin Lists
+          </Link>
+        </li>
+      )
+    }
+  }
 
   const OptionsCategories = categories.map((e, i) => {
     return (
@@ -137,19 +154,8 @@ function NavBar() {
                 </Badge>
               </IconButton>
             </Link>
-            {/*<Link to="/checkoutPage" className="cart__link">
-                            <i className="fas fa-shopping-cart"></i>
-                            <span>
-                                Cart <span className="cartlogo__badge">{ }</span>
-                                <p>{basket.length} </p>
-                            </span>
-                        </Link>*/}
           </li>
-          <li>
-            <Link className="List_return" to="/list">
-              Admin Lists
-            </Link>
-          </li>
+          {showList()}
         </ul>
       </div>
     </div>
