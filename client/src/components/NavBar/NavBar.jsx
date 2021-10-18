@@ -60,7 +60,7 @@ function NavBar() {
     );
   });
 
-  const OptionsTypes = types.map((e, i) => {
+  const OptionsTypes = types?.map((e, i) => {
     return (
       <option key={i} value={e.name}>
         {e.name}

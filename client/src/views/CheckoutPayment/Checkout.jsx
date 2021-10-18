@@ -124,7 +124,9 @@ const Checkout = ({name, id, email, phone}) => {
           handleSubmit(e);
         }}
       >
+        <div className="label_Insert">Please fill out this form before proceeding with the purchase.</div>
         <div className="insertar">
+          
           <div className="insert_label">
             <label className="label_Insert">Name:</label>
             <input

@@ -7,6 +7,7 @@ const session = require('express-session');
 const passport = require('passport');
 const cors = require('cors')
 
+
 require('./db.js');
 
 const server = express();
@@ -46,6 +47,7 @@ server.use((req, res, next) => {
   console.log(req.user);
   next();
 });
+
 
 server.use('/', routes);
 

@@ -11,7 +11,7 @@ const userRouter = require('./user');
 const ratingRouter = require('./rating');
 const viewRouter = require('./view');
 const postCart = require("./cart")
-
+const checkout = require("./checkout")
 
 router.use('/products', productsRouter);
 router.use('/category', categoryRouter);
@@ -23,6 +23,6 @@ router.use('/user', userRouter);
 router.use('/rating', isUnauthenticated, ratingRouter);
 router.use('/view', viewRouter);
 router.use("/cart", postCart);
-
+router.use("/checkout", checkout)
 
 module.exports = router;
