@@ -4,13 +4,31 @@ import { getAllUserDetails } from "./../../stateManagement/actions/getAllUserDet
 import { useHistory} from "react-router-dom";
 import { postUserDetails } from "../../stateManagement/actions/postUserDetails";
 import Select from "react-select";
+import axios from "axios";
 
 
-const Checkout = ({name, id, email, phone}) => {
+const Checkout = ({name, id, email, phone, data}) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllUserDetails());     
   }, [dispatch]); 
+  console.log("ESTE ES EL DATA NUEVO", data)
+
+  useEffect(()=>{
+    const script = document.createElement('script');
+    const attr_data_preference = document.createAttribute('data-preference-id')
+    //const attr_nonce = document.createAttribute('nonce')
+  
+    attr_data_preference.value = data
+    //attr_nonce.value = 'abcdefg'
+    script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
+    script.setAttributeNode(attr_data_preference)
+   // script.setAttributeNode(attr_nonce)
+    document.getElementById('form1').appendChild(script)
+    return () =>{
+      document.getElementById('form1').removeChild(script);
+    }
+   },[])
 
   const history = useHistory();
 
@@ -261,6 +279,8 @@ const Checkout = ({name, id, email, phone}) => {
             </button>
           </div>
         </div>
+      </form>
+      <form id='form1'>
       </form>
     </div>
   );
