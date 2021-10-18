@@ -38,7 +38,7 @@ const postCart = async (req, res, next) => {
                 ['id', 'ASC']
             ]
         })
-        return res.json(traigoCarrito)
+        returnres.json(traigoCarrito)
     } catch (error) {
         next(error);     
     }
