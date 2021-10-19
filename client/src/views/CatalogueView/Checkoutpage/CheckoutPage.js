@@ -11,6 +11,7 @@ import { getAllCart } from '../../../stateManagement/actions/getAllCart'
 import { getAllCartUsers } from '../../../stateManagement/actions/getAllCartUser'
 import { useUserId } from '../../../hooks/useUserId'
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -18,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 const CheckoutPage = () => {
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -44,7 +46,6 @@ const CheckoutPage = () => {
       console.log("else",showCart)
      
     }
-  
 
   function FormRow() {
     return (
@@ -57,10 +58,6 @@ const CheckoutPage = () => {
                   <tr>
                     <th className="table__th">Name</th>
                     <th className="table__th">Price</th>
-                    <th className="table__th">Qty</th>
-                    <th className="table__th">Progress</th>
-                    <th className="table__th">Rating</th>
-                    <th className="table__th">aumentar y disminuir cantidad</th>
                     <th className="table__th"></th>
                   </tr>
                 </thead>
@@ -76,7 +73,7 @@ const CheckoutPage = () => {
                       price={e.product.price}
                       image={e.product.images[0]}
                       subtotal={e.subtotal}
-                      size={e.product.size}
+                      size={e.product.sizes}
                       color={e.product.color}
                     />
                   ))}
