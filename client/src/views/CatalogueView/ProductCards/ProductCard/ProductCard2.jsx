@@ -6,17 +6,20 @@ import { useState } from "react";
 import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart";
 import { useUserId } from "../../../../hooks/useUserId";
 import { postAddToCartUser } from "../../../../stateManagement/actions/postAddToCartUser";
+import { postAddViewUser } from "../../../../stateManagement/actions/postAddView";
 
 
 function ProductCard2(props) {
   let [user,ok] = useUserId();
   const dispatch = useDispatch();
-  var cart;
+  var cart, View_User, View_product;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
   if(user !== undefined || user !== null){
+    View_User = user?.id;
     cart = cartLogedIn;
   }else{
+    View_User = 1;
     cart = cartLogedOut;
 
   }
@@ -34,7 +37,7 @@ function ProductCard2(props) {
   } = props;
 
   const addToCart = (ev) => {
-    if(user !== undefined || user !== null){ 
+    if(user !== null){ 
       var sizesUser = "";
       var Cart_Users = user?.id;
       var quantity = contador;
@@ -81,6 +84,11 @@ function ProductCard2(props) {
       setContador(contador - 1);
     }
   };
+
+  const sendView = (e) => {    
+    View_product = e;
+    dispatch(postAddViewUser({ View_User, View_product }));     
+  }
 
   const vistaRapidaProduct = () => {
     return (
@@ -174,7 +182,7 @@ function ProductCard2(props) {
                     </div>
                   </div>
                   <p className="descripcion">{description}</p>
-                  <Link className="boton" to={`/product/${productId}`}>
+                  <Link className="boton" onClick={() => sendView(productId)} to={`/product/${productId}`}>
                     Show Details
                   </Link>
                 </div>
@@ -228,7 +236,7 @@ function ProductCard2(props) {
           </div>
         </a>
         <div className="actions">
-          <Link className="boton" to={`/product/${productId}`}>
+          <Link className="boton" onClick={() => sendView(productId)} to={`/product/${productId}`}>
             Show Details
           </Link>
           <div className="boton alCarrito" onClick={(ev) => addToCart(ev)}>
