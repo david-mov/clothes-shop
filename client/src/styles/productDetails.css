@@ -926,6 +926,9 @@ body li {
     .botonTextoIcono {
     margin: 20px auto 0 auto;
   }
+  .imagen {
+    width: 500px;
+  }
   .infoRapidaModal2
     .modalContainer
     .topContent
@@ -960,6 +963,7 @@ body li {
 #emotes img {
   padding-top: 1rem;
   width: 150px;
+  height: 250;
 }
 .texto {
   text-align: center;

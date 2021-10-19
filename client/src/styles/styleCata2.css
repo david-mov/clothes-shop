@@ -673,9 +673,9 @@ body li {
   stroke: currentColor;
   stroke-miterlimit: 10;
 }
-.wrapperImg {
+/* .wrapperImg {
   padding-top: 3rem;
-}
+} */
 .infoRapidaModal .modalContainer .topContent .imagenContainer .wrapperImg {
   width: 100%;
   height: 100%;
