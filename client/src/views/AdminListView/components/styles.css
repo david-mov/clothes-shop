@@ -72,8 +72,8 @@ GENERAL
 }
 
 .table-row__img {
-  width: 80px;
-  height: 36px;
+  width: 100px;
+  /* height: 36px; */
   display: inline-block;
   border-radius: 50%;
   background-position: center;
@@ -262,9 +262,7 @@ GENERAL
     margin-bottom: 10px;
   }
   .table-row__img {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 10px;
+    width: 70px;
   }
 
   .table-row__td:before {
