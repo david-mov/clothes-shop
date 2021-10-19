@@ -7,7 +7,7 @@ import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
 import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {getAllCart} from "../../../stateManagement/actions/getAllCart";
+import { getAllCart } from "../../../stateManagement/actions/getAllCart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,55 +16,56 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const CheckoutPage = () => {
-  
+
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     dispatch(getAllCart())
   }, [dispatch])
 
-    const classes = useStyles();
-    var { cart } = useSelector(state => state.checkoutReducer)
-    var { totalAmount} = useSelector(state => state.checkoutReducer)
-    function FormRow() {
-        return (
-            <div className="container">
-                <div className="row row--top-20">
-                    <div className="col-md-12">
-                        <div className="table-container">
-                            <table className="table">
-                                <thead className="table__thead">
-                                    <tr>
-                                        <th className="table__th">Name</th>
-                                        <th className="table__th">Price</th>
-                                        <th className="table__th">Qty</th>
-                                        <th className="table__th">Progress</th>
-                                        <th className="table__th">Rating</th>
-                                        <th className="table__th">aumentar y disminuir cantidad</th>
-                                        <th className="table__th"></th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table__tbody">
-                                    {cart?.map((e) => (
-                                        <CheckoutCard key={e.product.id} 
-                                        name={e.product.name}
-                                        stock={e.product.stock}                         
-                                        productId={e.product.id}
-                                        idCarrito={e.id}
-                                        quantity={e.quantity}
-                                        price={e.product.price}
-                                        image={e.product.images[0]}
-                                        subtotal={e.subtotal}
-                                        size={e.product.size}
-                                        color={e.product.color}
-                                         />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-  
+  const classes = useStyles();
+  var { cart } = useSelector(state => state.checkoutReducer)
+  var { totalAmount } = useSelector(state => state.checkoutReducer)
+  function FormRow() {
+    return (
+      <div className="container">
+        <div className="row row--top-20">
+          <div className="col-md-12">
+            <div className="table-container">
+              <table className="table">
+                <thead className="table__thead">
+                  <tr>
+                    <th className="table__th">Name</th>
+                    <th className="table__th">Price</th>
+                    <th className="table__th">Amount (Min - Max)</th>
+                    <th className="table__th">Subtotal to Item</th>
+                    <th colspan="5" className="table__th">Sizes to Item</th>
+                    <th className="table__th">Rating</th>
+                    <th className="table__th">Color</th>
+                    <th className="table__th"></th>
+                  </tr>
+                </thead>
+                <tbody className="table__tbody">
+                  {cart?.map((e) => (
+                    <CheckoutCard key={e.product.id}
+                      name={e.product.name}
+                      stock={e.product.stock}
+                      productId={e.product.id}
+                      idCarrito={e.id}
+                      quantity={e.quantity}
+                      price={e.product.price}
+                      image={e.product.images[0]}
+                      subtotal={e.subtotal}
+                      size={e.product.sizes}
+                      color={e.product.color}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }

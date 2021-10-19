@@ -13,7 +13,6 @@ import Select from "react-select";
 export default function CheckoutCardUserIn({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
 
     const dispatch = useDispatch()
-    const cart = useSelector(state => state.checkoutReducer.cart)
 
     const [vauleS, setvauleS] = useState("S");
     const [Input, setInput] = useState(null);
