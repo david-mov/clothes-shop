@@ -42,7 +42,7 @@ export default function AddImgProduct({ id, name }) {
 
   return (
     <div className="crud_form">
-      <form onSubmit={onFormSubmit}>
+      <form className="inserImage" onSubmit={onFormSubmit}>
         <input value={id} hidden />
         <label className="Inser_Img">
           <h3>Name Product</h3>
@@ -53,7 +53,9 @@ export default function AddImgProduct({ id, name }) {
         <label className="Inser_Img">
           <h3 className="Inser_Img">Select Image</h3>
         </label>
-        <input type="file" name="img" onChange={InputChange}></input>
+        <div className="insertImg">
+          <input type="file" name="img" onChange={InputChange}></input>
+        </div>
         <button className="button2" type="submit">
           Add Image
         </button>
