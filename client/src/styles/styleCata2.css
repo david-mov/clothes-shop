@@ -9,6 +9,7 @@
   padding: 0;
   margin: 0 auto;
 }
+
 .body_Cata * {
   font-family: "Inter", sans-serif;
 }
@@ -264,6 +265,7 @@ body li {
 .card .innerProd .imgWrapper:hover .imgProd {
   transform: scale(0.8);
 }
+
 .card .innerProd .imgWrapper:hover .detalleRapido {
   width: 100%;
   height: 100%;
@@ -434,6 +436,9 @@ body li {
   text-align: right;
   text-decoration: line-through;
 }
+.cont {
+  color: green;
+}
 .card .innerProd .info .precios .precioOriginal:before {
   content: var(--currencyPrefix);
   font-size: 14px;
@@ -585,14 +590,19 @@ body li {
   align-items: center;
   justify-content: center;
   align-content: center;
-  display: flex;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
   height: 100%;
   background-color: rgba(18, 22, 24, 0.8);
   z-index: 1000;
+}
+@media (min-width: 768px) {
+  .infoRapidaModal {
+    width: 100%;
+    height: 100%;
+  }
 }
 .infoRapidaModal .closeModal {
   position: absolute;
@@ -663,10 +673,13 @@ body li {
   stroke: currentColor;
   stroke-miterlimit: 10;
 }
+.wrapperImg {
+  padding-top: 3rem;
+}
 .infoRapidaModal .modalContainer .topContent .imagenContainer .wrapperImg {
   width: 100%;
   height: 100%;
-  padding: 50px;
+  padding: 150px;
   box-sizing: border-box;
   position: relative;
   overflow: visible;

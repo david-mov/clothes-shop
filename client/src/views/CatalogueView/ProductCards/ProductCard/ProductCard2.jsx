@@ -86,17 +86,13 @@ function ProductCard2(props) {
                     <path d="M30 34l22-22m-16 0h16v16"></path>
                   </svg>
                 </div>
-                <div
-                  className="zoom_imgOrigin wrapperImg"
-                  onClick={hidenVistaRapida}
-                >
-                  <div className="zoom_imgSource imagen">
-                    <img
-                      classNameName="imgProd"
-                      src={require(`../../../../assets/${nameImagen}`).default}
-                      alt="Ima not found"
-                    ></img>
-                  </div>
+                <div className="zoom_imgOrigin wrapperImg">
+                  {hidenVistaRapida}
+                  <img
+                    className="imgProd"
+                    src={require(`../../../../assets/${nameImagen}`).default}
+                    alt="Ima not found"
+                  />
                 </div>
               </div>
               <div className="texto">
@@ -195,13 +191,12 @@ function ProductCard2(props) {
             </div>
             <p>Vista rapida</p>
           </div>
-          <div>
-            <img
-              className="imgProd"
-              src={require(`../../../../assets/${nameImagen}`).default}
-              alt="Imag not found"
-            ></img>
-          </div>
+
+          <img
+            className="imgProd"
+            src={require(`../../../../assets/${nameImagen}`).default}
+            alt="Imag not found"
+          ></img>
         </div>
         <a className="info" href="#">
           <p className="prodName">{name}</p>
