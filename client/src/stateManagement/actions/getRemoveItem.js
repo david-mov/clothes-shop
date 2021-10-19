@@ -3,7 +3,6 @@ import axios from "axios";
 
 
 const getRemoveItem = (productId) => async(dispatch) => {
-    console.log("EL ID", productId)
 try {
     const deleteProductCart = await axios.get(`/cart/delete/${productId}`)
     return dispatch({ type: REMOVE_ITEM, payload: deleteProductCart.data })

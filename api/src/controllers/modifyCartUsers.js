@@ -2,6 +2,7 @@ const { CartUsers, Product, Image, Size} = require('../db.js')
 
 const modifyCategory = async (req, res, next) => {
 	const { CartU_product, Cart_Users, quantity, price, sizesUser } = req.body;
+    console.log("entra y tiene ",CartU_product, Cart_Users, quantity, price )
     var subtotal = parseInt(quantity * price)
 	try {
 		const traigo = await CartUsers.update(

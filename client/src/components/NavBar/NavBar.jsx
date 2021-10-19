@@ -14,11 +14,13 @@ import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 import { getAllCart } from "../../stateManagement/actions/getAllCart";
 import { useUserRol } from '../../hooks/useUserRol';
+import { getAllCartUsers } from "../../stateManagement/actions/getAllCartUser";
+import { useUserId } from "../../hooks/useUserId";
 
 function NavBar() {
 
   let [rol, ok] = useUserRol();
-
+  let [user,okId] = useUserId();
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
 
@@ -29,7 +31,6 @@ function NavBar() {
   };
 
   const onSelectTypes = (e) => {
-    console.log("mostre on select types");
     e.preventDefault();
     setTypeValue(e.target.value);
     dispatch(getType(e.target.value));
@@ -46,6 +47,7 @@ function NavBar() {
 
   useEffect(() => {
     dispatch(getAllCart());
+    dispatch(getAllCartUsers());
   }, [dispatch]);
 
   useEffect(() => {
@@ -54,10 +56,16 @@ function NavBar() {
 
   var types = useSelector((state) => state.typesReducer.types);
   var categories = useSelector((state) => state.categoriesReducer.categories);
+  var totalCart  = useSelector((state) => state.checkoutUserReducer.totalCartUser);
   var { cart } = useSelector((state) => state.checkoutReducer);
+  var showCart;
+  if(user !== null){
+  showCart = totalCart.filter((e)=> e.Cart_Users === user.id) 
+  }else{
+    showCart = cart;
+  }
 
   const showList = () => {
-    console.log("desde showww")
     if (rol === 1 || rol === 2) {
       return (
         <li>
@@ -145,7 +153,7 @@ function NavBar() {
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={cart.length} color="secondary">
+                <Badge badgeContent={showCart.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"

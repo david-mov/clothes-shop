@@ -5,7 +5,7 @@ import typesReducer from "./typesReducer.js"
 import sizesReducer from './sizesReducer.js'
 import userReducer from './userReducer.js'
 import checkoutReducer from './checkoutReducer.js'
-
+import checkoutUserReducer from './checkoutUserReducer.js'
 
 export default combineReducers({
 	categoriesReducer,
@@ -13,6 +13,7 @@ export default combineReducers({
 	typesReducer,
   userReducer,
 	sizesReducer,
-	checkoutReducer
+	checkoutReducer,
+	checkoutUserReducer
 })
 

@@ -8,10 +8,10 @@ GENERAL
   padding: 0px;
   font-family: "arial";
 }
-.body-table{
-  display:table;
-  height:100%;
-  width:100%;
+.body-table {
+  display: table;
+  height: 100%;
+  width: 100%;
   color: #252a3b;
   background-color: #f8f8f8;
 }
@@ -72,8 +72,8 @@ GENERAL
 }
 
 .table-row__img {
-  width: 36px;
-  height: 36px;
+  width: 100px;
+  /* height: 36px; */
   display: inline-block;
   border-radius: 50%;
   background-position: center;
@@ -262,9 +262,7 @@ GENERAL
     margin-bottom: 10px;
   }
   .table-row__img {
-    width: 42px;
-    height: 42px;
-    margin-bottom: 10px;
+    width: 70px;
   }
 
   .table-row__td:before {
@@ -342,9 +340,16 @@ GENERAL
 .table-container {
   text-align: center;
 }
+@media (min-width: 458px) {
+  .table-container {
+    background-color: #1f7c68;
+  }
+}
 .button2 {
+  margin-top: 1rem;
   padding-left: 10px;
   color: black;
+  border: none;
   padding: 2px 8px;
   background: #ada996;
   background: -webkit-linear-gradient(
@@ -357,19 +362,16 @@ GENERAL
   background: linear-gradient(to right, #eaeaea, #dbdbdb, #f2f2f2, #ada996);
 }
 .button2:hover {
-  color: white;
+  color: red;
 }
 
 .buttonList {
   display: flex;
   justify-content: center;
-  padding-top: 15px;
 }
 .productList {
   display: flex;
   justify-content: center;
-  padding-bottom: 15px;
-  padding-top: 15px;
 }
 .productListLink {
   text-decoration: none;
@@ -385,8 +387,6 @@ GENERAL
   background: linear-gradient(to right, #eef2f3, #8e9eab);
   color: black;
   font-size: 20px;
-  padding-top: 10px;
-  padding-left: 10px;
 }
 
 .select-style {
@@ -396,15 +396,16 @@ GENERAL
 }
 .placeHolderSearch {
   text-align: center;
+  border: none;
 }
-
-.img1{
+/* 
+.img1 {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 5px;
   padding-top: 15px;
-}
+} */
 
-img{
+img {
   width: 100%;
 }
