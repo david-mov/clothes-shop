@@ -4,7 +4,7 @@ const postCart = async (req, res, next) => {
     
     const {Cart_product} = req.body;
     try {      
-    if(req.query){
+    if(Cart_product){
         const existe = await Cart.findOne({where:{Cart_product}})
         if(existe){
             const traigoCarrito = await Cart.findAll({

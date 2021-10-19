@@ -1,83 +1,44 @@
 import React from 'react'
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import { useUserId } from '../../hooks/useUserId';
-
+import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useUserId } from '../../hooks/useUserId'
 
 const Total = () => {
-    const cart = useSelector(state => state.checkoutReducer.cart)  
+  let [user, okId] = useUserId()
+  const cart = useSelector((state) => state.checkoutReducer.cart)
+  var totalCart = useSelector(
+    (state) => state.checkoutUserReducer.totalCartUser,
+  )
 
-    
-    let [id, idOk] = useUserId();
-    console.log("IDDDD", id?.id, idOk)
-    var total = 0
-    cart.map(e => total += parseInt(e.subtotal))
+  var showCart
+  var total = 0
+  let miBasket
 
+  if (user !== null) {
+    showCart = totalCart.filter((e) => e.Cart_Users === user.id)
+    showCart.map((e) => (total += parseInt(e.subtotal)))
+    miBasket = showCart.length
+    console.log('show', showCart)
+  } else {
+    cart.map((e) => (total += parseInt(e.subtotal)))
+    miBasket = cart.length
+  }
 
-    let miBasket = cart.length
-
-    if(id && !cart?.length){
-        return (
-            <div >
-                <h5>Total items: {miBasket}</h5>
-                <h5>Total Amount: {parseInt(total)}</h5>
-                <Button
-                    component={Link}
-                    to='/catalogue'                
-                    variant='contained'
-                    color='secondary'
-                >
-                    Check out
-                </Button>
-            </div>
-        );
-    }else if(!id && cart?.length){
-        return (
-            <div >
-                <h5>Total items: {miBasket}</h5>
-                <h5>Total Amount: {parseInt(total)}</h5>
-                <Button
-                    component={Link}
-                    to='/login'                
-                    variant='contained'
-                    color='secondary'
-                >
-                    Check out
-                </Button>
-            </div>
-        );
-    }else if(!id && !cart?.length){
-        return (
-            <div >
-                <h5>Total items: {miBasket}</h5>
-                <h5>Total Amount: {parseInt(total)}</h5>
-                <Button
-                    component={Link}
-                    to='/login'                
-                    variant='contained'
-                    color='secondary'
-                >
-                    Check out
-                </Button>
-            </div>
-        );
-    }else{
-        return (
-            <div >
-                <h5>Total items: {miBasket}</h5>
-                <h5>Total Amount: {parseInt(total)}</h5>
-                <Button
-                    component={Link}
-                    to='/checkout/Payment'                
-                    variant='contained'
-                    color='secondary'
-                >
-                    Check out
-                </Button>
-            </div>
-        );
-    }
+  return (
+    <div>
+      <h5>Total items: {miBasket}</h5>
+      <h5>Total Amount: {parseInt(total)}</h5>
+      <Button
+        component={Link}
+        to="/checkout/Payment"
+        variant="contained"
+        color="secondary"
+      >
+        Check out
+      </Button>
+    </div>
+  )
 }
 
-export default Total;
+export default Total

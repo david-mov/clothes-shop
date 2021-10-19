@@ -1,16 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart";
-import { getAllCart } from "../../../../stateManagement/actions/getAllCart";
+import { useUserId } from "../../../../hooks/useUserId";
+import { postAddToCartUser } from "../../../../stateManagement/actions/postAddToCartUser";
+
 
 function ProductCard2(props) {
+  let [user,ok] = useUserId();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.checkoutReducer.cart);
+  var cart;
+  const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
+  const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
+  if(user !== null ){
+    console.log("userr",user.id)
+    cart = cartLogedIn;
+  }else{
+    console.log("else")
+    cart = cartLogedOut;
+
+  }
   const [contador, setContador] = useState(1);
-  const [tengo, setTengo] = useState(false);
   const [showDetail, setshowDetail] = useState(false);
   const {
     name,
@@ -24,13 +35,20 @@ function ProductCard2(props) {
   } = props;
 
   const addToCart = (ev) => {
+    if(user !== undefined ){ 
+      var sizesUser = "";
+      var Cart_Users = user?.id;
+      console.log("si hay user id", Cart_Users)
+      var quantity = contador;
+      var CartU_product = productId;
+      var subtotal = price * quantity;
+      dispatch(postAddToCartUser({ CartU_product,Cart_Users, subtotal, quantity, sizesUser }))
+    }
+    
     var quantity = contador;
     var Cart_product = productId;
-    console.log("ACA SI ENTRO BRO", productId, quantity, price);
     var subtotal = price * quantity;
-    cart.find((e) => e.product.id == productId)
-      ? setTengo(true)
-      : dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
+    dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
   };
 
   var nameImagen = "";

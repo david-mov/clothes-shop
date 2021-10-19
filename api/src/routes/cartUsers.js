@@ -6,7 +6,7 @@ const deleteCartUsers = require("../controllers/deleteCartUsers");
 const modifyCartUsers = require("../controllers/modifyCartUsers");
 
 router.post('/', postCartUsers);
-router.get('/:Cart_Users', getCartUsers);
+router.get('/', getCartUsers);
 router.post('/delete_cart', deleteCartUsers);
 
 

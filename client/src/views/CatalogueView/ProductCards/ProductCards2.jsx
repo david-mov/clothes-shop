@@ -5,12 +5,15 @@ import ProductCard2 from "./ProductCard/ProductCard2";
 import { useSelector } from "react-redux";
 import { getAllCart } from "../../../stateManagement/actions/getAllCart";
 import { useDispatch } from "react-redux";
+import { getAllCartUsers } from "../../../stateManagement/actions/getAllCartUser";
+
 
 const Product = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllCart());
+    dispatch(getAllCart()); 
+    dispatch(getAllCartUsers());
   }, [dispatch]);
 
   var { products } = useSelector((state) => state.productsReducer);
