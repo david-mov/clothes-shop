@@ -20,14 +20,19 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    phone: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     documentType: {
       type: DataTypes.STRING,
       allowNull: false
     },
     numberDocument: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },    
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },  
     birthDate: {
       type: DataTypes.STRING,
       allowNull: false,
