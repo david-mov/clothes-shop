@@ -25,6 +25,7 @@ import SuperAView from "./views/SuperAdminView/SuperAdminView";
 import AdminView from "./views/AdminView/AdminView";
 import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import CheckoutView from "./views/CheckoutPayment/CheckoutView";
+import ContactUs from "../src/components/Email/emailSender"
 
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
         roles={[1]} other="/login"/>
         <ProtectedRoute exact path="/admin" component={AdminView}
         roles={[2]} other="/login"/>
+        <Route path="/mensaje" component={ContactUs}></Route>
         <Route path="*" component={NotFoundView} />
 
       </Switch>
