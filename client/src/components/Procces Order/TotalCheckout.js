@@ -19,7 +19,6 @@ const Total = () => {
     showCart = totalCart.filter((e) => e.Cart_Users === user.id)
     showCart.map((e) => (total += parseInt(e.subtotal)))
     miBasket = showCart.length
-    console.log('show', showCart)
   } else {
     cart.map((e) => (total += parseInt(e.subtotal)))
     miBasket = cart.length

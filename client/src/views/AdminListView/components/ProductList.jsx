@@ -210,7 +210,7 @@ export default function ProductosLista() {
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/info/product/ss/${e.id}`}>
+              <Link to={`/info/product/${e.id}`}>
                 <p>
                   <i class="fas fa-user-secret fa-9x"></i>
                 </p>

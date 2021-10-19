@@ -28,24 +28,24 @@ const CheckoutPage = () => {
   }, [dispatch])
 
   const classes = useStyles()
-  let [user,okId] = useUserId();
+  let [user, okId] = useUserId();
   var { cart } = useSelector((state) => state.checkoutReducer)
   var totalCart = useSelector(
     (state) => state.checkoutUserReducer.totalCartUser,
   )
   var { totalAmount } = useSelector((state) => state.checkoutReducer)
   var { totalAmountUser } = useSelector((state) => state.checkoutUserReducer)
-  var showCart,showTotalAmount;
-  if(user !== null){
-    showCart = totalCart.filter((e)=> e.Cart_Users === user.id) 
+  var showCart, showTotalAmount;
+  console.log("kjkjk", user)
+  if (user !== null) {
+    showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
     showTotalAmount = totalAmountUser;
-     console.log("showcart",showCart)
-    }else{
-      showCart = cart;
-      showTotalAmount = totalAmount;
-      console.log("else",showCart)
-     
-    }
+  } else {
+    console.log("debe estar aqui")
+    showCart = cart;
+    showTotalAmount = totalAmount;
+
+  }
 
   function FormRow() {
     return (

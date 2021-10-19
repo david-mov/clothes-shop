@@ -14,11 +14,9 @@ function ProductCard2(props) {
   var cart;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
-  if(user !== null ){
-    console.log("userr",user.id)
+  if(user !== undefined || user !== null){
     cart = cartLogedIn;
   }else{
-    console.log("else")
     cart = cartLogedOut;
 
   }
@@ -36,10 +34,9 @@ function ProductCard2(props) {
   } = props;
 
   const addToCart = (ev) => {
-    if(user !== undefined ){ 
+    if(user !== undefined || user !== null){ 
       var sizesUser = "";
       var Cart_Users = user?.id;
-      console.log("si hay user id", Cart_Users)
       var quantity = contador;
       var CartU_product = productId;
       var subtotal = price * quantity;
