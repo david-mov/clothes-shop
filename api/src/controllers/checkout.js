@@ -5,7 +5,7 @@ const mercadopago = require ('mercadopago');
 mercadopago.configure({
     access_token: 'TEST-3235386753856736-101613-6fb4a99a89bf5523f6f66fcd8aa1f5fb-39593671'
   });
-  var id_orden= 1
+  var id_orden=1
   
   const checkout = async(req,res,next) => {
     let carrito = await Cart.findAll()

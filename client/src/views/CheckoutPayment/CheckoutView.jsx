@@ -9,7 +9,6 @@ import axios from "axios";
 
 const CheckoutView = () => {
 
-  const productos = useSelector(state => state.productsReducer.products)
   const dispatch = useDispatch();
   const { id } = useParams();
   const [datos, setDatos] = useState("")
@@ -26,14 +25,22 @@ const CheckoutView = () => {
     };
   }, [dispatch, idFinal]);
   
+
   useEffect(()=>{
     axios
     .get("http://localhost:3001/checkout")
     .then((data)=>{
-      setDatos(data.data.id)
+      setDatos(data.data)
       console.info('Contenido de data:', data)
     }).catch(err => console.error(err)) 
   },[])
+
+
+  const productos = [
+    {title: "Producto 1", quantity: 5, price: 10.52},
+    {title: "Producto 2", quantity: 15, price: 100.52},
+    {title: "Producto 3", quantity: 6, price: 200}
+  ]
 
 
   const user = useSelector((state) => state.userReducer.userDetailIdParams);
@@ -46,14 +53,20 @@ const CheckoutView = () => {
           id={id}
           email={user.email}
           phone={user.phone}
-          data={datos}
+          productos={productos}
+           data={datos}
         />
       );
     }
   };
 
   return (
-<div>{formulario()}</div>
+    <div>
+      { !datos
+        ? <p>Aguarde un momento....</p> 
+        : formulario()
+      }
+      </div>
   )
 };
 
