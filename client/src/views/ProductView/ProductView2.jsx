@@ -49,7 +49,7 @@ export default function ProductView() {
 
   const addToCart = (ev) => {
     if (user !== undefined || user !== null) {
-      sizesUser = "";
+      sizesUser = Input.names?.join(" ");
       Cart_Users = user?.id;
       quantity = contador;
       CartU_product = productId;
@@ -93,7 +93,9 @@ export default function ProductView() {
   const onSelectChangeSize = (vauleS) => {
     setInput({
       ...Input,
-      sizes: vauleS.map(e => e.value)
+      sizes: vauleS.map(e => e.value),
+      names: vauleS.map(e => e.label)
+      
       
     });
     setvauleS(vauleS);
@@ -106,16 +108,17 @@ export default function ProductView() {
     });
   };
 
+  
   const sizesSelect =  () => {
 
-    
+    if (Object.keys(product).length !== 0) {
+
       const Optionsizes =  product?.sizes?.map((e) => {
         return {
           label: e.name,
-          value: e.id
+          value: e.size_product?.sizeId
         }
       });
-
       
       return (
         <Select
@@ -125,6 +128,10 @@ export default function ProductView() {
           isMulti
         />
       )
+
+    }
+
+      
 
 
     
@@ -144,7 +151,7 @@ export default function ProductView() {
     }
   };
 
-  // console.log("INPUT",Input)
+  console.log("INPUT",Input)
 
   return (
     <div>
@@ -236,7 +243,7 @@ export default function ProductView() {
                   ))}
               </p>
               <p className="descripcion">
-                <span className="bold">Type: </span>
+                <span className="bold">Type: {product?.type?.name} </span>
               </p>
               <p className="descripcion">
                 <span className="bold">Sizes: </span>
