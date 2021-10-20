@@ -138,6 +138,7 @@ const UpdateCheckout = ({
         documentType: input.documentType,
         numberDocument: input.numberDocument,
         birthDate: input.birthDate,
+        phone: input.phone
         
       };
       
@@ -203,10 +204,10 @@ const UpdateCheckout = ({
             <label className="label_Insert">Phone:</label>
             <input
               className="form-control"
-              name="name"
+              name="phone"
               type="text"
               onChange={handleChange}
-              value={phone}
+              value={input.phone}
               
             />
            
