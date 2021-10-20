@@ -51,7 +51,6 @@ const FormCrudViewDetails = () => {
         name={userdeta.name}
         id={idCookie?.id}
         email={userdeta.email}
-
       />
     </div>
   );

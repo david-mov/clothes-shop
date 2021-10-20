@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllUserDetails } from "../../../../stateManagement/actions/getAllUserDetails";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import { putUserDetail } from "../../../../stateManagement/actions/putUserDetail";
 
 
 const UpdateCheckout = ({
-
-  name, 
-  id, 
-  email, 
-  address, 
-  nacionality, 
-  phone, 
+  name,
+  id,
+  email,
+  address,
+  nacionality,
+  phone,
   data,
   sex,
   location,
@@ -24,32 +23,12 @@ const UpdateCheckout = ({
 }) => {
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
 
-    dispatch(getAllUserDetails());    
-
-  }, [dispatch]); 
-
-  
-
-  useEffect(()=>{
-    const script = document.createElement('script');
-    const attr_data_preference = document.createAttribute('data-preference-id')
-    //const attr_nonce = document.createAttribute('nonce')
-  
-    attr_data_preference.value = data
-    //attr_nonce.value = 'abcdefg'
-    script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-    script.setAttributeNode(attr_data_preference)
-   // script.setAttributeNode(attr_nonce)
-    document.getElementById('form1').appendChild(script)
-    return () =>{
-      document.getElementById('form1').removeChild(script);
-    }
-   },[])
-
-  const history = useHistory();
+    dispatch(getAllUserDetails());
+  }, [dispatch]);
 
   let users = useSelector((state) => state.userReducer.allUserDetails);
 
@@ -58,12 +37,12 @@ const UpdateCheckout = ({
   }
 
   const [valueSex, setValueSex] = useState({
-     value: sex , label: capitalize(sex) 
-    });
-  
+    value: sex, label: capitalize(sex)
+  });
+
   const [valueDocumentType, setValueDocumentType] = useState({
-    value: documentType, label: capitalize(documentType) 
-   })  
+    value: documentType, label: capitalize(documentType)
+  })
 
   const [input, setInput] = useState({
     name,
@@ -71,14 +50,12 @@ const UpdateCheckout = ({
     phone,
     address,
     nacionality,
-    sex:valueSex.value,
+    sex: valueSex.value,
     location,
-    documentType:valueDocumentType.value,
+    documentType: valueDocumentType.value,
     numberDocument,
-    birthDate,    
+    birthDate,
   });
-  
-  
 
   const handleChange = (e) => {
     setInput({
@@ -88,11 +65,11 @@ const UpdateCheckout = ({
   };
 
   const optionSex = [
-    {value: "female", label: "Female"},
-    {value: "male", label: "Male"},
+    { value: "female", label: "Female" },
+    { value: "male", label: "Male" },
 
   ]
-  
+
   const onSelectChangeSex = (e) => {
     setInput({
       ...input,
@@ -103,8 +80,8 @@ const UpdateCheckout = ({
   };
 
   const optionDocumentType = [
-    {value: "dni", label: "DNI"},
-    {value: "passport", label: "Passport"},
+    { value: "dni", label: "DNI" },
+    { value: "passport", label: "Passport" },
   ]
 
   const onSelectChangeDocumentType = (e) => {
@@ -117,17 +94,17 @@ const UpdateCheckout = ({
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();    
-    
+    e.preventDefault();
+
     let numerosDni = users ? users.map(e => e.numberDocument) : null;
 
     let DniRepetido = numerosDni.find((e) => e === input.numberDocument && input.numberDocument !== numberDocument);
 
-    if(DniRepetido) {     
+    if (DniRepetido) {
       alert(
         "El numero de documento ingresado ya esta vinculado a otro usuario"
-      );   
-    }else {
+      );
+    } else {
 
       let obj = {
 
@@ -139,30 +116,22 @@ const UpdateCheckout = ({
         numberDocument: input.numberDocument,
         birthDate: input.birthDate,
         phone: input.phone
-        
-      };
-      
-      dispatch(putUserDetail(id,obj));
-      
-      setInput({});
-  
-      alert("Excelente");
-      // history.push("/list");
-    }
-  }  
-      
-    
-    
 
+      };
+
+      dispatch(putUserDetail(id, obj));
+
+      setInput({});
+
+      alert("Excelente");
+      history.push("/CheckoutPage");
+    }
+  }
 
   const cerrarModalInsertar = () => {
-    
-    history.push("/list");
+
+    history.push("/CheckoutPage");
   };
-
-  
-
-  console.log("INPUT",input)
 
   return (
     <div className="crud_form">
@@ -170,10 +139,8 @@ const UpdateCheckout = ({
         onSubmit={(e) => {
           handleSubmit(e);
         }}
-      >
-        <div className="label_Insert">Please fill out this form before proceeding with the purchase.</div>
+      >        
         <div className="insertar">
-          
           <div className="insert_label">
             <label className="label_Insert">Name:</label>
             <input
@@ -184,7 +151,7 @@ const UpdateCheckout = ({
               value={name}
               disabled
             />
-           
+
           </div>
 
           <div className="insert_label">
@@ -194,10 +161,10 @@ const UpdateCheckout = ({
               name="name"
               type="text"
               onChange={handleChange}
-              value={email}              
+              value={email}
               disabled
             />
-           
+
           </div>
 
           <div className="insert_label">
@@ -208,9 +175,9 @@ const UpdateCheckout = ({
               type="text"
               onChange={handleChange}
               value={input.phone}
-              
+
             />
-           
+
           </div>
 
           <div className="insert_label">
@@ -220,8 +187,8 @@ const UpdateCheckout = ({
               name="address"
               type="text"
               onChange={handleChange}
-              value={input.address}              
-            />           
+              value={input.address}
+            />
           </div>
 
           <div className="insert_label">
@@ -231,8 +198,8 @@ const UpdateCheckout = ({
               name="birthDate"
               type="date"
               onChange={handleChange}
-              value={input.birthDate}              
-            />           
+              value={input.birthDate}
+            />
           </div>
 
           <div className="insert_label">
@@ -242,30 +209,30 @@ const UpdateCheckout = ({
               name="nacionality"
               type="text"
               onChange={handleChange}
-              value={input.nacionality}              
-            />           
+              value={input.nacionality}
+            />
           </div>
 
           <div className="insert_label">
             <label className="label_Insert">Sex:</label>
-              <Select
-                className="selected"
-                value={valueSex}
-                options={optionSex}
-                onChange={(e) => onSelectChangeSex(e)}
-                placeholder ="hola"
-              />
+            <Select
+              className="selected"
+              value={valueSex}
+              options={optionSex}
+              onChange={(e) => onSelectChangeSex(e)}
+              placeholder="hola"
+            />
           </div>
 
           <div className="insert_label">
             <label className="label_Insert">Document type:</label>
-              <Select
-                className="selected"
-                value={valueDocumentType}
-                options={optionDocumentType}
-                onChange={(e) => onSelectChangeDocumentType(e)}
-                placeholder ="hola"
-              />
+            <Select
+              className="selected"
+              value={valueDocumentType}
+              options={optionDocumentType}
+              onChange={(e) => onSelectChangeDocumentType(e)}
+              placeholder="hola"
+            />
           </div>
 
           <div className="insert_label">
@@ -275,23 +242,23 @@ const UpdateCheckout = ({
               name="numberDocument"
               type="text"
               onChange={handleChange}
-              value={input.numberDocument}  
+              value={input.numberDocument}
               pattern="[0-9]+"
-            />           
+            />
           </div>
 
-            <div className="insert_label">
+          <div className="insert_label">
             <label className="label_Insert">Location:</label>
             <input
               className="form-control"
               name="location"
               type="text"
               onChange={handleChange}
-              value={input.location}              
-            />           
+              value={input.location}
+            />
           </div>
 
-          
+
           <div className="crud_Form_Insert_cancelar">
             <button
               className="crud_Form_Insert_cancelar_button"
