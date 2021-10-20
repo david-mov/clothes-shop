@@ -49,6 +49,7 @@ export default function ProductView() {
 
   const addToCart = (ev) => {
     if (user !== undefined || user !== null) {
+
       sizesUser = Input.names?.join(" ");
       Cart_Users = user?.id;
       quantity = contador;

@@ -98,7 +98,6 @@ async function preload() {
 
 
 conn.sync({ force: false }).then(() => {
-
   server.listen(PORT, () => {
     preload();
     console.log(`%the best henry final project listening at ${PORT}`); // eslint-disable-line no-console
