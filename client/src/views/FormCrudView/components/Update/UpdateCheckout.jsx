@@ -229,7 +229,7 @@ const UpdateCheckout = ({
             <input
               className="form-control"
               name="birthDate"
-              type="text"
+              type="date"
               onChange={handleChange}
               value={input.birthDate}              
             />           

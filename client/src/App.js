@@ -26,6 +26,7 @@ import AdminView from "./views/AdminView/AdminView";
 import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
 import CheckoutView from "./views/FormCrudView/CheckoutView";
+import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
 
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route exact path="/create/category" component={InsertCategory} />
         <Route exact path="/create/size" component={InsertSize} />
         <Route exact path="/create/type" component={InsertType} />
+        <Route exact path= "/create/userDetail" component = {InsertCheckoutView} />
         <Route
           exact
           path="/update/product/:productId"
@@ -66,7 +68,7 @@ function App() {
         
 
 
-        {/* <Route exact path="/Checkout" component={CheckoutPrePayment} /> */}
+        <Route exact path="/Checkout" component={CheckoutPrePayment} />
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path="/list" component={ListAdmin} />
         <ProtectedRoute
