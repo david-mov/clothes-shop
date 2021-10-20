@@ -24,7 +24,6 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
     script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
     script.setAttributeNode(attr_data_preference)
    // script.setAttributeNode(attr_nonce)
-  console.log(data)
     document.getElementById('form1').appendChild(script)
     return () =>{
       document.getElementById('form1').removeChild(script);

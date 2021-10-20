@@ -7,6 +7,7 @@ import Checkout from "./../FormCrudView/components/Insert/Checkout";
 import {useUserId} from "../../hooks/useUserId"
 import axios from "axios";
 
+
 const CheckoutView = () => {
 
   const dispatch = useDispatch();
@@ -27,15 +28,17 @@ const CheckoutView = () => {
   
 
   useEffect(()=>{
-    axios
-    .get("http://localhost:3001/checkout")
-    .then((data)=>{
-      setDatos(data.data)
-      console.info('Contenido de data:', data)
-    }).catch(err => console.error(err)) 
+    if(idCookie !== null){
+      axios
+      .get(`http://localhost:3001/checkout/${idCookie?.id}`)
+      .then((data)=>{
+        setDatos(data.data)
+        console.info('Contenido de data:', data)
+      }).catch(err => console.error(err)) 
+    }
   },[])
 
-
+  console.log(datos)
   const productos = [
     {title: "Producto 1", quantity: 5, price: 10.52},
     {title: "Producto 2", quantity: 15, price: 100.52},
