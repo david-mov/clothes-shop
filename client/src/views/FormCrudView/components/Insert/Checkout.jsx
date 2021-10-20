@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUserDetails } from "./../../stateManagement/actions/getAllUserDetails";
+import { getAllUserDetails } from "../../../../stateManagement/actions/getAllUserDetails";
 import { useHistory} from "react-router-dom";
-import { postUserDetails } from "../../stateManagement/actions/postUserDetails";
+import { postUserDetails } from "./../../../../stateManagement/actions/postUserDetails";
 import Select from "react-select";
 import axios from "axios";
 
@@ -46,7 +46,7 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
   const [input, setInput] = useState({
     name,
     email,
-    phone,
+    phone: "",
     address:"",
     nacionality:"",
     sex:valueSex,
@@ -112,8 +112,9 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
         sex: input.sex,
         location: input.location,
         documentType: input.documentType,
-        numberDocument: input.numberDocument,
+        numberDocument: (input.numberDocument),
         birthDate: input.birthDate,
+        phone: (input.phone)
       };
       
       dispatch(postUserDetails(id,obj));
@@ -128,12 +129,12 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
   };
 
   const cerrarModalInsertar = () => {
-    setInput({});
+    
     history.push("/list");
   };
 
   
-
+  console.log("IDDDDDDDDD",id)
   console.log("INPUT",input)
 
   return (
@@ -177,7 +178,7 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
             <label className="label_Insert">Phone:</label>
             <input
               className="form-control"
-              name="name"
+              name="phone"
               type="text"
               onChange={handleChange}
               value={phone}
@@ -226,7 +227,7 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
                 value={valueSex}
                 options={optionSex}
                 onChange={(e) => onSelectChangeSex(e)}
-                placeholder ="hola"
+                
               />
           </div>
 
@@ -237,7 +238,7 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
                 value={valueDocumentType}
                 options={optionDocumentType}
                 onChange={(e) => onSelectChangeDocumentType(e)}
-                placeholder ="hola"
+                
               />
           </div>
 

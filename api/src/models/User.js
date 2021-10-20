@@ -15,11 +15,7 @@ module.exports = (sequelize) => {
       validate: {
         isEmail: true
       }
-    },
-    phone: {
-      type: DataTypes.INTEGER,
-      unique: true
-    },
+    },    
     googleId: {
       type: DataTypes.STRING
     },

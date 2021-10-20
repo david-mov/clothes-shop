@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cleanUpdate } from "../../stateManagement/actions/CleanPutUpdate";
 import { useParams } from "react-router";
 import { getUserIdParams } from "../../stateManagement/actions/getUserIdParams";
-import Checkout from "./Checkout";
+import Checkout from "./../FormCrudView/components/Insert/Checkout";
 import {useUserId} from "../../hooks/useUserId"
 import axios from "axios";
 
@@ -52,12 +52,12 @@ const CheckoutView = () => {
     if (Object.keys(user).length !== 0) {
       return (
         <Checkout
-          name={user.name}     
-          id={id}
+          name={user.name}
+          id={idFinal}
           email={user.email}
           phone={user.phone}
           productos={productos}
-           data={datos}
+          data={datos}
         />
       );
     }

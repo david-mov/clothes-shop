@@ -1,17 +1,12 @@
-import { GET_USER_DETAIL } from '../../consts/actionConsts';
-import axios from 'axios';
+import axios from "axios";
+import { GET_USER_DETAIL } from "../../consts/actionConsts";
 
-export const getUserDetail = () => async (dispatch) => {
+export const getUserDetail = (idFinal) => async (dispatch) => {
 	try {
-		const user = await axios({
-			method: 'GET',
-			url: '/user/userDetail',
-			withCredentials: true,
-			httpOnly: true,
-		})
-		dispatch({ type: GET_USER_DETAIL, payload: user.data })
+		const userDetail = await axios.get(`user/userDetail/${idFinal}`)
+		return dispatch({ type: GET_USER_DETAIL, payload: userDetail.data })
 	}
-	catch (err) {
-		console.error(err);
+	catch (e) {
+		console.error(e)
 	}
 }

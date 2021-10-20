@@ -1,12 +1,13 @@
 const { User, UserDetail } = require('../db.js')
 
 const getUserDetail = async (req, res, next) => {
-const id = req.user
+
+const {user_detail} = req.params
 console.log("USERRRRR", req.user)
 	try {
 		const userDetailFound = await UserDetail.findOne({
 			where: { 
-				id,                     
+				user_detail,                     
 			},			
 			include: {
 				model: User
