@@ -62,7 +62,8 @@ function App() {
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path= "/checkout/Payment" component ={CheckoutView} />
-        <Route exact path= "/checkout/update/:id" component = {UpdateCheckoutView} />
+        <Route exact path= "/update/userDetail" component = {UpdateCheckoutView} />
+        
 
 
         {/* <Route exact path="/Checkout" component={CheckoutPrePayment} /> */}

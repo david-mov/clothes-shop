@@ -11,7 +11,7 @@ import UpdateCheckout from "./../FormCrudView/components/Update/UpdateCheckout";
 const UpdateCheckoutView = () => {
 
   const dispatch = useDispatch();
-  const { id } = useParams();
+  
 
   let [idCookie, idOk] = useUserId()
 
@@ -21,11 +21,11 @@ const UpdateCheckoutView = () => {
   console.log("IDDDD",idFinal)
 
   useEffect(() => {
-    dispatch(getUserDetail(id));
+    dispatch(getUserDetail(idFinal));
     return () => {
       dispatch(cleanUpdate());
     };
-  }, [dispatch, id]);
+  }, [dispatch, idFinal]);
 
   const user = useSelector((state) => state.userReducer.userDetails);
 
@@ -34,7 +34,7 @@ const UpdateCheckoutView = () => {
       return (
         <UpdateCheckout
           name={user.user.name} 
-          id = {id}
+          id = {idFinal}
           email = {user.user.email}
           address = {user.address}
           nacionality = {user?.nacionality}
@@ -43,7 +43,7 @@ const UpdateCheckoutView = () => {
           documentType = {user.documentType}
           numberDocument = {user.numberDocument}
           birthDate = {user.birthDate}
-          phone = {user.user.phone}
+          phone = {user.phone}
         />
       );
     }
