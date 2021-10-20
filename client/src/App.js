@@ -25,7 +25,6 @@ import SuperAView from "./views/SuperAdminView/SuperAdminView";
 import AdminView from "./views/AdminView/AdminView";
 import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
-import CheckoutView from "./views/FormCrudView/CheckoutView";
 import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
 
 
@@ -63,7 +62,6 @@ function App() {
         <Route exact path="/update/type/:productId" component={UpdateType} />
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
-        <Route exact path= "/checkout/Payment" component ={CheckoutView} />
         <Route exact path= "/update/userDetail" component = {UpdateCheckoutView} />
         
 

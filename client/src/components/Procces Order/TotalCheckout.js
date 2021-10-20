@@ -30,7 +30,7 @@ const Total = () => {
     if (respu !== undefined) {
       let url = "/create/userDetail";
       if(userdeta?.user_detail !== undefined){
-        url = "/checkout/Payment";
+        url = "/checkout";
        }
       return (
         <Button
