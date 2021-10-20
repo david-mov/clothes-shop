@@ -1,8 +1,10 @@
 const nodemailer = require("nodemailer")
 
 
-const Email = async(req, res) => {
-    const {userEmail, userName} = req.body
+const EmailConfirm = async(req, res) => {
+   // const {userEmail, userName} = req.body
+var userName = "francisco"
+var userEmail = "ftorres767@gmail.com"
 
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -18,13 +20,12 @@ const Email = async(req, res) => {
       });
 
   const options = {
-    from: 'clothesshophenry@outlook.com', 
+    from: '"Clothesshop"clothesshophenry@outlook.com', 
     to: userEmail, 
-    subject: `Your order is on the way ✔`, 
-    html: `<b>${userName} your order has been shipped</b>
-    <b>For any questions you can answer this message</b>
-    <b>Thanks for shopping with us,The Clothesshop team</b>
-    `
+    subject: `${userName} Your purchase was successful ✔`, 
+    html: `<h1>Good news ${userName},We have received your order, now we will working on it.</h1>
+    <b>We will notify you when the order is ready to be sent to your address.</b>
+    <b>Thanks for shopping with us,The Clothesshop team</b>`
   }
   
  await transporter.sendMail(options, (err, info) => {
@@ -37,4 +38,4 @@ const Email = async(req, res) => {
 
 }
 
-module.exports = Email;
+module.exports = EmailConfirm;
