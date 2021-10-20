@@ -7,29 +7,55 @@ import getRemoveItem from "../../../../stateManagement/actions/getRemoveItem";
 import { useDispatch} from "react-redux";
 import { putUpdateCart } from "../../../../stateManagement/actions/putUpdateCart";
 import Select from "react-select";
+import { useUserId } from '../../../../hooks/useUserId';
+import { putUpdateCartUsers } from '../../../../stateManagement/actions/putUpdateCartU';
+import getRemoveItemUser from '../../../../stateManagement/actions/getRemoveItemU';
 
 
 
 export default function CheckoutCardUserIn({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
 
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
+    let [user,okId] = useUserId();
+    var Cart_Users, CartU_product,sizesUser;
     const [vauleS, setvauleS] = useState("S");
     const [Input, setInput] = useState(null);
 
     const addCantidad = () => {
+        if(user !== null){
+            Cart_Users = user.id;
+            CartU_product = productId;
+            sizesUser = "";
+            if (quantity !== stock) {
+                dispatch(putUpdateCartUsers({ CartU_product, Cart_Users, quantity: quantity + 1, price, sizesUser }))
+            }
+            
+        }
         if (quantity !== stock) {
             dispatch(putUpdateCart({ productId, quantity: quantity + 1, price }))
         }
     }
 
     const removeCantidad = () => {
+        if(user !== null){
+            Cart_Users = user.id;
+            CartU_product = productId;
+            sizesUser = "";
+            if (quantity !== 1) {
+                dispatch(putUpdateCartUsers({ CartU_product, Cart_Users, quantity: quantity - 1, price, sizesUser }))
+            }
+        }
         if (quantity !== 1) {
             dispatch(putUpdateCart({ productId, quantity: quantity - 1, price }))
         }
     }
 
     const RemoveItem = (event, productId) => {
+        if(user !== null){
+            Cart_Users = user.id;
+            CartU_product = productId;
+            dispatch(getRemoveItemUser({CartU_product, Cart_Users})); 
+        }
         dispatch(getRemoveItem(productId));
     };
 

@@ -5,7 +5,7 @@ export const postSignup = (user) => async (dispatch) => {
   try {
     const signup = await axios({
           method: 'POST',
-          url: '/user/signup',          
+          url: '/auth/signup',          
           data: user,      
           withCredentials: true,
           httpOnly: true,

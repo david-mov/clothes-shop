@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import '../../../styles/styleInformes.css'
+import { useSelector } from "react-redux";
 const rand = () => Math.floor(Math.random() * 255);
 
 const genData = () => ({
@@ -54,15 +55,13 @@ const options = {
 
 
 export default function InformeProducto () {
-    
-
+  var { productViewsUsers } = useSelector((state) => state.productsReducer);
+  console.log("datat desde ",productViewsUsers )
     const { productId } = useParams();
-    console.log("toma el id", productId)
     const [data, setData] = useState(genData());
 
   useEffect(() => {
     const interval = setInterval(() => setData(genData()), 5000);
-
     return () => clearInterval(interval);
   }, []);
 

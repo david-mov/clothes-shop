@@ -65,7 +65,7 @@ const Insert = () => {
       label: e.name,
     };
   });
-  const OptionType = types.map((e) => {
+  const OptionType = types?.map((e) => {
     return {
       value: e.id,
       label: e.name,
@@ -155,6 +155,8 @@ const Insert = () => {
       images: [],
     });
   };
+
+  console.log("input",input)
   return (
     <div>
       <form className="crud_form">

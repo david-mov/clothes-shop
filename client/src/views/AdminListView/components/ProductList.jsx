@@ -7,22 +7,20 @@ import "./styles.css";
 import Select from "react-select";
 import { deleteProduct } from "../../../stateManagement/actions/deleteProduct";
 
-
 export default function ProductosLista() {
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
   const products = useSelector((state) => state.productsReducer.products);
-  const [search, setSearch] = useState({label:'filter to..', value: ''})
+  const [search, setSearch] = useState({ label: "filter to..", value: "" });
   const [valor, setValor] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   var countP = 5;
   var totalCurrent = Math.ceil(products?.length / countP);
   const [Input, setInput] = useState("");
-  
+
   const filterProducts = () => {
     //var dataCompleta = [];
     switch (valor) {
@@ -64,43 +62,41 @@ export default function ProductosLista() {
   };
 
   const onInputChange = (Input) => {
-    setValor('input')
-    setInput(Input.target.value)
-  }
+    setValor("input");
+    setInput(Input.target.value);
+  };
 
   const OptionSelect = [
-    { label: 'Max Stock', value: 'Max Stock' },
-    { label: 'Min Stock', value: 'Min Stock' },
-    { label: 'Max Price', value: 'Max Price' },
-    { label: 'Min Price', value: 'Min Price' },
-  ]
+    { label: "Max Stock", value: "Max Stock" },
+    { label: "Min Stock", value: "Min Stock" },
+    { label: "Max Price", value: "Max Price" },
+    { label: "Min Price", value: "Min Price" },
+  ];
 
   const handleChangeSelect = (search) => {
-    setValor(search.value)
-    setSearch(search)
-  }
+    setValor(search.value);
+    setSearch(search);
+  };
 
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
-      setactualCurrent(actualCurrent + 1)
-      setCurrentPage(currentPage + countP)
+      setactualCurrent(actualCurrent + 1);
+      setCurrentPage(currentPage + countP);
     }
-  }
+  };
 
   const prevPage = () => {
     if (actualCurrent > 1) {
-      setactualCurrent(actualCurrent - 1)
-      setCurrentPage(currentPage - countP)
+      setactualCurrent(actualCurrent - 1);
+      setCurrentPage(currentPage - countP);
     }
-  }
-  
+  };
 
-  const deleteProducts = (e)=>{
-    dispatch(deleteProduct(e))
+  const deleteProducts = (e) => {
+    dispatch(deleteProduct(e));
     dispatch(getAllProducts());
-  }
-  
-  
+  };
+
   const show = () => {
     if (actualCurrent === 1) {
       return (
@@ -108,33 +104,39 @@ export default function ProductosLista() {
           <p className="pagination-item active">{actualCurrent}</p>
           <p>TO</p>
           <p className="pagination-item ">{totalCurrent}</p>
-          <p className="pagination-item " onClick={nextPage}>next</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
         </div>
-      )
+      );
     } else if (actualCurrent >= totalCurrent) {
-
       return (
         <div className="pagination">
-          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
           <p className="pagination-item active">{actualCurrent}</p>
           <p>TO</p>
           <p className="pagination-item ">{totalCurrent}</p>
         </div>
-      )
+      );
     } else {
-
       return (
         <div className="pagination">
-          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
           <p className="pagination-item active">{actualCurrent}</p>
           <p>TO</p>
           <p className="pagination-item ">{totalCurrent}</p>
-          <p className="pagination-item " onClick={nextPage}>next</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
         </div>
-      )
+      );
     }
-  }
-  
+  };
+
   function headers() {
     return (
       <thead className="table__thead">
@@ -169,14 +171,14 @@ export default function ProductosLista() {
           <th className="table__th">Delete Product</th>
         </tr>
       </thead>
-    )
+    );
   }
 
   function bodyTable() {
     return filterProducts()
       .map((e, i) => {
-        var status = 'status--green'
-        if (e.stock <= 5) status = 'status--red'
+        var status = "status--green";
+        if (e.stock <= 5) status = "status--red";
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -210,7 +212,7 @@ export default function ProductosLista() {
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/info/product/ss/${e.id}`}>
+              <Link to={`/info/product/${e.id}`}>
                 <p>
                   <i class="fas fa-user-secret fa-9x"></i>
                 </p>
@@ -218,32 +220,28 @@ export default function ProductosLista() {
             </td>
 
             <td className="table-row__td">
-          
-              <p value={e.id} onClick={() => deleteProducts(e.id)} >
+              <p value={e.id} onClick={() => deleteProducts(e.id)}>
                 <i className="fas fa-trash-alt fa-2x"></i>
-                </p>
+              </p>
             </td>
           </tr>
-        )
+        );
       })
-      .slice(currentPage, currentPage + 5)
+      .slice(currentPage, currentPage + 5);
   }
 
   return (
     <div>
-      <div className="body">      
+      <div className="body">
         <TablaList
-          title={'Products'}
+          title={"Products"}
           headers={headers()}
           data={products}
           bodyTable={bodyTable()}
-          url={'/create/product'}
+          url={"/create/product"}
         />
       </div>
-      <div className="buttonList">
-      {show()}
-       
-      </div>
+      <div className="buttonList">{show()}</div>
     </div>
-  )
+  );
 }

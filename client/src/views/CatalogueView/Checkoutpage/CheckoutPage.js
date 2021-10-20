@@ -10,6 +10,8 @@ import { useEffect } from 'react'
 import { getAllCart } from '../../../stateManagement/actions/getAllCart'
 import { getAllCartUsers } from '../../../stateManagement/actions/getAllCartUser'
 import { useUserId } from '../../../hooks/useUserId'
+import { cleanUpdate } from '../../../stateManagement/actions/CleanPutUpdate'
+import { getUserDetail } from '../../../stateManagement/actions/getUserDetail'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,31 +23,34 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutPage = () => {
 
   const dispatch = useDispatch()
+  let [user, okId] = useUserId();
 
   useEffect(() => {
-    dispatch(getAllCartUsers())
-    dispatch(getAllCart())
-  }, [dispatch])
-
+    if (user?.id !== undefined) {
+      dispatch(getAllCartUsers())
+      dispatch(getAllCart())
+      dispatch(getUserDetail(user?.id));
+      return () => {
+        dispatch(cleanUpdate());
+      };
+    }
+  }, [dispatch, user])
   const classes = useStyles()
-  let [user] = useUserId();
+  var showCart, showTotalAmount;
   var { cart } = useSelector((state) => state.checkoutReducer)
   var totalCart = useSelector(
     (state) => state.checkoutUserReducer.totalCartUser,
   )
   var { totalAmount } = useSelector((state) => state.checkoutReducer)
   var { totalAmountUser } = useSelector((state) => state.checkoutUserReducer)
-  var showCart,showTotalAmount;
-  if(user !== null){
-    showCart = totalCart.filter((e)=> e.Cart_Users === user.id) 
+  if (user !== null) {
+    showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
     showTotalAmount = totalAmountUser;
-     console.log("showcart",showCart)
-    }else{
-      showCart = cart;
-      showTotalAmount = totalAmount;
-      console.log("else",showCart)
-     
-    }
+  } else {
+    showCart = cart;
+    showTotalAmount = totalAmount;
+
+  }
 
   function FormRow() {
     return (
@@ -58,7 +63,12 @@ const CheckoutPage = () => {
                   <tr>
                     <th className="table__th">Name</th>
                     <th className="table__th">Price</th>
-                    <th className="table__th"></th>
+                    <th className="table__th">Amount (Min - Max)</th>
+                    <th className="table__th">Subtotal to Item</th>
+                    <th colspan="5" className="table__th">Sizes to Item</th>
+                    <th className="table__th">Rating</th>
+                    <th className="table__th">Color</th>
+                    <th className="table__th">Delete</th>
                   </tr>
                 </thead>
                 <tbody className="table__tbody">

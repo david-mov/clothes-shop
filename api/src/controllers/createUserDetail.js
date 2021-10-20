@@ -12,7 +12,8 @@ const createUserDetail = async (req, res, next) => {
      location, 
      documentType, 
      numberDocument, 
-     birthDate
+     birthDate,
+     phone
      
        
 
@@ -28,6 +29,7 @@ const createUserDetail = async (req, res, next) => {
       documentType,
       numberDocument,
       birthDate,
+      phone,
       user_detail
     }, {include: [User]})
     	

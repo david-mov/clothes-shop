@@ -40,7 +40,7 @@ const CheckoutPage = () => {
                                         <th colspan="5" className="table__th">Sizes to Item</th>
                                         <th className="table__th">Rating</th>
                                         <th className="table__th">Color</th>
-                                        <th className="table__th"></th>
+                                        <th className="table__th">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody className="table__tbody">
