@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../../stateManagement/actions/postLogin";
+import { getGoogleLogin } from '../../stateManagement/actions/getGoogleLogin';
 import { Link, useHistory } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
 import { useUserRol } from "../../hooks/useUserRol";
@@ -22,6 +23,17 @@ function LoginView() {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleGoogleLogin = () => {
+    dispatch(getGoogleLogin());
+  }
+
+  const redirectToGoogleSSO = async () => {
+    const newWindow = window.open(
+      `${process.env.REACT_APP_GOOGLE}`, 
+      '_blank', 
+      'width=500,height=600');
+  }
 
   return (
     <div>
@@ -67,6 +79,7 @@ function LoginView() {
         ></input>
         <button type="submit">Login</button>
       </form>
+      <button onClick={redirectToGoogleSSO}>Login with Google</button>
     </div>
   );
 }

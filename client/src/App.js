@@ -21,13 +21,12 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
 import UpdateZises from "./views/FormCrudView/UpdateSizesView";
 import UpdateType from "./views/FormCrudView/UpdateTypesView";
+import { GoogleAuthRedirect } from './views/GoogleAuthRedirect/GoogleAuthRedirect';
 import SuperAView from "./views/SuperAdminView/SuperAdminView";
 import AdminView from "./views/AdminView/AdminView";
 import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
 import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
-
-
 
 function App() {
   
@@ -63,9 +62,6 @@ function App() {
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path= "/update/userDetail" component = {UpdateCheckoutView} />
-        
-
-
         <Route exact path="/Checkout" component={CheckoutPrePayment} />
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path="/list" component={ListAdmin} />
@@ -85,6 +81,7 @@ function App() {
         />
         <Route exact path="/addimage/:productId" component={AddImage} />
         <Route exact path="/info/product/:productId" component={InfoProduct} />
+        <Route exact path='/login/:status' component={GoogleAuthRedirect} />
         <ProtectedRoute exact path="/superadmin" component={SuperAView}
         roles={[1]} other="/login"/>
         <ProtectedRoute exact path="/admin" component={AdminView}
