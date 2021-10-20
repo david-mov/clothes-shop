@@ -49,7 +49,7 @@ export default function ProductView() {
 
   const addToCart = (ev) => {
     if (user !== undefined || user !== null) {
-      sizesUser = "";
+      sizesUser = Input;
       Cart_Users = user?.id;
       quantity = contador;
       CartU_product = productId;

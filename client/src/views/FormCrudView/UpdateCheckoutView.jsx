@@ -1,31 +1,27 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanUpdate } from "../../stateManagement/actions/CleanPutUpdate";
-import { useParams } from "react-router";
 import { useUserId } from "../../hooks/useUserId";
 import { getUserDetail } from "../../stateManagement/actions/getUserDetail";
 import UpdateCheckout from "./../FormCrudView/components/Update/UpdateCheckout";
+import { Link } from "react-router-dom";
 
 
 
 const UpdateCheckoutView = () => {
 
   const dispatch = useDispatch();
-  
-
-  let [idCookie, idOk] = useUserId()
-
-  let idFinal = idCookie?.id
-  
-
-  console.log("IDDDD",idFinal)
+  let [idCookie, idOk] = useUserId()  
 
   useEffect(() => {
-    dispatch(getUserDetail(idFinal));
-    return () => {
-      dispatch(cleanUpdate());
-    };
-  }, [dispatch, idFinal]);
+    if(idCookie?.id !== undefined){
+      dispatch(getUserDetail(idCookie?.id));
+      return () => {
+        dispatch(cleanUpdate());
+      };
+
+    }
+  }, [dispatch, idCookie?.id]);
 
   const user = useSelector((state) => state.userReducer.userDetails);
 
@@ -34,7 +30,7 @@ const UpdateCheckoutView = () => {
       return (
         <UpdateCheckout
           name={user.user.name} 
-          id = {idFinal}
+          id = {idCookie?.id}
           email = {user.user.email}
           address = {user.address}
           nacionality = {user?.nacionality}
@@ -49,7 +45,39 @@ const UpdateCheckoutView = () => {
     }
   };
 
-  return <div>{formulario()}</div>;
+  return (
+
+  <div>
+  <div className="todo">
+        <div className="navbar">
+          <div className="navbar__logo">
+            <img
+              className="img"
+              src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+              alt="clothes-Shop"
+              border="0"
+            ></img>
+          </div>
+          <div className="cart__link">
+            <h2>Update Details</h2>
+          </div>
+          <div className="cart__link">
+            <ul className="navbar__links">
+              <li className="saco">
+                <Link to="/CheckoutPage" className="cart__link">
+                  <i class="fas fa-arrow-left fa-1x"></i>
+                  <span>
+                    Go to back <span className="cartlogo__badge">{ }</span>
+                  </span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  {formulario()}
+  </div>
+  )
 };
 
 export default UpdateCheckoutView;

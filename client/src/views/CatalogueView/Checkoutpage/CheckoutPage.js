@@ -10,6 +10,8 @@ import { useEffect } from 'react'
 import { getAllCart } from '../../../stateManagement/actions/getAllCart'
 import { getAllCartUsers } from '../../../stateManagement/actions/getAllCartUser'
 import { useUserId } from '../../../hooks/useUserId'
+import { cleanUpdate } from '../../../stateManagement/actions/CleanPutUpdate'
+import { getUserDetail } from '../../../stateManagement/actions/getUserDetail'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,10 +26,18 @@ const CheckoutPage = () => {
   let [user, okId] = useUserId();
 
   useEffect(() => {
-    dispatch(getAllCartUsers())
-    dispatch(getAllCart())
-  }, [dispatch])
+    if (user?.id !== undefined) {
+      dispatch(getAllCartUsers())
+      dispatch(getAllCart())
+      dispatch(getUserDetail(user?.id));
+      return () => {
+        dispatch(cleanUpdate());
+      };
+    }
+  }, [dispatch, user])
   const classes = useStyles()
+
+
 
   var showCart, showTotalAmount;
   var { cart } = useSelector((state) => state.checkoutReducer)

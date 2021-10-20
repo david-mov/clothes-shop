@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanUpdate } from "../../stateManagement/actions/CleanPutUpdate";
 import { useParams } from "react-router";
-import { getUserIdParams } from "../../stateManagement/actions/getUserIdParams";
 import Checkout from "./../FormCrudView/components/Insert/Checkout";
 import {useUserId} from "../../hooks/useUserId"
 import axios from "axios";
+import { getAllUserDetails } from "../../stateManagement/actions/getAllUserDetails";
 
 
 const CheckoutView = () => {
@@ -15,17 +15,6 @@ const CheckoutView = () => {
   const [datos, setDatos] = useState("")
 
   let [idCookie, idOk] = useUserId()
-  console.log("aCA TAN", idCookie?.id, )
-
-  var idFinal = idCookie?.id
-
-  useEffect(() => {
-    dispatch(getUserIdParams(idFinal));
-    return () => {
-      dispatch(cleanUpdate());
-    };
-  }, [dispatch, idFinal]);
-  
 
   useEffect(()=>{
     if(idCookie !== null){
@@ -34,9 +23,14 @@ const CheckoutView = () => {
       .then((data)=>{
         setDatos(data.data)
         console.info('Contenido de data:', data)
-      }).catch(err => console.error(err)) 
+      }).catch(err => console.error(err));
+
+      dispatch(getAllUserDetails(idCookie?.id));
+    return () => {
+      dispatch(cleanUpdate());
+    };
     }
-  },[])
+  },[dispatch, idCookie?.id])
 
   console.log(datos)
   const productos = [
@@ -53,7 +47,7 @@ const CheckoutView = () => {
       return (
         <Checkout
           name={user.name}
-          id={idFinal}
+          id={idCookie?.id}
           email={user.email}
           phone={user.phone}
           productos={productos}
@@ -66,7 +60,7 @@ const CheckoutView = () => {
   return (
     <div>
       { !datos
-        ? <p>Aguarde un momento....</p> 
+        ? <p>Aguarde un momentorrrrr....</p> 
         : formulario()
       }
       </div>

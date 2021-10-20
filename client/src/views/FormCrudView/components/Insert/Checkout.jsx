@@ -1,62 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUserDetails } from "../../../../stateManagement/actions/getAllUserDetails";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { postUserDetails } from "./../../../../stateManagement/actions/postUserDetails";
 import Select from "react-select";
-import axios from "axios";
 
 
-const Checkout = ({name, id, email, phone,productos, data}) => {
+const Checkout = ({ name, id, email }) => {
+
   const dispatch = useDispatch();
- 
-  useEffect(() => {
-    dispatch(getAllUserDetails());     
-  }, [dispatch]); 
-
-  useEffect(()=>{
-    const script = document.createElement('script');
-    const attr_data_preference = document.createAttribute('data-preference-id')
-    //const attr_nonce = document.createAttribute('nonce')
-  
-    attr_data_preference.value = data.id
-    //attr_nonce.value = 'abcdefg'
-    script.src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
-    script.setAttributeNode(attr_data_preference)
-   // script.setAttributeNode(attr_nonce)
-    document.getElementById('form1').appendChild(script)
-    return () =>{
-      document.getElementById('form1').removeChild(script);
-    }
-   },[])
-
-
   const history = useHistory();
 
   let users = useSelector((state) => state.userReducer.allUserDetails);
-
-  const [valueSex, setValueSex] = useState({
-     value: "", label: "" 
-    });
   
+  const [valueSex, setValueSex] = useState({
+    value: "", label: ""
+  });
+
   const [valueDocumentType, setValueDocumentType] = useState({
-    value: "", label: "" 
-   })  
+    value: "", label: ""
+  })
 
   const [input, setInput] = useState({
     name,
     email,
     phone: "",
-    address:"",
-    nacionality:"",
-    sex:valueSex,
-    location:"",
-    documentType:valueDocumentType,
-    numberDocument:"",
-    birthDate:"",    
+    address: "",
+    nacionality: "",
+    sex: valueSex,
+    location: "",
+    documentType: valueDocumentType,
+    numberDocument: "",
+    birthDate: "",
   });
-  
-  
 
   const handleChange = (e) => {
     setInput({
@@ -66,11 +41,11 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
   };
 
   const optionSex = [
-    {value: "female", label: "Female"},
-    {value: "male", label: "Male"},
+    { value: "female", label: "Female" },
+    { value: "male", label: "Male" },
 
   ]
-  
+
   const onSelectChangeSex = (e) => {
     setInput({
       ...input,
@@ -81,8 +56,8 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
   };
 
   const optionDocumentType = [
-    {value: "dni", label: "DNI"},
-    {value: "passport", label: "Passport"},
+    { value: "dni", label: "DNI" },
+    { value: "passport", label: "Passport" },
   ]
 
   const onSelectChangeDocumentType = (e) => {
@@ -97,15 +72,15 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let numbersDocument = users.map((e) => e.numberDocument);
-    //BUSCO SI HAY ALGUNA CATEGORIA QUE ESTE REPETIDA
-    let repetido = numbersDocument.find((e) => e === input.numberDocument);
-    console.log("DNI´s", numbersDocument )
+
+    //BUSCO SI HAY ALGUN documento  QUE ESTE repetido
+    let repetido = numbersDocument.find((e) => e == input.numberDocument);
     if (repetido) {
       alert(
         "El numero de documento  que esta ingresando ya se encuentra en nuestra base de datos. por favor ingrese otro"
       );
     } else {
-      
+
       let obj = {
         address: input.address,
         nacionality: input.nacionality,
@@ -116,187 +91,170 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
         birthDate: input.birthDate,
         phone: (input.phone)
       };
-      
-      dispatch(postUserDetails(id,obj));
-      
+
+      dispatch(postUserDetails(id, obj));
+
       setInput({});
-  
+
       alert("Excelente");
-      // history.push("/list");
+      history.push("/Checkout");
     }
-    
+
 
   };
 
   const cerrarModalInsertar = () => {
-    
-    history.push("/list");
-  };
 
-  
-  console.log("IDDDDDDDDD",id)
-  console.log("INPUT",input)
+    history.push("/CheckoutPage");
+  };
 
   return (
     <div>
-    <div className="crud_form">
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <div className="label_Insert">Please fill out this form before proceeding with the purchase.</div>
-        <div className="insertar">
-          
-          <div className="insert_label">
-            <label className="label_Insert">Name:</label>
-            <input
-              className="form-control"
-              name="name"
-              type="text"
-              onChange={handleChange}
-              value={name}
-              disabled
-            />
-           
-          </div>
+      <div className="crud_form">
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <div className="label_Insert">Please fill out this form before proceeding with the purchase.</div>
+          <div className="insertar">
 
-          <div className="insert_label">
-            <label className="label_Insert">Email:</label>
-            <input
-              className="form-control"
-              name="name"
-              type="text"
-              onChange={handleChange}
-              value={email}              
-              disabled
-            />
-           
-          </div>
+            <div className="insert_label">
+              <label className="label_Insert">Name:</label>
+              <input
+                className="form-control"
+                name="name"
+                type="text"
+                onChange={handleChange}
+                value={name}
+                disabled
+              />
 
-          <div className="insert_label">
-            <label className="label_Insert">Phone:</label>
-            <input
-              className="form-control"
-              name="phone"
-              type="text"
-              onChange={handleChange}
-              value={phone}
-              
-            />
-           
-          </div>
+            </div>
 
-          <div className="insert_label">
-            <label className="label_Insert">Address:</label>
-            <input
-              className="form-control"
-              name="address"
-              type="text"
-              onChange={handleChange}
-              value={input.address}              
-            />           
-          </div>
+            <div className="insert_label">
+              <label className="label_Insert">Email:</label>
+              <input
+                className="form-control"
+                name="name"
+                type="text"
+                onChange={handleChange}
+                value={email}
+                disabled
+              />
 
-          <div className="insert_label">
-            <label className="label_Insert">date of birth:</label>
-            <input
-              className="form-control"
-              name="birthDate"
-              type="text"
-              onChange={handleChange}
-              value={input.birthDate}              
-            />           
-          </div>
+            </div>
 
-          <div className="insert_label">
-            <label className="label_Insert">Nacionality:</label>
-            <input
-              className="form-control"
-              name="nacionality"
-              type="text"
-              onChange={handleChange}
-              value={input.nacionality}              
-            />           
-          </div>
+            <div className="insert_label">
+              <label className="label_Insert">Phone:</label>
+              <input
+                className="form-control"
+                name="phone"
+                type="text"
+                onChange={handleChange}
+                value={input.phone}
 
-          <div className="insert_label">
-            <label className="label_Insert">Sex:</label>
+              />
+
+            </div>
+
+            <div className="insert_label">
+              <label className="label_Insert">Address:</label>
+              <input
+                className="form-control"
+                name="address"
+                type="text"
+                onChange={handleChange}
+                value={input.address}
+              />
+            </div>
+
+            <div className="insert_label">
+              <label className="label_Insert">date of birth:</label>
+              <input
+                className="form-control"
+                name="birthDate"
+                type="date"
+                onChange={handleChange}
+                value={input.birthDate}
+              />
+            </div>
+
+            <div className="insert_label">
+              <label className="label_Insert">Nacionality:</label>
+              <input
+                className="form-control"
+                name="nacionality"
+                type="text"
+                onChange={handleChange}
+                value={input.nacionality}
+              />
+            </div>
+
+            <div className="insert_label">
+              <label className="label_Insert">Sex:</label>
               <Select
                 className="selected"
                 value={valueSex}
                 options={optionSex}
                 onChange={(e) => onSelectChangeSex(e)}
-                
-              />
-          </div>
 
-          <div className="insert_label">
-            <label className="label_Insert">Document type:</label>
+              />
+            </div>
+
+            <div className="insert_label">
+              <label className="label_Insert">Document type:</label>
               <Select
                 className="selected"
                 value={valueDocumentType}
                 options={optionDocumentType}
                 onChange={(e) => onSelectChangeDocumentType(e)}
-                
-              />
-          </div>
 
-          <div className="insert_label">
-            <label className="label_Insert">Document Number:</label>
-            <input
-              className="form-control"
-              name="numberDocument"
-              type="text"
-              onChange={handleChange}
-              value={input.numberDocument}  
-              pattern="[0-9]+"
-            />           
-          </div>
+              />
+            </div>
 
             <div className="insert_label">
-            <label className="label_Insert">Location:</label>
-            <input
-              className="form-control"
-              name="location"
-              type="text"
-              onChange={handleChange}
-              value={input.location}              
-            />           
-          </div>
+              <label className="label_Insert">Document Number:</label>
+              <input
+                className="form-control"
+                name="numberDocument"
+                type="text"
+                onChange={handleChange}
+                value={input.numberDocument}
+                pattern="[0-9]+"
+              />
+            </div>
 
-          
-          <div className="crud_Form_Insert_cancelar">
-            <button
-              className="crud_Form_Insert_cancelar_button"
-              type="submit"
-              disabled={!input.name}
-            >
-              Editar
-            </button>
-            <button
-              className="crud_Form_Insert_cancelar_button_danger"
-              onClick={cerrarModalInsertar}
-            >
-              Cancel
-            </button>
+            <div className="insert_label">
+              <label className="label_Insert">Location:</label>
+              <input
+                className="form-control"
+                name="location"
+                type="text"
+                onChange={handleChange}
+                value={input.location}
+              />
+            </div>
+
+
+            <div className="crud_Form_Insert_cancelar">
+              <button
+                className="crud_Form_Insert_cancelar_button"
+                type="submit"
+                disabled={!input.location}
+              >
+                Insert
+              </button>
+              <button
+                className="crud_Form_Insert_cancelar_button_danger"
+                onClick={cerrarModalInsertar}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
       </div>
-      <form id='form1'>
-
-        <h4>Listado de Compras</h4>
-        <ul>
-        {productos.map((producto, i) => {
-            return(
-              
-                <li key={i}>{producto.title} - {producto.price} - {producto.quantity}</li>   
-                  
-            )
-        })} </ul>  
-        
-      </form>
     </div>
   );
 };
