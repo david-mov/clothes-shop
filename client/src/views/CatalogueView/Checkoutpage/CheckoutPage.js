@@ -1,72 +1,89 @@
-import "../../../styles/styleChecPage.css";
-import { React } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import { Typography } from "@material-ui/core";
-import CheckoutCard from "../../../components/Procces Order/CheckoutCard";
-import TotalCheckout from "../../../components/Procces Order/TotalCheckout";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import {getAllCart} from "../../../stateManagement/actions/getAllCart";
+import '../../../styles/styleChecPage.css'
+import { React } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import { Typography } from '@material-ui/core'
+import CheckoutCard from '../../../components/Procces Order/CheckoutCard'
+import TotalCheckout from '../../../components/Procces Order/TotalCheckout'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getAllCart } from '../../../stateManagement/actions/getAllCart'
+import { getAllCartUsers } from '../../../stateManagement/actions/getAllCartUser'
+import { useUserId } from '../../../hooks/useUserId'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: "2rem",
+    padding: '2rem',
   },
-}));
+}))
 const CheckoutPage = () => {
-  
+
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
+    dispatch(getAllCartUsers())
     dispatch(getAllCart())
   }, [dispatch])
 
-    const classes = useStyles();
-    var { cart } = useSelector(state => state.checkoutReducer)
-    var { totalAmount} = useSelector(state => state.checkoutReducer)
-    function FormRow() {
-        return (
-            <div className="container">
-                <div className="row row--top-20">
-                    <div className="col-md-12">
-                        <div className="table-container">
-                            <table className="table">
-                                <thead className="table__thead">
-                                    <tr>
-                                        <th className="table__th">Name</th>
-                                        <th className="table__th">Price</th>
-                                        <th className="table__th">Qty</th>
-                                        <th className="table__th">Progress</th>
-                                        <th className="table__th">Rating</th>
-                                        <th className="table__th">aumentar y disminuir cantidad</th>
-                                        <th className="table__th"></th>
-                                    </tr>
-                                </thead>
-                                <tbody className="table__tbody">
-                                    {cart?.map((e) => (
-                                        <CheckoutCard key={e.product.id} 
-                                        name={e.product.name}
-                                        stock={e.product.stock}                         
-                                        productId={e.product.id}
-                                        idCarrito={e.id}
-                                        quantity={e.quantity}
-                                        price={e.product.price}
-                                        image={e.product.images[0]}
-                                        subtotal={e.subtotal}
-                                        size={e.product.size}
-                                        color={e.product.color}
-                                         />
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-  
+  const classes = useStyles()
+  let [user, okId] = useUserId();
+  var { cart } = useSelector((state) => state.checkoutReducer)
+  var totalCart = useSelector(
+    (state) => state.checkoutUserReducer.totalCartUser,
+  )
+  var { totalAmount } = useSelector((state) => state.checkoutReducer)
+  var { totalAmountUser } = useSelector((state) => state.checkoutUserReducer)
+  var showCart, showTotalAmount;
+  console.log("kjkjk", user)
+  if (user !== null) {
+    showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
+    showTotalAmount = totalAmountUser;
+  } else {
+    console.log("debe estar aqui")
+    showCart = cart;
+    showTotalAmount = totalAmount;
+
+  }
+
+  function FormRow() {
+    return (
+      <div className="container">
+        <div className="row row--top-20">
+          <div className="col-md-12">
+            <div className="table-container">
+              <table className="table">
+                <thead className="table__thead">
+                  <tr>
+                    <th className="table__th">Name</th>
+                    <th className="table__th">Price</th>
+                    <th className="table__th"></th>
+                  </tr>
+                </thead>
+                <tbody className="table__tbody">
+                  {showCart?.map((e) => (
+                    <CheckoutCard
+                      key={e.product.id}
+                      name={e.product.name}
+                      stock={e.product.stock}
+                      productId={e.product.id}
+                      idCarrito={e.id}
+                      quantity={e.quantity}
+                      price={e.product.price}
+                      image={e.product.images[0]}
+                      subtotal={e.subtotal}
+                      size={e.product.sizes}
+                      color={e.product.color}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -77,12 +94,12 @@ const CheckoutPage = () => {
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
           <Typography align="center" gutterBottom variant="h4">
-            <TotalCheckout totalAmount={totalAmount} />
+            <TotalCheckout totalAmount={showTotalAmount} />
           </Typography>
         </Grid>
       </Grid>
     </div>
-  );
-};
+  )
+}
 
-export default CheckoutPage;
+export default CheckoutPage

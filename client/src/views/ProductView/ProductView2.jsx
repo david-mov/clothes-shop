@@ -9,12 +9,16 @@ import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Select from "react-select";
 import { postAddToCart } from "../../stateManagement/actions/postAddToCart"
+import { useUserId } from "../../hooks/useUserId.js";
+import { postAddToCartUser } from "../../stateManagement/actions/postAddToCartUser.js";
 
 export default function ProductView() {
   //aca el estado ratin
   var rating = 5;
   const { productId } = useParams();
   const dispatch = useDispatch();
+  let [user, okId] = useUserId();
+  var Cart_Users, CartU_product, sizesUser, quantity, subtotal, showCart, Cart_product;
   useEffect(() => {
     dispatch(getProductDetails(productId));
     return () => {
@@ -24,19 +28,34 @@ export default function ProductView() {
 
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [vauleS, setvauleS] = useState(false);
-  const [Input, setInput] = useState(null); 
-  const [tengo, setTengo] = useState(false);
+  const [Input, setInput] = useState(null);
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
+  var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
+
+  if (user !== undefined || user !== null) {
+    showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
+  } else {
+    showCart = cart;
+  }
 
   const addToCart = (ev) => {
-    var quantity = contador
-    var Cart_product = productId
-    console.log("ACA SI ENTRO BRO", productId, quantity, product.price)
-    var subtotal = product.price * quantity
-    cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({ Cart_product, subtotal, quantity }))
+    if (user !== undefined || user !== null) {
+      sizesUser = "";
+      Cart_Users = user?.id;
+      quantity = contador;
+      CartU_product = productId;
+      subtotal = product.price * quantity;
+      dispatch(postAddToCartUser({ CartU_product, Cart_Users, subtotal, quantity, sizesUser }))
+    }
+
+    quantity = contador;
+    Cart_product = productId;
+    subtotal = product.price * quantity;
+    dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
+
   }
-  
+
   var nameImagen = "";
   const rendeImages = () => {
     if (product.images !== undefined) {
@@ -144,7 +163,7 @@ export default function ProductView() {
           <li className="saco">
             <Link to="/CheckoutPage">
               <IconButton aria-label="show cart items" color="inherit">
-                <Badge badgeContent={cart?.length} color="secondary">
+                <Badge badgeContent={showCart?.length} color="secondary">
                   <ShoppingCart
                     className="temp"
                     fontSize="large"
@@ -199,7 +218,7 @@ export default function ProductView() {
                 <span className="bold">Rating: </span>
               </p>
               <p>
-              {Array(rating)
+                {Array(rating)
                   .fill()
                   .map((_, i) => (
                     <span>&#11088;</span>
@@ -232,7 +251,7 @@ export default function ProductView() {
                   ></div>
                 </div>
                 <div
-                onClick={(ev) => addToCart(ev)}
+                  onClick={(ev) => addToCart(ev)}
                   className={`botonTextoIcono ${!product.stock ? "disabled" : ""
                     }`}
                 >

@@ -1,16 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import "../../../../styles/styleCata2.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart";
-import { getAllCart } from "../../../../stateManagement/actions/getAllCart";
+import { useUserId } from "../../../../hooks/useUserId";
+import { postAddToCartUser } from "../../../../stateManagement/actions/postAddToCartUser";
+import { postAddViewUser } from "../../../../stateManagement/actions/postAddView";
+
 
 function ProductCard2(props) {
+  let [user,ok] = useUserId();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.checkoutReducer.cart);
+  var cart, View_User, View_product;
+  const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
+  const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
+  if(user !== undefined || user !== null){
+    View_User = user?.id;
+    cart = cartLogedIn;
+  }else{
+    View_User = 1;
+    cart = cartLogedOut;
+
+  }
   const [contador, setContador] = useState(1);
-  const [tengo, setTengo] = useState(false);
   const [showDetail, setshowDetail] = useState(false);
   const {
     name,
@@ -24,13 +37,19 @@ function ProductCard2(props) {
   } = props;
 
   const addToCart = (ev) => {
+    if(user !== null){ 
+      var sizesUser = "";
+      var Cart_Users = user?.id;
+      var quantity = contador;
+      var CartU_product = productId;
+      var subtotal = price * quantity;
+      dispatch(postAddToCartUser({ CartU_product,Cart_Users, subtotal, quantity, sizesUser }))
+    }
+    
     var quantity = contador;
     var Cart_product = productId;
-    console.log("ACA SI ENTRO BRO", productId, quantity, price);
     var subtotal = price * quantity;
-    cart.find((e) => e.product.id == productId)
-      ? setTengo(true)
-      : dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
+    dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
   };
 
   var nameImagen = "";
@@ -66,6 +85,11 @@ function ProductCard2(props) {
     }
   };
 
+  const sendView = (e) => {    
+    View_product = e;
+    dispatch(postAddViewUser({ View_User, View_product }));     
+  }
+
   const vistaRapidaProduct = () => {
     return (
       <div>
@@ -86,17 +110,13 @@ function ProductCard2(props) {
                     <path d="M30 34l22-22m-16 0h16v16"></path>
                   </svg>
                 </div>
-                <div
-                  className="zoom_imgOrigin wrapperImg"
-                  onClick={hidenVistaRapida}
-                >
-                  <div className="zoom_imgSource imagen">
-                    <img
-                      classNameName="imgProd"
-                      src={require(`../../../../assets/${nameImagen}`).default}
-                      alt="Ima not found"
-                    ></img>
-                  </div>
+                <div className="zoom_imgOrigin wrapperImg">
+                  {hidenVistaRapida}
+                  <img
+                    className="imgProd"
+                    src={require(`../../../../assets/${nameImagen}`).default}
+                    alt="Ima not found"
+                  />
                 </div>
               </div>
               <div className="texto">
@@ -162,7 +182,7 @@ function ProductCard2(props) {
                     </div>
                   </div>
                   <p className="descripcion">{description}</p>
-                  <Link className="boton" to={`/product/${productId}`}>
+                  <Link className="boton" onClick={() => sendView(productId)} to={`/product/${productId}`}>
                     Show Details
                   </Link>
                 </div>
@@ -195,12 +215,12 @@ function ProductCard2(props) {
             </div>
             <p>Vista rapida</p>
           </div>
-          <div className="imgProd">
-            <img
-              className="imgProd"
-              src={require(`../../../../assets/${nameImagen}`).default}
-            ></img>
-          </div>
+
+          <img
+            className="imgProd"
+            src={require(`../../../../assets/${nameImagen}`).default}
+            alt="Imag not found"
+          ></img>
         </div>
         <a className="info" href="#">
           <p className="prodName">{name}</p>
@@ -216,7 +236,7 @@ function ProductCard2(props) {
           </div>
         </a>
         <div className="actions">
-          <Link className="boton" to={`/product/${productId}`}>
+          <Link className="boton" onClick={() => sendView(productId)} to={`/product/${productId}`}>
             Show Details
           </Link>
           <div className="boton alCarrito" onClick={(ev) => addToCart(ev)}>
