@@ -12,7 +12,7 @@ import { postAddViewUser } from "../../../../stateManagement/actions/postAddView
 function ProductCard2(props) {
   let [user] = useUserId();
   const dispatch = useDispatch();
-  var cart, View_User, View_product;
+  var cart, View_User, View_product, subtotal = 0;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
   if(user !== undefined || user !== null){

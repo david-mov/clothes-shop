@@ -24,14 +24,10 @@ import UpdateType from "./views/FormCrudView/UpdateTypesView";
 import { GoogleAuthRedirect } from './views/GoogleAuthRedirect/GoogleAuthRedirect';
 import SuperAView from "./views/SuperAdminView/SuperAdminView";
 import AdminView from "./views/AdminView/AdminView";
-<<<<<<< HEAD
-import CheckoutView from "./views/CheckoutPayment/CheckoutView";
-
-=======
 import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
 import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
->>>>>>> a4a82c5825d56d9c429c76bff986d7252cebdd7f
+
 
 function App() {
   

@@ -3,11 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllUserDetails } from "../../../../stateManagement/actions/getAllUserDetails";
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
-<<<<<<< HEAD:client/src/views/CheckoutPayment/Checkout.jsx
-
-=======
 import { putUserDetail } from "../../../../stateManagement/actions/putUserDetail";
->>>>>>> a4a82c5825d56d9c429c76bff986d7252cebdd7f:client/src/views/FormCrudView/components/Update/UpdateCheckout.jsx
 
 
 const UpdateCheckout = ({
@@ -99,20 +95,11 @@ const UpdateCheckout = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD:client/src/views/CheckoutPayment/Checkout.jsx
-    let numbersDocument = users.map((e) => e.numberDocument);
-    //BUSCO SI HAY ALGUNA CATEGORIA QUE ESTE REPETIDA
-    let repetido = numbersDocument.find((e) => e === input.numberDocument);
-    console.log("DNI´s", numbersDocument )
-    if (repetido) {
-=======
 
     let numerosDni = users ? users.map(e => e.numberDocument) : null;
-
     let DniRepetido = numerosDni.find((e) => e === input.numberDocument && input.numberDocument !== numberDocument);
 
     if (DniRepetido) {
->>>>>>> a4a82c5825d56d9c429c76bff986d7252cebdd7f:client/src/views/FormCrudView/components/Update/UpdateCheckout.jsx
       alert(
         "El numero de documento ingresado ya esta vinculado a otro usuario"
       );
