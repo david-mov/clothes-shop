@@ -4,7 +4,7 @@ import { getAllUserDetails } from "./../../stateManagement/actions/getAllUserDet
 import { useHistory} from "react-router-dom";
 import { postUserDetails } from "../../stateManagement/actions/postUserDetails";
 import Select from "react-select";
-import axios from "axios";
+
 
 
 const Checkout = ({name, id, email, phone, data}) => {
@@ -97,7 +97,7 @@ const Checkout = ({name, id, email, phone, data}) => {
     e.preventDefault();
     let numbersDocument = users.map((e) => e.numberDocument);
     //BUSCO SI HAY ALGUNA CATEGORIA QUE ESTE REPETIDA
-    let repetido = numbersDocument.find((e) => e == input.numberDocument);
+    let repetido = numbersDocument.find((e) => e === input.numberDocument);
     console.log("DNI´s", numbersDocument )
     if (repetido) {
       alert(

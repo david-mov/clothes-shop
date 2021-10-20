@@ -9,7 +9,7 @@ import axios from "axios";
 
 const CheckoutView = () => {
 
-  const productos = useSelector(state => state.productsReducer.products)
+ // const productos = useSelector(state => state.productsReducer.products)
   const dispatch = useDispatch();
   const { id } = useParams();
   const [datos, setDatos] = useState("")

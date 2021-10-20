@@ -28,7 +28,7 @@ const CheckoutPage = () => {
   }, [dispatch])
 
   const classes = useStyles()
-  let [user,okId] = useUserId();
+  let [user] = useUserId();
   var { cart } = useSelector((state) => state.checkoutReducer)
   var totalCart = useSelector(
     (state) => state.checkoutUserReducer.totalCartUser,

@@ -19,8 +19,8 @@ import { useUserId } from "../../hooks/useUserId";
 
 function NavBar() {
 
-  let [rol, ok] = useUserRol();
-  let [user,okId] = useUserId();
+  let [rol] = useUserRol();
+  let [user] = useUserId();
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
 
@@ -157,7 +157,7 @@ function NavBar() {
                   <ShoppingCart
                     className="temp"
                     fontSize="large"
-                    color="ligth"
+                    //color="ligth"
                   />
                 </Badge>
               </IconButton>

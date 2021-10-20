@@ -25,7 +25,7 @@ export default function ProductView() {
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [vauleS, setvauleS] = useState(false);
   const [Input, setInput] = useState(null); 
-  const [tengo, setTengo] = useState(false);
+  const [, setTengo] = useState(false);
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
 
@@ -34,7 +34,7 @@ export default function ProductView() {
     var Cart_product = productId
     console.log("ACA SI ENTRO BRO", productId, quantity, product.price)
     var subtotal = product.price * quantity
-    cart.find(e => (e.product.id) == (productId)) ? setTengo(true) : dispatch(postAddToCart({ Cart_product, subtotal, quantity }))
+    cart.find(e => (e.product.id) === (productId)) ? setTengo(true) : dispatch(postAddToCart({ Cart_product, subtotal, quantity }))
   }
   
   var nameImagen = "";

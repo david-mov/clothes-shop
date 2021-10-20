@@ -9,16 +9,14 @@ import { postAddToCartUser } from "../../../../stateManagement/actions/postAddTo
 
 
 function ProductCard2(props) {
-  let [user,ok] = useUserId();
+  let [user] = useUserId();
   const dispatch = useDispatch();
-  var cart;
+  var cart, quantity, subtotal;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
   if(user !== null ){
-    console.log("userr",user.id)
     cart = cartLogedIn;
   }else{
-    console.log("else")
     cart = cartLogedOut;
 
   }
@@ -32,23 +30,23 @@ function ProductCard2(props) {
     image,
     rating,
     productId,
-    quantity,
+    
   } = props;
-
+   
   const addToCart = (ev) => {
     if(user !== undefined ){ 
       var sizesUser = "";
       var Cart_Users = user?.id;
       console.log("si hay user id", Cart_Users)
-      var quantity = contador;
+      quantity = contador;
       var CartU_product = productId;
-      var subtotal = price * quantity;
+      subtotal = price * quantity;
       dispatch(postAddToCartUser({ CartU_product,Cart_Users, subtotal, quantity, sizesUser }))
     }
     
-    var quantity = contador;
+    quantity = contador;
     var Cart_product = productId;
-    var subtotal = price * quantity;
+     subtotal = price * quantity;
     dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
   };
 
@@ -217,7 +215,7 @@ function ProductCard2(props) {
             alt="Imag not found"
           ></img>
         </div>
-        <a className="info" href="#">
+        <a className="info">
           <p className="prodName">{name}</p>
           <p className="prodDesc">{description}</p>
           <div className="precios">

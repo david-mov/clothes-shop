@@ -20,19 +20,19 @@ export default function ProductosLista() {
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   var countP = 5;
-  var dataCompleta = [];
   var totalCurrent = Math.ceil(products?.length / countP);
   const [Input, setInput] = useState("");
   
   const filterProducts = () => {
+    //var dataCompleta = [];
     switch (valor) {
       case 'input':
-        return (dataCompleta = products.filter((e) =>
+        return (products.filter((e) =>
           e.name.toLowerCase().includes(Input.toLowerCase()),
         ))
 
       case 'Max Stock':
-        return (dataCompleta = products.sort((a,b)=>{
+        return ( products.sort((a,b)=>{
           const StockA = parseInt(a.stock);
                 const StockB = parseInt(b.stock);
                 if (StockA > StockB)return -1;
@@ -41,12 +41,12 @@ export default function ProductosLista() {
         }))
 
       case 'Min Stock':
-        return (dataCompleta = products.sort((a,b)=>{
+        return (products.sort((a,b)=>{
           return a.stock - b.stock
         }))
 
       case 'Max Price':
-        return (dataCompleta = products.sort((a,b)=>{
+        return ( products.sort((a,b)=>{
           const PriceA = parseInt(a.price);
                 const PriceB = parseInt(b.price);
                 if (PriceA > PriceB)return -1;
@@ -55,11 +55,11 @@ export default function ProductosLista() {
         }))
 
       case 'Min Price':
-        return (dataCompleta = products.sort((a,b)=>{
+        return (products.sort((a,b)=>{
           return a.price - b.price
         }))
       default:
-        return (dataCompleta = products)
+        return (products)
     }
   };
 

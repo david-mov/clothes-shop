@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Select from "react-select";
-import { useDispatch, useSelector } from "react-redux";
+import React, {  useEffect } from "react";
+import { useDispatch} from "react-redux";
 import {getAllUserDetails} from "../../stateManagement/actions/getAllUserDetails"
 
 function CheckoutView() {

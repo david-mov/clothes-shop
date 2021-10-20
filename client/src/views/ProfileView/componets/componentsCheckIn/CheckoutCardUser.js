@@ -4,7 +4,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import DeleteIcon from "@material-ui/icons/Delete";
 import getRemoveItem from "../../../../stateManagement/actions/getRemoveItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { putUpdateCart } from "../../../../stateManagement/actions/putUpdateCart";
 import Select from "react-select";
 
@@ -71,7 +71,7 @@ export default function CheckoutCardUserIn({ name, productId, idCarrito, quantit
         <tr className="table-row table-row--chris">
 
             <td className="table-row__td">
-                <img className="table-row__img" src={require(`../../../../assets/${nameImagen}`).default} alt="not image" />
+                <image className="table-row__img" src={require(`../../../../assets/${nameImagen}`).default} alt="not image" />
 
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { postLogin } from "../../stateManagement/actions/postLogin";
 import { Link, useHistory } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
-import { useUserRol } from "../../hooks/useUserRol";
+
 
 function LoginView() {
   const dispatch = useDispatch();

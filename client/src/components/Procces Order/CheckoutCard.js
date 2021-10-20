@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import DeleteIcon from "@material-ui/icons/Delete";
 import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { putUpdateCart } from "../../stateManagement/actions/putUpdateCart";
 import Select from "react-select";
 
@@ -11,7 +11,7 @@ import Select from "react-select";
 export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
 
     const dispatch = useDispatch()
-    const cart = useSelector(state => state.checkoutReducer.cart)
+   //const cart = useSelector(state => state.checkoutReducer.cart)
     const [vauleS, setvauleS] = useState("S");
     const [Input, setInput] = useState(null);    
 
@@ -67,7 +67,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         <tr className="table-row table-row--chris">
 
             <td className="table-row__td">
-                <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
+                <image className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
 
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>

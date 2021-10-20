@@ -23,7 +23,6 @@ import UpdateZises from "./views/FormCrudView/UpdateSizesView";
 import UpdateType from "./views/FormCrudView/UpdateTypesView";
 import SuperAView from "./views/SuperAdminView/SuperAdminView";
 import AdminView from "./views/AdminView/AdminView";
-import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import CheckoutView from "./views/CheckoutPayment/CheckoutView";
 
 
