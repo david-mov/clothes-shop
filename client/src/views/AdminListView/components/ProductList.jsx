@@ -1,103 +1,142 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getAllProducts } from '../../../stateManagement/actions/getAllProducts'
-import TablaList from './ListTable'
-import './styles.css'
-import Select from 'react-select'
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../../../stateManagement/actions/getAllProducts";
+import TablaList from "./ListTable";
+import "./styles.css";
+import Select from "react-select";
+import { deleteProduct } from "../../../stateManagement/actions/deleteProduct";
 
 export default function ProductosLista() {
-  const dispatch = useDispatch()
-  const [currentPage, setCurrentPage] = useState(0)
-  const [actualCurrent, setactualCurrent] = useState(1)
-  const [search, setSearch] = useState('S')
-  const [valor, setValor] = useState('')
-  var countP = 5
-  var dataCompleta = []
-  const [Input, setInput] = useState('')
-  const product = useSelector((state) => state.productsReducer.products)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+  const products = useSelector((state) => state.productsReducer.products);
+  const [search, setSearch] = useState({ label: "filter to..", value: "" });
+  const [valor, setValor] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [actualCurrent, setactualCurrent] = useState(1);
+  var countP = 5;
+  var dataCompleta = [];
+  var totalCurrent = Math.ceil(products?.length / countP);
+  const [Input, setInput] = useState("");
+
   const filterProducts = () => {
     switch (valor) {
-      case 'input':
-        return (dataCompleta = product.filter((e) =>
-          e.name.toLowerCase().includes(Input.toLowerCase()),
-        ))
+      case "input":
+        return (dataCompleta = products.filter((e) =>
+          e.name.toLowerCase().includes(Input.toLowerCase())
+        ));
 
-      case 'Max Stock':
-        return (dataCompleta = product.sort((a,b)=>{
+      case "Max Stock":
+        return (dataCompleta = products.sort((a, b) => {
           const StockA = parseInt(a.stock);
-                const StockB = parseInt(b.stock);
-                if (StockA > StockB)return -1;
-                if (StockA < StockB)return 1;
-                return 0;
-        }))
+          const StockB = parseInt(b.stock);
+          if (StockA > StockB) return -1;
+          if (StockA < StockB) return 1;
+          return 0;
+        }));
 
-      case 'Min Stock':
-        return (dataCompleta = product.sort((a,b)=>{
-          return a.stock - b.stock
-        }))
+      case "Min Stock":
+        return (dataCompleta = products.sort((a, b) => {
+          return a.stock - b.stock;
+        }));
 
-      case 'Max Price':
-        return (dataCompleta = product.sort((a,b)=>{
+      case "Max Price":
+        return (dataCompleta = products.sort((a, b) => {
           const PriceA = parseInt(a.price);
-                const PriceB = parseInt(b.price);
-                if (PriceA > PriceB)return -1;
-                if (PriceA < PriceB)return 1;
-                return 0;
-        }))
+          const PriceB = parseInt(b.price);
+          if (PriceA > PriceB) return -1;
+          if (PriceA < PriceB) return 1;
+          return 0;
+        }));
 
-      case 'Min Price':
-        return (dataCompleta = product.sort((a,b)=>{
-          return a.price - b.price
-        }))
+      case "Min Price":
+        return (dataCompleta = products.sort((a, b) => {
+          return a.price - b.price;
+        }));
       default:
-        return (dataCompleta = product)
+        return (dataCompleta = products);
     }
-
-    /* if (Input !== "") {
-      const stock = state.product.sort((a,b)=>b.stock - a.stock  ):
-                state.product.sort((a,b)=> a.stock- b.stock )
-      ));
-    }*/
-  }
+  };
 
   const onInputChange = (Input) => {
-    setValor('input')
-    setInput(Input.target.value)
-  }
+    setValor("input");
+    setInput(Input.target.value);
+  };
 
   const OptionSelect = [
-    { label: 'Max Stock', value: 'Max Stock' },
-    { label: 'Min Stock', value: 'Min Stock' },
-    { label: 'Max Price', value: 'Max Price' },
-    { label: 'Min Price', value: 'Min Price' },
-  ]
+    { label: "Max Stock", value: "Max Stock" },
+    { label: "Min Stock", value: "Min Stock" },
+    { label: "Max Price", value: "Max Price" },
+    { label: "Min Price", value: "Min Price" },
+  ];
 
   const handleChangeSelect = (search) => {
-    setValor(search.value)
-    setSearch(search)
-  }
+    setValor(search.value);
+    setSearch(search);
+  };
 
   const nextPage = () => {
     if (totalCurrent !== actualCurrent) {
-      setactualCurrent(actualCurrent + 1)
-      setCurrentPage(currentPage + countP)
+      setactualCurrent(actualCurrent + 1);
+      setCurrentPage(currentPage + countP);
     }
-  }
+  };
 
   const prevPage = () => {
     if (actualCurrent > 1) {
-      setactualCurrent(actualCurrent - 1)
-      setCurrentPage(currentPage - countP)
+      setactualCurrent(actualCurrent - 1);
+      setCurrentPage(currentPage - countP);
     }
-  }
+  };
 
-  useEffect(() => {
-    dispatch(getAllProducts())
-  }, [dispatch])
+  const deleteProducts = (e) => {
+    dispatch(deleteProduct(e));
+    dispatch(getAllProducts());
+  };
 
-  const products = useSelector((state) => state.productsReducer.products)
-  var totalCurrent = Math.ceil(products.length / countP)
+  const show = () => {
+    if (actualCurrent === 1) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
+        </div>
+      );
+    } else if (actualCurrent >= totalCurrent) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
+        </div>
+      );
+    }
+  };
+
   function headers() {
     return (
       <thead className="table__thead">
@@ -132,14 +171,14 @@ export default function ProductosLista() {
           <th className="table__th">Delete Product</th>
         </tr>
       </thead>
-    )
+    );
   }
 
   function bodyTable() {
     return filterProducts()
       .map((e, i) => {
-        var status = 'status--green'
-        if (e.stock <= 5) status = 'status--red'
+        var status = "status--green";
+        if (e.stock <= 5) status = "status--red";
         return (
           <tr key={i} className="table-row table-row--chris">
             <td className="table-row__td">
@@ -173,7 +212,7 @@ export default function ProductosLista() {
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/info/product/ss/${e.id}`}>
+              <Link to={`/info/product/${e.id}`}>
                 <p>
                   <i class="fas fa-user-secret fa-9x"></i>
                 </p>
@@ -181,41 +220,28 @@ export default function ProductosLista() {
             </td>
 
             <td className="table-row__td">
-              <p>
+              <p value={e.id} onClick={() => deleteProducts(e.id)}>
                 <i className="fas fa-trash-alt fa-2x"></i>
               </p>
             </td>
           </tr>
-        )
+        );
       })
-      .slice(currentPage, currentPage + 5)
+      .slice(currentPage, currentPage + 5);
   }
 
-  console.log('ailyn', product)
   return (
     <div>
       <div className="body">
         <TablaList
-          title={'Products'}
+          title={"Products"}
           headers={headers()}
           data={products}
           bodyTable={bodyTable()}
-          url={'/create/product'}
+          url={"/create/product"}
         />
       </div>
-      <div className="buttonList">
-        <button className="button2" onClick={prevPage}>
-          PREV
-        </button>
-
-        <h1>
-          {actualCurrent} / {totalCurrent}
-        </h1>
-
-        <button className="button2" onClick={nextPage}>
-          NEXT
-        </button>
-      </div>
+      <div className="buttonList">{show()}</div>
     </div>
-  )
+  );
 }

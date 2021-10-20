@@ -23,7 +23,7 @@ const server = require("./src/app.js");
 
 const { conn, Category, Size, Type, Rol, User } = require("./src/db.js");
 const { PORT } = process.env;
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 async function preload() {
   const categoriesData = [
@@ -46,7 +46,7 @@ async function preload() {
     "Hats",
   ];
   const rolesData = ["superAdmin", "admin", "user", "banned", "inactive"];
-    
+
   for (categoryData of categoriesData) {
     await Category.findOrCreate({
       where: {
@@ -78,26 +78,25 @@ async function preload() {
 
   const superAdmin = {
     name: "Juan",
-    email:"juan123@gmail.com",
-    password: "12345"  
-  } 
-  const hashedPassword = await bcrypt.hash(superAdmin.password, 10)
+    email: "juan123@gmail.com",
+    password: "12345",
+  };
+  const hashedPassword = await bcrypt.hash(superAdmin.password, 10);
   const [newUser, created] = await User.findOrCreate({
-      where: {
-        email: superAdmin.email,
-      },
-      defaults: {
-        name: superAdmin.name,
-        password: hashedPassword
-      }
+    where: {
+      email: superAdmin.email,
+    },
+    defaults: {
+      name: superAdmin.name,
+      password: hashedPassword,
+    },
   });
-  await newUser.setRol(1)
-  
+  await newUser.setRol(1);
 } // temporal function
 
 // Syncing all the models at once.
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(PORT, () => {
     preload();
     console.log(`%the best henry final project listening at ${PORT}`); // eslint-disable-line no-console

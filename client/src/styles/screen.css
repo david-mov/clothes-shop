@@ -1,8 +1,7 @@
 .homescreen {
-  display: grid;
+  width: 100%;
   max-width: 1500px;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto;
 }
 :root {
   --blanco: #ffffff;
@@ -16,18 +15,16 @@
   font-size: 1.5rem;
   color: var(--oscuro);
   margin-bottom: 1rem;
-  margin-left: 18px;
 }
 
 .homescreen__products {
   display: grid;
-  /* margin-left: 50px;
-  margin-top: 10px; */
-  gap: 20px;
-  align-items: center;
-  justify-items: center;
+  gap: 10px;
+  padding: 0 15px;
 }
-
+.cart__link:hover {
+  color: red;
+}
 @media (min-width: 1232px) {
   .homescreen__products {
     grid-template-columns: repeat(2, 1fr);
@@ -43,14 +40,5 @@
 @media (min-width: 630px) {
   .homescreen__products {
     grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-    justify-items: center;
-    padding-left: 0.5rem;
   }
-}
-
-.total {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
 }

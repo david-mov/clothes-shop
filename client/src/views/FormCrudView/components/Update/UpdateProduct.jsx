@@ -65,7 +65,7 @@ const Update = ({
   }));
 
   let nombreType = "";
-  types.forEach((e) => {
+  types?.forEach((e) => {
     if (e.id === type_product) {
       nombreType = e.name;
     }
@@ -105,7 +105,7 @@ const Update = ({
     };
   });
 
-  const OptionType = types.map((e) => {
+  const OptionType = types?.map((e) => {
     return {
       value: e.id,
       label: e.name,
@@ -196,7 +196,7 @@ const Update = ({
   };
 
   const cerrarModalInsertar = () => {
-    setInput({});
+    // setInput({});
 
     history.push("/list");
   };

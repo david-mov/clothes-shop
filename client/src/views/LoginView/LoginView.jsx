@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../../stateManagement/actions/postLogin";
 import { getGoogleLogin } from '../../stateManagement/actions/getGoogleLogin';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
+import { useUserRol } from "../../hooks/useUserRol";
 
 function LoginView() {
   const dispatch = useDispatch();
-  const [state, setState] = useState({});
-
-  const onSubmitForm = (e) => {
+  const history = useHistory();
+  const [state, setState] = useState({});  
+  
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     dispatch(postLogin(state));
+    history.push("/");     
   };
 
   const handleChange = (e) => {
