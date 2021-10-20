@@ -1,31 +1,34 @@
 const nodemailer = require("nodemailer")
 
 
-const Email = async() => {
-    console.log("ACA")
-    var transporter = nodemailer.createTransport(({
-        host: 'smtp.gmail.com',
+const Email = async(req, res) => {
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
         port: 587,
-        secure: false,
+        secure: false, // true for 465, false for other ports
         auth: {
-            user:'clothesshophenry@outlook.com',
-            pass:'111111'
+            user:'clothesshopG3@gmail.com',
+            pass:'Henry123456'
+        },
+        tls: {
+            rejectUnauthorized: false
         }
-    }));
+      });
 
   const options = {
-    from: '"Clothesshop" <clothesshophenry@outlook.com>', 
-    to: "pachi97torres@hotmail.com", 
+    from: 'clothesshophenry@outlook.com', 
+    to: "ftorres767@gmail.com", 
     subject: `Your purchase was successful ✔`, 
-    text: "jorge",
-    html: `<b>"jorge"</b>`,
+    text: "gracias por su compra vuelva prontos",
+    html: `<b>"gracias por su compra vuelva prontos"</b>`,
   }
   
-  transporter.sendMail(options, function(err, info){
+ await transporter.sendMail(options, (err, info) => {
       if(err){
-          console.log(err)
+          return res.status(500).send(err.message);
       }
-      console.log("buena")
+      console.log("eso tilin")
+     return res.status(200).json(info.message)
   })
 
 }
