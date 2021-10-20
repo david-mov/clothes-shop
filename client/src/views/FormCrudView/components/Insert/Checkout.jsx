@@ -11,7 +11,7 @@ const Checkout = ({ name, id, email }) => {
   const history = useHistory();
 
   let users = useSelector((state) => state.userReducer.allUserDetails);
-
+  
   const [valueSex, setValueSex] = useState({
     value: "", label: ""
   });

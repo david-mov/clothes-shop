@@ -34,7 +34,7 @@ const CheckoutPage = () => {
         dispatch(cleanUpdate());
       };
     }
-  }, [dispatch, user?.id])
+  }, [dispatch, user])
   const classes = useStyles()
 
 
