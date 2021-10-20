@@ -98,7 +98,7 @@ const Checkout = ({name, id, email, phone,productos, data}) => {
     e.preventDefault();
     let numbersDocument = users.map((e) => e.numberDocument);
     //BUSCO SI HAY ALGUNA CATEGORIA QUE ESTE REPETIDA
-    let repetido = numbersDocument.find((e) => e == input.numberDocument);
+    let repetido = numbersDocument.find((e) => e === input.numberDocument);
     console.log("DNI´s", numbersDocument )
     if (repetido) {
       alert(

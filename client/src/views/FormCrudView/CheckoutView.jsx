@@ -15,7 +15,7 @@ const CheckoutView = () => {
   const [datos, setDatos] = useState("")
 
   let [idCookie, idOk] = useUserId()
-  console.log("aCA TAN", idCookie?.id, idOk)
+  console.log("aCA TAN", idCookie?.id, )
 
   var idFinal = idCookie?.id
 
