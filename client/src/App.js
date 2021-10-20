@@ -21,6 +21,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import UpdateCategories from "./views/FormCrudView/UpdateCategoriesView";
 import UpdateZises from "./views/FormCrudView/UpdateSizesView";
 import UpdateType from "./views/FormCrudView/UpdateTypesView";
+import { GoogleAuthRedirect } from './views/GoogleAuthRedirect/GoogleAuthRedirect';
 
 function App() {
   return (
@@ -71,6 +72,7 @@ function App() {
         />
         <Route exact path="/addimage/:productId" component={AddImage} />
         <Route exact path="/info/product/:productId" component={InfoProduct} />
+        <Route exact path='/login/:status' component={GoogleAuthRedirect} />
         <Route path="*" component={NotFoundView} />
       </Switch>
     </Router>

@@ -1,4 +1,4 @@
-const { User } = require("../db.js");
+const { User, Rol } = require("../db.js");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -44,19 +44,25 @@ module.exports = function (passport) {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: `${process.env.SERVER}/auth/google/callback` || "http://localhost:3001/auth/google/callback",
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, accessToken, refreshToken, profile, done) {
     console.log('profile data: ', profile);
     User.findOrCreate({ 
       where: { googleId: profile.id },
       defaults: {
-        name: profile.displayName,
-        email: profile.email,
+        name: `${profile.name.givenName} ${profile.name.familyName}`,
+        email: profile.emails[0].value
       }
     })
     .then(([currentUser, created]) => {
-      if (created) { console.log('created user: ', currentUser) }
+      if (created) { 
+        currentUser.setRol(3)
+        .then((newUser) => 
+          console.log('created user: ', currentUser) 
+        )
+      }
       else { console.log('current user: ', currentUser) }
       return done(null, currentUser)
     })
