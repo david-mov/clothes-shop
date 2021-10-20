@@ -13,6 +13,7 @@ const viewRouter = require('./view');
 const checkout = require("./checkout");
 const postCart = require("./cart");
 const cartUsers = require("./cartUsers");
+const emailSender = require("./email")
 
 
 router.use('/products', productsRouter);
@@ -27,5 +28,6 @@ router.use('/view', viewRouter);
 router.use("/cart", postCart);
 router.use("/checkout", checkout);
 router.use("/cart_user", cartUsers);
+router.use("/email", emailSender)
 
 module.exports = router;
