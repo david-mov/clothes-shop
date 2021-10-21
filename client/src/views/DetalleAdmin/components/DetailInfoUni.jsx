@@ -60,6 +60,7 @@ const options = {
 
 export default function InformeProducto () {
 
+  const { productId } = useParams();
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllViews())
@@ -97,6 +98,12 @@ export default function InformeProducto () {
       },
       {
         type: 'line',
+        label: 'Average Rating',
+        backgroundColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
+        data: [10, 50, 20, 80, 100, 10, 40],
+      },
+      {
+        type: 'line',
         label: 'Total Stars',
         backgroundColor: `rgb(${rand()}, ${rand()}, ${rand()})`,
         data: [2, 3, 4, 2, 5, 5, 5],
@@ -124,7 +131,7 @@ export default function InformeProducto () {
   };
 
 
-    const { productId } = useParams();
+    
     const [data, setData] = useState(genData());
 
   useEffect(() => {
