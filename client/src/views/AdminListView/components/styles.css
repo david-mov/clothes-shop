@@ -35,7 +35,7 @@ GENERAL
   font-family: "arial";
   color: black;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 0.6rem;
   text-transform: uppercase;
   cursor: pointer;
   border: 0 !important;
@@ -43,6 +43,7 @@ GENERAL
 }
 
 .table-row {
+  width: 100%;
   background: #8e9eab;
   background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);
   background: linear-gradient(to right, #eef2f3, #8e9eab);
@@ -90,7 +91,7 @@ GENERAL
 
 .table-row__name {
   color: #53646f;
-  font-size: 20px;
+  font-size: 0.7rem;
   font-weight: 400;
   line-height: 18px;
   margin-bottom: 0px;
@@ -257,7 +258,7 @@ GENERAL
     display: inline-block;
     border: 0;
     background-color: #fff;
-    width: calc(33.3% - 13px);
+    /* width: calc(33.3% - 13px); */
     margin-right: 10px;
     margin-bottom: 10px;
   }
@@ -303,7 +304,7 @@ GENERAL
 
 @media screen and (max-width: 680px) {
   .table-row {
-    width: calc(50% - 13px);
+    /* width: calc(50% - 13px); */
   }
 }
 
@@ -312,7 +313,26 @@ GENERAL
     width: 100%;
   }
 }
-
+.image_detail_table {
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+@media (min-width: 768px) {
+  .image_detail_table {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.image_detail_img {
+  width: 50%;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+.Delete_icon {
+  text-align: center;
+  margin-top: 2rem;
+  margin-left: 1rem;
+}
 .otro {
   font-family: "lucida handwriting";
   border-radius: 2px;
@@ -345,7 +365,12 @@ GENERAL
 }
 @media (min-width: 458px) {
   .table-container {
+    margin: 1rem;
     background-color: #1f7c68;
+  }
+  .Delete_icon {
+    margin-top: 2rem;
+    margin-left: 1rem;
   }
 }
 .button2 {
@@ -416,7 +441,9 @@ GENERAL
   gap: 5px;
   padding-top: 15px;
 } */
-
+.img1 {
+  text-align: center;
+}
 img {
   width: 100%;
 }

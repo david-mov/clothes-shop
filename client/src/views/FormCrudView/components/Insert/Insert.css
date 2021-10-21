@@ -108,7 +108,11 @@ button {
 button:hover {
   color: red;
 }
+.Google {
+  margin-top: 1rem;
 
+  background-color: #87c2f1;
+}
 .insert_label {
   padding-top: 0.5rem;
   text-align: center;
