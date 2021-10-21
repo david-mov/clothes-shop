@@ -80,6 +80,7 @@
   box-shadow: none;
 }
 .pagination .pagination-item.active {
+  font-size: 0.8rem;
   color: #fff;
   background-image: linear-gradient(135deg, #008094, #18ffff);
 }

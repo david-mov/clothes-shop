@@ -6,7 +6,6 @@ import TablaList from "./ListTable";
 import "./styles.css";
 
 export default function CategoryList() {
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());
@@ -18,15 +17,15 @@ export default function CategoryList() {
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   const [Input, setInput] = useState("");
-  
+
   const filterCategory = () => {
     //var dataCompleta = [];
     if (Input !== "") {
-      return ( category.filter((e) =>
+      return category.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
-      ));
+      );
     }
-    return (category);
+    return category;
   };
   const onInputChange = (Input) => {
     setInput(Input.target.value);
@@ -35,7 +34,6 @@ export default function CategoryList() {
     if (totalCurrent !== actualCurrent) {
       setactualCurrent(actualCurrent + 1);
       setCurrentPage(currentPage + countP);
-
     }
   };
 
@@ -46,7 +44,10 @@ export default function CategoryList() {
     }
   };
 
-  
+  const deleteProducts = () => {
+    // dispatch(deleteProduct(e));
+    // dispatch(getAllProducts());
+  };
 
   function headers() {
     return (
@@ -78,34 +79,40 @@ export default function CategoryList() {
       return (
         <div className="pagination">
           <p className="pagination-item active">{actualCurrent}</p>
-          <p>TO</p>
+          <p>To</p>
           <p className="pagination-item ">{totalCurrent}</p>
-          <p className="pagination-item " onClick={nextPage}>next</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
         </div>
-      )
+      );
     } else if (actualCurrent >= totalCurrent) {
-
       return (
         <div className="pagination">
-          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
           <p className="pagination-item active">{actualCurrent}</p>
           <p>TO</p>
           <p className="pagination-item ">{totalCurrent}</p>
         </div>
-      )
+      );
     } else {
-
       return (
         <div className="pagination">
-          <p className="pagination-item " onClick={prevPage}>prev</p>
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
           <p className="pagination-item active">{actualCurrent}</p>
           <p>TO</p>
           <p className="pagination-item ">{totalCurrent}</p>
-          <p className="pagination-item " onClick={nextPage}>next</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
         </div>
-      )
+      );
     }
-  }
+  };
 
   function bodyTable() {
     return filterCategory()
@@ -124,6 +131,11 @@ export default function CategoryList() {
                 </p>
               </Link>
             </td>
+            <td className="table-row__td">
+              <p onClick={(e) => deleteProducts(e.id)}>
+                <i className="fas fa-trash-alt fa-2x"></i>
+              </p>
+            </td>
           </tr>
         );
       })
@@ -141,9 +153,7 @@ export default function CategoryList() {
           url={"/create/category"}
         />
       </div>
-      <div className="buttonList">
-        {show()}
-      </div>
+      <div className="buttonList">{show()}</div>
     </div>
   );
 }
