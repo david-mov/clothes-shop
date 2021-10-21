@@ -27,6 +27,7 @@ import AdminView from "./views/AdminView/AdminView";
 import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
 import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
+import InsertRatingView from "./views/FormCrudView/InsertRatingView";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         <Route exact path="/create/size" component={InsertSize} />
         <Route exact path="/create/type" component={InsertType} />
         <Route exact path= "/create/userDetail" component = {InsertCheckoutView} />
+        <Route exact path ="/insertRating" component = {InsertRatingView} />
         <Route
           exact
           path="/update/product/:productId"
@@ -88,6 +90,11 @@ function App() {
         <ProtectedRoute exact path="/admin" component={AdminView}
         roles={[2]} other="/login"/>
         <Route path="*" component={NotFoundView} />
+
+
+        <Route exact path ="/insertRating" component = {InsertRatingView} />
+
+
 
       </Switch>
     </Router>
