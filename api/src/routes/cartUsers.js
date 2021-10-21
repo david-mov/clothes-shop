@@ -2,13 +2,13 @@ const router = require('express').Router();
 
 const postCartUsers = require('../controllers/postCartUsers');
 const getCartUsers = require('../controllers/getCartUsers');
-const getCartUsers2 = require('../controllers/getCartUsers2');
+const modifyStateCategory = require('../controllers/modifyStateCartUsers');
 const deleteCartUsers = require("../controllers/deleteCartUsers");
 const modifyCartUsers = require("../controllers/modifyCartUsers");
 
 router.post('/', postCartUsers);
 router.get('/', getCartUsers);
-router.get('/:Cart_Users', getCartUsers2);
+router.put('/state', modifyStateCategory);
 router.post('/delete_cart', deleteCartUsers);
 
 

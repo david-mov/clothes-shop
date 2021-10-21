@@ -66,6 +66,7 @@
 }
 .insertImg {
   text-align: center;
+  color: rgb(161, 43, 43);
   padding-bottom: 1rem;
 }
 @media (min-width: 768px) {

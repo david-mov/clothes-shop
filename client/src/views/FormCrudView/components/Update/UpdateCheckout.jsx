@@ -4,6 +4,7 @@ import { getAllUserDetails } from "../../../../stateManagement/actions/getAllUse
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
 import { putUserDetail } from "../../../../stateManagement/actions/putUserDetail";
+import { putStateCartUsers } from "../../../../stateManagement/actions/putStateCUsers";
 
 
 const UpdateCheckout = ({
@@ -124,6 +125,12 @@ const UpdateCheckout = ({
       setInput({});
 
       alert("Excelente");
+      //codigo para cambiar el estado del producto en el carrito 
+      const objCart = {
+        Cart_Users:id,
+        state:2
+      }
+      dispatch(putStateCartUsers(objCart)) 
       history.push("/CheckoutPage");
     }
   }

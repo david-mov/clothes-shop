@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const CheckoutPage = () => {
 
   const dispatch = useDispatch()
-  let [user, okId] = useUserId();
+  let [user] = useUserId();
 
   useEffect(() => {
     if (user?.id !== undefined) {
@@ -36,23 +36,15 @@ const CheckoutPage = () => {
     }
   }, [dispatch, user])
   const classes = useStyles()
-
-
-
-  var showCart, showTotalAmount;
+  var showCart;
   var { cart } = useSelector((state) => state.checkoutReducer)
   var totalCart = useSelector(
     (state) => state.checkoutUserReducer.totalCartUser,
   )
-  var { totalAmount } = useSelector((state) => state.checkoutReducer)
-  var { totalAmountUser } = useSelector((state) => state.checkoutUserReducer)
   if (user !== null) {
-    showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
-    showTotalAmount = totalAmountUser;
+    showCart = totalCart.filter((e) => e.Cart_Users === user?.id && e.state !==3)
   } else {
     showCart = cart;
-    showTotalAmount = totalAmount;
-
   }
 
   function FormRow() {
@@ -107,7 +99,7 @@ const CheckoutPage = () => {
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
           <Typography align="center" gutterBottom variant="h4">
-            <TotalCheckout totalAmount={showTotalAmount} />
+            <TotalCheckout />
           </Typography>
         </Grid>
       </Grid>

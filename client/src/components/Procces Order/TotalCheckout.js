@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useUserId } from '../../hooks/useUserId'
 
 const Total = () => {
-  let [user, okId] = useUserId()  
+  let [user] = useUserId()  
   const cart = useSelector((state) => state.checkoutReducer.cart)
   const userdeta = useSelector((state) => state.userReducer.userDetails);
   var totalCart = useSelector(
@@ -18,7 +18,7 @@ const Total = () => {
   let miBasket
 
   if (user?.id !== undefined) {
-    showCart = totalCart.filter((e) => e.Cart_Users === user.id)
+    showCart = totalCart.filter((e) => e.Cart_Users === user.id && e.state !==3)
     showCart.map((e) => (total += parseInt(e.subtotal)))
     miBasket = showCart.length
   } else {

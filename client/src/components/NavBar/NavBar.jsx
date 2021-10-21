@@ -60,7 +60,7 @@ function NavBar() {
   var { cart } = useSelector((state) => state.checkoutReducer);
   var showCart;
   if(user !== null){
-  showCart = totalCart.filter((e)=> e.Cart_Users === user.id) 
+  showCart = totalCart.filter((e)=> e.Cart_Users === user.id && e.state !==3) 
   }else{
     showCart = cart;
   }

@@ -11,6 +11,10 @@ module.exports = (sequelize) => {
    quantity: {
     type: DataTypes.INTEGER
    },
+   state: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1
+   },
    sizesUser: {
     type: DataTypes.STRING
    }

@@ -13,10 +13,10 @@ import getRemoveItemUser from '../../../../stateManagement/actions/getRemoveItem
 
 
 
-export default function CheckoutCardUserIn({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
+export default function CheckoutCardUserIn({ name, productId, quantity, price, image, size, color, stock, rating }) {
 
     const dispatch = useDispatch();
-    let [user,okId] = useUserId();
+    let [user] = useUserId();
     var Cart_Users, CartU_product,sizesUser;
     const [vauleS, setvauleS] = useState("S");
     const [Input, setInput] = useState(null);

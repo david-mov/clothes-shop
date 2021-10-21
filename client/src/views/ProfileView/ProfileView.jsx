@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { getAllCart } from '../../stateManagement/actions/getAllCart';
 import { useEffect } from 'react';
 import TableUser from './componets/TablaUser';
+import PrepaymentPage from "./componets/PrePaymentPage";
 
 export default function ProfileView() {
 
@@ -60,6 +61,7 @@ export default function ProfileView() {
 			</div>
 			<CheckoutPageUserIn />
 			<TableUser />
+			<PrepaymentPage />
 
 		</div>
 	)
