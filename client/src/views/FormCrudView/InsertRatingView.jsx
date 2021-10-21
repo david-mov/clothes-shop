@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import InsertRating from "./components/Insert/InsertRating";
+import { useDispatch } from "react-redux";
+import { getAllRating } from "../../stateManagement/actions/getAllRating";
+import { useUserId } from "../../hooks/useUserId";
+
 
 const InsertRatingView = () => {
+  const dispatch = useDispatch();
+  let [idCookie, idOk] = useUserId()
+
+   useEffect(() => {
+     dispatch(getAllRating());
+    
+  }, [dispatch]);
+
+
   return (
     <div>
       <div className="todo">
@@ -30,7 +43,7 @@ const InsertRatingView = () => {
           </ul>
         </div>
       </div>
-      <InsertRating />
+      <InsertRating id = {idCookie?.id} />
     </div>
   );
 };

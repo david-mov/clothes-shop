@@ -3,12 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-const InsertRating = () => {
+const InsertRating = (id) => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   // dispatch(PostTypes());
-  //   // dispatch(getAllTypes());
-  // }, [dispatch]);
+ 
   const [input, setInput] = useState({
     amount: 0,
     coment: ""
@@ -60,7 +57,7 @@ const InsertRating = () => {
                 value={input.amount}
                 step="1"
                 pattern="[0-5]+"
-                readOnly
+                
               />
 
             </div>
