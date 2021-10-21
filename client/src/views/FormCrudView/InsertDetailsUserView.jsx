@@ -10,14 +10,15 @@ const FormCrudViewDetails = () => {
   let [idCookie, idOk] = useUserId()
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => {    
     if (idCookie?.id !== undefined) {
       dispatch(getUserIdParams(idCookie?.id));
     }
-  }, [dispatch]);
+  }, [dispatch, idCookie]);
 
   const userdeta = useSelector((state) => state.userReducer.userDetailIdParams);
 
+ 
   return (
     <div>
       <div className="todo">
@@ -53,7 +54,7 @@ const FormCrudViewDetails = () => {
         email={userdeta.email}
       />
     </div>
-  );
+  );  
 };
 
 export default FormCrudViewDetails;

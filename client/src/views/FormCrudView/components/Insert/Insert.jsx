@@ -155,6 +155,8 @@ const Insert = () => {
       images: [],
     });
   };
+
+  console.log("input",input)
   return (
     <div>
       <form className="crud_form">

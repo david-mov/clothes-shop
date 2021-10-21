@@ -18,46 +18,46 @@ export default function ProductosLista() {
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   var countP = 5;
-  var dataCompleta = [];
   var totalCurrent = Math.ceil(products?.length / countP);
   const [Input, setInput] = useState("");
 
   const filterProducts = () => {
+    //var dataCompleta = [];
     switch (valor) {
-      case "input":
-        return (dataCompleta = products.filter((e) =>
-          e.name.toLowerCase().includes(Input.toLowerCase())
-        ));
+      case 'input':
+        return (products.filter((e) =>
+          e.name.toLowerCase().includes(Input.toLowerCase()),
+        ))
 
-      case "Max Stock":
-        return (dataCompleta = products.sort((a, b) => {
+      case 'Max Stock':
+        return ( products.sort((a,b)=>{
           const StockA = parseInt(a.stock);
-          const StockB = parseInt(b.stock);
-          if (StockA > StockB) return -1;
-          if (StockA < StockB) return 1;
-          return 0;
-        }));
+                const StockB = parseInt(b.stock);
+                if (StockA > StockB)return -1;
+                if (StockA < StockB)return 1;
+                return 0;
+        }))
 
-      case "Min Stock":
-        return (dataCompleta = products.sort((a, b) => {
-          return a.stock - b.stock;
-        }));
+      case 'Min Stock':
+        return (products.sort((a,b)=>{
+          return a.stock - b.stock
+        }))
 
-      case "Max Price":
-        return (dataCompleta = products.sort((a, b) => {
+      case 'Max Price':
+        return ( products.sort((a,b)=>{
           const PriceA = parseInt(a.price);
-          const PriceB = parseInt(b.price);
-          if (PriceA > PriceB) return -1;
-          if (PriceA < PriceB) return 1;
-          return 0;
-        }));
+                const PriceB = parseInt(b.price);
+                if (PriceA > PriceB)return -1;
+                if (PriceA < PriceB)return 1;
+                return 0;
+        }))
 
-      case "Min Price":
-        return (dataCompleta = products.sort((a, b) => {
-          return a.price - b.price;
-        }));
+      case 'Min Price':
+        return (products.sort((a,b)=>{
+          return a.price - b.price
+        }))
       default:
-        return (dataCompleta = products);
+        return (products)
     }
   };
 

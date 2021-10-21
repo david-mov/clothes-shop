@@ -96,7 +96,8 @@ async function preload() {
 
 // Syncing all the models at once.
 
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
+
   server.listen(PORT, () => {
     preload();
     console.log(`%the best henry final project listening at ${PORT}`); // eslint-disable-line no-console

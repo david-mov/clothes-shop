@@ -12,7 +12,7 @@ const ProductCart = () => {
       <div className="detailContainer">
         <div className="elcountry">Cart Detail</div>
         <div className="detailName">name</div>
-        <img className="imagenn" alt="no image" />
+        <image className="imagenn" alt="no image" />
         <div className="detail">precio</div>
         <div className="detail">cantidad</div>
         <div className="detail">n° pedido</div>

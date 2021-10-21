@@ -34,11 +34,8 @@ const CheckoutPage = () => {
         dispatch(cleanUpdate());
       };
     }
-  }, [dispatch, user?.id])
+  }, [dispatch, user])
   const classes = useStyles()
-
-
-
   var showCart, showTotalAmount;
   var { cart } = useSelector((state) => state.checkoutReducer)
   var totalCart = useSelector(

@@ -97,7 +97,6 @@ const UpdateCheckout = ({
     e.preventDefault();
 
     let numerosDni = users ? users.map(e => e.numberDocument) : null;
-
     let DniRepetido = numerosDni.find((e) => e === input.numberDocument && input.numberDocument !== numberDocument);
 
     if (DniRepetido) {

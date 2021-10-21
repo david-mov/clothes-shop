@@ -11,7 +11,7 @@ const Checkout = ({ name, id, email }) => {
   const history = useHistory();
 
   let users = useSelector((state) => state.userReducer.allUserDetails);
-
+  
   const [valueSex, setValueSex] = useState({
     value: "", label: ""
   });
@@ -72,9 +72,9 @@ const Checkout = ({ name, id, email }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let numbersDocument = users.map((e) => e.numberDocument);
+
     //BUSCO SI HAY ALGUN documento  QUE ESTE repetido
     let repetido = numbersDocument.find((e) => e == input.numberDocument);
-
     if (repetido) {
       alert(
         "El numero de documento  que esta ingresando ya se encuentra en nuestra base de datos. por favor ingrese otro"

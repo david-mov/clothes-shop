@@ -9,7 +9,7 @@ import { getLogout } from "../../stateManagement/actions/getLogout";
 function NavbarHam({ open }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  let [rol, ok] = useUserRol();
+  let [rol] = useUserRol();
 
   function handleLogout() {
     dispatch(getLogout());
