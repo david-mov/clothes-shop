@@ -13,14 +13,13 @@ import { useSelector, useDispatch } from "react-redux";
 import "./NavBar.css";
 import { getAllTypes } from "../../stateManagement/actions/getAllTypes";
 import { getAllCart } from "../../stateManagement/actions/getAllCart";
-import { useUserRol } from '../../hooks/useUserRol';
+import { useUserRol } from "../../hooks/useUserRol";
 import { getAllCartUsers } from "../../stateManagement/actions/getAllCartUser";
 import { useUserId } from "../../hooks/useUserId";
 
 function NavBar() {
-
   let [rol, ok] = useUserRol();
-  let [user,okId] = useUserId();
+  let [user, okId] = useUserId();
   const [categoryValue, setCategoryValue] = useState("C");
   const [typeValue, setTypeValue] = useState("T");
 
@@ -56,12 +55,14 @@ function NavBar() {
 
   var types = useSelector((state) => state.typesReducer.types);
   var categories = useSelector((state) => state.categoriesReducer.categories);
-  var totalCart  = useSelector((state) => state.checkoutUserReducer.totalCartUser);
+  var totalCart = useSelector(
+    (state) => state.checkoutUserReducer.totalCartUser
+  );
   var { cart } = useSelector((state) => state.checkoutReducer);
   var showCart;
-  if(user !== null){
-  showCart = totalCart.filter((e)=> e.Cart_Users === user.id) 
-  }else{
+  if (user !== null) {
+    showCart = totalCart.filter((e) => e.Cart_Users === user.id);
+  } else {
     showCart = cart;
   }
 
@@ -73,9 +74,9 @@ function NavBar() {
             Admin Lists
           </Link>
         </li>
-      )
+      );
     }
-  }
+  };
 
   const OptionsCategories = categories.map((e, i) => {
     return (

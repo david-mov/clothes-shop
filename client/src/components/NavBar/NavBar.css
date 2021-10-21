@@ -13,6 +13,7 @@
 }
 @media (min-width: 768px) {
   .navbar {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     /* max-width: 1500px; */
@@ -64,9 +65,15 @@
 .cart__link {
   padding: 10px;
   border-radius: 8px;
-  color: white;
+  color: #171717;
   font-size: 1rem;
 }
+@media (min-width: 768px) {
+  .cart_Link_name {
+    color: white;
+  }
+}
+
 .cart_Link_name {
   margin-right: 5px;
 }

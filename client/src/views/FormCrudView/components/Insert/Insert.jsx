@@ -207,6 +207,7 @@ const Insert = () => {
               value={input.price}
               onChange={handleChange}
               step="1"
+              min="0"
               pattern="[0-9]+"
             />
             {errors.price && <p className="p">{errors.price}</p>}
@@ -229,6 +230,7 @@ const Insert = () => {
               step="1"
               pattern="[0-9]+"
               onChange={handleChange}
+              min="0"
             />
             {errors.stock && <p className="p">{errors.stock}</p>}
             <label className="label_Insert">Color</label>
