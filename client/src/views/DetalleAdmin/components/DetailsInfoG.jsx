@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
+import CardActions from "@material-ui/core/CardActions";
 import '../../AdminListView/components/styles.css'
 import { deleteImage } from '../../../stateManagement/actions/deleteImage';
 import { getUpdateProductDetails } from '../../../stateManagement/actions/getUpdatePDetail';
+import { Maximize } from '@material-ui/icons';
 
 export default function DetailProduct({
   idProduct,
@@ -21,14 +23,16 @@ export default function DetailProduct({
   updatedAt,
   images,
 }) {
-console.log("RATING ", ratings )
-console.log("EL AMOUN", ratings[0].amount)
+// console.log("RATING ", ratings )
+// console.log("EL AMOUN", ratings[0].amount)
   const dispatch = useDispatch();
-
+ 
   const deleteProduct = (e)=>{
     dispatch(deleteImage(e))
     dispatch(getUpdateProductDetails(idProduct));
   }
+  var filtrado = ratings.map(e => e.amount)
+  const rating = Math.max(...filtrado);
 
   return (
     <tbody className="table__tbody">
@@ -87,7 +91,17 @@ console.log("EL AMOUN", ratings[0].amount)
 
         <td className="table-row__td">
           <div className="table-row__info">
-            <p className="table-row__name">{ratings.amount}</p>
+          <CardActions disableSpacing>
+                    <div >
+                        {Array(rating)
+                            .fill()
+                            .map((_, i) => (
+                                <span>&#11088;</span>
+                            ))}
+                    </div>
+
+                </CardActions>
+            <p className="table-row__name">{}</p>
           </div>
         </td>
 
@@ -143,7 +157,7 @@ console.log("EL AMOUN", ratings[0].amount)
           return ( 
           <div>
            
-      <image src={require(`../../../assets/${nameImagen}`).default} alt="Not Image"></image>
+      <img src={require(`../../../assets/${nameImagen}`).default} alt="Not Imag"></img>
            <p value={e.id} onClick={() => deleteProduct(e.id)} >
                 <i className="fas fa-trash-alt fa-2x"></i>
                 </p>
