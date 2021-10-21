@@ -10,8 +10,7 @@ const getAllView = async (req, res, next) => {
             },{
                 model: User,
                 attributes: ['id'],
-            }],
-            attributes: ['amount'],
+            }]
 		});
 		res.json(allView);
 	}

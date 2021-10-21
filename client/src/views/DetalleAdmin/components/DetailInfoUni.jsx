@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import '../../../styles/styleInformes.css'
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {getAllViews} from "../../../stateManagement/actions/getAllViews";
+import { getAllRating } from "../../../stateManagement/actions/getAllRating";
 const rand = () => Math.floor(Math.random() * 255);
 
 /*const genData = () => ({
@@ -56,10 +59,20 @@ const options = {
 
 
 export default function InformeProducto () {
-  const {productViewsUsers} = useSelector(state => state.productsReducer)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAllViews())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getAllRating())
+  }, [dispatch])
+
+  const {productViews} = useSelector(state => state.productsReducer)
   var { productRatingsUsers } = useSelector((state) => state.productsReducer);
 
-  console.log("PRODUCTVIEWS", productViewsUsers)
+  console.log("PRODUCTVIEWS", productViews)
   console.log("PRODUCTRATINGS", productRatingsUsers)
   const genData = () => ({
 
@@ -111,8 +124,6 @@ export default function InformeProducto () {
   };
 
 
-  
-  console.log("datat desde ",productViewsUsers )
     const { productId } = useParams();
     const [data, setData] = useState(genData());
 
