@@ -12,14 +12,29 @@ import { Link } from 'react-router-dom'
 import { getAllCartUsers } from '../../stateManagement/actions/getAllCartUser'
 import { getAllUserDetails } from "../../stateManagement/actions/getAllUserDetails";
 import { putStateCartUsers } from '../../stateManagement/actions/putStateCUsers';
-
+import { useHistory } from 'react-router';
 
 const FORM_ID = 'payment-form';
 const CheckoutPrePaymentView = () => {
-
+  const history = useHistory()
   const dispatch = useDispatch()
   let [user] = useUserId();
   const [datos, setDatos] = useState("")
+  const [verificacion, setVerificacion] = useState(1)
+
+  console.log("ACA TA VERIFICACION", verificacion)
+
+  const redirectOnClick = (e) => {
+    e.preventDefault()
+    if(verificacion === 1){
+      setVerificacion(verificacion +1)
+      alert("podria perder su carrito")
+    }
+    else if(verificacion === 2){
+      history.push("/checkoutPage")
+      setVerificacion(1)
+    }
+  }
 
   useEffect(() => {
     if (user?.id !== undefined) {
@@ -192,13 +207,13 @@ const CheckoutPrePaymentView = () => {
           </div>
           <div className="cart__link">
             <ul className="navbar__links">
-              <li className="saco">
-                <Link to="/CheckoutPage" className="cart__link">
+              < li className="saco">
+                 <button onClick={(e) => redirectOnClick(e)} className="cart__link">
                   <i class="fas fa-arrow-left fa-1x"></i>
                   <span>
                     Go to back <span className="cartlogo__badge">{ }</span>
                   </span>
-                </Link>
+                </button>  
               </li>
             </ul>
           </div>
