@@ -37,7 +37,6 @@ export default function ProductView() {
   const cart = useSelector((state) => state.checkoutReducer.cart);
   var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
 
-  console.log("PRODUCT", product)
 
   if (user !== undefined || user !== null) {
     showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
@@ -152,7 +151,6 @@ export default function ProductView() {
     }
   };
 
-  console.log("INPUT",Input)
 
   return (
     <div>
