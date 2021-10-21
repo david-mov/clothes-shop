@@ -10,9 +10,9 @@ import { postAddViewUser } from "../../../../stateManagement/actions/postAddView
 
 
 function ProductCard2(props) {
-  let [user,ok] = useUserId();
+  let [user] = useUserId();
   const dispatch = useDispatch();
-  var cart, View_User, View_product;
+  var cart, View_User, View_product, subtotal = 0;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
   if(user !== undefined || user !== null){
@@ -33,22 +33,22 @@ function ProductCard2(props) {
     image,
     rating,
     productId,
-    quantity,
+    
   } = props;
-
+   
   const addToCart = (ev) => {
     if(user !== null){ 
       var sizesUser = "";
       var Cart_Users = user?.id;
       var quantity = contador;
       var CartU_product = productId;
-      var subtotal = price * quantity;
+      subtotal = price * quantity;
       dispatch(postAddToCartUser({ CartU_product,Cart_Users, subtotal, quantity, sizesUser }))
     }
     
-    var quantity = contador;
+    quantity = contador;
     var Cart_product = productId;
-    var subtotal = price * quantity;
+     subtotal = price * quantity;
     dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
   };
 
@@ -222,7 +222,7 @@ function ProductCard2(props) {
             alt="Imag not found"
           ></img>
         </div>
-        <a className="info" href="#">
+        <a className="info">
           <p className="prodName">{name}</p>
           <p className="prodDesc">{description}</p>
           <div className="precios">

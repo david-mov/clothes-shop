@@ -64,15 +64,10 @@ const Update = ({
     label: e.name,
   }));
 
-  let nombreType = "";
-  types?.forEach((e) => {
-    if (e.id === type_product) {
-      nombreType = e.name;
-    }
-  });
+  
 
-  const mapType = { value: type_product, label: nombreType };
-
+  const mapType = { value: type_product, label: type.name };
+  console.log("mapTYpe", type)
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
   const [valueType, setvalueType] = useState(mapType);
@@ -83,9 +78,9 @@ const Update = ({
     color,
     stock,
     type_product,
-    type: valueType,
-    categories: valueCate,
-    sizes: valueSize,
+    type: valueType.label,
+    categories: valueCate.map(e => e.value),
+    sizes: valueSize?.map(e => e.value),
     price,
   });
 
@@ -170,26 +165,16 @@ const Update = ({
     setInput({
       ...input,
       type_product: valueType.value,
+      type: valueType.label
     });
 
     setvalueType(valueType);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    let mapCategorie = input.categories.map((e) => e.value);
-    let mapSizes = input.sizes.map((e) => e.value);
-    let obj = {
-      name: input.name,
-      description: input.description,
-      color: input.color,
-      stock: input.stock,
-      type_product: input.type_product,
-      categories: mapCategorie,
-      sizes: mapSizes,
-      price: input.price,
-    };
-    dispatch(putProduct(productId, obj));
+    e.preventDefault();        
+    
+    dispatch(putProduct(productId, input));
 
     alert("Successfully edited product");
     history.push("/list");
@@ -200,6 +185,8 @@ const Update = ({
 
     history.push("/list");
   };
+
+  console.log("INPUt", input);
 
   return (
     <div>
@@ -334,8 +321,8 @@ const Update = ({
                     input.color &&
                     input.stock &&
                     input.type_product &&
-                    input.sizes.length &&
-                    input.categories.length &&
+                    input.sizes &&
+                    input.categories &&
                     input.price
                   )
                 }

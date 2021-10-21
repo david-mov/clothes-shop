@@ -13,7 +13,6 @@ export default function CategoryList() {
   }, [dispatch]);
   const category = useSelector((state) => state.categoriesReducer.categories);
   var countP = 5;
-  var dataCompleta = [];
   var totalCurrent = Math.ceil(category?.length / countP);
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,12 +20,13 @@ export default function CategoryList() {
   const [Input, setInput] = useState("");
   
   const filterCategory = () => {
+    //var dataCompleta = [];
     if (Input !== "") {
-      return (dataCompleta = category.filter((e) =>
+      return ( category.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
       ));
     }
-    return (dataCompleta = category);
+    return (category);
   };
   const onInputChange = (Input) => {
     setInput(Input.target.value);

@@ -13,7 +13,6 @@ export default function TypeList() {
   const type = useSelector((state) => state.typesReducer.types);
 
   var countP = 5;
-  var dataCompleta = [];
   var totalCurrent =type ? Math.ceil(type?.length / countP): null;
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,12 +20,13 @@ export default function TypeList() {
   const [Input, setInput] = useState("");
   
   const filterTypes = () => {
+    //var dataCompleta = [];
     if (Input !== "") {
-      return (dataCompleta = type.filter((e) =>
+      return (type.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
       ));
     }
-    return (dataCompleta = type);
+    return (type);
   };
   const onInputChange = (Input) => {
     setInput(Input.target.value);

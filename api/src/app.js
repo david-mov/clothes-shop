@@ -40,7 +40,7 @@ server.use(
 )
 server.use(passport.initialize());
 server.use(passport.session());
-require("./passportConfig/localPassportConfig")(passport);
+require("./passportConfig/passportConfig.js")(passport);
 
 server.use((req, res, next) => {
   console.log(req.session);

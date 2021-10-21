@@ -22,7 +22,7 @@ const checkout = async (req, res, next) => {
     }
     ]
   });
-
+  
   const items_ml = DataCarritoUser.map((e) => {
     return {
       title: e.dataValues.product.dataValues.name,
@@ -37,9 +37,9 @@ const checkout = async (req, res, next) => {
     items: items_ml,
     external_reference: `${id_orden}`, //`${new Date().valueOf()}`,
     back_urls: {
-      success: 'http://localhost:3001/mercadopago/pagos',
-      failure: 'http://localhost:3001/mercadopago/pagos',
-      pending: 'http://localhost:3001/mercadopago/pagos',
+      success: 'http://localhost:3000/profile',
+      failure: 'http://localhost:3000/CheckoutPage',
+      pending: 'http://localhost:3000/profile',
     }
   };
   
