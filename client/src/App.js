@@ -41,7 +41,7 @@ function App() {
           exact
           path="/profile"
           component={ProfileView}
-          roles={[1,3]}
+          roles={[1,2,3]}
           other="/login"
         />
         <Route exact path="/create/product/" component={Insert} />
@@ -88,7 +88,7 @@ function App() {
         <ProtectedRoute exact path="/superadmin" component={SuperAView}
         roles={[1]} other="/login"/>
         <ProtectedRoute exact path="/admin" component={AdminView}
-        roles={[2]} other="/login"/>
+        roles={[1,2]} other="/login"/>
         <Route path="*" component={NotFoundView} />
 
 
