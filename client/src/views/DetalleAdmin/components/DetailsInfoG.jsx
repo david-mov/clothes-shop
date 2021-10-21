@@ -21,7 +21,8 @@ export default function DetailProduct({
   updatedAt,
   images,
 }) {
-
+console.log("RATING ", ratings )
+console.log("EL AMOUN", ratings[0].amount)
   const dispatch = useDispatch();
 
   const deleteProduct = (e)=>{
@@ -86,19 +87,19 @@ export default function DetailProduct({
 
         <td className="table-row__td">
           <div className="table-row__info">
-            <p className="table-row__name">{stars}</p>
+            <p className="table-row__name">{ratings.amount}</p>
           </div>
         </td>
 
         <td className="table-row__td">
           <div className="table-row__info">
-            <p className="table-row__name">{views}</p>
+            <p className="table-row__name">{views.length}</p>
           </div>
         </td>
 
         <td className="table-row__td">
           <div className="table-row__info">
-            <p className="table-row__name">{ratings}</p>
+            <p className="table-row__name">{ratings.length}</p>
           </div>
         </td>
 

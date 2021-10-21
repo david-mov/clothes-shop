@@ -20,7 +20,7 @@ export default function HomeIniView() {
         <Link to="/">
           <img
             className="img"
-            src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+            src="https://i.ibb.co/nD1CCgm/clothes-Shop.png"
             alt="clothes-Shop"
             border="0"
           />
