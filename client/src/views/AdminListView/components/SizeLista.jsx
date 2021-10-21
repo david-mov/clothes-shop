@@ -13,7 +13,6 @@ export default function SizeList() {
   const sizes = useSelector((state) => state.sizesReducer.sizes);
 
   var countP = 5;
-  var dataCompleta = [];
   var totalCurrent = Math.ceil(sizes?.length / countP);
   
   const [currentPage, setCurrentPage] = useState(0);
@@ -21,12 +20,13 @@ export default function SizeList() {
   const [Input, setInput] = useState("");
 
   const filterSizes = () => {
+    //var dataCompleta = [];
     if (Input !== "") {
-      return (dataCompleta = sizes.filter((e) =>
+      return (sizes.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
       ));
     }
-    return (dataCompleta = sizes);
+    return (sizes);
   };
   const onInputChange = (Input) => {
     setInput(Input.target.value);

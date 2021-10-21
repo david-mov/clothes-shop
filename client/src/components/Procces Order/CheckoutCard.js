@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import DeleteIcon from "@material-ui/icons/Delete";
 import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { putUpdateCart } from "../../stateManagement/actions/putUpdateCart";
 import Select from "react-select";
 import { useUserId } from '../../hooks/useUserId';
@@ -13,17 +13,20 @@ import getRemoveItemUser from '../../stateManagement/actions/getRemoveItemU';
 
 export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
 
+
+    console.log("SIZE",size)
+
     const dispatch = useDispatch()
     let [user,okId] = useUserId();
     var Cart_Users, CartU_product,sizesUser;
     const [vauleS, setvauleS] = useState("S");
-    const [Input, setInput] = useState(null);    
+    const [Input, setInput] = useState({});    
 
     const addCantidad = () => {
         if(user !== undefined || user !== null){
             Cart_Users = user?.id;
             CartU_product = productId;
-            sizesUser = "";
+            sizesUser = Input.names?.join(" ");
             if (quantity !== stock) {
                 dispatch(putUpdateCartUsers({ CartU_product, Cart_Users, quantity: quantity + 1, price, sizesUser }))
             }            
@@ -57,14 +60,14 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
     };
 
     const onSelectChangeSize = (vauleS) => {
-        var sizesEnv = "";
-        if (vauleS) {
-          sizesEnv = vauleS.map((e) => {
-            return e.value;
+        setInput({
+            ...Input,
+            sizes: vauleS.map(e => e.value),
+            names: vauleS.map(e => e.label)
+            
+            
           });
-        }
-        setvauleS(vauleS);
-        addSizes(sizesEnv);
+          setvauleS(vauleS);
       };
       const addSizes = (tipesEnv) => {
         setInput({
@@ -88,11 +91,14 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         nameImagen = "products/logo JK&A.png";
     }
    
+    console.log("Input", Input)
+
+
     return (
         <tr className="table-row table-row--chris">
 
             <td className="table-row__td">
-                <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
+                <image className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
 
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>

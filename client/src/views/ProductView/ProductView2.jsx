@@ -11,6 +11,8 @@ import Select from "react-select";
 import { postAddToCart } from "../../stateManagement/actions/postAddToCart"
 import { useUserId } from "../../hooks/useUserId.js";
 import { postAddToCartUser } from "../../stateManagement/actions/postAddToCartUser.js";
+import Product from "../CatalogueView/ProductCards/ProductCards2.jsx";
+import { getAllsizes } from "../../stateManagement/actions/getAllsizes.js";
 
 export default function ProductView() {
   //aca el estado ratin
@@ -21,27 +23,35 @@ export default function ProductView() {
   var Cart_Users, CartU_product, sizesUser, quantity, subtotal, showCart, Cart_product;
   useEffect(() => {
     dispatch(getProductDetails(productId));
+    dispatch(getAllsizes());
     return () => {
       dispatch(cleanUpObjet());
     };
   }, [dispatch, productId]);
 
+  let sizess = useSelector((state) => state.sizesReducer.sizes);
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [vauleS, setvauleS] = useState(false);
-  const [Input, setInput] = useState(null);
+  const [Input, setInput] = useState({});
+
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
   var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
 
+
   if (user !== undefined || user !== null) {
     showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
+    
+
   } else {
     showCart = cart;
   }
 
   const addToCart = (ev) => {
+
     if (user !== undefined || user !== null) {
-      sizesUser = Input;
+
+      sizesUser = Input.names?.join(" ");
       Cart_Users = user?.id;
       quantity = contador;
       CartU_product = productId;
@@ -53,6 +63,7 @@ export default function ProductView() {
     Cart_product = productId;
     subtotal = product.price * quantity;
     dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
+
 
   }
 
@@ -83,14 +94,15 @@ export default function ProductView() {
   };
 
   const onSelectChangeSize = (vauleS) => {
-    var sizesEnv = "";
-    if (vauleS) {
-      sizesEnv = vauleS.map((e) => {
-        return e.value;
-      });
-    }
+    setInput({
+      ...Input,
+      sizes: vauleS.map(e => e.value),
+      names: vauleS.map(e => e.label)
+      
+      
+    });
     setvauleS(vauleS);
-    addSizes(sizesEnv);
+    // addSizes(sizesEnv);
   };
   const addSizes = (tipesEnv) => {
     setInput({
@@ -99,15 +111,18 @@ export default function ProductView() {
     });
   };
 
-  const sizesSelect = () => {
+  
+  const sizesSelect =  () => {
 
-    if (product.sizes !== undefined) {
-      const Optionsizes = product.sizes.map((e) => {
+    if (Object.keys(product).length !== 0) {
+
+      const Optionsizes =  product?.sizes?.map((e) => {
         return {
           label: e.name,
-          value: e.id
+          value: e.size_product?.sizeId
         }
       });
+      
       return (
         <Select
           value={vauleS}
@@ -117,8 +132,12 @@ export default function ProductView() {
         />
       )
 
-
     }
+
+      
+
+
+    
   }
 
   const addCantidad = () => {
@@ -134,6 +153,7 @@ export default function ProductView() {
       setContador(contador - 1);
     }
   };
+
 
   return (
     <div>
@@ -225,7 +245,7 @@ export default function ProductView() {
                   ))}
               </p>
               <p className="descripcion">
-                <span className="bold">Type: </span>
+                <span className="bold">Type: {product?.type?.name} </span>
               </p>
               <p className="descripcion">
                 <span className="bold">Sizes: </span>

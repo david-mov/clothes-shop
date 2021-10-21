@@ -38,14 +38,16 @@ const options = {
     plugins: {
       legend: {
         position: 'top',
+        display: true,
+
       },
       title: {
         display: true,
         text: 'REPORT PRODUCT'
       },
-      legend: {
-          display: true,
-      }
+      // legend: {
+      //     display: true,
+      // }
     },
   
 };

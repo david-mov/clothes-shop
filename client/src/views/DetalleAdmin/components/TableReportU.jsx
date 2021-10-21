@@ -50,11 +50,6 @@ const TableReportProduct = () => {
   console.log("soy product",product)
     return (
         <div className="container1">
-            <div className="row row--top-40">
-                <div className="col-md-12">
-                    <h2 className="row__title"></h2>
-                </div>
-            </div>
             <div className="row row--top-20">
                 <div className="col-md-12">
                     <div className="table-container">

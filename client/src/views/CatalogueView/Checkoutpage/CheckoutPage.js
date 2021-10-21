@@ -36,7 +36,9 @@ const CheckoutPage = () => {
     }
   }, [dispatch, user])
   const classes = useStyles()
+
   var showCart;
+
   var { cart } = useSelector((state) => state.checkoutReducer)
   var totalCart = useSelector(
     (state) => state.checkoutUserReducer.totalCartUser,

@@ -10,12 +10,15 @@ import { getAllUserDetails } from "../../stateManagement/actions/getAllUserDetai
 
 const CheckoutView = () => {
 
+<<<<<<< HEAD:client/src/views/CheckoutPayment/CheckoutView.jsx
+ // const productos = useSelector(state => state.productsReducer.products)
+=======
+>>>>>>> a4a82c5825d56d9c429c76bff986d7252cebdd7f:client/src/views/FormCrudView/CheckoutView.jsx
   const dispatch = useDispatch();
   const { id } = useParams();
   const [datos, setDatos] = useState("")
 
   let [idCookie, idOk] = useUserId()
-  console.log("aCA TAN", idCookie?.id, idOk)  
 
   useEffect(()=>{
     if(idCookie !== null){

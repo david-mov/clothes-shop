@@ -142,7 +142,7 @@ export default function DetailProduct({
           return ( 
           <div>
            
-      <img src={require(`../../../assets/${nameImagen}`).default} alt="Not Image"></img>
+      <image src={require(`../../../assets/${nameImagen}`).default} alt="Not Image"></image>
            <p value={e.id} onClick={() => deleteProduct(e.id)} >
                 <i className="fas fa-trash-alt fa-2x"></i>
                 </p>

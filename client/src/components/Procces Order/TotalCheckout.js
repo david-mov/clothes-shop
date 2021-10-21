@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux'
 import { useUserId } from '../../hooks/useUserId'
 
 const Total = () => {
+
   let [user] = useUserId()  
+
   const cart = useSelector((state) => state.checkoutReducer.cart)
   const userdeta = useSelector((state) => state.userReducer.userDetails);
   var totalCart = useSelector(
