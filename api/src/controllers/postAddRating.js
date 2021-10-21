@@ -11,7 +11,7 @@ const addRating = async (req, res, next) => {
             Rating_User,			
         }, {include: [Product]
         }, {include: [User]})
-		res.json('Rating Add correctly');
+		res.json(addRating);
 	}
 	catch (err) {
         console.log(err)

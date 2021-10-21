@@ -4,14 +4,12 @@ const getAllRating = async (req, res, next) => {
     try {
         const allRating = await Rating.findAll({
           include: [{
-                model: Product,
-                attributes:['id']
+                model: Product
             },{
-                model: User,
-                attributes: ['id'],
-            }],
-            attributes: ['amount'],
+                model: User
+            }]
 		});
+        console.log(allRating)
 		res.json(allRating);
 	}
 	catch (e) {

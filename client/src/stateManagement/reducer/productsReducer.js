@@ -9,6 +9,8 @@ import {
   CLEAN_DETAIL_P_OBGETO,
   CLEAN_UPDATE_PRODUCT_DETAILS,
   POST_VIEW_PU,
+  GET_ALL_RATINGS,
+  GET_RATING_DETAIL
 } from "../../consts/actionConsts";
 
 const initialState = {
@@ -18,6 +20,7 @@ const initialState = {
   productUpdateDetails: {},
   productViewsUsers: [],
   productRatingsUsers: [],
+  productRatingDetails: []
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -104,6 +107,16 @@ export default function productsReducer(state = initialState, action) {
 				...state,
         productViewsUsers: action.payload,
 			}
+      case GET_ALL_RATINGS: 
+      return {
+        ...state,
+        productRatingsUsers: action.payload
+      }
+      case GET_RATING_DETAIL: 
+      return {
+        ...state,
+        productRatingDetails: action.payload
+      }
     default:
       return { ...state };
   }
