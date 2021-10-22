@@ -31,6 +31,7 @@ const InsertRating = (id,) => {
       Rating_User: id.id,
       comment: input.comment
     }
+
   
     dispatch(postRatingDetail(obj));
     alert("Rating has inserted correctly");
@@ -44,7 +45,6 @@ const InsertRating = (id,) => {
   const cerrarModalInsertar = () => {
     history.push(`/product/${productId}`)
   };
-
 
   return (
     <div>
@@ -78,7 +78,7 @@ const InsertRating = (id,) => {
               <label className="label_Insert">Comment:</label>
               <textarea
                 className="form-control"
-                name="coment"
+                name="comment"
                 type="text"
                 value={input.coment}                
                 onChange={handleChange}
