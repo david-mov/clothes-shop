@@ -49,7 +49,7 @@ function App() {
         <Route exact path="/create/size" component={InsertSize} />
         <Route exact path="/create/type" component={InsertType} />
         <Route exact path= "/create/userDetail" component = {InsertCheckoutView} />
-        <Route exact path ="/insertRating" component = {InsertRatingView} />
+        <Route exact path ="/insertRating/:productId" component = {InsertRatingView} />
         <Route
           exact
           path="/update/product/:productId"
@@ -92,7 +92,7 @@ function App() {
         <Route path="*" component={NotFoundView} />
 
 
-        <Route exact path ="/insertRating" component = {InsertRatingView} />
+        
 
 
 
