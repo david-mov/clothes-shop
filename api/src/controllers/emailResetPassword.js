@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer")
 const bcryptjs = require("bcryptjs")
-const { User } = require("./db.js");
+const { User } = require("../db.js");
 
 const Email = async(req, res) => {
     const {userEmail, userName} = req.body
