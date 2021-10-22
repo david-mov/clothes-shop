@@ -14,6 +14,7 @@ const authRouter = require('./auth');
 const checkout = require("./checkout");
 const postCart = require("./cart");
 const cartUsers = require("./cartUsers");
+const emailSender = require("./email")
 
 router.use('/products', productsRouter);
 router.use('/category', categoryRouter);
@@ -28,5 +29,6 @@ router.use("/cart", postCart);
 router.use('/auth', authRouter);
 router.use("/checkout", checkout);
 router.use("/cart_user", cartUsers);
+router.use("/email", emailSender)
 
 module.exports = router;
