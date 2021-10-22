@@ -56,7 +56,7 @@ export default function AddImgProduct({ id, name }) {
         <div className="insertImg">
           <input type="file" name="img" onChange={InputChange}></input>
         </div>
-        <button className="button2" type="submit">
+        <button className="button2" type="submit" disabled={!file}>
           Add Image
         </button>
       </form>

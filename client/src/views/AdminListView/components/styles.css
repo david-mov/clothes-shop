@@ -324,9 +324,9 @@ GENERAL
   }
 }
 .image_detail_img {
-  width: 50%;
+  width: 150px;
   border-radius: 50%;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 .Delete_icon {
   text-align: center;
@@ -365,6 +365,8 @@ GENERAL
 }
 @media (min-width: 458px) {
   .table-container {
+    display: flex;
+    align-items: center;
     margin: 1rem;
     background-color: #1f7c68;
   }
