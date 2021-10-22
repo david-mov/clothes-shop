@@ -96,7 +96,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         <tr className="table-row table-row--chris">
 
             <td className="table-row__td">
-                <image className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
+                <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not imag" />
 
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>

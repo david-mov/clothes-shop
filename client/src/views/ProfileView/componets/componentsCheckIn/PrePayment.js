@@ -58,7 +58,7 @@ const prePaymentP = ({
       </td>
 
       <td className="table-row__td">
-        <Link to={`/update/product/${idProduct}`}>
+        <Link to={`/insertRating/${idProduct}`}>
           <p>
             <i className="fas fa-pencil-alt  fa-2x"></i>
           </p>
