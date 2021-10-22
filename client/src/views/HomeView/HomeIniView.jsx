@@ -6,11 +6,9 @@ import MenuButton from "./MenuButon";
 import NavbarHam from "./NavBarHam";
 import { HeaderWrapper } from "./Header";
 
-
 export default function HomeIniView() {
   const [open, setOpen] = useState(false);
-  
-  
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -26,7 +24,7 @@ export default function HomeIniView() {
           />
         </Link>
         <HeaderWrapper>
-          <div className=" contenido-header">
+          <div className=" contenido-header1">
             <MenuButton open={open} handleClick={handleClick}></MenuButton>
           </div>
           <NavbarHam open={open} />

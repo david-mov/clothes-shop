@@ -958,7 +958,7 @@ body li {
   /* min-width: 50%; */
   position: relative;
   left: 0;
-  animation: carousel 7s linear infinite;
+  /* animation: carousel 7s linear infinite; */
 }
 #emotes img {
   padding-top: 1rem;
