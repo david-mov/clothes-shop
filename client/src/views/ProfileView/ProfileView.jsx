@@ -7,8 +7,7 @@ import { getAllCart } from '../../stateManagement/actions/getAllCart';
 import { useEffect } from 'react';
 import PrepaymentPage from "./componets/PrePaymentPage";
 import PaymentP from "./componets/componentsCheckIn/myShopping";
-import {useUserProfile} from "../../hooks/useUserProfile"
-
+import { useUserProfile } from '../../hooks/useUserProfile';
 
 export default function ProfileView() {
 	const [user] = useUserProfile();
