@@ -9,8 +9,8 @@ import PrepaymentPage from "./componets/PrePaymentPage";
 import PaymentP from "./componets/componentsCheckIn/myShopping";
 import { useUserProfile } from '../../hooks/useUserProfile';
 
-export default function ProfileView() {
 
+export default function ProfileView() {
 	const [user] = useUserProfile();
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -38,6 +38,7 @@ export default function ProfileView() {
 					</div>
 					<div className="cart__link">
 						<h2>Hello! {user?.name}</h2>
+					
 					</div>
 					<ul className="navbar__links">
 						<li className="saco">
@@ -62,6 +63,6 @@ export default function ProfileView() {
 			<PrepaymentPage />
             <PaymentP />
 
-		</div>
+		</div >
 	)
 }
