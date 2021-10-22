@@ -1,8 +1,8 @@
 const { CartUsers } = require('../db.js')
 
 const deleteAllCart = async(req,res,next) => {
-const {id} = req.body   
-console.log("ENTRE EN EL BACK")
+const {id} = req.params  
+console.log("aca")
 try{
     await CartUsers.destroy({
         where: {

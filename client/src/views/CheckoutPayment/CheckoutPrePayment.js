@@ -34,7 +34,7 @@ var guardo = user?.id
     }
     else if(verificacion === 2){
      dispatch(deleteAllCart(user?.id))
-    //  history.push("/checkoutPage")
+     history.push("/checkoutPage")
     }
   }
 
