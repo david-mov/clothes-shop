@@ -5,7 +5,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
 import { useDispatch, useSelector } from "react-redux";
 import { putUpdateCart } from "../../stateManagement/actions/putUpdateCart";
-import Select from "react-select";
 import { useUserId } from '../../hooks/useUserId';
 import { putUpdateCartUsers } from '../../stateManagement/actions/putUpdateCartU';
 import getRemoveItemUser from '../../stateManagement/actions/getRemoveItemU';
