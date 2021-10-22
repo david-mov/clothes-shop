@@ -48,8 +48,8 @@ const TotalUserIn = () => {
       }
     return (
         <div >
-            <h5>Total items: {miBasket}</h5>
-            <h5>Total Amount: {parseInt(total)}</h5>
+            <h5 className="row__title">Total items: {miBasket}</h5>
+            <h5 className="row__title">Total Amount: {parseInt(total)}</h5>
             {showButon()}
         </div>
     );

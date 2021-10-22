@@ -12,8 +12,8 @@ export const GoogleAuthRedirect = () => {
 		<div>
 		{ 
 			(status === 'success') 
-			? <h2>Successful login</h2> 
-			: <h2>Login failed</h2> 
+			? <h2 className="row__title">Successful login</h2> 
+			: <h2 className="row__title">Login failed</h2> 
 		}
 		</div>
 	)
