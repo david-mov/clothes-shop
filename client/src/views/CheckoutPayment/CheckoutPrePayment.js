@@ -14,6 +14,7 @@ import { getAllUserDetails } from "../../stateManagement/actions/getAllUserDetai
 import { putStateCartUsers } from '../../stateManagement/actions/putStateCUsers';
 import { useHistory } from 'react-router';
 import { deleteAllCart } from "../../stateManagement/actions/deleteAllCart";
+import { postAddToOrders } from '../../stateManagement/actions/createOrder';
 
 const FORM_ID = 'payment-form';
 const CheckoutPrePaymentView = () => {
@@ -22,19 +23,16 @@ const CheckoutPrePaymentView = () => {
   let [user] = useUserId();
   const [datos, setDatos] = useState("")
   const [verificacion, setVerificacion] = useState(1)
-var guardo = user?.id
-
-  console.log("ACA TA VERIFICACION", verificacion)
-  console.log("EL USER QUE VIENE DEL FUTURO", user?.id)
+  var guardo = user?.id
   const redirectOnClick = (e) => {
     e.preventDefault()
-    if(verificacion === 1){
-      setVerificacion(verificacion +1)
+    if (verificacion === 1) {
+      setVerificacion(verificacion + 1)
       alert("If you go back you could lose your purchase")
     }
-    else if(verificacion === 2){
-     dispatch(deleteAllCart(user?.id))
-     history.push("/checkoutPage")
+    else if (verificacion === 2) {
+      dispatch(deleteAllCart(user?.id))
+      history.push("/checkoutPage")
     }
   }
 
@@ -44,8 +42,8 @@ var guardo = user?.id
       dispatch(getAllCart());
       //codigo para cambiar el estado del producto en el carrito 
       const objCart = {
-        Cart_Users:user?.id,
-        state:2
+        Cart_Users: user?.id,
+        state: 2
       }
       dispatch(putStateCartUsers(objCart))
       dispatch(getUserDetail(user?.id));
@@ -98,61 +96,67 @@ var guardo = user?.id
 
         <tr className="table-row table-row--chris">
 
-        <td className="table-row__td">
-          {/* <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" /> */}
+          <td className="table-row__td">
+            {/* <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" /> */}
 
-          <div className="table-row__info">
-            <p className="table-row__name">{e.product.name}</p>
-            <span className="table-row__small">Stock {e.product.stock}</span>
-          </div>
-        </td>
-        <td data-column="Policy" className="table-row__td">
-          <div className="">
-            <p className="table-row__policy">${e.product.price}</p>
-            <span className="table-row__small">Unit Price</span>
-          </div>
-        </td>
-
-        <td data-column="Progress" className="table-row__td">
-          <div className={`component_toCartCantidad ${!e.product.stock ? 'disabled' : ''}`}>
-            <div className="">{e.quantity}</div>
-          </div>
-        </td>
-        <td data-column="Progress" className="table-row__td">
-          <p className="table-row__policy">${e.product.price * e.quantity}</p>
-        </td>
-
-        <td colspan="5" data-column="Progress" className="table-row__td">
-           {e.product.sizesUser}
-        </td>
-
-        <td className="table-row__td">
-          <CardActions disableSpacing>
-            <div >
-              {Array(rating)
-                .fill()
-                .map((_, i) => (
-                  <p>&#11088;</p>
-                ))}
+            <div className="table-row__info">
+              <p className="table-row__name">{e.product.name}</p>
+              <span className="table-row__small">Stock {e.product.stock}</span>
             </div>
+          </td>
+          <td data-column="Policy" className="table-row__td">
+            <div className="">
+              <p className="table-row__policy">${e.product.price}</p>
+              <span className="table-row__small">Unit Price</span>
+            </div>
+          </td>
 
-          </CardActions>
+          <td data-column="Progress" className="table-row__td">
+            <div className={`component_toCartCantidad ${!e.product.stock ? 'disabled' : ''}`}>
+              <div className="">{e.quantity}</div>
+            </div>
+          </td>
+          <td data-column="Progress" className="table-row__td">
+            <p className="table-row__policy">${e.product.price * e.quantity}</p>
+          </td>
 
-        </td>
-        <td className="table-row__td">
-          <p className="table-row__policy">{e.product.color}</p>
-        </td>
-      </tr>
-        
+          <td colspan="5" data-column="Progress" className="table-row__td">
+            {e.product.sizesUser}
+          </td>
+
+          <td className="table-row__td">
+            <CardActions disableSpacing>
+              <div >
+                {Array(rating)
+                  .fill()
+                  .map((_, i) => (
+                    <p>&#11088;</p>
+                  ))}
+              </div>
+
+            </CardActions>
+
+          </td>
+          <td className="table-row__td">
+            <p className="table-row__policy">{e.product.color}</p>
+          </td>
+        </tr>
+
       )))
   }
   const onPayment = () => {
     //codigo para cambiar el estado del producto en el carrito 
     const objCart = {
-      Cart_Users:user?.id,
-      state:3
-    }
+      Cart_Users: user?.id,
+      state: 3
+    }    
     dispatch(putStateCartUsers(objCart))
+    const objOrder = {
+      Cart_Users: user?.id,
+      total: total
+    }
+    dispatch(postAddToOrders(objOrder))
+
   }
   function FormRow() {
     return (
@@ -181,7 +185,7 @@ var guardo = user?.id
                 <div>
                   <h5 className="row__title">Total items: {miBasket}</h5>
                   <h5 className="row__title">Total Amount: {parseInt(total)}</h5>
-                  <form id={FORM_ID} method="GET" onClick={onPayment}/>
+                  <form id={FORM_ID} method="GET" onClick={onPayment} />
                 </div>
               </div>
             </div>
@@ -210,12 +214,12 @@ var guardo = user?.id
           <div className="cart__link">
             <ul className="navbar__links">
               < li className="saco">
-                 <Link onClick={(e) => redirectOnClick(e)}>
+                <Link onClick={(e) => redirectOnClick(e)}>
                   <i class="fas fa-arrow-left fa-1x"></i>
                   <span>
                     Go to back <span className="cartlogo__badge">{ }</span>
                   </span>
-                  </Link>
+                </Link>
               </li>
             </ul>
           </div>
