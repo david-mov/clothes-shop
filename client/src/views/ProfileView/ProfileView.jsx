@@ -5,12 +5,13 @@ import CheckoutPageUserIn from "./componets/CheckoutPageUserIn";
 import { Link, useHistory } from 'react-router-dom';
 import { getAllCart } from '../../stateManagement/actions/getAllCart';
 import { useEffect } from 'react';
+import { useUserProfile } from '../../hooks/useUserProfile'
 import TableUser from './componets/TablaUser';
 import PrepaymentPage from "./componets/PrePaymentPage";
 
 export default function ProfileView() {
 
-
+	const [user] = useUserProfile();
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -36,9 +37,7 @@ export default function ProfileView() {
 						></img>
 					</div>
 					<div className="cart__link">
-						<h2>Hello!</h2>
-						{/* <p>name: {user?.name}</p>
-						<p>email: {user?.email}</p> */}
+						<h2>Hello {user?.name}!</h2>
 					</div>
 					<ul className="navbar__links">
 						<li className="saco">

@@ -2,10 +2,11 @@ const { Rating, Product, User } = require('../db.js')
 
 const addRating = async (req, res, next) => {
 	
-    const {amount, Rating_User, Rating_product} = req.body;
+    const {amount, Rating_User, Rating_product, comment} = req.body;
     console.log("data",amount, Rating_User, Rating_product)
 	try {
 		const addRating = await Rating.create({
+            comment,
             amount,
             Rating_product,
             Rating_User,			

@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, } from "react";
+import { useDispatch} from "react-redux";
+import { postRatingDetail } from "../../../../stateManagement/actions/postRatingDetail";
+import { useHistory, useParams } from "react-router";
 
 
 
-const InsertRating = () => {
+const InsertRating = (id,) => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   // dispatch(PostTypes());
-  //   // dispatch(getAllTypes());
-  // }, [dispatch]);
+  const  {productId}  = useParams();  
+  const history = useHistory();
+
   const [input, setInput] = useState({
-    amount: 0,
-    coment: ""
+    amount: 1,
+    comment: ""
   });
   
   const handleChange = async (e) => {
@@ -23,18 +24,26 @@ const InsertRating = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-   
-      // dispatch(PostTypes(input));
-      alert("Rating has inserted correctly");
-      setInput({ 
-        amount: "",
-        coment: "" 
-      });
+
+    let obj = {
+      amount : parseInt(input.amount) ,
+      Rating_product:parseInt(productId),
+      Rating_User: id.id,
+      comment: input.comment
+    }
+
+  
+    dispatch(postRatingDetail(obj));
+    alert("Rating has inserted correctly");
+    setInput({ 
+      amount: "",
+      comment: "" 
+    });
     
   };
 
   const cerrarModalInsertar = () => {
-    alert("canselado")
+    history.push(`/profile/`)
   };
 
   return (
@@ -55,12 +64,12 @@ const InsertRating = () => {
                 name="amount"
                 type="number"
                 max="5"
-                min="0"
+                min="1"
                 onChange={handleChange}
                 value={input.amount}
                 step="1"
-                pattern="[0-5]+"
-                readOnly
+                pattern="[1-5]+"
+                
               />
 
             </div>
@@ -69,7 +78,7 @@ const InsertRating = () => {
               <label className="label_Insert">Comment:</label>
               <textarea
                 className="form-control"
-                name="coment"
+                name="comment"
                 type="text"
                 value={input.coment}                
                 onChange={handleChange}

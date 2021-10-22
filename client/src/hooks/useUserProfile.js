@@ -24,5 +24,5 @@ export const useUserProfile = () => {
 			}
 		})();
 	}, [logged])
-	return profile;
+	return [profile, profileOk];
 }

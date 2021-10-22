@@ -41,7 +41,7 @@ function App() {
           exact
           path="/profile"
           component={ProfileView}
-          roles={[1,3]}
+          roles={[1,2,3]}
           other="/login"
         />
         <Route exact path="/create/product/" component={Insert} />
@@ -49,7 +49,7 @@ function App() {
         <Route exact path="/create/size" component={InsertSize} />
         <Route exact path="/create/type" component={InsertType} />
         <Route exact path= "/create/userDetail" component = {InsertCheckoutView} />
-        <Route exact path ="/insertRating" component = {InsertRatingView} />
+        <Route exact path ="/insertRating/:productId" component = {InsertRatingView} />
         <Route
           exact
           path="/update/product/:productId"
@@ -88,11 +88,11 @@ function App() {
         <ProtectedRoute exact path="/superadmin" component={SuperAView}
         roles={[1]} other="/login"/>
         <ProtectedRoute exact path="/admin" component={AdminView}
-        roles={[2]} other="/login"/>
+        roles={[1,2]} other="/login"/>
         <Route path="*" component={NotFoundView} />
 
 
-        <Route exact path ="/insertRating" component = {InsertRatingView} />
+        
 
 
 
