@@ -1,9 +1,24 @@
-import React from "react";
-import AdminPage from "./components/AdminPage";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import HistoryList from "./components/HistoryList";
+import { useParams } from "react-router";
+import { getOrderDetails } from "../../stateManagement/actions/getAllOrdersDetails";
+import DetailShopping from "./components/DetailShopping";
 
-const ListasAdminUsers = () => {
+const DetailsOrderAdmin = () => {
+
+    const dispatch = useDispatch();
+    const  {idOrder}  = useParams();
+
+    useEffect(() => {
+        dispatch(getOrderDetails(idOrder));
+    }, [dispatch, idOrder]);
+
+    var showOrdersDetails = useSelector(
+        (state) => state.checkoutUserReducer.totalOrdersDetails,
+    )
+
+        console.log("data", showOrdersDetails)
   return (
     <div>
       <div className="todo">
@@ -17,7 +32,7 @@ const ListasAdminUsers = () => {
             ></img>
           </div>
           <div className="cart__link">
-            <h2>List Admin</h2>
+            <h2>Detaisl Order</h2>
           </div>
           <ul className="navbar__links">
             <li className="saco">
@@ -31,10 +46,9 @@ const ListasAdminUsers = () => {
           </ul>
         </div>
       </div>
-      <AdminPage />
-      <HistoryList />
+        <DetailShopping data={showOrdersDetails} />
     </div>
   );
 };
 
-export default ListasAdminUsers;
+export default DetailsOrderAdmin;

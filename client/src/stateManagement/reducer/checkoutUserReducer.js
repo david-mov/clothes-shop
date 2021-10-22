@@ -5,7 +5,8 @@ import {
   PUT_CART_USER,
   REMOVE_ITEM_USER,
   POST_CART_ORDER,
-  GET_CART_ORDER
+  GET_CART_ORDER,
+  GET_CART_ORDER_DETAILS
 } from "../../consts/actionConsts";
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   contadorStateUser: [],
   totalAmountUser: 0,
   anteriorUser: [0],
-  totalOrders: []
+  totalOrders: [],
+  totalOrdersDetails: []
 };
 
 
@@ -60,6 +62,11 @@ const checkoutUserReducer = (state = initialState, action) => {
           ...state,
           totalOrders: action.payload,
         }
+        case GET_CART_ORDER_DETAILS:
+        return {
+          ...state,
+          totalOrdersDetails: action.payload,
+        } 
 
     default:
       return state;

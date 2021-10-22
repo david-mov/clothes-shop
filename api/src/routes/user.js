@@ -12,6 +12,7 @@ const createOrder = require('../controllers/createOrder');
 const getUserIdParams = require('../controllers/getUserIdParams');
 const modifyUserDetail = require('../controllers/putUserDetails');
 const getAllOrders = require('../controllers/getAllOrder.js');
+const getAllOrdersDetails = require('../controllers/getAllDetailsOrder.js');
 
 
 const router = require('express').Router();
@@ -25,6 +26,7 @@ router.get('/rol', isAuthenticated, getUserRol);
 router.get('/id', isAuthenticated, getUserId);
 router.get('/admin', getAllUsers);
 router.get('/order', getAllOrders);
+router.get('/order/:idOrder', getAllOrdersDetails);
 router.put('/:id', putUser);
 router.put('/rol/:id', changeRolUsers);
 router.post("/userDetail/:user_detail", createUserDetail)

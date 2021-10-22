@@ -28,6 +28,7 @@ import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
 import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
 import InsertRatingView from "./views/FormCrudView/InsertRatingView";
+import DetailsOrderAdmin from "./views/AdminView/DetailsOrder";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
         <Route exact path="/product/:productId" component={ProductView} />
         <Route exact path="/CheckoutPage" component={CheckoutPage} />
         <Route exact path= "/update/userDetail" component = {UpdateCheckoutView} />
+        <Route exact path= "/Order/Details/:idOrder" component = {DetailsOrderAdmin} />
         <Route exact path="/Checkout" component={CheckoutPrePayment} />
         <Route exact path="/cart" component={ProductCart} />
         <Route exact path="/list" component={ListAdmin} />
