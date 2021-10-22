@@ -11,4 +11,3 @@ export const getAllsizes = () => async (dispatch) => {
   }
 };
 
-//export default getAllCategories;

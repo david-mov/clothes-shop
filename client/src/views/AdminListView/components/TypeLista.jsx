@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getAllTypes } from "../../../stateManagement/actions/getAllTypes";
 import TablaList from "./ListTable";
 import "./styles.css";
+import { deleteTypes } from "../../../stateManagement/actions/deleteType";
 
 export default function TypeList() {
   const dispatch = useDispatch();
@@ -44,6 +45,12 @@ export default function TypeList() {
       setactualCurrent(actualCurrent - 1);
       setCurrentPage(currentPage - countP);
     }
+  };
+
+  
+  const deleteType = (e) => {
+    dispatch(deleteTypes(e));
+    dispatch(getAllTypes());
   };
 
   const show = () => {
@@ -132,7 +139,7 @@ export default function TypeList() {
                   </Link>
                 </td>
                 <td className="table-row__td">
-                  <p>
+                  <p onClick={() => deleteType (e.id)}>
                     <i className="fas fa-trash-alt fa-2x"></i>
                   </p>
                 </td>

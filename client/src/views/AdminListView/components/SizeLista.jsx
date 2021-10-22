@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { getAllsizes } from "../../../stateManagement/actions/getAllsizes";
 import TablaList from "./ListTable";
 import "./styles.css";
+import { deleteSizes } from "../../../stateManagement/actions/deleteSizes";
+
 
 export default function SizeList() {
   const dispatch = useDispatch();
@@ -11,7 +13,6 @@ export default function SizeList() {
     dispatch(getAllsizes());
   }, [dispatch]);
   const sizes = useSelector((state) => state.sizesReducer.sizes);
-
   var countP = 5;
   var totalCurrent = Math.ceil(sizes?.length / countP);
 
@@ -70,10 +71,12 @@ export default function SizeList() {
       </thead>
     );
   }
-  const deleteProducts = () => {
-    // dispatch(deleteProduct(e));
-    // dispatch(getAllProducts());
+
+  const deleteSize = (e) => {
+     dispatch(deleteSizes(e));
+    dispatch(getAllsizes());
   };
+
   function bodyTable() {
     return filterSizes()
       .map((e, i) => {
@@ -92,7 +95,7 @@ export default function SizeList() {
               </Link>
             </td>
             <td className="table-row__td">
-              <p onClick={(e) => deleteProducts(e.id)}>
+              <p onClick={() => deleteSize (e.id)}>
                 <i className="fas fa-trash-alt fa-2x"></i>
               </p>
             </td>

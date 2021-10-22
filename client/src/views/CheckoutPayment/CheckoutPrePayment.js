@@ -123,7 +123,7 @@ var guardo = user?.id
         </td>
 
         <td colspan="5" data-column="Progress" className="table-row__td">
-          sizes{e.product.price}
+           {e.product.sizesUser}
         </td>
 
         <td className="table-row__td">
@@ -179,8 +179,8 @@ var guardo = user?.id
                   </tbody>
                 </table1>
                 <div>
-                  <h5>Total items: {miBasket}</h5>
-                  <h5>Total Amount: {parseInt(total)}</h5>
+                  <h5 className="row__title">Total items: {miBasket}</h5>
+                  <h5 className="row__title">Total Amount: {parseInt(total)}</h5>
                   <form id={FORM_ID} method="GET" onClick={onPayment}/>
                 </div>
               </div>
