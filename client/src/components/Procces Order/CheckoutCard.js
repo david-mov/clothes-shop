@@ -23,14 +23,11 @@ export default function CheckoutCard({
   stock,
   rating,
 }) {
-  console.log("SIZE", size);
-
   const dispatch = useDispatch();
   let [user, okId] = useUserId();
   var Cart_Users, CartU_product, sizesUser;
   const [vauleS, setvauleS] = useState("S");
   const [Input, setInput] = useState({});
-
   const addCantidad = () => {
     if (user !== undefined || user !== null) {
       Cart_Users = user?.id;
@@ -51,8 +48,8 @@ export default function CheckoutCard({
     if (quantity !== stock) {
       dispatch(putUpdateCart({ productId, quantity: quantity + 1, price }));
     }
-  };
 
+  };
   const removeCantidad = () => {
     if (user !== undefined || user !== null) {
       Cart_Users = user?.id;
@@ -74,7 +71,6 @@ export default function CheckoutCard({
       dispatch(putUpdateCart({ productId, quantity: quantity - 1, price }));
     }
   };
-
   const RemoveItem = (event, productId) => {
     if (user !== undefined || user !== null) {
       Cart_Users = user?.id;
@@ -83,7 +79,6 @@ export default function CheckoutCard({
     }
     dispatch(getRemoveItem(productId));
   };
-
   const onSelectChangeSize = (vauleS) => {
     setInput({
       ...Input,
@@ -98,24 +93,18 @@ export default function CheckoutCard({
       sizes: tipesEnv,
     });
   };
-
   const Optionsizes = size?.map((e) => {
     return {
       label: e.name,
       value: e.id,
     };
   });
-
   var nameImagen = "";
-
   if (image !== undefined) {
     nameImagen = "imageProduct/" + image.name;
   } else {
     nameImagen = "products/logo JK&A.png";
   }
-
-  console.log("Input", Input);
-
   return (
     <tr className="table-row table-row--chris">
       <td className="table-row__td">
@@ -124,7 +113,6 @@ export default function CheckoutCard({
           src={require(`../../assets/${nameImagen}`).default}
           alt="not imag"
         />
-
         <div className="table-row__info">
           <p className="table-row__name">{name}</p>
           <span className="table-row__small">Stock {stock}</span>
@@ -136,7 +124,6 @@ export default function CheckoutCard({
           <span className="table-row__small">Unit Price</span>
         </div>
       </td>
-
       <td data-column="Progress" className="table-row__td">
         <div className={`component_toCartCantidad ${!stock ? "disabled" : ""}`}>
           <div
@@ -164,7 +151,6 @@ export default function CheckoutCard({
           isMulti
         />
       </td>
-
       <td className="table-row__td">
         <CardActions disableSpacing>
           <div>

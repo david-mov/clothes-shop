@@ -1,16 +1,16 @@
-const { Size } = require('../db.js')
+const { Type } = require('../db.js')
 
 const disableType = async (req, res, next) => {
 	const { id } = req.params;
 	try {
-		const disabledSize = await Size.update({
+		const disabledType = await Type.update({
 			enabled: false,
 		}, {
 			where: {
 				id,
 			}
 		})
-		res.json('Size disabled correctly');
+		res.json('Type disabled correctly');
 	}
 	catch (err) {
 		next(err);

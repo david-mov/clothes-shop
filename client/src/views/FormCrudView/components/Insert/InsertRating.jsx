@@ -39,11 +39,13 @@ const InsertRating = (id,) => {
       amount: "",
       comment: "" 
     });
+
+    history.push("/profile/")
     
   };
 
   const cerrarModalInsertar = () => {
-    history.push(`/product/${productId}`)
+    history.push(`/profile/`)
   };
 
   return (

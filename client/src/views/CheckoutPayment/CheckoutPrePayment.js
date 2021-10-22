@@ -12,14 +12,31 @@ import { Link } from 'react-router-dom'
 import { getAllCartUsers } from '../../stateManagement/actions/getAllCartUser'
 import { getAllUserDetails } from "../../stateManagement/actions/getAllUserDetails";
 import { putStateCartUsers } from '../../stateManagement/actions/putStateCUsers';
-
+import { useHistory } from 'react-router';
+import { deleteAllCart } from "../../stateManagement/actions/deleteAllCart";
 
 const FORM_ID = 'payment-form';
 const CheckoutPrePaymentView = () => {
-
+  const history = useHistory()
   const dispatch = useDispatch()
   let [user] = useUserId();
   const [datos, setDatos] = useState("")
+  const [verificacion, setVerificacion] = useState(1)
+var guardo = user?.id
+
+  console.log("ACA TA VERIFICACION", verificacion)
+  console.log("EL USER QUE VIENE DEL FUTURO", user?.id)
+  const redirectOnClick = (e) => {
+    e.preventDefault()
+    if(verificacion === 1){
+      setVerificacion(verificacion +1)
+      alert("If you go back you could lose your purchase")
+    }
+    else if(verificacion === 2){
+     dispatch(deleteAllCart(user?.id))
+     history.push("/checkoutPage")
+    }
+  }
 
   useEffect(() => {
     if (user?.id !== undefined) {
@@ -106,7 +123,7 @@ const CheckoutPrePaymentView = () => {
         </td>
 
         <td colspan="5" data-column="Progress" className="table-row__td">
-          sizes{e.product.price}
+           {e.product.sizesUser}
         </td>
 
         <td className="table-row__td">
@@ -162,8 +179,8 @@ const CheckoutPrePaymentView = () => {
                   </tbody>
                 </table1>
                 <div>
-                  <h5>Total items: {miBasket}</h5>
-                  <h5>Total Amount: {parseInt(total)}</h5>
+                  <h5 className="row__title">Total items: {miBasket}</h5>
+                  <h5 className="row__title">Total Amount: {parseInt(total)}</h5>
                   <form id={FORM_ID} method="GET" onClick={onPayment}/>
                 </div>
               </div>
@@ -192,13 +209,13 @@ const CheckoutPrePaymentView = () => {
           </div>
           <div className="cart__link">
             <ul className="navbar__links">
-              <li className="saco">
-                <Link to="/CheckoutPage" className="cart__link">
+              < li className="saco">
+                 <Link onClick={(e) => redirectOnClick(e)}>
                   <i class="fas fa-arrow-left fa-1x"></i>
                   <span>
                     Go to back <span className="cartlogo__badge">{ }</span>
                   </span>
-                </Link>
+                  </Link>
               </li>
             </ul>
           </div>
