@@ -47,10 +47,6 @@ export default function ProductView() {
     showCart = cart;
   }
 
-
-  let productCart = showCart?.find(e => e.product.id === product.id )
-
-
   const addToCart = (ev) => {
 
     if (user !== undefined || user !== null) {
@@ -136,7 +132,12 @@ export default function ProductView() {
         />
       )
 
-    }    
+    }
+
+      
+
+
+    
   }
 
   const addCantidad = () => {

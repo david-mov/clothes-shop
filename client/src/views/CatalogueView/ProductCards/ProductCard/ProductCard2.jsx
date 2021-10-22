@@ -7,36 +7,14 @@ import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart
 import { useUserId } from "../../../../hooks/useUserId";
 import { postAddToCartUser } from "../../../../stateManagement/actions/postAddToCartUser";
 import { postAddViewUser } from "../../../../stateManagement/actions/postAddView";
-import Select from "react-select";
-import { useEffect } from "react";
-import { getProductDetails } from "../../../../stateManagement/actions/getProductDetails";
-import { cleanUpObjet } from "../../../../stateManagement/actions/cleanStateObjet";
 
 
-function ProductCard2({name, price, stock, description, image, rating, productId,}) {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getProductDetails(productId));
-
-    return () => {
-      dispatch(cleanUpObjet());
-    };
-  }, [dispatch, productId])
-
-
-
-
+function ProductCard2(props) {
   let [user] = useUserId();
-  
+  const dispatch = useDispatch();
   var cart, View_User, View_product, subtotal = 0;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
-  const product = useSelector((state) => state.productsReducer.productDetails);
-
-  const [vauleS, setvauleS] = useState(false);
-  const [Input, setInput] = useState({});
-
-
   if(user !== undefined || user !== null){
     View_User = user?.id;
     cart = cartLogedIn;
@@ -47,11 +25,20 @@ function ProductCard2({name, price, stock, description, image, rating, productId
   }
   const [contador, setContador] = useState(1);
   const [showDetail, setshowDetail] = useState(false);
-  
+  const {
+    name,
+    price,
+    stock,
+    description,
+    image,
+    rating,
+    productId,
+    
+  } = props;
    
   const addToCart = (ev) => {
     if(user !== null){ 
-      var sizesUser = Input.names?.join(" ");
+      var sizesUser = "";
       var Cart_Users = user?.id;
       var quantity = contador;
       var CartU_product = productId;
@@ -64,8 +51,6 @@ function ProductCard2({name, price, stock, description, image, rating, productId
      subtotal = price * quantity;
     dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
   };
-
-
 
   var nameImagen = "";
 
@@ -104,43 +89,6 @@ function ProductCard2({name, price, stock, description, image, rating, productId
     View_product = e;
     dispatch(postAddViewUser({ View_User, View_product }));     
   }
-
-
-  const sizesSelect =  () => {
-
-    if (Object.keys(product).length !== 0) {
-
-      const Optionsizes =  product?.sizes?.map((e) => {
-        return {
-          label: e.name,
-          value: e.size_product?.sizeId
-        }
-      });
-      
-      return (
-        <Select
-          value={vauleS}
-          options={Optionsizes}
-          onChange={onSelectChangeSize}
-          isMulti
-        />
-      )
-
-    }    
-  }
-
-  const onSelectChangeSize = (vauleS) => {
-    setInput({
-      ...Input,
-      sizes: vauleS.map(e => e.value),
-      names: vauleS.map(e => e.label)
-      
-      
-    });
-    setvauleS(vauleS);
-    // addSizes(sizesEnv);
-  };
-
 
   const vistaRapidaProduct = () => {
     return (
@@ -197,10 +145,6 @@ function ProductCard2({name, price, stock, description, image, rating, productId
                         !stock ? "disabled" : ""
                       }`}
                     >
-                      <div>
-                      {sizesSelect()}
-                      </div>
-                      <br/>
                       <div
                         className={`toCartBoton menos ${
                           contador === 1 ? "disabled" : ""
