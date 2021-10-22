@@ -40,18 +40,14 @@ const CheckoutPage = () => {
   var showCart;
 
   var { cart } = useSelector((state) => state.checkoutReducer)
-  
   var totalCart = useSelector(
     (state) => state.checkoutUserReducer.totalCartUser,
   )
-
   if (user !== null) {
     showCart = totalCart.filter((e) => e.Cart_Users === user?.id && e.state !==3)
   } else {
     showCart = cart;
   }
-
-  console.log("aca estan las sizes", totalCart)
 
   function FormRow() {
     return (
@@ -84,7 +80,7 @@ const CheckoutPage = () => {
                       price={e.product.price}
                       image={e.product.images[0]}
                       subtotal={e.subtotal}
-                      size={cart.sizesUser}
+                      size={e.product.sizes}
                       color={e.product.color}
                     />
                   ))}

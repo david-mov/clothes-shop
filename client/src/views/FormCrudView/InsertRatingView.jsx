@@ -6,7 +6,7 @@ import InsertRating from "./components/Insert/InsertRating";
 
 const InsertRatingView = () => {  
 
-  let [idCookie] = useUserId()
+  let [idCookie, idOk] = useUserId()
 
   let id = idCookie?.id  
 
