@@ -118,9 +118,9 @@ const HistoryList = () => {
     return (
         <div className="body-table1">
             <div className="container">
-                <div className="row row--top-40">
+                <div className="row row--top-20">
                     <div className="col-md-12">
-                        <h3 className="row__title">Users ({totalUsers})</h3>
+                        <h3 className="row__title">Orders ({totalUsers})</h3>
                     </div>
                 </div>
                 <div className="row row--top-40">

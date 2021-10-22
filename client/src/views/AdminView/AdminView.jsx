@@ -1,6 +1,7 @@
 import React from "react";
 import AdminPage from "./components/AdminPage";
 import { Link } from "react-router-dom";
+import HistoryList from "./components/HistoryList";
 
 const ListasAdminUsers = () => {
   return (
@@ -31,6 +32,7 @@ const ListasAdminUsers = () => {
         </div>
       </div>
       <AdminPage />
+      <HistoryList />
     </div>
   );
 };
