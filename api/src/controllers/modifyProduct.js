@@ -3,6 +3,7 @@ const { Product, Category, Sizes} = require('../db.js')
 const modifyProduct = async (req, res, next) => {
 	const {name, description, color,stock, type_product, type, categories, sizes, price} = req.body
 	const { id } = req.params;
+
 	
 	try {
 		const modifiedProduct = await Product.update({

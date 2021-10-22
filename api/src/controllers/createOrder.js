@@ -2,8 +2,15 @@ const { Orders, CartUsers, Product, User} = require("../db.js");
 
 const createOrder = async (req, res, next) => {	
 
-	const { total, cartUserOder } = req.body;
+	const { total, Cart_Users } = req.body;
 	try {
+
+		const cartUserOder = await CartUsers.findAll({
+			where: { Cart_Users: Cart_Users, state: 3 },
+			attributes: ['id']
+		  });
+
+
 		const newOrder = await Orders.create({
 			total
 		})
