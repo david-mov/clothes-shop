@@ -3,12 +3,13 @@ import IconButton from "@material-ui/core/IconButton";
 import CardActions from "@material-ui/core/CardActions";
 import DeleteIcon from "@material-ui/icons/Delete";
 import getRemoveItem from "../../stateManagement/actions/getRemoveItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { putUpdateCart } from "../../stateManagement/actions/putUpdateCart";
 import Select from "react-select";
 import { useUserId } from '../../hooks/useUserId';
 import { putUpdateCartUsers } from '../../stateManagement/actions/putUpdateCartU';
 import getRemoveItemUser from '../../stateManagement/actions/getRemoveItemU';
+import { Link } from 'react-router-dom';
 
 
 export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
@@ -19,7 +20,12 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
     let [user,okId] = useUserId();
     var Cart_Users, CartU_product,sizesUser;
     const [vauleS, setvauleS] = useState("S");
-    const [Input, setInput] = useState({});    
+    const [Input, setInput] = useState({});  
+
+    var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
+    let productCart = totalCart?.find(e => e.product?.id === productId );
+
+    console.log("productCart", productCart)
 
     const addCantidad = () => {
         if(user !== undefined || user !== null){
@@ -57,30 +63,8 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         }
         dispatch(getRemoveItem(productId));
     };
-
-    const onSelectChangeSize = (vauleS) => {
-        setInput({
-            ...Input,
-            sizes: vauleS.map(e => e.value),
-            names: vauleS.map(e => e.label)
-            
-            
-          });
-          setvauleS(vauleS);
-      };
-      const addSizes = (tipesEnv) => {
-        setInput({
-          ...Input,
-          sizes: tipesEnv,
-        });
-      };
-
-      const Optionsizes = size?.map((e) => {
-        return {
-          label: e.name,
-          value: e.id
-        }
-      });
+    
+      
 
     var nameImagen = "";
 
@@ -90,7 +74,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         nameImagen = "products/logo JK&A.png";
     }
    
-
+    
 
     return (
         <tr className="table-row table-row--chris">
@@ -122,12 +106,17 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
             </td>
 
             <td colspan="5" data-column="Progress" className="table-row__td">
-                <Select
-              value={vauleS}
-              options={Optionsizes}
-              onChange={onSelectChangeSize}
-              isMulti
-            />
+             
+            
+                <p>{productCart?.sizesUser} </p>
+
+                <Link to={`/product/${productId}`}>
+                    <p>
+                      <i className="fas fa-pencil-alt  fa-2x"></i>
+                    </p>
+                  </Link>
+            
+
             </td>
 
             <td className="table-row__td">
