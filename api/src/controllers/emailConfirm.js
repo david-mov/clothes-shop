@@ -32,7 +32,6 @@ var userEmail = "ftorres767@gmail.com"
       if(err){
           return res.status(500).send(err.message);
       }
-      console.log("eso tilin")
      return res.status(200).json(info.message)
   })
 

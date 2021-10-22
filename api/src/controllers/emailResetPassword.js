@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer")
-
+const bcryptjs = require("bcryptjs")
+const { User } = require("./db.js");
 
 const Email = async(req, res) => {
     const {userEmail, userName} = req.body
@@ -21,19 +22,24 @@ const Email = async(req, res) => {
     from: 'clothesshophenry@outlook.com', 
     to: userEmail, 
     subject: `Your order is on the way ✔`, 
-    html: `<b>${userName} your order has been shipped</b>
+    html: `<b>${userName} your password has been changed</b>
+    <b>The new password is 12345</b>
     <b>For any questions you can answer this message</b>
-    <b>Thanks for shopping with us,The Clothesshop team</b>
+    <b>The Clothesshop team</b>
     `
   }
-  
- await transporter.sendMail(options, (err, info) => {
-      if(err){
-          return res.status(500).send(err.message);
-      }
-     return res.status(200).json(info.message)
-  })
+  var contra = 12345
+  const hashedPassword = await bcryptjs.hash(contra, 10);
+  const respuesta = await User.update({password: hashedPassword})
 
+  if(respuesta){
+      await transporter.sendMail(options, (err, info) => {
+           if(err){
+               return res.status(500).send(err.message);
+           }
+          return res.status(200).json(info.message)
+       })
+  }
 }
 
 module.exports = Email;
