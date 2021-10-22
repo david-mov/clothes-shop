@@ -13,6 +13,7 @@ import { getAllCartUsers } from '../../stateManagement/actions/getAllCartUser'
 import { getAllUserDetails } from "../../stateManagement/actions/getAllUserDetails";
 import { putStateCartUsers } from '../../stateManagement/actions/putStateCUsers';
 import { useHistory } from 'react-router';
+import { deleteAllCart } from "../../stateManagement/actions/deleteAllCart";
 
 const FORM_ID = 'payment-form';
 const CheckoutPrePaymentView = () => {
@@ -21,18 +22,19 @@ const CheckoutPrePaymentView = () => {
   let [user] = useUserId();
   const [datos, setDatos] = useState("")
   const [verificacion, setVerificacion] = useState(1)
+var guardo = user?.id
 
   console.log("ACA TA VERIFICACION", verificacion)
-
+  console.log("EL USER QUE VIENE DEL FUTURO", user?.id)
   const redirectOnClick = (e) => {
     e.preventDefault()
     if(verificacion === 1){
       setVerificacion(verificacion +1)
-      alert("podria perder su carrito")
+      alert("If you go back you could lose your purchase")
     }
     else if(verificacion === 2){
-      history.push("/checkoutPage")
-      setVerificacion(1)
+     dispatch(deleteAllCart(user?.id))
+    //  history.push("/checkoutPage")
     }
   }
 
@@ -208,12 +210,12 @@ const CheckoutPrePaymentView = () => {
           <div className="cart__link">
             <ul className="navbar__links">
               < li className="saco">
-                 <button onClick={(e) => redirectOnClick(e)} className="cart__link">
+                 <Link onClick={(e) => redirectOnClick(e)}>
                   <i class="fas fa-arrow-left fa-1x"></i>
                   <span>
                     Go to back <span className="cartlogo__badge">{ }</span>
                   </span>
-                </button>  
+                  </Link>
               </li>
             </ul>
           </div>
