@@ -71,14 +71,25 @@ export default function InformeProducto () {
   }, [dispatch])
 
   const {productViews} = useSelector(state => state.productsReducer)
-  var { productRatingsUsers } = useSelector((state) => state.productsReducer);
+  const showProductViews = productViews.filter((e) => e.View_product == productId);
+  var objFechaViews = showProductViews.map((e) => e.createdAt);
 
-  console.log("PRODUCTVIEWS", productViews)
-  console.log("PRODUCTRATINGS", productRatingsUsers)
+  const { productRatingsUsers } = useSelector((state) => state.productsReducer);
+  const showproductRatingsUsers = productRatingsUsers.filter((e) => e.View_product == productId);
+  var objFechaRating = showProductViews.map((e) => e.createdAt);
+
+  const fechasUni = objFechaRating.concat(objFechaViews);
+  const filterFechas = [...fechasUni]
+ 
+ console.log("gtttt", filterFechas)
+//   var dia  = objFecha.getDate();
+// var mes  = objFecha.getMonth();
+// var anio = objFecha.getFullYear();
   const genData = () => ({
 
   
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: filterFechas,
+    // ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
         type: 'bar',
