@@ -39,6 +39,8 @@ const InsertRating = (id,) => {
       amount: "",
       comment: "" 
     });
+
+    history.push("/profile/")
     
   };
 
