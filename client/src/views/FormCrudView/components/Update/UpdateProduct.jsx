@@ -67,7 +67,6 @@ const Update = ({
   
 
   const mapType = { value: type_product, label: type.name };
-  console.log("mapTYpe", type)
   const [valueCate, setvalueCate] = useState(mapCategories);
   const [valueSize, setvalueSize] = useState(mapSizes);
   const [valueType, setvalueType] = useState(mapType);
@@ -186,7 +185,6 @@ const Update = ({
     history.push("/list");
   };
 
-  console.log("INPUt", input);
 
   return (
     <div>

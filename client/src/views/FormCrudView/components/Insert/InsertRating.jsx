@@ -43,7 +43,7 @@ const InsertRating = (id,) => {
   };
 
   const cerrarModalInsertar = () => {
-    history.push(`/product/${productId}`)
+    history.push(`/profile/`)
   };
 
   return (
