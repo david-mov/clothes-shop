@@ -9,7 +9,18 @@ const addView = async (req, res, next) => {
             View_User,			
         }, {include: [Product]
         }, {include: [User]})
-		res.json('View Add correctly');
+		
+		const allView = await View.findAll({
+			include: [{
+				  model: Product,
+				  attributes:['id']
+			  },{
+				  model: User,
+				  attributes: ['id'],
+			  }],
+			  attributes: ['amount'],
+		  });
+		  res.json(allView);
 	}
 	catch (err) {
 		next(err);

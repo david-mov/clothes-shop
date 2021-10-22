@@ -304,3 +304,16 @@ GENERAL
     width: 100%;
   }
 }
+.table-row__td_ {
+  font-size: 1rem;
+  cursor: pointer;
+  color: #1d8883;
+}
+.listUser_ {
+  display: block;
+  justify-content: center;
+}
+.col-md-12 {
+  display: flex;
+  justify-content: center;
+}

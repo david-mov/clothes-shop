@@ -6,11 +6,9 @@ import MenuButton from "./MenuButon";
 import NavbarHam from "./NavBarHam";
 import { HeaderWrapper } from "./Header";
 
-
 export default function HomeIniView() {
   const [open, setOpen] = useState(false);
-  
-  
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -20,13 +18,13 @@ export default function HomeIniView() {
         <Link to="/">
           <img
             className="img"
-            src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
+            src="https://i.ibb.co/nD1CCgm/clothes-Shop.png"
             alt="clothes-Shop"
             border="0"
           />
         </Link>
         <HeaderWrapper>
-          <div className=" contenido-header">
+          <div className=" contenido-header1">
             <MenuButton open={open} handleClick={handleClick}></MenuButton>
           </div>
           <NavbarHam open={open} />

@@ -1,24 +1,22 @@
 import React from "react";
 import { NavbarWrapper } from "./NavbarStyles";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import "../../styles/HomePrincipal.css";
-import { useUserRol } from '../../hooks/useUserRol';
+import { useUserRol } from "../../hooks/useUserRol";
 import { getLogout } from "../../stateManagement/actions/getLogout";
 
 function NavbarHam({ open }) {
-
   const dispatch = useDispatch();
   const history = useHistory();
-  let [rol, ok] = useUserRol();
+  let [rol] = useUserRol();
 
   function handleLogout() {
-		dispatch(getLogout());
-		history.push("/catalogue")
-	}
+    dispatch(getLogout());
+    history.push("/catalogue");
+  }
 
   const showLinks = () => {
-
     switch (rol) {
       case 1:
         return (
@@ -26,12 +24,10 @@ function NavbarHam({ open }) {
             <Link to="/catalogue">Catalogue</Link>
             <Link to="/superadmin">Super Admin</Link>
             <li className="saco">
-							<button onClick={() => handleLogout()}>
-								<span>
-									Logout
-								</span>
-							</button>
-						</li>
+              <button onClick={() => handleLogout()}>
+                <span>Logout</span>
+              </button>
+            </li>
           </nav>
         );
       case 2:
@@ -40,12 +36,10 @@ function NavbarHam({ open }) {
             <Link to="/catalogue">Catalogue</Link>
             <Link to="/admin">Admin</Link>
             <li className="saco">
-							<button onClick={() => handleLogout()}>
-								<span>
-									Logout
-								</span>
-							</button>
-						</li>
+              <button onClick={() => handleLogout()}>
+                <span>Logout</span>
+              </button>
+            </li>
           </nav>
         );
       case 3:
@@ -54,12 +48,10 @@ function NavbarHam({ open }) {
             <Link to="/catalogue">Catalogue</Link>
             <Link to="/profile">user</Link>
             <li className="saco">
-							<button onClick={() => handleLogout()}>
-								<span>
-									Logout
-								</span>
-							</button>
-						</li>
+              <button onClick={() => handleLogout()}>
+                <span>Logout</span>
+              </button>
+            </li>
           </nav>
         );
       default:
@@ -71,15 +63,9 @@ function NavbarHam({ open }) {
           </nav>
         );
     }
+  };
 
-  }
-
-
-  return (
-    <NavbarWrapper open={open}>
-      {showLinks()}
-    </NavbarWrapper>
-  );
+  return <NavbarWrapper open={open}>{showLinks()}</NavbarWrapper>;
 }
 
 export default NavbarHam;

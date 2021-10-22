@@ -66,6 +66,7 @@
 }
 .insertImg {
   text-align: center;
+  color: rgb(161, 43, 43);
   padding-bottom: 1rem;
 }
 @media (min-width: 768px) {
@@ -107,7 +108,11 @@ button {
 button:hover {
   color: red;
 }
+.Google {
+  margin-top: 1rem;
 
+  background-color: #87c2f1;
+}
 .insert_label {
   padding-top: 0.5rem;
   text-align: center;

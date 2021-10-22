@@ -27,7 +27,9 @@ export default function ProductView() {
   const [tengo, setTengo] = useState(false);
   const basket = useSelector((state) => state.checkoutReducer.basket);
   const addToCart = () => {
-    basket.find((e) => e.productId !== productId) ? setTengo(true) : dispatch(getAddToCart(product));
+    basket.find((e) => e.productId !== productId)
+      ? setTengo(true)
+      : dispatch(getAddToCart(product));
   };
 
   var nameImagen = "";

@@ -15,21 +15,13 @@ module.exports = (sequelize) => {
       validate: {
         isEmail: true
       }
-    },
-    phone: {
-      type: DataTypes.INTEGER,
-      unique: true
-    },
+    },    
     googleId: {
       type: DataTypes.STRING
     },
     password: {
       type: DataTypes.STRING
-    },
-    enabled: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
-  }
+    }
   },{
     timestamps: false
   });
