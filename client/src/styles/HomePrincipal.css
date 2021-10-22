@@ -9,7 +9,6 @@
 /*Utilidades*/
 
 .seccion {
-  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 .fw-300 {
@@ -34,17 +33,14 @@
 .site-header.inicio {
   background-position: center center;
   background-size: cover;
-  padding-bottom: 1.5rem;
 }
 
 .contenido-header {
   /* flex-direction: column; */
   justify-content: space-between;
   align-items: center;
-  background-color: var(--oscuro);
+  background-color: #171717;
   padding-right: 5rem;
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
 }
 
 @media (min-width: 458px) {

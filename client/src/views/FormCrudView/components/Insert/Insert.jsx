@@ -156,7 +156,6 @@ const Insert = () => {
     });
   };
 
-  console.log("input",input)
   return (
     <div>
       <form className="crud_form">
