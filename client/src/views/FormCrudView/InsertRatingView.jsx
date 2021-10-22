@@ -1,8 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserId } from "../../hooks/useUserId";
 import InsertRating from "./components/Insert/InsertRating";
 
-const InsertRatingView = () => {
+
+const InsertRatingView = () => {  
+
+  let [idCookie, idOk] = useUserId()
+
+  let id = idCookie?.id  
+
   return (
     <div>
       <div className="todo">
@@ -30,7 +37,7 @@ const InsertRatingView = () => {
           </ul>
         </div>
       </div>
-      <InsertRating />
+      <InsertRating  id = {id} />
     </div>
   );
 };

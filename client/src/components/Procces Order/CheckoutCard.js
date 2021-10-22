@@ -14,7 +14,6 @@ import getRemoveItemUser from '../../stateManagement/actions/getRemoveItemU';
 export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
 
 
-    console.log("SIZE",size)
 
     const dispatch = useDispatch()
     let [user,okId] = useUserId();
@@ -50,7 +49,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         }
     }
 
-    const RemoveItem = (event, productId) => {
+    const RemoveItem = (event, productId) => { 
         if(user !== undefined || user !== null){
             Cart_Users = user?.id;
             CartU_product = productId;
@@ -91,7 +90,6 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         nameImagen = "products/logo JK&A.png";
     }
    
-    console.log("Input", Input)
 
 
     return (

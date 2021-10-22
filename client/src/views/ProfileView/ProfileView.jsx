@@ -12,7 +12,7 @@ import { useUserId } from '../../hooks/useUserId';
 
 export default function ProfileView() {
 
-
+	const [user] = useUserProfile();
 	const dispatch = useDispatch();
     let [user] = useUserId();
 	const history = useHistory();
@@ -38,7 +38,7 @@ export default function ProfileView() {
 							border="0"
 						></img>
 					</div>
-					<div className="cart__link">
+					<div className="cart__link"
 						<h2>Hello! {user?.name}</h2>
 					</div>
 					<ul className="navbar__links">

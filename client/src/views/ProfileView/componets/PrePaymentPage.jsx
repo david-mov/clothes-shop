@@ -35,8 +35,6 @@ const PrePaymentPage = () => {
     if (user !== null) {
         showCart = totalCart.filter((e) => e.Cart_Users === user?.id && e.state === 3)
     }
-   
-    console.log("dadad", showCart)
     function FormRow() {
 
         return (
