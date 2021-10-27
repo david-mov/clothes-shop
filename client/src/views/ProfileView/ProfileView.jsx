@@ -9,6 +9,7 @@ import PrepaymentPage from "./componets/PrePaymentPage";
 import PaymentP from "./componets/componentsCheckIn/myShopping";
 import { useUserProfile } from '../../hooks/useUserProfile';
 
+
 export default function ProfileView() {
 	const [user] = useUserProfile();
 	const dispatch = useDispatch();
@@ -62,6 +63,6 @@ export default function ProfileView() {
 			<PrepaymentPage />
             <PaymentP />
 
-		</div>
+		</div >
 	)
 }

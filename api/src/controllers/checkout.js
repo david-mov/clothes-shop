@@ -14,7 +14,7 @@ const checkout = async (req, res, next) => {
   const { idFinal } = req.params;
 
   const DataCarritoUser = await CartUsers.findAll({
-    where: { Cart_Users: idFinal },
+    where: { Cart_Users: idFinal, state: 1 || 2 },
     include: [{
       model: Product,
       attributes: ['name', 'price']
