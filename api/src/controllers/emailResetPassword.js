@@ -3,7 +3,7 @@ const bcryptjs = require("bcryptjs")
 const { User } = require("../db.js");
 
 const Email = async(req, res) => {
-    const {userEmail, userName} = req.body
+    const {userEmail, userName, id} = req.body
 
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -21,7 +21,7 @@ const Email = async(req, res) => {
   const options = {
     from: 'clothesshophenry@outlook.com', 
     to: userEmail, 
-    subject: `Your order is on the way ✔`, 
+    subject: `your password has been changed ✔`, 
     html: `<b>${userName} your password has been changed</b>
     <b>The new password is 12345</b>
     <b>For any questions you can answer this message</b>
@@ -30,7 +30,7 @@ const Email = async(req, res) => {
   }
   var contra = 12345
   const hashedPassword = await bcryptjs.hash(contra, 10);
-  const respuesta = await User.update({password: hashedPassword})
+  const respuesta = await User.update({password: hashedPassword}, {where: {id}})
 
   if(respuesta){
       await transporter.sendMail(options, (err, info) => {

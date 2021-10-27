@@ -10,6 +10,7 @@ import { useUserId } from '../../hooks/useUserId';
 import { putUpdateCartUsers } from '../../stateManagement/actions/putUpdateCartU';
 import getRemoveItemUser from '../../stateManagement/actions/getRemoveItemU';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {

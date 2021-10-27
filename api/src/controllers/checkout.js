@@ -1,5 +1,7 @@
 const { CartUsers, Product, Size } = require('../db');
 const mercadopago = require('mercadopago');
+const { Op } = require("sequelize");
+
 
 
 mercadopago.configure({
@@ -14,7 +16,9 @@ const checkout = async (req, res, next) => {
   const { idFinal } = req.params;
 
   const DataCarritoUser = await CartUsers.findAll({
-    where: { Cart_Users: idFinal, state: 1 || 2 },
+    where: { Cart_Users: idFinal, state: {
+      [Op.or]: [1, 2]
+    }},
     include: [{
       model: Product,
       attributes: ['name', 'price']

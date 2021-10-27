@@ -4,12 +4,12 @@ const createOrder = async (req, res, next) => {
 
 	const { total, Cart_Users } = req.body;
 	try {
-
+		console.log("EL CART USER", Cart_Users)
 		const cartUserOder = await CartUsers.findAll({
 			where: { Cart_Users: Cart_Users, state: 3 },
 			attributes: ['id']
 		  });
-
+		  console.log("ORDENES DEL USUARIO", cartUserOder)
 
 		const newOrder = await Orders.create({
 			total

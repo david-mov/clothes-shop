@@ -1,4 +1,6 @@
 const { CartUsers } = require('../db.js')
+const { Op } = require("sequelize");
+
 
 const deleteAllCart = async(req,res,next) => {
 const {id} = req.params  
@@ -7,7 +9,9 @@ try{
     await CartUsers.destroy({
         where: {
             Cart_Users: id,
-            state: state < 3
+            state: {
+                [Op.or]: [1, 2]
+              }
     }
     })
         res.json("se borro")

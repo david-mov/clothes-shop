@@ -144,19 +144,19 @@ const CheckoutPrePaymentView = () => {
 
       )))
   }
-  const onPayment = () => {
+  const onPayment = async() => {
     //codigo para cambiar el estado del producto en el carrito 
     const objCart = {
       Cart_Users: user?.id,
       state: 3
     }    
-    dispatch(putStateCartUsers(objCart))
-    const objOrder = {
-      Cart_Users: user?.id,
-      total: total
-    }
-    dispatch(postAddToOrders(objOrder))
-
+    await dispatch(putStateCartUsers(objCart))
+    dispatch(getAllCartUsers())
+       const objOrder = {
+         Cart_Users: user?.id,
+         total: total
+       }
+       dispatch(postAddToOrders(objOrder))
   }
   function FormRow() {
     return (
