@@ -10,7 +10,7 @@ export const postSignup = (user) => async (dispatch) => {
           withCredentials: true,
           httpOnly: true,
         });
-    return dispatch({ type: POST_SIGNUP, payload: signup.data });
+    return dispatch({ type: POST_SIGNUP, payload: signup });
   } catch (err) {
     console.error(err);
   }

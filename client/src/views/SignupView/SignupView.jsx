@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postSignup } from "../../stateManagement/actions/postSignup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
 function SignupView() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [state, setState] = useState({});
 
-  const onSubmitForm = (e) => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
-    dispatch(postSignup(state));
+    const resp = await dispatch(postSignup(state));
+    if(resp.payload.data === "User already exists"){
+      alert("User already exists");
+    }
+    if(resp.payload.data === "User created correctly"){
+      alert("well you can login now");
+      history.push("/login");
+    }
   };
 
   const handleChange = (e) => {

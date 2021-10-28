@@ -60,7 +60,7 @@ const CheckoutPage = () => {
                   <tr>
                     <th className="table__th">Name</th>
                     <th className="table__th">Price</th>
-                    <th className="table__th">Amount (Min - Max)</th>
+                    <th colspan="3" className="table__th">Amount (Min - Max)</th>
                     <th className="table__th">Subtotal to Item</th>
                     <th colspan="5" className="table__th">Sizes to Item</th>
                     <th className="table__th">Rating</th>

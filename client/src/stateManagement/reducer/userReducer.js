@@ -1,5 +1,6 @@
 import {
-	POST_LOGIN, 
+	POST_LOGIN,
+	POST_SIGNUP, 
 	GET_LOGOUT, 
 	GET_USERS, 
 	GET_ALL_USER_DETAILS,
@@ -13,6 +14,7 @@ const initialState = {
 	users:[],
 	user: {},
 	logged: false,
+	signup: false,
 	allUserDetails: [],
 	userDetailIdParams: {},
 	userDetails: {}
@@ -29,6 +31,17 @@ export default function userReducer(state = initialState, action) {
 			} else {
 				return { ...state }
 			}
+		}
+		case POST_SIGNUP:{
+			if (action.payload.status === 200) {
+				return {
+					...state,
+					signup: true,
+				}				
+			} else {
+				return { ...state }
+			}
+
 		}
 		case GET_LOGOUT: {
 			

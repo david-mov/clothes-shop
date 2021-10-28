@@ -16,10 +16,9 @@ const Product = () => {
   }, [dispatch]);
 
   var { products } = useSelector((state) => state.productsReducer);
-  //aca el estado ratin
-  var rating = 2;
+   
   //paginator
-  var countP = 5;
+  var countP = 8;
   var totalCurrent = Math.ceil(products.length / countP);
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
@@ -91,7 +90,8 @@ const Product = () => {
               description={e.description}
               stock={e.stock}
               productId={e.id}
-              rating={rating}
+              sizes={e.sizes}
+              rating={e.ratings.amount}
               image={e.images[0]}
             />
           ))

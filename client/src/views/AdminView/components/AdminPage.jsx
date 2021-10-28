@@ -1,4 +1,4 @@
-import "../../../styles/styleTablesSAA.css";
+import '../../../styles/styleTablesSAA.css';
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../../stateManagement/actions/getAllUsers";

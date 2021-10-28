@@ -28,7 +28,7 @@ import CheckoutPrePayment from "./views/CheckoutPayment/CheckoutPrePayment";
 import UpdateCheckoutView from "./views/FormCrudView/UpdateCheckoutView";
 import InsertCheckoutView from "./views/FormCrudView/InsertDetailsUserView";
 import InsertRatingView from "./views/FormCrudView/InsertRatingView";
-import DetailsOrderAdmin from "./views/AdminView/DetailsOrder";
+import DetailsOrderAdmin from "./views/AdminView/DetailsOrderViews";
 
 
 function App() {
