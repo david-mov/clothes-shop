@@ -11,7 +11,8 @@ import {
   POST_VIEW_PU,
   GET_ALL_RATINGS,
   GET_RATING_DETAIL,
-  GET_ALL_VIEWS
+  GET_ALL_VIEWS,
+  GET_LAST_PRODUCTS
 } from "../../consts/actionConsts";
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
   productViewsUsers: [],
   productRatingsUsers: [],
   productRatingDetails: [],
-  productViews: []
+  productViews: [],
+  lastProducts: []
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -124,6 +126,11 @@ export default function productsReducer(state = initialState, action) {
           ...state,
           productViews: action.payload
         }
+        case GET_LAST_PRODUCTS:
+          return {
+            ...state,
+            lastProducts: action.payload
+          }
     default:
       return { ...state };
   }
