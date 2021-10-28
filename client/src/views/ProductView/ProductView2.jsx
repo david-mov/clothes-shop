@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Badge } from "@material-ui/core";
 import { ShoppingCart } from "@material-ui/icons";
 import Select from "react-select";
-import { postAddToCart } from "../../stateManagement/actions/postAddToCart"
+import { postAddToCart } from "../../stateManagement/actions/postAddToCart";
 import { useUserId } from "../../hooks/useUserId.js";
 import { postAddToCartUser } from "../../stateManagement/actions/postAddToCartUser.js";
 import Product from "../CatalogueView/ProductCards/ProductCards2.jsx";
@@ -20,7 +20,13 @@ export default function ProductView() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   let [user, okId] = useUserId();
-  var Cart_Users, CartU_product, sizesUser, quantity, subtotal, showCart, Cart_product;
+  var Cart_Users,
+    CartU_product,
+    sizesUser,
+    quantity,
+    subtotal,
+    showCart,
+    Cart_product;
   useEffect(() => {
     dispatch(getProductDetails(productId));
     dispatch(getAllsizes());
@@ -36,36 +42,39 @@ export default function ProductView() {
 
   const [contador, setContador] = useState(1);
   const cart = useSelector((state) => state.checkoutReducer.cart);
-  var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
-
+  var totalCart = useSelector(
+    (state) => state.checkoutUserReducer.totalCartUser
+  );
 
   if (user !== undefined || user !== null) {
-    showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
-    
-
+    showCart = totalCart.filter((e) => e.Cart_Users === user?.id);
   } else {
     showCart = cart;
   }
 
   const addToCart = (ev) => {
-
     if (user !== undefined || user !== null) {
-
       sizesUser = Input.names?.join(" ");
       Cart_Users = user?.id;
       quantity = contador;
       CartU_product = productId;
       subtotal = product.price * quantity;
-      dispatch(postAddToCartUser({ CartU_product, Cart_Users, subtotal, quantity, sizesUser }))
+      dispatch(
+        postAddToCartUser({
+          CartU_product,
+          Cart_Users,
+          subtotal,
+          quantity,
+          sizesUser,
+        })
+      );
     }
 
     quantity = contador;
     Cart_product = productId;
     subtotal = product.price * quantity;
     dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
-
-
-  }
+  };
 
   var nameImagen = "";
   const rendeImages = () => {
@@ -96,10 +105,8 @@ export default function ProductView() {
   const onSelectChangeSize = (vauleS) => {
     setInput({
       ...Input,
-      sizes: vauleS.map(e => e.value),
-      names: vauleS.map(e => e.label)
-      
-      
+      sizes: vauleS.map((e) => e.value),
+      names: vauleS.map((e) => e.label),
     });
     setvauleS(vauleS);
     // addSizes(sizesEnv);
@@ -111,18 +118,15 @@ export default function ProductView() {
     });
   };
 
-  
-  const sizesSelect =  () => {
-
+  const sizesSelect = () => {
     if (Object.keys(product).length !== 0) {
-
-      const Optionsizes =  product?.sizes?.map((e) => {
+      const Optionsizes = product?.sizes?.map((e) => {
         return {
           label: e.name,
-          value: e.size_product?.sizeId
-        }
+          value: e.size_product?.sizeId,
+        };
       });
-      
+
       return (
         <Select
           value={vauleS}
@@ -130,15 +134,9 @@ export default function ProductView() {
           onChange={onSelectChangeSize}
           isMulti
         />
-      )
-
+      );
     }
-
-      
-
-
-    
-  }
+  };
 
   const addCantidad = () => {
     if (product.stock !== 0) {
@@ -153,7 +151,6 @@ export default function ProductView() {
       setContador(contador - 1);
     }
   };
-
 
   return (
     <div>
@@ -175,7 +172,7 @@ export default function ProductView() {
               <Link to="/catalogue" className="cart__link">
                 <i className="fas fa-arrow-left fa-1x"></i>
                 <span>
-                  Go to back <span className="cartlogo__badge">{ }</span>
+                  Go to back <span className="cartlogo__badge">{}</span>
                 </span>
               </Link>
             </li>
@@ -208,9 +205,7 @@ export default function ProductView() {
             <div className="wrapper">
               <p className="nombre">{product.name}</p>
               <div className="precios">
-                <p className="precio">
-                  {product.price || product.price}
-                </p>
+                <p className="precio">{product.price || product.price}</p>
                 {product.price ? (
                   <p className="precioOferta">${product.price}</p>
                 ) : (
@@ -250,37 +245,38 @@ export default function ProductView() {
               <p className="descripcion">
                 <span className="bold">Sizes: </span>
               </p>
-              <p>
-                {sizesSelect()}
-              </p>
+              <p>{sizesSelect()}</p>
               <div className="actions">
                 <div
-                  className={`component_toCartCantidad ${!product.stock ? "disabled" : ""
-                    }`}
+                  className={`component_toCartCantidad ${
+                    !product.stock ? "disabled" : ""
+                  }`}
                 >
                   <div
-                    className={`toCartBoton menos ${contador === 1 ? "disabled" : ""
-                      }`}
+                    className={`toCartBoton1 menos1 ${
+                      contador === 1 ? "disabled" : ""
+                    }`}
                     onClick={removeCantidad}
-                  ></div>
+                  >
+                    <h3 className="menos">-</h3>
+                  </div>
                   <div className="">{contador}</div>
                   <div
-                    className={`toCartBoton mas ${contador === product.stock ? "disabled" : ""
-                      }`}
+                    className={`toCartBoton mas ${
+                      contador === product.stock ? "disabled" : ""
+                    }`}
                     onClick={addCantidad}
                   ></div>
                 </div>
                 <div
                   onClick={(ev) => addToCart(ev)}
-                  className={`botonTextoIcono ${!product.stock ? "disabled" : ""
-                    }`}
+                  className={`botonTextoIcono ${
+                    !product.stock ? "disabled" : ""
+                  }`}
                 >
                   <label className="labelBoton">Add to Cart</label>
                   <div className="icono">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 64 64"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
                       <path d="M2 6h10l10 40h32l8-24H16"></path>
                       <circle cx="23" cy="54" r="4"></circle>
                       <circle cx="49" cy="54" r="4"></circle>

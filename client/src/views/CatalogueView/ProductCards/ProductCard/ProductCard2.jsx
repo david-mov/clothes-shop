@@ -8,47 +8,49 @@ import { useUserId } from "../../../../hooks/useUserId";
 import { postAddToCartUser } from "../../../../stateManagement/actions/postAddToCartUser";
 import { postAddViewUser } from "../../../../stateManagement/actions/postAddView";
 
-
 function ProductCard2(props) {
   let [user] = useUserId();
   const dispatch = useDispatch();
-  var cart, View_User, View_product, subtotal = 0;
+  var cart,
+    View_User,
+    View_product,
+    subtotal = 0;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
-  const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
-  if(user !== undefined || user !== null){
+  const cartLogedIn = useSelector(
+    (state) => state.checkoutUserReducer.totalCartUser
+  );
+  if (user !== undefined || user !== null) {
     View_User = user?.id;
     cart = cartLogedIn;
-  }else{
+  } else {
     View_User = 1;
     cart = cartLogedOut;
-
   }
   const [contador, setContador] = useState(1);
   const [showDetail, setshowDetail] = useState(false);
-  const {
-    name,
-    price,
-    stock,
-    description,
-    image,
-    rating,
-    productId,
-    
-  } = props;
-   
+  const { name, price, stock, description, image, rating, productId } = props;
+
   const addToCart = (ev) => {
-    if(user !== null){ 
+    if (user !== null) {
       var sizesUser = "";
       var Cart_Users = user?.id;
       var quantity = contador;
       var CartU_product = productId;
       subtotal = price * quantity;
-      dispatch(postAddToCartUser({ CartU_product,Cart_Users, subtotal, quantity, sizesUser }))
+      dispatch(
+        postAddToCartUser({
+          CartU_product,
+          Cart_Users,
+          subtotal,
+          quantity,
+          sizesUser,
+        })
+      );
     }
-    
+
     quantity = contador;
     var Cart_product = productId;
-     subtotal = price * quantity;
+    subtotal = price * quantity;
     dispatch(postAddToCart({ Cart_product, subtotal, quantity }));
   };
 
@@ -85,10 +87,10 @@ function ProductCard2(props) {
     }
   };
 
-  const sendView = (e) => {    
+  const sendView = (e) => {
     View_product = e;
-    dispatch(postAddViewUser({ View_User, View_product }));     
-  }
+    dispatch(postAddViewUser({ View_User, View_product }));
+  };
 
   const vistaRapidaProduct = () => {
     return (
@@ -146,11 +148,14 @@ function ProductCard2(props) {
                       }`}
                     >
                       <div
-                        className={`toCartBoton menos ${
+                        className={`toCartBoton1 menos1 ${
                           contador === 1 ? "disabled" : ""
                         }`}
                         onClick={removeCantidad}
-                      ></div>
+                      >
+                        {" "}
+                        <h1 className=" menos">-</h1>
+                      </div>
                       <div className="">{contador}</div>
                       <div
                         className={`toCartBoton mas ${
@@ -182,7 +187,11 @@ function ProductCard2(props) {
                     </div>
                   </div>
                   <p className="descripcion">{description}</p>
-                  <Link className="boton" onClick={() => sendView(productId)} to={`/product/${productId}`}>
+                  <Link
+                    className="boton"
+                    onClick={() => sendView(productId)}
+                    to={`/product/${productId}`}
+                  >
                     Show Details
                   </Link>
                 </div>
@@ -236,7 +245,11 @@ function ProductCard2(props) {
           </div>
         </a>
         <div className="actions">
-          <Link className="boton" onClick={() => sendView(productId)} to={`/product/${productId}`}>
+          <Link
+            className="boton"
+            onClick={() => sendView(productId)}
+            to={`/product/${productId}`}
+          >
             Show Details
           </Link>
           <div className="boton alCarrito" onClick={(ev) => addToCart(ev)}>
