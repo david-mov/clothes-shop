@@ -100,7 +100,6 @@ body li {
 
 .component_toCartCantidad .toCartBoton:before,
 .component_toCartCantidad .toCartBoton:after {
-  
   position: absolute;
   width: calc(100% - 30px);
   height: 2px;
