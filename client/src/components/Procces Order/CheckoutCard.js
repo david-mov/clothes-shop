@@ -9,33 +9,34 @@ import Select from "react-select";
 import { useUserId } from '../../hooks/useUserId';
 import { putUpdateCartUsers } from '../../stateManagement/actions/putUpdateCartU';
 import getRemoveItemUser from '../../stateManagement/actions/getRemoveItemU';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 
-export default function CheckoutCard({ name, productId, idCarrito, quantity, price, image, subtotal, size, color, stock, rating }) {
+export default function CheckoutCard({ name, productId, quantity, price, image, subtotal, size, color, stock, rating }) {
 
 
 
     const dispatch = useDispatch()
-    let [user,okId] = useUserId();
-    var Cart_Users, CartU_product,sizesUser;
-    const [vauleS, setvauleS] = useState("S");
-    const [Input, setInput] = useState({});  
+    const Optionsizes = size?.map((e) => {
+        return {
+            label: e.name,
+            value: e.size_product?.sizeId
+        }
+    });
+    let [user] = useUserId();
+    var Cart_Users, CartU_product, sizesUser;
+    const [vauleS, setvauleS] = useState(Optionsizes);
+    const [Input, setInput] = useState({ names: Optionsizes.map(e => e.label) });
 
-    var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
-    let productCart = totalCart?.find(e => e.product?.id === productId );
 
-    console.log("productCart", productCart)
 
     const addCantidad = () => {
-        if(user !== undefined || user !== null){
+        if (user !== null) {
             Cart_Users = user?.id;
             CartU_product = productId;
             sizesUser = Input.names?.join(" ");
             if (quantity !== stock) {
                 dispatch(putUpdateCartUsers({ CartU_product, Cart_Users, quantity: quantity + 1, price, sizesUser }))
-            }            
+            }
         }
         if (quantity !== stock) {
             dispatch(putUpdateCart({ productId, quantity: quantity + 1, price }))
@@ -43,10 +44,10 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
     }
 
     const removeCantidad = () => {
-        if(user !== undefined || user !== null){
+        if (user !== null) {
             Cart_Users = user?.id;
             CartU_product = productId;
-            sizesUser = "";
+            sizesUser = Input.names?.join(" ");
             if (quantity !== 1) {
                 dispatch(putUpdateCartUsers({ CartU_product, Cart_Users, quantity: quantity - 1, price, sizesUser }))
             }
@@ -56,16 +57,16 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
         }
     }
 
-    const RemoveItem = (event, productId) => { 
-        if(user !== undefined || user !== null){
+    const RemoveItem = (event, productId) => {
+        if (user !== null) {
             Cart_Users = user?.id;
             CartU_product = productId;
-            dispatch(getRemoveItemUser({CartU_product, Cart_Users})); 
+            dispatch(getRemoveItemUser({ CartU_product, Cart_Users }));
         }
         dispatch(getRemoveItem(productId));
     };
-    
-      
+
+
 
     var nameImagen = "";
 
@@ -74,14 +75,39 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
     } else {
         nameImagen = "products/logo JK&A.png";
     }
-   
-    
+
+    const onSelectChangeSize = (vauleS) => {
+        setInput({
+            ...Input,
+            names: vauleS.map(e => e.label)
+        });
+        if (user !== null) {
+            Cart_Users = user?.id;
+            CartU_product = productId;
+        sizesUser = Input.names?.join(" ");
+        dispatch(putUpdateCartUsers({ CartU_product, Cart_Users,quantity, price, sizesUser}))
+        }
+        setvauleS(vauleS);
+    };
+
+    const sizesSelect = () => {
+
+        return (
+            <Select
+                value={vauleS}
+                options={Optionsizes}
+                onChange={onSelectChangeSize}
+                isMulti
+            />
+        )
+
+    }
 
     return (
         <tr className="table-row table-row--chris">
 
             <td className="table-row__td">
-                <image className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
+                <img className="table-row__img" src={require(`../../assets/${nameImagen}`).default} alt="not image" />
 
                 <div className="table-row__info">
                     <p className="table-row__name">{name}</p>
@@ -95,7 +121,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
                 </div>
             </td>
 
-            <td data-column="Progress" className="table-row__td">
+            <td colspan="3" data-column="Progress" className="table-row__td">
                 <div className={`component_toCartCantidad ${!stock ? 'disabled' : ''}`}>
                     <div className={`toCartBoton menos ${quantity === 1 ? 'disabled' : ''}`} onClick={removeCantidad}></div>
                     <div className="">{quantity}</div>
@@ -107,17 +133,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
             </td>
 
             <td colspan="5" data-column="Progress" className="table-row__td">
-             
-            
-                <p>{productCart?.sizesUser} </p>
-
-                <Link to={`/product/${productId}`}>
-                    <p>
-                      <i className="fas fa-pencil-alt  fa-2x"></i>
-                    </p>
-                  </Link>
-            
-
+                <p>{sizesSelect()} </p>
             </td>
 
             <td className="table-row__td">
@@ -134,7 +150,7 @@ export default function CheckoutCard({ name, productId, idCarrito, quantity, pri
 
             </td>
             <td className="table-row__td">
-            <p className="table-row__policy">{color}</p>
+                <p className="table-row__policy">{color}</p>
             </td>
             <td className="table-row__td">
                 <CardActions disableSpacing >

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postDisdableUser } from '../../../stateManagement/actions/putDisdableUser';
 import { putChangeRolUsers } from '../../../stateManagement/actions/putChangeRolUser';
 import { getAllOrders } from '../../../stateManagement/actions/getAllOrders';
+import { Link } from 'react-router-dom';
 
 // estados de la order
 // 1 = creada 2 = procesando 3 = completa 4 = cancelada
@@ -21,7 +22,7 @@ const HistoryList = () => {
 
     var status, color, escale, escaleChang, statusenv;
     var totalOrdes = showOrders.length
-    console.log("data", showOrders.map((e) => e.cartUsers.map((el) => el.user.name)))
+   
 
     const headers = () => {
 
@@ -75,6 +76,7 @@ const HistoryList = () => {
 
     const bodys = () => {
         return showOrders?.map((e) => {
+      
             if (e.state == 1) {
                 status = "Creada"; color = "green"; escale = "right";
 
@@ -82,17 +84,17 @@ const HistoryList = () => {
                 status = "Procesando"; color = "red"; escale = "left";
 
             }
-     
+           
             return (
 
                 <tr className="table1-row table1-row--chris">
                     <td className="table1-row__td">
                         <div className="table1-row__info">
-                            <p className="table1-row__name">{e.cartUsers.map((el) => el.user.name)}</p>
+                            <p className="table1-row__name">{e.cartUsers[0].user.name}</p>
                         </div>
                     </td>
                     <td data-column="Progress" className="table1-row__td">
-                        <p className="table1-row__progress status--blue status">{e.cartUsers.map((el) => el.user.email)}</p>
+                        <p className="table1-row__progress status--blue status">{e.cartUsers[0].user.email}</p>
                     </td>
                     <td data-column="Progress" className="table1-row__td">
                         <p className="table1-row__progress status--blue status">{e.total}</p>
@@ -104,10 +106,12 @@ const HistoryList = () => {
                         <p className="table1-row__progress status--blue status">{e?.id}</p>
                     </td>
                     <td className="table-row__td">
-                        <p>
-                            <i className={`fas fa-eye fa-2x`}></i>
-                        </p>
-                    </td>                  
+                        <Link to={`/Order/Details/${e.id}`}>
+                            <p>
+                                <i className="fas fa-eye fa-2x"></i>
+                            </p>
+                        </Link>
+                    </td>
 
                 </tr>
             )

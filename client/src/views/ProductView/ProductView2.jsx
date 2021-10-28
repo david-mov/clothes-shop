@@ -11,16 +11,16 @@ import Select from "react-select";
 import { postAddToCart } from "../../stateManagement/actions/postAddToCart"
 import { useUserId } from "../../hooks/useUserId.js";
 import { postAddToCartUser } from "../../stateManagement/actions/postAddToCartUser.js";
-import Product from "../CatalogueView/ProductCards/ProductCards2.jsx";
 import { getAllsizes } from "../../stateManagement/actions/getAllsizes.js";
 
 export default function ProductView() {
   //aca el estado ratin
-  var rating = 5;
+  var rating;
   const { productId } = useParams();
   const dispatch = useDispatch();
-  let [user, okId] = useUserId();
+  let [user] = useUserId();
   var Cart_Users, CartU_product, sizesUser, quantity, subtotal, showCart, Cart_product;
+
   useEffect(() => {
     dispatch(getProductDetails(productId));
     dispatch(getAllsizes());
@@ -29,7 +29,6 @@ export default function ProductView() {
     };
   }, [dispatch, productId]);
 
-  let sizess = useSelector((state) => state.sizesReducer.sizes);
   const product = useSelector((state) => state.productsReducer.productDetails);
   const [vauleS, setvauleS] = useState(false);
   const [Input, setInput] = useState({});
@@ -39,7 +38,7 @@ export default function ProductView() {
   var totalCart = useSelector((state) => state.checkoutUserReducer.totalCartUser);
 
 
-  if (user !== undefined || user !== null) {
+  if (user !== null) {
     showCart = totalCart.filter((e) => e.Cart_Users === user?.id)
     
 
@@ -49,7 +48,7 @@ export default function ProductView() {
 
   const addToCart = (ev) => {
 
-    if (user !== undefined || user !== null) {
+    if (user !== null) {
 
       sizesUser = Input.names?.join(" ");
       Cart_Users = user?.id;
@@ -101,16 +100,9 @@ export default function ProductView() {
       
       
     });
-    setvauleS(vauleS);
-    // addSizes(sizesEnv);
+    setvauleS(vauleS);    
   };
-  const addSizes = (tipesEnv) => {
-    setInput({
-      ...Input,
-      sizes: tipesEnv,
-    });
-  };
-
+ 
   
   const sizesSelect =  () => {
 
@@ -133,10 +125,6 @@ export default function ProductView() {
       )
 
     }
-
-      
-
-
     
   }
 

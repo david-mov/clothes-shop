@@ -18,7 +18,6 @@ const DetailsOrderAdmin = () => {
         (state) => state.checkoutUserReducer.totalOrdersDetails,
     )
 
-        console.log("data", showOrdersDetails)
   return (
     <div>
       <div className="todo">
@@ -32,7 +31,7 @@ const DetailsOrderAdmin = () => {
             ></img>
           </div>
           <div className="cart__link">
-            <h2>Detaisl Order</h2>
+            <h2>Details Order</h2>
           </div>
           <ul className="navbar__links">
             <li className="saco">

@@ -7,6 +7,8 @@ import { postAddToCart } from "../../../../stateManagement/actions/postAddToCart
 import { useUserId } from "../../../../hooks/useUserId";
 import { postAddToCartUser } from "../../../../stateManagement/actions/postAddToCartUser";
 import { postAddViewUser } from "../../../../stateManagement/actions/postAddView";
+import { putUpdateCartUsers } from '../../../../stateManagement/actions/putUpdateCartU';
+import Select from "react-select";
 
 
 function ProductCard2(props) {
@@ -15,7 +17,7 @@ function ProductCard2(props) {
   var cart, View_User, View_product, subtotal = 0;
   const cartLogedOut = useSelector((state) => state.checkoutReducer.cart);
   const cartLogedIn = useSelector((state) => state.checkoutUserReducer.totalCartUser);
-  if(user !== undefined || user !== null){
+  if(user !== null){
     View_User = user?.id;
     cart = cartLogedIn;
   }else{
@@ -23,8 +25,6 @@ function ProductCard2(props) {
     cart = cartLogedOut;
 
   }
-  const [contador, setContador] = useState(1);
-  const [showDetail, setshowDetail] = useState(false);
   const {
     name,
     price,
@@ -33,15 +33,27 @@ function ProductCard2(props) {
     image,
     rating,
     productId,
+    sizes,
     
   } = props;
+  const Optionsizes =  sizes?.map((e) => {
+    return {
+      label: e.name,
+      value: e.size_product?.sizeId
+    }
+  });
+  const [contador, setContador] = useState(1);
+  const [showDetail, setshowDetail] = useState(false);
+  const [vauleS, setvauleS] = useState(Optionsizes);
+  const [Input, setInput] = useState({ names: Optionsizes.map(e => e.label) });
+  var Cart_Users, CartU_product, sizesUser, quantity;
    
   const addToCart = (ev) => {
     if(user !== null){ 
-      var sizesUser = "";
-      var Cart_Users = user?.id;
-      var quantity = contador;
-      var CartU_product = productId;
+      sizesUser = sizes.map((e) => e.name).join(" ");
+      Cart_Users = user?.id;
+      quantity = contador;
+      CartU_product = productId;
       subtotal = price * quantity;
       dispatch(postAddToCartUser({ CartU_product,Cart_Users, subtotal, quantity, sizesUser }))
     }
@@ -88,6 +100,32 @@ function ProductCard2(props) {
   const sendView = (e) => {    
     View_product = e;
     dispatch(postAddViewUser({ View_User, View_product }));     
+  }
+  const onSelectChangeSize = (vauleS) => {
+    setInput({
+        ...Input,
+        names: vauleS.map(e => e.label)
+    });
+    if (user !== null) {
+        Cart_Users = user?.id;
+        CartU_product = productId;
+    sizesUser = Input.names?.join(" ");
+    dispatch(putUpdateCartUsers({ CartU_product, Cart_Users,quantity, price, sizesUser}))
+    }
+    setvauleS(vauleS);
+};
+
+  const sizesSelect =  () => {        
+      
+      return (
+        <Select
+          value={vauleS}
+          options={Optionsizes}
+          onChange={onSelectChangeSize}
+          isMulti
+        />
+      )    
+    
   }
 
   const vistaRapidaProduct = () => {
@@ -139,6 +177,7 @@ function ProductCard2(props) {
                     <span className="bold">Code Product: </span>
                     {productId}
                   </p>
+                  <p>{sizesSelect()} </p>
                   <div className="actions">
                     <div
                       className={`component_toCartCantidad ${

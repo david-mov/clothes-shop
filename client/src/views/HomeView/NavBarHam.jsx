@@ -3,26 +3,26 @@ import { NavbarWrapper } from "./NavbarStyles";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "../../styles/HomePrincipal.css";
-import { useUserRol } from "../../hooks/useUserRol";
 import { getLogout } from "../../stateManagement/actions/getLogout";
+import { useUserProfile } from "../../hooks/useUserProfile";
 
 function NavbarHam({ open }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  let [rol] = useUserRol();
+  let [dataUser] = useUserProfile();
 
   function handleLogout() {
     dispatch(getLogout());
     history.push("/catalogue");
   }
-
+console.log("datattt", dataUser.user_rol)
   const showLinks = () => {
-    switch (rol) {
+    switch (dataUser.user_rol) {
       case 1:
         return (
           <nav className="navegacion">
             <Link to="/catalogue">Catalogue</Link>
-            <Link to="/superadmin">Super Admin</Link>
+            <Link to="/superadmin">Hola! {dataUser.name}</Link>
             <li className="saco">
               <button onClick={() => handleLogout()}>
                 <span>Logout</span>
@@ -34,7 +34,7 @@ function NavbarHam({ open }) {
         return (
           <nav className="navegacion">
             <Link to="/catalogue">Catalogue</Link>
-            <Link to="/admin">Admin</Link>
+            <Link to="/admin">Hola! {dataUser.name}</Link>
             <li className="saco">
               <button onClick={() => handleLogout()}>
                 <span>Logout</span>
@@ -46,7 +46,7 @@ function NavbarHam({ open }) {
         return (
           <nav className="navegacion">
             <Link to="/catalogue">Catalogue</Link>
-            <Link to="/profile">user</Link>
+            <Link to="/profile">Hola! {dataUser.name}</Link>
             <li className="saco">
               <button onClick={() => handleLogout()}>
                 <span>Logout</span>
@@ -54,7 +54,7 @@ function NavbarHam({ open }) {
             </li>
           </nav>
         );
-      default:
+        case undefined:
         return (
           <nav className="navegacion">
             <Link to="/catalogue">Catalogue</Link>
