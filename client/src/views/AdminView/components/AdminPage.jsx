@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../../stateManagement/actions/getAllUsers";
 import { postDisdableUser } from "../../../stateManagement/actions/putDisdableUser";
-import { putChangeRolUsers } from "../../../stateManagement/actions/putChangeRolUser";
+import { getEmailReset } from '../../../stateManagement/actions/getEmailReset';
 
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const AdminPage = () => {
 
   var users = useSelector((state) => state.userReducer.users);
   const user = users.filter((e) => e.user_rol !== 1);
-  var status, color, escale, escaleChang, statusenv;
+  var status, color, escale, escaleChang = "left", statusenv, userEmail, userName, id;
   var totalUsers = user.length;
 
   const headers = () => {
@@ -22,8 +22,8 @@ const AdminPage = () => {
         <th className="table1__th1">Name</th>
         <th className="table1__th1">email</th>
         <th className="table1__th1">Status</th>
-        <th className="table1__th1">change role</th>
-        <th className="table1__th1">to disable</th>
+        <th className="table1__th1">Reset Pass</th>
+        <th className="table1__th1">To disable</th>
       </tr>
     );
   };
@@ -40,20 +40,22 @@ const AdminPage = () => {
     }
   };
 
-  const AdminUser = (e, i) => {
-    if (i !== "user") {
-      statusenv = 3;
-      dispatch(putChangeRolUsers(e, statusenv));
-      dispatch(getAllUsers());
-    } else {
-      statusenv = 2;
-      dispatch(putChangeRolUsers(e, statusenv));
-      dispatch(getAllUsers());
+  const ResetPass = async (i,e,n) => {
+   
+    const obj = {
+      userEmail:e,
+      userName:n,
+      id:i
     }
+    
+     const resp = await dispatch(getEmailReset(obj));
+      if (resp) {
+        escaleChang = "right";
+      } 
   };
 
   const bodys = () => {
-    return user?.map((e) => {
+    return user?.map((e, k) => {
       if (e.enabled === true) {
         status = "Active";
         color = "green";
@@ -63,13 +65,9 @@ const AdminPage = () => {
         color = "red";
         escale = "left";
       }
-      if (e.rol.name !== "user") {
-        escaleChang = "right";
-      } else {
-        escaleChang = "left";
-      }
+     
       return (
-        <tr className="table1-row table1-row--chris">
+        <tr key={k} className="table1-row table1-row--chris">
           <td className="table1-row__td">
             <div className="table1-row__info">
               <p className="table1-row__name">{e.name}</p>
@@ -92,7 +90,7 @@ const AdminPage = () => {
           <td className="table-row__td">
             <p>
               <i
-                onClick={() => AdminUser(e.id, e.rol.name)}
+                onClick={() => ResetPass(e.id, e.email, e.name)}
                 class={`fas fa-balance-scale-${escaleChang} fa-2x`}
               ></i>
             </p>

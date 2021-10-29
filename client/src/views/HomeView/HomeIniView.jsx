@@ -6,26 +6,26 @@ import MenuButton from "./MenuButon";
 import NavbarHam from "./NavBarHam";
 import { HeaderWrapper } from "./Header";
 import { useEffect } from "react";
-import {getLastProducts} from "../../stateManagement/actions/getLastProducts"
+import { getLastProducts } from "../../stateManagement/actions/getLastProducts"
 import { useDispatch, useSelector } from "react-redux";
+
 
 export default function HomeIniView() {
   const products = useSelector(state => state.productsReducer.lastProducts)
   const [open, setOpen] = useState(false);
-  const  dispatch = useDispatch()
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
     dispatch(getLastProducts())
   }, [])
 
-  console.log("ACA TA TU ESTADO PA", products)
-
-
-
   const handleClick = () => {
     setOpen(!open);
   };
+
+  var urlImg, nameImagen, objImage;
+
   return (
 
     <div>
@@ -49,20 +49,41 @@ export default function HomeIniView() {
         <div className="container1">
           <div className="body_hiview">
             <ul className="c-accordion">
-              {
-                products.map((e) => {
+              { 
+
+                products.map((e, i) => {
+                  
+                  if (e.images.length === 0) {
+                    nameImagen = "products/logo JK&A.png";
+                    urlImg = require(`../../assets/${nameImagen}`).default;
+                  }else{
+                    objImage = e.images[0];
+                    nameImagen = "imageProduct/"+objImage.name;
+                    urlImg = require(`../../assets/${nameImagen}`).default;
+                  }
+                  
                   return (
-                <li id="joker" className="c-accordion__item">
-                    <div className="c-accordion__content">
-                      <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                        {e.name}
-                      </h2>
-                      <p className="c-accordion__description">
-                        {e.description}
-                      </p>
-                    </div>
-                </li>
-              )})
+                    <li key={i} className="c-accordion__item" id="joker"
+                      style={{
+                        backgroundImage: `url("${urlImg}")`
+                      }}
+                    >
+                      <div className="c-accordion__content">
+
+                        <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
+                          {e.name}
+                        </h2>
+                        <p className="c-accordion__description">
+                          {e.description}
+                        </p>
+                      </div>                      
+                      <div className="c-accordion__aside">
+                        <h2 className="c-accordion__title c-accordion__title--hover-hide">{e.name}</h2>
+                      </div>
+                    </li>
+
+                  )
+                })
               }
             </ul>
           </div>

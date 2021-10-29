@@ -1,4 +1,4 @@
-const {  Product } = require('../db.js')
+const {  Product, Image } = require('../db.js')
 
 const getProductsHome = async (req, res, next) => {
 	try {
@@ -6,7 +6,11 @@ const getProductsHome = async (req, res, next) => {
 			order: [
                 ['id', 'DESC'],
             ],
-            limit: 6			
+            limit: 6,
+			include: [{
+				model: Image,
+				attributes:['name']
+			}],			
 		});
 		res.json(Products);		
 	}

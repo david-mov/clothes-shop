@@ -23,14 +23,16 @@ const Email = async(req, res) => {
     to: userEmail, 
     subject: `your password has been changed ✔`, 
     html: `<b>${userName} your password has been changed</b>
-    <b>The new password is 12345</b>
+    <b>The new password is clothesshopG12345</b>
     <b>For any questions you can answer this message</b>
     <b>The Clothesshop team</b>
     `
   }
-  var contra = 12345
+  var contra = "clothesshopG12345"
   const hashedPassword = await bcryptjs.hash(contra, 10);
-  const respuesta = await User.update({password: hashedPassword}, {where: {id}})
+  const respuesta = await User.update(
+    { password: hashedPassword },
+    { where: {id} })
 
   if(respuesta){
       await transporter.sendMail(options, (err, info) => {
