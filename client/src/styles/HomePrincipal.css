@@ -119,3 +119,7 @@
   background-color: var(--oscuro);
   padding-bottom: 0.5rem;
 }
+.footer {
+  padding: 3rem;
+  background-color: red;
+}

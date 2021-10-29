@@ -6,19 +6,19 @@ import MenuButton from "./MenuButon";
 import NavbarHam from "./NavBarHam";
 import { HeaderWrapper } from "./Header";
 import { useEffect } from "react";
-import { getLastProducts } from "../../stateManagement/actions/getLastProducts"
+import { getLastProducts } from "../../stateManagement/actions/getLastProducts";
 import { useDispatch, useSelector } from "react-redux";
 
 
 export default function HomeIniView() {
-  const products = useSelector(state => state.productsReducer.lastProducts)
+  const products = useSelector((state) => state.productsReducer.lastProducts);
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getLastProducts())
-  }, [])
+    dispatch(getLastProducts());
+  }, []);
+
 
   const handleClick = () => {
     setOpen(!open);
@@ -27,7 +27,6 @@ export default function HomeIniView() {
   var urlImg, nameImagen, objImage;
 
   return (
-
     <div>
       <div className="contenedor contenido-header">
         <Link to="/">
