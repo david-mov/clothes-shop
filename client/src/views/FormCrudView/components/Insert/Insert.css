@@ -97,6 +97,7 @@
   background-color: rgb(128, 107, 107);
 }
 button {
+  background-color: rgb(245, 72, 72);
   border-radius: 0.3rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -104,9 +105,12 @@ button {
   text-align: center;
   cursor: pointer;
   border: none;
+  -webkit-box-shadow: 0px 11px 15px -9px rgba(45, 125, 245, 0.63);
+  -moz-box-shadow: 0px 11px 15px -9px rgba(81, 230, 68, 0.63);
+  box-shadow: 0px 11px 15px -9px rgba(243, 6, 6, 0.63);
 }
 button:hover {
-  color: red;
+  color: rgb(72, 255, 0);
 }
 .Google {
   margin-top: 1rem;

@@ -8,9 +8,6 @@
 }
 /*Utilidades*/
 
-.seccion {
-  margin-bottom: 2rem;
-}
 .fw-300 {
   font-weight: 300;
 }
@@ -41,8 +38,21 @@
   align-items: center;
   background-color: #171717;
   padding-right: 5rem;
+  position: relative;
 }
-
+footer {
+  background-color: var(--oscuro);
+  padding: 0.5rem;
+  color: #ffffff;
+  text-align: center;
+}
+.pf {
+  color: var(--blanco);
+  font-size: 1rem;
+}
+.imgFooter {
+  width: 150px;
+}
 @media (min-width: 458px) {
   .contenido-header {
     display: flex;
