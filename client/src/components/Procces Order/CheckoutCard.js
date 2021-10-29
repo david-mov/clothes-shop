@@ -102,10 +102,10 @@ export default function CheckoutCard({
   return (
     <tr className="table-row table-row--chris">
       <td className="table-row__td">
-        <image
+        <img
           className="table-row__img"
           src={require(`../../assets/${nameImagen}`).default}
-          alt="not image"
+          alt="not imag"
         />
 
         <div className="table-row__info">
