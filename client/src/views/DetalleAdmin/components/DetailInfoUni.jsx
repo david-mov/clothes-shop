@@ -4,8 +4,9 @@ import { Bar } from 'react-chartjs-2';
 import '../../../styles/styleInformes.css'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {getAllViews} from "../../../stateManagement/actions/getAllViews";
+import { getAllViews } from "../../../stateManagement/actions/getAllViews";
 import { getAllRating } from "../../../stateManagement/actions/getAllRating";
+import { getAllInformeDetails } from "../../../stateManagement/actions/getAllInforme";
 const rand = () => Math.floor(Math.random() * 255);
 
 /*const genData = () => ({
@@ -58,37 +59,31 @@ const options = {
 */
 
 
-export default function InformeProducto () {
+export default function InformeProducto() {
 
   const { productId } = useParams();
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getAllViews())
-  }, [dispatch])
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllRating())
-  }, [dispatch])
+    dispatch(getAllInformeDetails(productId))
+  }, [dispatch, productId])
 
-  const {productViews} = useSelector(state => state.productsReducer)
-  const showProductViews = productViews.filter((e) => e.View_product == productId);
-  var objFechaViews = showProductViews.map((e) => e.createdAt);
+  const { allInforme } = useSelector(state => state.productsReducer);
+  const fechasUniInfor = allInforme.views?.map((e) => e.createdAt).concat(allInforme.ratings?.map((e) => e.createdAt))
+  
+  var fechasUniInforFilter;
+  
+  if(allInforme.length !== 0){
+   fechasUniInforFilter = [...fechasUniInfor]
+  }
+  
+console.log("data", allInforme)
 
-  const { productRatingsUsers } = useSelector((state) => state.productsReducer);
-  const showproductRatingsUsers = productRatingsUsers.filter((e) => e.View_product == productId);
-  var objFechaRating = showProductViews.map((e) => e.createdAt);
 
-  const fechasUni = objFechaRating.concat(objFechaViews);
-  const filterFechas = [...fechasUni]
- 
- console.log("gtttt", filterFechas)
-//   var dia  = objFecha.getDate();
-// var mes  = objFecha.getMonth();
-// var anio = objFecha.getFullYear();
   const genData = () => ({
 
-  
-    labels: filterFechas,
+
+    labels: fechasUniInforFilter,
     // ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
@@ -121,29 +116,29 @@ export default function InformeProducto () {
       },
     ],
   });
-  
+
   const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-          display: true,
-  
-        },
-        title: {
-          display: true,
-          text: 'REPORT PRODUCT'
-        },
-        // legend: {
-        //     display: true,
-        // }
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+        display: true,
+
       },
-    
+      title: {
+        display: true,
+        text: 'REPORT PRODUCT'
+      },
+      // legend: {
+      //     display: true,
+      // }
+    },
+
   };
 
 
-    
-    const [data, setData] = useState(genData());
+
+  const [data, setData] = useState(genData());
 
   useEffect(() => {
     const interval = setInterval(() => setData(genData()), 5000);
@@ -151,8 +146,8 @@ export default function InformeProducto () {
   }, []);
 
   return (
-    <div className=" dataInfiUni">      
-      <Bar data={data} options={options} />   
+    <div className=" dataInfiUni">
+      <Bar data={data} options={options} />
     </div>
   );
 

@@ -15,7 +15,7 @@ function NavbarHam({ open }) {
     dispatch(getLogout());
     history.push("/catalogue");
   }
-console.log("datattt", dataUser.user_rol)
+  
   const showLinks = () => {
     switch (dataUser.user_rol) {
       case 1:
