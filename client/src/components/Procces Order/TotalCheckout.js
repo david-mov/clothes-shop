@@ -1,39 +1,40 @@
-import React from 'react'
-import { Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { useUserId } from '../../hooks/useUserId'
-
+import React from "react";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useUserId } from "../../hooks/useUserId";
+import "./order.css";
 const Total = () => {
+  let [user] = useUserId();
 
-  let [user] = useUserId()  
-
-  const cart = useSelector((state) => state.checkoutReducer.cart)
+  const cart = useSelector((state) => state.checkoutReducer.cart);
   const userdeta = useSelector((state) => state.userReducer.userDetails);
   var totalCart = useSelector(
-    (state) => state.checkoutUserReducer.totalCartUser,
-  )
+    (state) => state.checkoutUserReducer.totalCartUser
+  );
 
   var respu = user?.id;
-  var showCart
-  var total = 0
-  let miBasket
+  var showCart;
+  var total = 0;
+  let miBasket;
 
   if (user?.id !== undefined) {
-    showCart = totalCart.filter((e) => e.Cart_Users === user.id && e.state !==3)
-    showCart.map((e) => (total += parseInt(e.subtotal)))
-    miBasket = showCart.length
+    showCart = totalCart.filter(
+      (e) => e.Cart_Users === user.id && e.state !== 3
+    );
+    showCart.map((e) => (total += parseInt(e.subtotal)));
+    miBasket = showCart.length;
   } else {
-    cart.map((e) => (total += parseInt(e.subtotal)))
-    miBasket = cart.length
+    cart.map((e) => (total += parseInt(e.subtotal)));
+    miBasket = cart.length;
   }
-  
+
   const showButon = () => {
     if (respu !== undefined) {
       let url = "/create/userDetail";
-      if(userdeta?.user_detail !== undefined){
+      if (userdeta?.user_detail !== undefined) {
         url = "/checkout";
-       }
+      }
       return (
         <Button
           component={Link}
@@ -44,28 +45,25 @@ const Total = () => {
         >
           Check out
         </Button>
-      )
+      );
     } else {
       return (
-        <Link to="/login">
-          <button >
-            <span>
-              Login
-            </span>
+        <Link className="Shoping_Cart" to="/login">
+          <button>
+            <span>Login</span>
           </button>
         </Link>
-      )
+      );
     }
-
-  }
+  };
 
   return (
-    <div>
+    <div className="totalItems">
       <h5>Total items: {miBasket}</h5>
       <h5>Total Amount: {parseInt(total)}</h5>
       {showButon()}
     </div>
-  )
-}
+  );
+};
 
-export default Total
+export default Total;
