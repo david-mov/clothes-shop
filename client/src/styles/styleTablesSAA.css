@@ -26,17 +26,32 @@ GENERAL
   font-size: 20px;
   margin: 0;
 }
-
 .row--top-40 {
   margin-top: 40px;
 }
-
+.pagar {
+  border: 1px solid #53646f;
+  margin-left: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #9eabb4;
+}
+.pagar h5 {
+  color: black;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+.boton_pagar {
+  padding-top: 0.5rem;
+  text-align: center;
+}
 .row--top-20 {
   margin-top: 20px;
 }
 .table1__th1 {
   background-color: black;
-  color: #9eabb4;
+  color: #b49eb4;
   font-weight: 500;
   font-size: 12px;
   text-transform: uppercase;
