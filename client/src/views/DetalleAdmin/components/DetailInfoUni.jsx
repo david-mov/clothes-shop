@@ -72,14 +72,11 @@ export default function InformeProducto() {
   const fechasUniInfor = allInforme.views?.map((e) => e.createdAt).concat(allInforme.ratings?.map((e) => e.createdAt))
   
   var fechasUniInforFilter;
-  
+
   if(allInforme.length !== 0){
    fechasUniInforFilter = [...fechasUniInfor]
   }
   
-console.log("data", allInforme)
-
-
   const genData = () => ({
 
 
