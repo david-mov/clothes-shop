@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeView from "./views/HomeView/HomeIniView";
+import AboutView from "./views/HomeView/AboutView";
 import NotFoundView from "./views/NotFoundView/NotFoundView";
 import ProfileView from "./views/ProfileView/ProfileView";
 import ProductView from "./views/ProductView/ProductView2";
@@ -37,6 +38,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={HomeView} />
+        <Route exact path="/about" component={AboutView} />
         <Route exact path="/catalogue" component={CatalogueView} />
         <ProtectedRoute
           exact
