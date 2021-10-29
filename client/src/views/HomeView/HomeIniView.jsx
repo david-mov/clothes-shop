@@ -87,6 +87,9 @@ export default function HomeIniView() {
       </div>
       <footer className="contenedor contenido-header">
         <p className="pf">Todos los derechos reservados 2021 {copy}</p>
+        <Link className="team" to="/about">
+          Our Team
+        </Link>
         <Link to="/">
           <img
             className="imgFooter"
