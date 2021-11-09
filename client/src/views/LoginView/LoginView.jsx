@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../../stateManagement/actions/postLogin";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
 
 function LoginView() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [state, setState] = useState({});
 
-  const onSubmitForm = (e) => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     dispatch(postLogin(state));
+    history.push("/");
   };
 
   const handleChange = (e) => {
@@ -18,6 +20,15 @@ function LoginView() {
       ...state,
       [e.target.name]: e.target.value,
     });
+  };
+ 
+
+  const redirectToGoogleSSO = async () => {
+    const newWindow = window.open(
+      `${process.env.REACT_APP_GOOGLE}`,
+      "_blank",
+      "width=500,height=600"
+    );
   };
 
   return (
@@ -62,7 +73,12 @@ function LoginView() {
           placeholder="password"
           onChange={handleChange}
         ></input>
-        <button type="submit">Login</button>
+        <button className="Google" type="submit">
+          Login
+        </button>
+        <button className="Google" onClick={redirectToGoogleSSO}>
+          Login with Google
+        </button>
       </form>
     </div>
   );

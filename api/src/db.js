@@ -53,7 +53,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Type, Rol, Product, Image, Category, Size, Rating, View } = sequelize.models;
+
+const { User, Type, Rol, Product, Image, Category, Size, Rating, View, Cart, UserDetail, CartUsers, Orders } = sequelize.models;
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -67,7 +69,52 @@ Product.belongsToMany(User, {through: "user_product"})
 Product.belongsToMany(Category, {through: "category_product"})
 Category.belongsToMany(Product, {through: "category_product"})
 
+Orders.belongsToMany(CartUsers, {through: "CartUsers_Orders"})
+CartUsers.belongsToMany(Orders, {through: "CartUsers_Orders"})
 
+User.hasMany(UserDetail,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+UserDetail.belongsTo(User,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+
+Product.hasMany(Cart,{
+  foreignKey:{
+      name: 'Cart_product'
+  } 
+})
+Cart.belongsTo(Product,{
+  foreignKey:{
+      name: 'Cart_product'
+  } 
+})
+
+Product.hasMany(CartUsers,{
+  foreignKey:{
+      name: 'CartU_product'
+  } 
+})
+CartUsers.belongsTo(Product,{
+  foreignKey:{
+      name: 'CartU_product'
+  } 
+})
+
+User.hasMany(CartUsers,{
+  foreignKey:{
+      name: 'Cart_Users'
+  } 
+})
+CartUsers.belongsTo(User,{
+  foreignKey:{
+      name: 'Cart_Users'
+  } 
+})
 
 Type.hasMany(Product,{
   foreignKey:{
@@ -146,6 +193,16 @@ View.belongsTo(User,{
   } 
 })
 
+User.hasMany(UserDetail,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
+UserDetail.belongsTo(User,{
+  foreignKey:{
+      name: 'user_detail'
+  } 
+})
 
 
 

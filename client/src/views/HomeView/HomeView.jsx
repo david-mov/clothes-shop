@@ -3,6 +3,9 @@ import { Authorizer } from '../../components/Authorizer/Authorizer.jsx'
 import "../../styles/HomePrincipal.css";
 
 export default function HomeView() {
+
+
+  
   return (
     <div className="HomePrincipal">
       <div className="NavbarPaincipal">

@@ -4,22 +4,30 @@ import { Link } from "react-router-dom";
 import { getAllTypes } from "../../../stateManagement/actions/getAllTypes";
 import TablaList from "./ListTable";
 import "./styles.css";
+import { deleteTypes } from "../../../stateManagement/actions/deleteType";
 
 export default function TypeList() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllTypes());
+  }, [dispatch]);
+  const type = useSelector((state) => state.typesReducer.types);
+
+  var countP = 5;
+  var totalCurrent = type ? Math.ceil(type?.length / countP) : null;
+
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
-  var countP = 5;
-  var dataCompleta = [];
   const [Input, setInput] = useState("");
-  const type = useSelector((state) => state.typesReducer.types);
+
   const filterTypes = () => {
+    //var dataCompleta = [];
     if (Input !== "") {
-      return (dataCompleta = type.filter((e) =>
+      return type.filter((e) =>
         e.name.toLowerCase().includes(Input.toLowerCase())
-      ));
+      );
     }
-    return (dataCompleta = type);
+    return type;
   };
   const onInputChange = (Input) => {
     setInput(Input.target.value);
@@ -39,12 +47,51 @@ export default function TypeList() {
     }
   };
 
-  useEffect(() => {
+  
+  const deleteType = (e) => {
+    dispatch(deleteTypes(e));
     dispatch(getAllTypes());
-  }, [dispatch]);
+  };
 
-  const types = useSelector((state) => state.typesReducer.types);
-  var totalCurrent = Math.ceil(types.length / countP);
+  const show = () => {
+    if (actualCurrent === 1) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>To</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
+        </div>
+      );
+    } else if (actualCurrent >= totalCurrent) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
+        </div>
+      );
+    }
+  };
 
   function headers() {
     return (
@@ -74,31 +121,33 @@ export default function TypeList() {
 
   function bodyTable() {
     return filterTypes()
-      .map((e, i) => {
-        return (
-          <tr key={i} className="table-row table-row--chris">
-            <td className="table-row__td">
-              <div className="table-row__info">
-                <p className="table-row__name">{e.name}</p>
-              </div>
-            </td>
+      ? filterTypes()
+          .map((e, i) => {
+            return (
+              <tr key={i} className="table-row table-row--chris">
+                <td className="table-row__td">
+                  <div className="table-row__info">
+                    <p className="table-row__name">{e.name}</p>
+                  </div>
+                </td>
 
-            <td className="table-row__td">
-              <Link to="/update/type">
-                <p>
-                  <i className="fas fa-pencil-alt  fa-2x"></i>
-                </p>
-              </Link>
-            </td>
-            <td className="table-row__td">
-              <p>
-                <i className="fas fa-trash-alt fa-2x"></i>
-              </p>
-            </td>
-          </tr>
-        );
-      })
-      .slice(currentPage, currentPage + 5);
+                <td className="table-row__td">
+                  <Link to={`/update/type/${e.id}`}>
+                    <p>
+                      <i className="fas fa-pencil-alt  fa-2x"></i>
+                    </p>
+                  </Link>
+                </td>
+                <td className="table-row__td">
+                  <p onClick={() => deleteType (e.id)}>
+                    <i className="fas fa-trash-alt fa-2x"></i>
+                  </p>
+                </td>
+              </tr>
+            );
+          })
+          .slice(currentPage, currentPage + countP)
+      : null;
   }
 
   return (
@@ -107,24 +156,12 @@ export default function TypeList() {
         <TablaList
           title={"TYPES"}
           headers={headers()}
-          data={types}
+          data={type}
           bodyTable={bodyTable()}
           url={"/create/type"}
         />
       </div>
-      <div className="buttonList">
-        <button className="button2" onClick={prevPage}>
-          PREV
-        </button>
-
-        <h1>
-          {actualCurrent} De {totalCurrent}
-        </h1>
-
-        <button className="button2" onClick={nextPage}>
-          NEXT
-        </button>
-      </div>
+      <div className="buttonList">{show()}</div>
     </div>
   );
 }

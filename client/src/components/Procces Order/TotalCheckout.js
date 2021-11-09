@@ -1,46 +1,69 @@
-import React, { useState } from 'react'
-import { Button, makeStyles } from "@material-ui/core";
-import accounting from "accounting";
-import { getBasketTotal } from "../../stateManagement/reducer/checkoutReducer";
+import React from "react";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-
-const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     justifyContent: "center",
-    //     alignItems: "center",
-    //     height: "20vh",
-    // },
-    // button: {
-    //     maxWidth: "200px",
-    //     marginTop: "2rem",
-    // },
-}));
-
+import { useSelector } from "react-redux";
+import { useUserId } from "../../hooks/useUserId";
+import "./order.css";
 const Total = () => {
-    const basket = useSelector(state => state.checkoutReducer.basket)
-    var totalAmount = useSelector(state => state.checkoutReducer.totalAmount)
-    const classes = useStyles();
-    var total = 0
-    basket.map((e) => (total = e.price + total) )        
-    let miBasket = basket.length
-    return (
-        <div className={classes.root}>
-            <h5>Total items: {miBasket}</h5>
-            <h5>Total Amount: {parseInt(totalAmount)}</h5>
-            <Button
-                component={Link}
-                to='/checkout'
-                className={classes.button}
-                variant='contained'
-                color='secondary'
-            >
-                Check out
-            </Button>
-        </div>
+  let [user] = useUserId();
+
+  const cart = useSelector((state) => state.checkoutReducer.cart);
+  const userdeta = useSelector((state) => state.userReducer.userDetails);
+  var totalCart = useSelector(
+    (state) => state.checkoutUserReducer.totalCartUser
+  );
+
+  var respu = user?.id;
+  var showCart;
+  var total = 0;
+  let miBasket;
+
+  if (user?.id !== undefined) {
+    showCart = totalCart.filter(
+      (e) => e.Cart_Users === user.id && e.state !== 3
     );
+    showCart.map((e) => (total += parseInt(e.subtotal)));
+    miBasket = showCart.length;
+  } else {
+    cart.map((e) => (total += parseInt(e.subtotal)));
+    miBasket = cart.length;
+  }
+
+  const showButon = () => {
+    if (respu !== undefined) {
+      let url = "/create/userDetail";
+      if (userdeta?.user_detail !== undefined) {
+        url = "/checkout";
+      }
+      return (
+        <Button
+          component={Link}
+          to={url}
+          variant="contained"
+          color="secondary"
+          disabled={!miBasket}
+        >
+          Check out
+        </Button>
+      );
+    } else {
+      return (
+        <Link className="Shoping_Cart" to="/login">
+          <button>
+            <span>Login</span>
+          </button>
+        </Link>
+      );
+    }
+  };
+
+  return (
+    <div className="totalItems">
+      <h5>Total items: {miBasket}</h5>
+      <h5>Total Amount: {parseInt(total)}</h5>
+      {showButon()}
+    </div>
+  );
 };
 
 export default Total;

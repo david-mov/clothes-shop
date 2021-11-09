@@ -6,6 +6,10 @@ module.exports = (sequelize) => {
   sequelize.define('rating', {   
     amount: {
      type: DataTypes.INTEGER,
- }
+     defaultValue: 1
+ },
+    comment: {
+      type: DataTypes.STRING
+    }
   });
 };

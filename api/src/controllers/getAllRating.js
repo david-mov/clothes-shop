@@ -1,17 +1,20 @@
+const { Sequelize } = require('sequelize');
 const {Rating, Product, User} = require('../db');
 
 const getAllRating = async (req, res, next) => {
     try {
         const allRating = await Rating.findAll({
           include: [{
-                model: Product,
-                attributes:['id']
+                model: Product
             },{
-                model: User,
-                attributes: ['id'],
+                model: User
             }],
-            attributes: ['amount'],
+            // attributes: [
+            //     'id',
+            //     [Sequelize.fn('createdAt', Sequelize.col('createdAt'), '%Y-%m-%d'), 'createdAt']
+            // ]
 		});
+        console.log(allRating)
 		res.json(allRating);
 	}
 	catch (e) {

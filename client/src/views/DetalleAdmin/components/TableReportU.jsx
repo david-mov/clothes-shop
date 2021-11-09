@@ -1,14 +1,54 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import DetailProduct from "./DetailsInfoG"
+import { useParams } from "react-router";
+import { getUpdateProductDetails } from "../../../stateManagement/actions/getUpdatePDetail";
+import { cleanUpdate } from "../../../stateManagement/actions/CleanPutUpdate";
+
 
 const TableReportProduct = () => {
+    const dispatch = useDispatch();
+  const { productId } = useParams();
+
+  useEffect(() => {
+    dispatch(getUpdateProductDetails(productId));
+    return () => {
+      dispatch(cleanUpdate());
+    };
+  }, [dispatch, productId]);
+
+  const product = useSelector(
+    (state) => state.productsReducer.productUpdateDetails
+  );
+
+  const listInfo = () => {
+    if (Object.keys(product).length !== 0) {
+      
+      return (
+        <DetailProduct
+          idProduct={productId}
+          name={product.name}
+          categories={product.categories}
+          price={product.price}
+          description={product.description}
+          color={product.color}
+          sizes={product.sizes}
+          type={product.type}
+          stock={product.stock}
+          productId={productId}
+          images={product.images}
+          ratings={product.ratings}
+          views={product.views}
+          createdAt={product.createdAt}
+          updatedAt={product.updatedAt}
+        />
+      );
+    }
+  };
+
     return (
         <div className="container1">
-            <div className="row row--top-40">
-                <div className="col-md-12">
-                    <h2 className="row__title"></h2>
-                </div>
-            </div>
             <div className="row row--top-20">
                 <div className="col-md-12">
                     <div className="table-container">
@@ -25,30 +65,18 @@ const TableReportProduct = () => {
                                     <th className="table__th">categories</th>
                                     <th className="table__th">sizes</th>
                                     <th className="table__th">Stars</th>
-                                    <th className="table__th">Views</th>
+                                    <th className="table__th">Count Views</th>
                                     <th className="table__th">Count Rating</th>
+                                    <th className="table__th">Date Create</th>
+                                    <th className="table__th">Date Last Update</th> 
                                     <th className="table__th">Update Product</th>
                                     <th className="table__th">Delete Product</th>
                                 </tr>
                             </thead>
 
-                            <tbody className="table__tbody">
-                                <tr className="table-row table-row--chris">
-                                    <td className="table-row__td">
-                                        <div className="table-row__info">
-                                            <p className="table-row__name">{ }</p>
-
-                                        </div>
-                                    </td>
-
-                                    <td className="table-row__td">
-                                        <Link to='/'> <p><i className="fas fa-pencil-alt  fa-2x"></i></p> </Link>
-                                    </td>
-                                    <td className="table-row__td">
-                                        <p><i className="fas fa-trash-alt fa-2x"></i></p>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            
+                            {listInfo()}
+                           
                         </table>
                     </div>
                 </div>

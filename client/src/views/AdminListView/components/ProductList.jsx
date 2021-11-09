@@ -5,26 +5,77 @@ import { getAllProducts } from "../../../stateManagement/actions/getAllProducts"
 import TablaList from "./ListTable";
 import "./styles.css";
 import Select from "react-select";
+import { deleteProduct } from "../../../stateManagement/actions/deleteProduct";
 
 export default function ProductosLista() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+  const products = useSelector((state) => state.productsReducer.products);
+  const [search, setSearch] = useState({ label: "filter to..", value: "" });
+  const [valor, setValor] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [actualCurrent, setactualCurrent] = useState(1);
   var countP = 5;
-  var dataCompleta = [];
+  var totalCurrent = Math.ceil(products?.length / countP);
   const [Input, setInput] = useState("");
-  const product = useSelector((state) => state.productsReducer.products);
+
   const filterProducts = () => {
-    if (Input !== "") {
-      return (dataCompleta = product.filter((e) =>
-        e.name.toLowerCase().includes(Input.toLowerCase())
-      ));
+    //var dataCompleta = [];
+    switch (valor) {
+      case "input":
+        return products.filter((e) =>
+          e.name.toLowerCase().includes(Input.toLowerCase())
+        );
+
+      case "Max Stock":
+        return products.sort((a, b) => {
+          const StockA = parseInt(a.stock);
+          const StockB = parseInt(b.stock);
+          if (StockA > StockB) return -1;
+          if (StockA < StockB) return 1;
+          return 0;
+        });
+
+      case "Min Stock":
+        return products.sort((a, b) => {
+          return a.stock - b.stock;
+        });
+
+      case "Max Price":
+        return products.sort((a, b) => {
+          const PriceA = parseInt(a.price);
+          const PriceB = parseInt(b.price);
+          if (PriceA > PriceB) return -1;
+          if (PriceA < PriceB) return 1;
+          return 0;
+        });
+
+      case "Min Price":
+        return products.sort((a, b) => {
+          return a.price - b.price;
+        });
+      default:
+        return products;
     }
-    return (dataCompleta = product);
   };
 
   const onInputChange = (Input) => {
+    setValor("input");
     setInput(Input.target.value);
+  };
+
+  const OptionSelect = [
+    { label: "Max Stock", value: "Max Stock" },
+    { label: "Min Stock", value: "Min Stock" },
+    { label: "Max Price", value: "Max Price" },
+    { label: "Min Price", value: "Min Price" },
+  ];
+
+  const handleChangeSelect = (search) => {
+    setValor(search.value);
+    setSearch(search);
   };
 
   const nextPage = () => {
@@ -41,12 +92,51 @@ export default function ProductosLista() {
     }
   };
 
-  useEffect(() => {
+  const deleteProducts = (e) => {
+    dispatch(deleteProduct(e));
     dispatch(getAllProducts());
-  }, [dispatch]);
+  };
 
-  const products = useSelector((state) => state.productsReducer.products);
-  var totalCurrent = Math.ceil(products.length / countP);
+  const show = () => {
+    if (actualCurrent === 1) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
+        </div>
+      );
+    } else if (actualCurrent >= totalCurrent) {
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="pagination">
+          <p className="pagination-item " onClick={prevPage}>
+            prev
+          </p>
+          <p className="pagination-item active">{actualCurrent}</p>
+          <p>TO</p>
+          <p className="pagination-item ">{totalCurrent}</p>
+          <p className="pagination-item " onClick={nextPage}>
+            next
+          </p>
+        </div>
+      );
+    }
+  };
+
   function headers() {
     return (
       <thead className="table__thead">
@@ -62,8 +152,13 @@ export default function ProductosLista() {
               />
             </div>
           </th>
-          <th className="table__th">
-            <Select className="select-style" />
+          <th>
+            <Select
+              className="selected"
+              value={search}
+              options={OptionSelect}
+              onChange={handleChangeSelect}
+            />
           </th>
         </tr>
         <tr>
@@ -117,15 +212,15 @@ export default function ProductosLista() {
               </Link>
             </td>
             <td className="table-row__td">
-              <Link to={`/info/product/ss/${e.id}`}>
+              <Link to={`/info/product/${e.id}`}>
                 <p>
-                  <i class="fas fa-user-secret fa-9x"></i>
+                  <i class="fas fa-user-secret fa-4x"></i>
                 </p>
               </Link>
             </td>
 
             <td className="table-row__td">
-              <p>
+              <p value={e.id} onClick={() => deleteProducts(e.id)}>
                 <i className="fas fa-trash-alt fa-2x"></i>
               </p>
             </td>
@@ -146,19 +241,7 @@ export default function ProductosLista() {
           url={"/create/product"}
         />
       </div>
-      <div className="buttonList">
-        <button className="button2" onClick={prevPage}>
-          PREV
-        </button>
-
-        <h1>
-          {actualCurrent} / {totalCurrent}
-        </h1>
-
-        <button className="button2" onClick={nextPage}>
-          NEXT
-        </button>
-      </div>
+      <div className="buttonList">{show()}</div>
     </div>
   );
 }

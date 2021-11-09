@@ -1,129 +1,104 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../../styles/styleHIView.css";
 import "../../styles/HomePrincipal.css";
-import { Authorizer } from "../../components/Authorizer/Authorizer.jsx";
-import { Link } from "react-router-dom";
+import MenuButton from "./MenuButon";
+import NavbarHam from "./NavBarHam";
+import { HeaderWrapper } from "./Header";
+import { useEffect } from "react";
+import { getLastProducts } from "../../stateManagement/actions/getLastProducts";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function HomeIniView() {
+  const products = useSelector((state) => state.productsReducer.lastProducts);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLastProducts());
+  }, []);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+  let copy = (/\u00A9/g, "©");
+  var urlImg, nameImagen, objImage;
+
   return (
-    <div className="HomePrincipal">
-      <div className="NavbarPaincipal">
+    <div>
+      <div className="contenedor contenido-header">
         <Link to="/">
-          <div className="navbar__logo">
-            <img
-              className="img"
-              src="https://i.ibb.co/jwF67rm/clothes-Shop.png"
-              alt="clothes-Shop"
-              border="0"
-            ></img>
-          </div>
+          <img
+            className="img"
+            src="https://i.ibb.co/nD1CCgm/clothes-Shop.png"
+            alt="clothes-Shop"
+            border="0"
+          />
         </Link>
-        <div className="abaout">
-          <Link className="spanHomePrincipal" to="/catalogue">
-            <span>Catalogue</span>
-          </Link>
-          {/* <Link className="spanHomePrincipal" to="#">
-            <span>About</span>
-          </Link> */}
-          <Authorizer roles={[0]}>
-            <Link className="spanHomePrincipal" to="/login">
-              <span> Login</span>
-            </Link>
-            <Link className="spanHomePrincipal" to="/signup">
-              <span> Signup</span>
-            </Link>
-          </Authorizer>
+        <HeaderWrapper>
+          <div className=" contenido-header1">
+            <MenuButton open={open} handleClick={handleClick}></MenuButton>
+          </div>
+          <NavbarHam open={open} />
+        </HeaderWrapper>
+      </div>
+      <div className="contenedor1 seccion">
+        <div className="container1">
+          <div className="body_hiview">
+            <ul className="c-accordion">
+              {products.map((e, i) => {
+                if (e.images.length === 0) {
+                  nameImagen = "products/logo JK&A.png";
+                  urlImg = require(`../../assets/${nameImagen}`).default;
+                } else {
+                  objImage = e.images[0];
+                  nameImagen = "imageProduct/" + objImage.name;
+                  urlImg = require(`../../assets/${nameImagen}`).default;
+                }
+
+                return (
+                  <li
+                    key={i}
+                    className="c-accordion__item"
+                    id="joker"
+                    style={{
+                      backgroundImage: `url("${urlImg}")`,
+                    }}
+                  >
+                    <div className="c-accordion__content">
+                      <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
+                        {e.name}
+                      </h2>
+                      <p className="c-accordion__description">
+                        {e.description}
+                      </p>
+                    </div>
+                    <div className="c-accordion__aside">
+                      <h2 className="c-accordion__title c-accordion__title--hover-hide">
+                        {e.name}
+                      </h2>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
-      <div className="container">
-        <div className="body_hiview">
-          <ul className="c-accordion">
-            <li id="joker" className="c-accordion__item">
-              <a href="#joker" className="c-accordion__action">
-                <div className="c-accordion__content">
-                  <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    Kike
-                  </h2>
-                  <p className="c-accordion__description">
-                    In Gotham City, mentally troubled comedian Arthur Fleck is
-                    disregarded and mistreated by society. He then embarks on a
-                    downward spiral of revolution and bloody crime. This path
-                    brings him face-to-face with his alter-ego: the Joker.
-                  </p>
-                </div>
-                <div className="c-accordion__aside">
-                  <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    Nike
-                  </h2>
-                </div>
-              </a>
-            </li>
-            <li id="john-wick" className="c-accordion__item">
-              <a href="#john-wick" className="c-accordion__action">
-                <div className="c-accordion__content">
-                  <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    John Wick
-                  </h2>
-                  <p className="c-accordion__description">
-                    John Wick is on the run after killing a member of the
-                    international assassins' guild, and with a $14 million price
-                    tag on his head, he is the target of hit men and women
-                    everywhere.
-                  </p>
-                </div>
-                <div className="c-accordion__aside">
-                  <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    John Wick
-                  </h2>
-                </div>
-              </a>
-            </li>
-            <li id="black-panther" className="c-accordion__item">
-              <a href="#black-panther" className="c-accordion__action">
-                <div className="c-accordion__content">
-                  <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    New Wallas
-                  </h2>
-                  <p className="c-accordion__description">
-                    T'Challa, heir to the hidden but advanced kingdom of
-                    Wakanda, must step forward to lead his people into a new
-                    future and must confront a challenger from his country's
-                    past.
-                  </p>
-                </div>
-                <div className="c-accordion__aside">
-                  <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    New Wallas
-                  </h2>
-                </div>
-              </a>
-            </li>
-            <li id="marvel-captain" className="c-accordion__item">
-              <a href="#marvel-captain" className="c-accordion__action">
-                <div className="c-accordion__content">
-                  <h2 className="c-accordion__title c-accordion__title--hero c-accordion__title--hover-show">
-                    Puma Hero
-                  </h2>
-                  <p className="c-accordion__description">
-                    Carol Danvers becomes one of the universe's most powerful
-                    heroes when Earth is caught in the middle of a galactic war
-                    between two alien races.
-                  </p>
-                </div>
-                <div className="c-accordion__aside">
-                  <h2 className="c-accordion__title c-accordion__title--hover-hide">
-                    Puma Hero
-                  </h2>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="container">
-        <div className="container_about">
-          <h1>uuu</h1>
-        </div>
-      </div>
+      <footer className="contenedor contenido-header">
+        <p className="pf">Todos los derechos reservados 2021 {copy}</p>
+        <Link className="team" to="/about">
+          Our Team
+        </Link>
+        <Link to="/">
+          <img
+            className="imgFooter"
+            src="https://i.ibb.co/nD1CCgm/clothes-Shop.png"
+            alt="clothes-Shop"
+            border="0"
+          />
+        </Link>
+      </footer>
     </div>
   );
 }

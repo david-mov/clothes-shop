@@ -5,7 +5,7 @@ export const postLogin = (user) => async (dispatch) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: '/user/login',
+      url: '/auth/login',
       data: user,
       withCredentials: true,
       httpOnly: true,

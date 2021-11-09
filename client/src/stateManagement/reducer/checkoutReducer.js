@@ -1,24 +1,35 @@
+import { GET_ALL_CART } from "../../consts/actionConsts";
+
 const initialState = {
-  basket: [],
+  cart: [],
   contadorState: [],
-  totalAmount: [0],
+  totalAmount: 0,
+  anterior: [0]
 };
 
 
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_TO_BASKET":
+    case "POST_CART":
       return {
         ...state,
-        basket: [...state.basket, action.payload],
-        totalAmount: parseInt(state.totalAmount + action.payload.price)
-      };
+        cart: action.payload,
+      }
+      case "GET_ALL_CART":
+        return {
+          ...state,
+          cart: action.payload
+        }
     case "REMOVE_ITEM":
-      console.log("ACA ESTOY", action.payload)
       return {
         ...state,
-        basket:  state.basket.filter(e => e.productId !== action.payload)
+        cart: action.payload
       };
+      case "PUT_CART":
+        return {
+          ...state,
+          cart: action.payload
+        }
     case "EMPTY_BASKET":
       return {
         ...state,
@@ -51,16 +62,20 @@ const checkoutReducer = (state = initialState, action) => {
             totalAmount: action.payload
           }
           case "SUMA_CONTADOR":
-            console.log("EL TOTAL AMOUNT EN REDUCER", state.totalAmount, action.payload)
             return{
               ...state,
-              totalAmount: parseInt(state.totalAmount + action.payload)
+              totalAmount: state.totalAmount + action.payload
             }
           case "RESTA_CONTADOR":
             return{
               ...state,
-              totalAmount: action.payload >= state.totalAmount  ? 0 : parseInt(state.totalAmount - action.payload)
+              totalAmount: action.payload >= state.totalAmount  ? 0 : parseInt(state.totalAmount - (action.payload.cantidad * action.payload.price - action.payload.price))
             }
+            case GET_ALL_CART:
+              return {
+                ...state,
+                cart: action.payload,
+              }
     default:
       return state;
   }

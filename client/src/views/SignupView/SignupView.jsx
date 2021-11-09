@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { postSignup } from "../../stateManagement/actions/postSignup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../FormCrudView/components/Insert/Insert.css";
 function SignupView() {
   const dispatch = useDispatch();
-  const [state, setState] = useState();
+  const history = useHistory();
+  const [state, setState] = useState({});
 
-  const onSubmitForm = (e) => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
-    dispatch(postSignup(state));
+    const resp = await dispatch(postSignup(state));
+    if(resp.payload.data === "User already exists"){
+      alert("User already exists");
+    }
+    if(resp.payload.data === "User created correctly"){
+      alert("well you can login now");
+      history.push("/login");
+    }
   };
 
-  const HandleChange = (e) => {
+  const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
@@ -51,21 +59,21 @@ function SignupView() {
           className="Login_mail"
           name="name"
           placeholder="name"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <input
           className="Login_mail"
           type="email"
           name="email"
           placeholder="email"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <input
           className="Login_mail"
           type="password"
           name="password"
           placeholder="password"
-          onChange={HandleChange}
+          onChange={handleChange}
         ></input>
         <button type="submit">Sign up</button>
       </form>
