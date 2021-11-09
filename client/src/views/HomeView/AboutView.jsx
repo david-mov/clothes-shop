@@ -103,7 +103,7 @@ export default function AboutView() {
           </li>
           <li className="member">
             <div className="member-image">
-              <img src={require("../../assets/team/deiby.jfif").default} />
+              <img src={require("../../assets/team/david.jpg").default} />
             </div>
             <div className="member-info">
               <h3>David Movsichoff</h3>
